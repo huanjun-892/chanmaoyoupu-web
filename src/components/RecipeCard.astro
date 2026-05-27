@@ -1,0 +1,79 @@
+---
+export interface Props {
+  title: string;
+  slug: string;
+  cover?: string;
+  difficulty?: string;
+  cookTime?: number;
+  calories?: number;
+  tags?: string[];
+}
+
+const { title, slug, cover, difficulty, cookTime, calories, tags = [] } = Astro.props;
+
+const difficultyMap: Record<string, string> = {
+  easy: '新手零失败',
+  simple: '简单易上手',
+  medium: '中等挑战',
+  hard: '高手进阶',
+};
+---
+
+<a href={`/recipes/${slug}`} class="card recipe-card">
+  <div class="card-img-wrap">
+    {cover
+      ? <img src={cover} alt={title} class="card-img" loading="lazy" />
+      : <div class="card-img placeholder">🍳</div>
+    }
+    {calories && (
+      <span class:list={['calorie-badge', calories < 300 ? 'tag-green' : calories > 600 ? 'tag-red' : 'tag']}>
+        {calories} kcal
+      </span>
+    )}
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">{title}</h3>
+    <div class="card-meta">
+      {difficulty && <span>{difficultyMap[difficulty] || difficulty}</span>}
+      {cookTime && <span>⏱ {cookTime}分钟</span>}
+    </div>
+    {tags.length > 0 && (
+      <div class="card-tags">
+        {tags.slice(0, 3).map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    )}
+  </div>
+</a>
+
+<style>
+  .card-img-wrap {
+    position: relative;
+  }
+
+  .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-warm);
+    font-size: 3rem;
+  }
+
+  .calorie-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+</style>

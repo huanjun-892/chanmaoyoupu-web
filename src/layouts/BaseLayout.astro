@@ -1,0 +1,26 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '馋得明白，做得靠谱 — 面向小白的食谱分享站与专业美食知识库' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | 馋猫有谱</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

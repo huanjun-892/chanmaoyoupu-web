@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const query = Astro.url.searchParams.get('q') || '';
+---
+
+<BaseLayout title={query ? `搜索：${query}` : '搜索'}>
+  <Header />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">搜索</h1>
+      <form action="/search" method="get" class="search-form">
+        <input
+          type="text"
+          name="q"
+          value={query}
+          placeholder="搜索菜名、食材、菜系、技法..."
+          class="search-input"
+          autofocus
+        />
+        <button type="submit" class="btn btn-primary">搜索</button>
+      </form>
+
+      {query && (
+        <div class="search-results">
+          <p class="search-hint">搜索 "<strong>{query}</strong>" 的结果（后续对接Strapi API后生效）</p>
+          <div class="empty-state">
+            <span class="empty-icon">🔍</span>
+            <p>功能开发中，敬请期待</p>
+          </div>
+        </div>
+      )}
+
+      {!query && (
+        <div class="search-suggestions">
+          <h2 class="section-subtitle">热门搜索</h2>
+          <div class="hot-tags">
+            <a href="/search?q=麻婆豆腐" class="tag">麻婆豆腐</a>
+            <a href="/search?q=减脂餐" class="tag">减脂餐</a>
+            <a href="/search?q=快手菜" class="tag">快手菜</a>
+            <a href="/search?q=川菜" class="tag">川菜</a>
+            <a href="/search?q=红烧肉" class="tag">红烧肉</a>
+            <a href="/search?q=烘焙" class="tag">烘焙</a>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-title);
+    margin-bottom: 24px;
+  }
+
+  .search-form {
+    display: flex;
+    gap: 12px;
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus {
+    border-color: var(--color-accent);
+  }
+
+  .search-hint {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    margin-bottom: 32px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 0;
+  }
+
+  .empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .empty-state p {
+    color: var(--color-muted);
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-bottom: 16px;
+  }
+
+  .hot-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .hot-tags .tag {
+    font-size: 0.85rem;
+    padding: 8px 18px;
+  }
+
+  @media (max-width: 480px) {
+    .search-form {
+      flex-direction: column;
+    }
+  }
+</style>

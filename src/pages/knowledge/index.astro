@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const categories = [
+  { name: '技法', slug: 'technique', icon: '🔥', count: 12, desc: '炒、炖、蒸、炸…每种技法的关键要点' },
+  { name: '食材', slug: 'ingredient', icon: '🥬', count: 28, desc: '食材属性、搭配宜忌、替代方案' },
+  { name: '味型', slug: 'flavor', icon: '👅', count: 8, desc: '糊辣、荔枝、鱼香…味型的秘密' },
+  { name: '文化', slug: 'culture', icon: '📜', count: 15, desc: '菜品背后的历史与地域文化' },
+  { name: '历史', slug: 'history', icon: '📖', count: 10, desc: '从古至今的美食演变' },
+];
+
+const recentKnowledge = [
+  { title: '什么是"糊辣味"？川菜灵魂味型全解析', slug: 'hulao-flavor', category: '味型', excerpt: '糊辣味是川菜最经典的味型之一，干辣椒炝至微糊，释放出独特的焦香与辣味交织的风味...' },
+  { title: '炒菜火候指南：从大火爆炒到小火慢炖', slug: 'heat-control', category: '技法', excerpt: '火候是中餐最核心也最难掌握的技法，不同菜品对火力的要求截然不同...' },
+  { title: '豆腐家族：嫩豆腐、老豆腐、内酯豆腐怎么选？', slug: 'tofu-types', category: '食材', excerpt: '同样是豆腐，嫩老之间差别巨大。选对了豆腐，菜品成功率直接翻倍...' },
+  { title: '川菜的前世今生：从湖广填川到现代川菜', slug: 'sichuan-history', category: '历史', excerpt: '现代川菜的形成不过百年，却成为了中国最具影响力的菜系之一...' },
+];
+---
+
+<BaseLayout title="知识库">
+  <Header />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">美食知识库</h1>
+      <p class="page-desc">不仅要会做，还要懂。从技法到食材，从味型到文化，吃个明白。</p>
+
+      <!-- 分类卡片 -->
+      <div class="grid-5 category-cards">
+        {categories.map((cat) => (
+          <a href={`/knowledge?category=${cat.slug}`} class="category-card">
+            <span class="category-icon">{cat.icon}</span>
+            <h3 class="category-name">{cat.name}</h3>
+            <p class="category-desc">{cat.desc}</p>
+            <span class="category-count">{cat.count}篇</span>
+          </a>
+        ))}
+      </div>
+
+      <!-- 最新条目 -->
+      <div class="knowledge-list">
+        <h2 class="section-subtitle">最新条目</h2>
+        {recentKnowledge.map((item) => (
+          <a href={`/knowledge/${item.slug}`} class="knowledge-item">
+            <div class="knowledge-item-left">
+              <span class="tag">{item.category}</span>
+              <h3 class="knowledge-item-title">{item.title}</h3>
+              <p class="knowledge-item-excerpt">{item.excerpt}</p>
+            </div>
+            <span class="knowledge-item-arrow">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-title);
+    margin-bottom: 8px;
+  }
+
+  .page-desc {
+    font-size: 1rem;
+    color: var(--color-muted);
+    margin-bottom: 40px;
+  }
+
+  .grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 16px;
+    background: var(--color-bg-warm);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    transition: all 0.2s;
+  }
+
+  .category-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .category-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .category-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-bottom: 6px;
+  }
+
+  .category-desc {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .category-count {
+    font-size: 0.7rem;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .section-subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+  }
+
+  .knowledge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .knowledge-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: all 0.2s;
+  }
+
+  .knowledge-item:hover {
+    border-color: var(--color-accent);
+  }
+
+  .knowledge-item-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin: 6px 0;
+  }
+
+  .knowledge-item-excerpt {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .knowledge-item-arrow {
+    font-size: 1.2rem;
+    color: var(--color-muted);
+    transition: color 0.2s;
+  }
+
+  .knowledge-item:hover .knowledge-item-arrow {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .grid-5 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .grid-5 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .knowledge-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>

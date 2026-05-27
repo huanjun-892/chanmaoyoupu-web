@@ -1,0 +1,119 @@
+---
+const categories = [
+  { label: '川菜', href: '/recipes?cuisine=sichuan', img: '/images/categories/sichuan.jpg' },
+  { label: '粤菜', href: '/recipes?cuisine=cantonese', img: '/images/categories/cantonese.jpg' },
+  { label: '湘菜', href: '/recipes?cuisine=hunan', img: '/images/categories/hunan.jpg' },
+  { label: '鲁菜', href: '/recipes?cuisine=shandong', img: '/images/categories/shandong.jpg' },
+  { label: '东北菜', href: '/recipes?cuisine=dongbei', img: '/images/categories/dongbei.jpg' },
+  { label: '新手零失败', href: '/recipes?difficulty=easy', img: '/images/categories/easy.jpg' },
+  { label: '快手菜', href: '/recipes?scene=quick', img: '/images/categories/quick.jpg' },
+  { label: '减脂餐', href: '/recipes?scene=diet', img: '/images/categories/diet.jpg' },
+  { label: '夜宵', href: '/recipes?scene=latesnack', img: '/images/categories/latesnack.jpg' },
+  { label: '烘焙', href: '/recipes?scene=baking', img: '/images/categories/baking.jpg' },
+  { label: '一人食', href: '/recipes?scene=solo', img: '/images/categories/solo.jpg' },
+  { label: '家常菜', href: '/recipes?scene=home', img: '/images/categories/home.jpg' },
+];
+---
+
+<section class="section categories-section">
+  <div class="container">
+    <h2 class="section-title">想做什么菜？</h2>
+    <div class="category-grid">
+      {categories.map((cat) => (
+        <a href={cat.href} class="category-item">
+          <img src={cat.img} alt={cat.label} class="category-img" loading="lazy" />
+          <span class="category-label">{cat.label}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+  }
+
+  .category-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid var(--color-border-light);
+  }
+
+  .category-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Semi-transparent overlay for text readability */
+  .category-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0.35) 100%
+    );
+    pointer-events: none;
+    transition: background 0.3s;
+  }
+
+  .category-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent);
+  }
+
+  .category-item:hover .category-img {
+    transform: scale(1.08);
+  }
+
+  .category-item:hover::after {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 20%,
+      rgba(255, 140, 66, 0.25) 100%
+    );
+  }
+
+  .category-label {
+    position: relative;
+    z-index: 1;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 6px 0 12px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .category-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .category-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .category-label {
+      font-size: 0.75rem;
+      padding: 4px 0 8px;
+    }
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+export interface Props {
+  title: string;
+  slug: string;
+  category?: string;
+  excerpt?: string;
+}
+
+const { title, slug, category, excerpt } = Astro.props;
+
+const categoryIcon: Record<string, string> = {
+  technique: '🔥',
+  ingredient: '🥬',
+  culture: '📜',
+  flavor: '👅',
+  history: '📖',
+};
+---
+
+<a href={`/knowledge/${slug}`} class="card knowledge-card">
+  <div class="card-body">
+    <div class="knowledge-header">
+      {category && <span class="knowledge-icon">{categoryIcon[category] || '📚'}</span>}
+      <span class="tag">{category || '知识'}</span>
+    </div>
+    <h3 class="card-title">{title}</h3>
+    {excerpt && <p class="knowledge-excerpt">{excerpt}</p>}
+  </div>
+</a>
+
+<style>
+  .knowledge-card {
+    border-left: 3px solid var(--color-accent);
+  }
+
+  .knowledge-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .knowledge-icon {
+    font-size: 1.2rem;
+  }
+
+  .knowledge-excerpt {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin-top: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,304 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CategoryGrid from '../components/CategoryGrid.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+import KnowledgeCard from '../components/KnowledgeCard.astro';
+
+const featuredRecipes = [
+  { title: '麻婆豆腐', slug: 'mapo-tofu', difficulty: 'easy', cookTime: 20, calories: 185, tags: ['川菜', '快手菜'], cover: '/images/recipes/mapo-tofu.jpg' },
+  { title: '番茄炒蛋', slug: 'tomato-egg', difficulty: 'easy', cookTime: 10, calories: 150, tags: ['家常菜', '新手'], cover: '/images/recipes/tomato-egg.jpg' },
+  { title: '红烧肉', slug: 'hongshao-rou', difficulty: 'medium', cookTime: 90, calories: 480, tags: ['家常菜', '硬菜'], cover: '/images/recipes/hongshao-rou.jpg' },
+];
+
+const newRecipes = [
+  { title: '酸辣土豆丝', slug: 'suanla-tudousi', difficulty: 'easy', cookTime: 15, calories: 120, tags: ['家常菜', '素食'], cover: '/images/recipes/suanla-tudousi.jpg' },
+  { title: '可乐鸡翅', slug: 'kele-jichi', difficulty: 'simple', cookTime: 30, calories: 290, tags: ['家常菜', '甜味'], cover: '/images/recipes/kele-jichi.jpg' },
+];
+
+const knowledgeItems = [
+  { title: '什么是"糊辣味"？川菜灵魂味型全解析', slug: 'hulao-flavor', category: 'flavor', excerpt: '糊辣味是川菜最经典的味型之一，干辣椒炝至微糊，释放出独特的焦香...' },
+  { title: '炒菜火候指南：从大火爆炒到小火慢炖', slug: 'heat-control', category: 'technique', excerpt: '火候是中餐最核心也最难掌握的技法，不同菜品对火力的要求截然不同...' },
+];
+---
+
+<BaseLayout title="首页">
+  <Header />
+
+  <!-- Hero区 -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">食谱 + 知识库</div>
+        <h1 class="hero-title">
+          馋得明白<br/>
+          <span class="accent">做得靠谱</span>
+        </h1>
+        <p class="hero-desc">详细步骤、精确用量、专业美食知识库<br/>小白也能做出好味道</p>
+        <form action="/search" method="get" class="hero-search">
+          <svg class="hero-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" name="q" placeholder="搜索菜名、食材、菜系..." class="hero-search-input" />
+          <button type="submit" class="btn btn-primary">搜索</button>
+        </form>
+        <div class="hero-hot">
+          <span class="hero-hot-label">热门：</span>
+          <a href="/recipes?cuisine=sichuan">川菜</a>
+          <a href="/recipes?scene=diet">减脂餐</a>
+          <a href="/recipes?difficulty=easy">新手菜</a>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <svg class="hero-cat" width="200" height="200" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="60" cy="72" rx="34" ry="30" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5"/>
+          <path d="M32 55L24 22L48 46Z" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M88 55L96 22L72 46Z" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M34 52L29 30L46 47Z" fill="#FFDEC4"/>
+          <path d="M86 52L91 30L74 47Z" fill="#FFDEC4"/>
+          <path d="M44 68Q49 63 54 68" stroke="#FF8C42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M66 68Q71 63 76 68" stroke="#FF8C42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="60" cy="77" rx="3" ry="2" fill="#FF8C42"/>
+          <path d="M55 81Q60 85 65 81" stroke="#FF8C42" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <line x1="20" y1="74" x2="42" y2="76" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="20" y1="80" x2="42" y2="80" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="78" y1="76" x2="100" y2="74" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="78" y1="80" x2="100" y2="80" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="42" cy="78" r="6" fill="#FFB88C" opacity="0.3"/>
+          <circle cx="78" cy="78" r="6" fill="#FFB88C" opacity="0.3"/>
+          <rect x="40" y="34" width="40" height="10" rx="2" fill="white" stroke="#FF8C42" stroke-width="2"/>
+          <path d="M38 44Q38 20 60 20Q82 20 82 44" fill="white" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+          <ellipse cx="80" cy="72" rx="10" ry="8" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2" transform="rotate(-15 80 72)"/>
+          <path d="M74 66Q76 62 78 66" stroke="#FF8C42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M79 64Q81 60 83 64" stroke="#FF8C42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分类入口 -->
+  <CategoryGrid />
+
+  <!-- 今日上新 -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">今日上新</h2>
+        <a href="/recipes" class="view-all">查看全部 →</a>
+      </div>
+      <div class="grid-2">
+        {newRecipes.map((recipe) => (
+          <RecipeCard {...recipe} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 热门食谱 -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">热门食谱</h2>
+        <a href="/recipes" class="view-all">更多食谱 →</a>
+      </div>
+      <div class="grid-3">
+        {featuredRecipes.map((recipe) => (
+          <RecipeCard {...recipe} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 知识库精选 -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">知识库精选</h2>
+        <a href="/knowledge" class="view-all">进入知识库 →</a>
+      </div>
+      <div class="grid-2">
+        {knowledgeItems.map((item) => (
+          <KnowledgeCard {...item} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: 88px 0 72px;
+    background: linear-gradient(180deg, var(--color-bg-cream) 0%, var(--color-bg) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 140, 66, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+  }
+
+  .hero-text {
+    flex: 1;
+    max-width: 520px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+    border-radius: 100px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: var(--color-title);
+    line-height: 1.18;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  .hero-search {
+    display: flex;
+    gap: 10px;
+    background: var(--color-bg);
+    border: 1.5px solid var(--color-border);
+    border-radius: 100px;
+    padding: 5px 5px 5px 18px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s;
+  }
+
+  .hero-search:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+  }
+
+  .hero-search-icon {
+    color: var(--color-muted);
+    flex-shrink: 0;
+    margin-top: 10px;
+  }
+
+  .hero-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .hero-search-input::placeholder {
+    color: var(--color-muted);
+  }
+
+  .hero-search .btn {
+    flex-shrink: 0;
+    padding: 10px 24px;
+  }
+
+  .hero-hot {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 18px;
+    font-size: 0.82rem;
+  }
+
+  .hero-hot-label {
+    color: var(--color-muted);
+  }
+
+  .hero-hot a {
+    color: var(--color-text);
+    transition: color 0.2s;
+  }
+
+  .hero-hot a:hover {
+    color: var(--color-accent);
+  }
+
+  .hero-illustration {
+    flex-shrink: 0;
+    width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-cat {
+    width: 200px;
+    height: 200px;
+    filter: drop-shadow(0 4px 20px rgba(255, 140, 66, 0.15));
+  }
+
+  /* Section header */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .section-header .section-title {
+    margin-bottom: 0;
+  }
+
+  .view-all {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    transition: opacity 0.2s;
+  }
+
+  .view-all:hover {
+    opacity: 0.7;
+  }
+
+  .section-alt {
+    background: var(--color-bg-warm);
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 52px 0 48px; }
+    .hero-inner { flex-direction: column-reverse; gap: 24px; text-align: center; }
+    .hero-title { font-size: 2.2rem; }
+    .hero-search { max-width: 100%; }
+    .hero-illustration { width: auto; }
+    .hero-cat { width: 140px; height: 140px; }
+    .hero-hot { justify-content: center; }
+  }
+</style>

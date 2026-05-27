@@ -1,0 +1,136 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="32" height="32" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="72" rx="34" ry="30" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5"/>
+            <path d="M32 55L24 22L48 46Z" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M88 55L96 22L72 46Z" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M34 52L29 30L46 47Z" fill="#FFDEC4"/>
+            <path d="M86 52L91 30L74 47Z" fill="#FFDEC4"/>
+            <path d="M44 68Q49 63 54 68" stroke="#FF8C42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M66 68Q71 63 76 68" stroke="#FF8C42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="60" cy="77" rx="3" ry="2" fill="#FF8C42"/>
+            <path d="M55 81Q60 85 65 81" stroke="#FF8C42" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <line x1="20" y1="74" x2="42" y2="76" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="20" y1="80" x2="42" y2="80" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="78" y1="76" x2="100" y2="74" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="78" y1="80" x2="100" y2="80" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="42" cy="78" r="6" fill="#FFB88C" opacity="0.3"/>
+            <circle cx="78" cy="78" r="6" fill="#FFB88C" opacity="0.3"/>
+            <rect x="40" y="34" width="40" height="10" rx="2" fill="white" stroke="#FF8C42" stroke-width="2"/>
+            <path d="M38 44Q38 20 60 20Q82 20 82 44" fill="white" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+            <ellipse cx="80" cy="72" rx="10" ry="8" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2" transform="rotate(-15 80 72)"/>
+            <path d="M74 66Q76 62 78 66" stroke="#FF8C42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M79 64Q81 60 83 64" stroke="#FF8C42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span>馋猫有谱</span>
+        </div>
+        <p class="footer-desc">馋得明白，做得靠谱</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>浏览</h4>
+          <a href="/recipes">全部食谱</a>
+          <a href="/knowledge">知识库</a>
+          <a href="/recipes?difficulty=easy">新手专区</a>
+        </div>
+        <div class="footer-col">
+          <h4>分类</h4>
+          <a href="/recipes?scene=diet">减脂餐</a>
+          <a href="/recipes?scene=quick">快手菜</a>
+          <a href="/recipes?scene=latesnack">夜宵</a>
+          <a href="/recipes?scene=baking">烘焙</a>
+        </div>
+        <div class="footer-col">
+          <h4>关于</h4>
+          <a href="/about">关于我们</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {year} 馋猫有谱. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg-cream);
+    border-top: 1px solid var(--color-border-light);
+    padding: 56px 0 28px;
+    margin-top: 80px;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-title);
+  }
+
+  .footer-desc {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-top: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 56px;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-bottom: 2px;
+  }
+
+  .footer-col a {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-light);
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 768px) {
+    .footer-top {
+      flex-direction: column;
+      gap: 36px;
+    }
+    .footer-links { gap: 36px; }
+  }
+</style>

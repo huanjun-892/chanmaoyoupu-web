@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'hulao-flavor' } },
+    { params: { slug: 'heat-control' } },
+    { params: { slug: 'tofu-types' } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+const knowledgeData = {
+  'hulao-flavor': {
+    title: '什么是"糊辣味"？川菜灵魂味型全解析',
+    category: '味型',
+    content: '<h2>糊辣味是什么？</h2><p>糊辣味是川菜最具代表性的味型之一，以其独特的焦香与辣味交织而闻名。</p><h2>核心原理</h2><p>糊辣味的关键在于"炝"——将干辣椒放入热油中，炝至微微发糊，此时辣椒中的辣椒素和芳香物质在高温下发生美拉德反应，产生独特的焦香风味。</p><h2>操作要点</h2><ul><li>油温控制：五成热下干辣椒</li><li>辣椒选择：常用二荆条干辣椒</li><li>炝制时间：约10-15秒</li><li>观察标志：辣椒从鲜红变为深红偏暗</li></ul><h2>代表菜品</h2><ul><li>宫保鸡丁</li><li>炝炒土豆丝</li><li>糊辣蕨根粉</li></ul>',
+    relatedRecipes: [
+      { title: '麻婆豆腐', slug: 'mapo-tofu' },
+    ],
+    relatedKnowledge: [
+      { title: '炒菜火候指南', slug: 'heat-control' },
+    ],
+  },
+  'heat-control': {
+    title: '炒菜火候指南：从大火爆炒到小火慢炖',
+    category: '技法',
+    content: '<h2>火候的重要性</h2><p>火候是中餐最核心也最难掌握的技法，不同菜品对火力的要求截然不同。</p><h2>火力等级</h2><ul><li><strong>大火/旺火</strong>：爆炒、快炒，锁住食材水分</li><li><strong>中火</strong>：煎、煸，让食材均匀受热</li><li><strong>小火</strong>：炖、焖、卤，慢慢入味</li></ul><h2>常见误区</h2><p>很多新手所有菜都用一个火候，这是最大的问题。炒青菜必须大火快炒，炖肉必须小火慢炖，搞反了就不好吃。</p>',
+    relatedRecipes: [
+      { title: '麻婆豆腐', slug: 'mapo-tofu' },
+    ],
+    relatedKnowledge: [
+      { title: '糊辣味全解析', slug: 'hulao-flavor' },
+    ],
+  },
+  'tofu-types': {
+    title: '豆腐家族：嫩豆腐、老豆腐、内酯豆腐怎么选？',
+    category: '食材',
+    content: '<h2>豆腐的区别</h2><p>同样是豆腐，嫩老之间差别巨大。选对了豆腐，菜品成功率直接翻倍。</p><h2>分类</h2><ul><li><strong>嫩豆腐</strong>：水分多、口感滑嫩，适合炖煮、做汤</li><li><strong>老豆腐</strong>：水分少、质地紧实，适合煎、炒、炸</li><li><strong>内酯豆腐</strong>：最嫩，适合凉拌、做豆腐脑</li></ul><h2>选豆腐口诀</h2><p>炖煮选嫩的，煎炒选老的，凉拌选内酯。做麻婆豆腐用嫩豆腐，做家常豆腐用老豆腐。</p>',
+    relatedRecipes: [
+      { title: '麻婆豆腐', slug: 'mapo-tofu' },
+    ],
+    relatedKnowledge: [
+      { title: '糊辣味全解析', slug: 'hulao-flavor' },
+    ],
+  },
+};
+
+const entry = knowledgeData[slug as keyof typeof knowledgeData];
+
+if (!entry) {
+  return Astro.redirect('/knowledge');
+}
+---
+
+<BaseLayout title={entry.title}>
+  <Header />
+
+  <article class="knowledge-detail">
+    <div class="container">
+      <div class="knowledge-header">
+        <span class="tag">{entry.category}</span>
+        <h1 class="knowledge-title">{entry.title}</h1>
+      </div>
+
+      <div class="knowledge-body" set:html={entry.content} />
+
+      <div class="related">
+        <div class="related-section">
+          <h3 class="related-title">相关食谱</h3>
+          <div class="related-links">
+            {entry.relatedRecipes.map((r) => (
+              <a href={`/recipes/${r.slug}`} class="related-link">{r.title} →</a>
+            ))}
+          </div>
+        </div>
+        <div class="related-section">
+          <h3 class="related-title">相关知识</h3>
+          <div class="related-links">
+            {entry.relatedKnowledge.map((k) => (
+              <a href={`/knowledge/${k.slug}`} class="related-link">{k.title} →</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .knowledge-detail { padding-top: 40px; }
+  .knowledge-header { margin-bottom: 40px; }
+  .knowledge-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-top: 12px; }
+  .knowledge-body { max-width: 720px; font-size: 0.95rem; line-height: 1.9; color: var(--color-text); }
+  .knowledge-body :global(h2) { font-size: 1.3rem; font-weight: 600; color: var(--color-title); margin: 36px 0 16px; padding-left: 12px; border-left: 3px solid var(--color-accent); }
+  .knowledge-body :global(ul) { margin-bottom: 16px; padding-left: 24px; }
+  .knowledge-body :global(li) { margin-bottom: 6px; }
+  .related { margin-top: 60px; padding-top: 32px; border-top: 1px solid var(--color-border); display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .related-title { font-size: 1rem; font-weight: 600; color: var(--color-title); margin-bottom: 12px; }
+  .related-links { display: flex; flex-direction: column; gap: 8px; }
+  .related-link { font-size: 0.9rem; color: var(--color-accent); transition: opacity 0.2s; }
+  .related-link:hover { opacity: 0.7; }
+  @media (max-width: 768px) { .related { grid-template-columns: 1fr; } }
+</style>

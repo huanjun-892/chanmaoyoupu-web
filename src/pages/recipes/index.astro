@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+
+// 筛选器选项
+const cuisines = ['全部', '川菜', '粤菜', '湘菜', '鲁菜', '苏菜', '浙菜', '闽菜', '徽菜', '东北菜', '西北菜', '云南菜'];
+const methods = ['全部', '炒', '炖/煲', '蒸', '炸', '烤', '卤/酱', '拌/凉菜', '煎', '焖', '煮'];
+const difficulties = ['全部', '新手零失败', '简单易上手', '中等挑战', '高手进阶'];
+const scenes = ['全部', '减脂餐', '快手菜', '一人食', '家常菜', '夜宵', '烘焙', '宴客菜', '养生汤', '宝宝辅食'];
+
+// 占位数据
+const recipes = [
+  { title: '麻婆豆腐', slug: 'mapo-tofu', difficulty: 'easy', cookTime: 20, calories: 185, tags: ['川菜', '快手菜'], cover: '/images/recipes/mapo-tofu.jpg' },
+  { title: '番茄炒蛋', slug: 'tomato-egg', difficulty: 'easy', cookTime: 10, calories: 150, tags: ['家常菜', '新手'], cover: '/images/recipes/tomato-egg.jpg' },
+  { title: '红烧肉', slug: 'hongshao-rou', difficulty: 'medium', cookTime: 90, calories: 480, tags: ['家常菜', '硬菜'], cover: '/images/recipes/hongshao-rou.jpg' },
+  { title: '清蒸鲈鱼', slug: 'steamed-bass', difficulty: 'simple', cookTime: 25, calories: 160, tags: ['粤菜', '宴客菜'], cover: '/images/categories/cantonese.jpg' },
+  { title: '可乐鸡翅', slug: 'kele-jichi', difficulty: 'simple', cookTime: 30, calories: 290, tags: ['家常菜', '甜味'], cover: '/images/recipes/kele-jichi.jpg' },
+  { title: '酸辣土豆丝', slug: 'suanla-tudousi', difficulty: 'easy', cookTime: 15, calories: 120, tags: ['家常菜', '素食'], cover: '/images/recipes/suanla-tudousi.jpg' },
+];
+---
+
+<BaseLayout title="全部食谱">
+  <Header />
+
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">全部食谱</h1>
+
+      <!-- 筛选器 -->
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label">菜系</span>
+          <div class="filter-options">
+            {cuisines.map((c, i) => (
+              <button class:list={['filter-btn', { active: i === 0 }]}>{c}</button>
+            ))}
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">做法</span>
+          <div class="filter-options">
+            {methods.map((m, i) => (
+              <button class:list={['filter-btn', { active: i === 0 }]}>{m}</button>
+            ))}
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">难度</span>
+          <div class="filter-options">
+            {difficulties.map((d, i) => (
+              <button class:list={['filter-btn', { active: i === 0 }]}>{d}</button>
+            ))}
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">场景</span>
+          <div class="filter-options">
+            {scenes.map((s, i) => (
+              <button class:list={['filter-btn', { active: i === 0 }]}>{s}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- 食谱列表 -->
+      <div class="grid-3 recipe-list">
+        {recipes.map((recipe) => (
+          <RecipeCard {...recipe} />
+        ))}
+      </div>
+
+      <div class="load-more">
+        <button class="btn btn-outline">加载更多</button>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-title);
+    margin-bottom: 32px;
+  }
+
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding: 24px;
+    background: var(--color-bg-warm);
+    border-radius: var(--radius);
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .filter-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-title);
+    min-width: 40px;
+    padding-top: 6px;
+  }
+
+  .filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-bg);
+    font-size: 0.8rem;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .filter-btn.active {
+    background: var(--color-accent);
+    color: #fff;
+    border-color: var(--color-accent);
+  }
+
+  .recipe-list {
+    margin-bottom: 40px;
+  }
+
+  .load-more {
+    text-align: center;
+    padding: 20px 0;
+  }
+</style>
