@@ -6,8 +6,8 @@
 const API_BASE = typeof window !== 'undefined' 
   ? (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
       ? 'http://localhost:8787' 
-      : 'https://chanmaoyoupu-api.88138228.workers.dev')
-  : 'https://chanmaoyoupu-api.88138228.workers.dev';
+      : 'https://api.chanmaoyoupu.com')
+  : 'https://api.chanmaoyoupu.com';
 
 // Token存储键
 const TOKEN_KEY = 'chanmaoyoupu_token';
