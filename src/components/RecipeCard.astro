@@ -2,7 +2,7 @@
 export interface Props {
   title: string;
   slug: string;
-  cover?: string;
+  cover?: string | null;
   difficulty?: string;
   cookTime?: number;
   calories?: number;
@@ -10,13 +10,6 @@ export interface Props {
 }
 
 const { title, slug, cover, difficulty, cookTime, calories, tags = [] } = Astro.props;
-
-const difficultyMap: Record<string, string> = {
-  easy: '新手零失败',
-  simple: '简单易上手',
-  medium: '中等挑战',
-  hard: '高手进阶',
-};
 ---
 
 <a href={`/recipes/${slug}`} class="card recipe-card">
@@ -34,7 +27,7 @@ const difficultyMap: Record<string, string> = {
   <div class="card-body">
     <h3 class="card-title">{title}</h3>
     <div class="card-meta">
-      {difficulty && <span>{difficultyMap[difficulty] || difficulty}</span>}
+      {difficulty && <span>{difficulty}</span>}
       {cookTime && <span>⏱ {cookTime}分钟</span>}
     </div>
     {tags.length > 0 && (
