@@ -3,76 +3,80 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
+import { getAllRecipes, getAllCuisines, getAllTags, difficultyLabel } from '../../lib/strapi';
 
-// 筛选器选项
-const cuisines = ['全部', '川菜', '粤菜', '湘菜', '鲁菜', '苏菜', '浙菜', '闽菜', '徽菜', '东北菜', '西北菜', '云南菜'];
-const methods = ['全部', '炒', '炖/煲', '蒸', '炸', '烤', '卤/酱', '拌/凉菜', '煎', '焖', '煮'];
-const difficulties = ['全部', '新手零失败', '简单易上手', '中等挑战', '高手进阶'];
-const scenes = ['全部', '减脂餐', '快手菜', '一人食', '家常菜', '夜宵', '烘焙', '宴客菜', '养生汤', '宝宝辅食'];
+const recipes = await getAllRecipes();
+const cuisines = await getAllCuisines();
+const tags = await getAllTags();
 
-// 占位数据
-const recipes = [
-  { title: '麻婆豆腐', slug: 'mapo-tofu', difficulty: 'easy', cookTime: 20, calories: 185, tags: ['川菜', '快手菜'], cover: '/images/recipes/mapo-tofu.jpg' },
-  { title: '番茄炒蛋', slug: 'tomato-egg', difficulty: 'easy', cookTime: 10, calories: 150, tags: ['家常菜', '新手'], cover: '/images/recipes/tomato-egg.jpg' },
-  { title: '红烧肉', slug: 'hongshao-rou', difficulty: 'medium', cookTime: 90, calories: 480, tags: ['家常菜', '硬菜'], cover: '/images/recipes/hongshao-rou.jpg' },
-  { title: '清蒸鲈鱼', slug: 'steamed-bass', difficulty: 'simple', cookTime: 25, calories: 160, tags: ['粤菜', '宴客菜'], cover: '/images/categories/cantonese.jpg' },
-  { title: '可乐鸡翅', slug: 'kele-jichi', difficulty: 'simple', cookTime: 30, calories: 290, tags: ['家常菜', '甜味'], cover: '/images/recipes/kele-jichi.jpg' },
-  { title: '酸辣土豆丝', slug: 'suanla-tudousi', difficulty: 'easy', cookTime: 15, calories: 120, tags: ['家常菜', '素食'], cover: '/images/recipes/suanla-tudousi.jpg' },
-];
+const recipeList = recipes.map((r: any) => ({
+  title: r.title,
+  slug: r.slug,
+  difficulty: difficultyLabel(r.difficulty),
+  cookTime: r.cookTime,
+  calories: r.calories,
+  tags: (r.tags || []).map((t: any) => t.name),
+  cuisine: r.cuisine?.name || '',
+  cover: r.cover?.url || null,
+}));
+
+const cuisineList = ['全部', ...cuisines.map((c: any) => c.name)];
+const tagList = ['全部', ...tags.map((t: any) => t.name)];
+const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
 ---
 
-<BaseLayout title="全部食谱">
+<BaseLayout title="食谱列表">
   <Header />
 
   <section class="section">
     <div class="container">
       <h1 class="page-title">全部食谱</h1>
+      <p class="page-desc">{recipes.length} 道食谱，从入门到进阶</p>
 
       <!-- 筛选器 -->
-      <div class="filters">
+      <div class="filters" id="filters">
         <div class="filter-group">
           <span class="filter-label">菜系</span>
           <div class="filter-options">
-            {cuisines.map((c, i) => (
-              <button class:list={['filter-btn', { active: i === 0 }]}>{c}</button>
+            {cuisineList.map((c: string) => (
+              <button class="filter-btn" data-filter="cuisine" data-value={c === '全部' ? '' : c}>{c}</button>
             ))}
           </div>
         </div>
-        <div class="filter-group">
-          <span class="filter-label">做法</span>
-          <div class="filter-options">
-            {methods.map((m, i) => (
-              <button class:list={['filter-btn', { active: i === 0 }]}>{m}</button>
-            ))}
-          </div>
-        </div>
-        <div class="filter-group">
-          <span class="filter-label">难度</span>
-          <div class="filter-options">
-            {difficulties.map((d, i) => (
-              <button class:list={['filter-btn', { active: i === 0 }]}>{d}</button>
-            ))}
-          </div>
-        </div>
+
         <div class="filter-group">
           <span class="filter-label">场景</span>
           <div class="filter-options">
-            {scenes.map((s, i) => (
-              <button class:list={['filter-btn', { active: i === 0 }]}>{s}</button>
+            {tagList.map((t: string) => (
+              <button class="filter-btn" data-filter="tag" data-value={t === '全部' ? '' : t}>{t}</button>
+            ))}
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">难度</span>
+          <div class="filter-options">
+            {difficultyList.map((d: string) => (
+              <button class="filter-btn" data-filter="difficulty" data-value={d === '全部' ? '' : d}>{d}</button>
             ))}
           </div>
         </div>
       </div>
 
       <!-- 食谱列表 -->
-      <div class="grid-3 recipe-list">
-        {recipes.map((recipe) => (
-          <RecipeCard {...recipe} />
+      <div class="grid-3" id="recipe-grid">
+        {recipeList.map((recipe: any) => (
+          <div class="recipe-item"
+            data-cuisine={recipe.cuisine}
+            data-tag={recipe.tags.join(',')}
+            data-difficulty={recipe.difficulty}>
+            <RecipeCard {...recipe} />
+          </div>
         ))}
       </div>
 
-      <div class="load-more">
-        <button class="btn btn-outline">加载更多</button>
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <p>没有找到符合条件的食谱，试试其他筛选条件？</p>
       </div>
     </div>
   </section>
@@ -80,51 +84,121 @@ const recipes = [
   <Footer />
 </BaseLayout>
 
+<script>
+  // 客户端筛选逻辑
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filterType = btn.getAttribute('data-filter');
+      const value = btn.getAttribute('data-value');
+
+      // 切换按钮高亮
+      btn.parentElement!.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // 收集当前筛选条件
+      const activeFilters: Record<string, string> = {};
+      document.querySelectorAll('.filter-btn.active').forEach((b: any) => {
+        const ft = b.getAttribute('data-filter');
+        const fv = b.getAttribute('data-value');
+        if (ft && fv) activeFilters[ft] = fv;
+      });
+
+      // 筛选显示
+      let visibleCount = 0;
+      document.querySelectorAll('.recipe-item').forEach((item: any) => {
+        let show = true;
+        if (activeFilters.cuisine && item.dataset.cuisine !== activeFilters.cuisine) show = false;
+        if (activeFilters.tag && !item.dataset.tag?.split(',').includes(activeFilters.tag)) show = false;
+        if (activeFilters.difficulty && item.dataset.difficulty !== activeFilters.difficulty) show = false;
+
+        item.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+
+      const emptyEl = document.getElementById('empty-state');
+      if (emptyEl) emptyEl.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+  });
+
+  // 初始化：默认选中"全部"
+  document.querySelectorAll('.filter-group').forEach(group => {
+    const firstBtn = group.querySelector('.filter-btn');
+    if (firstBtn) firstBtn.classList.add('active');
+  });
+
+  // URL参数筛选
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('cuisine')) {
+    const val = params.get('cuisine');
+    document.querySelector(`.filter-btn[data-filter="cuisine"][data-value="${val}"]`)?.dispatchEvent(new Event('click'));
+  }
+  if (params.has('tag')) {
+    const val = params.get('tag');
+    document.querySelector(`.filter-btn[data-filter="tag"][data-value="${val}"]`)?.dispatchEvent(new Event('click'));
+  }
+  if (params.has('difficulty')) {
+    const val = params.get('difficulty');
+    const labelMap: Record<string, string> = { easy: '入门', simple: '简单', medium: '中级', hard: '高级' };
+    const label = labelMap[val || ''] || val;
+    document.querySelector(`.filter-btn[data-filter="difficulty"][data-value="${label}"]`)?.dispatchEvent(new Event('click'));
+  }
+</script>
+
 <style>
   .page-title {
     font-size: 2rem;
     font-weight: 700;
     color: var(--color-title);
+    margin-bottom: 8px;
+  }
+
+  .page-desc {
+    font-size: 1rem;
+    color: var(--color-muted);
     margin-bottom: 32px;
   }
 
   .filters {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 40px;
-    padding: 24px;
+    margin-bottom: 32px;
+    padding: 20px 24px;
     background: var(--color-bg-warm);
     border-radius: var(--radius);
+    border: 1px solid var(--color-border);
   }
 
   .filter-group {
+    margin-bottom: 14px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .filter-group:last-child {
+    margin-bottom: 0;
   }
 
   .filter-label {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    color: var(--color-title);
-    min-width: 40px;
-    padding-top: 6px;
+    color: var(--color-muted);
+    min-width: 36px;
+    flex-shrink: 0;
   }
 
   .filter-options {
     display: flex;
-    flex-wrap: wrap;
     gap: 8px;
+    flex-wrap: wrap;
   }
 
   .filter-btn {
-    padding: 6px 14px;
+    padding: 5px 14px;
     border: 1px solid var(--color-border);
-    border-radius: 20px;
+    border-radius: 100px;
     background: var(--color-bg);
-    font-size: 0.8rem;
     color: var(--color-text);
+    font-size: 0.82rem;
     cursor: pointer;
     transition: all 0.2s;
   }
@@ -140,12 +214,10 @@ const recipes = [
     border-color: var(--color-accent);
   }
 
-  .recipe-list {
-    margin-bottom: 40px;
-  }
-
-  .load-more {
+  .empty-state {
     text-align: center;
-    padding: 20px 0;
+    padding: 60px 20px;
+    color: var(--color-muted);
+    font-size: 1rem;
   }
 </style>
