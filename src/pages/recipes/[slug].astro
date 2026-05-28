@@ -2,233 +2,144 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+import { getAllRecipes, getRecipeBySlug, difficultyLabel, difficultyColor } from '../../lib/strapi';
 
-export function getStaticPaths() {
-  return [
-    { params: { slug: 'mapo-tofu' } },
-    { params: { slug: 'tomato-egg' } },
-    { params: { slug: 'hongshao-rou' } },
-  ];
+export async function getStaticPaths() {
+  const recipes = await getAllRecipes();
+  return recipes.map((r: any) => ({
+    params: { slug: r.slug },
+  }));
 }
 
 const { slug } = Astro.params;
-
-const recipesData = {
-  'mapo-tofu': {
-    title: '麻婆豆腐',
-    description: '正宗川菜麻婆豆腐，麻辣鲜香嫩烫，新手也能轻松驾驭的经典下饭菜',
-    difficulty: 'easy',
-    difficultyLabel: '新手零失败',
-    cookTime: 20,
-    servings: 2,
-    calories: 185,
-    protein: 12,
-    carbs: 8,
-    fat: 11,
-    cuisine: '川菜',
-    regions: ['四川', '重庆'],
-    methods: ['炒'],
-    tags: ['快手菜', '下饭菜'],
-    ingredients: [
-      { name: '嫩豆腐', amount: '1块（约400g）', isMain: true, substitute: '可用内酯豆腐替代' },
-      { name: '猪肉末', amount: '100g', isMain: true, substitute: '素食可用香菇碎替代' },
-      { name: '郫县豆瓣酱', amount: '1.5大勺', isMain: false },
-      { name: '花椒粉', amount: '1小勺', isMain: false },
-      { name: '蒜末', amount: '3瓣', isMain: false },
-      { name: '姜末', amount: '1小块', isMain: false },
-      { name: '小葱', amount: '2根', isMain: false },
-      { name: '生抽', amount: '1大勺', isMain: false },
-      { name: '淀粉水', amount: '适量', isMain: false },
-    ],
-    steps: [
-      { number: 1, text: '豆腐切成2cm小方块，放入加了少许盐的开水中焯烫2分钟，捞出沥干备用。', tip: '不要大力搅拌，轻轻推就行' },
-      { number: 2, text: '锅中倒少许油，中火下肉末炒散，炒至变色出油，盛出备用。', tip: '肉末炒到微微发干更香' },
-      { number: 3, text: '锅中留底油，小火下豆瓣酱炒出红油（约1分钟），加入蒜末姜末炒香。', tip: '豆瓣酱一定要小火炒' },
-      { number: 4, text: '加入半碗清水，大火烧开，放入豆腐块，轻轻推动均匀。', tip: '用锅铲背面推' },
-      { number: 5, text: '加入生抽调味，中火煮3-4分钟让豆腐入味。', tip: '煮的时间别太长' },
-      { number: 6, text: '加入炒好的肉末，淋入淀粉水勾薄芡，大火收汁。', tip: '芡汁不要太多' },
-      { number: 7, text: '出锅装盘，撒上花椒粉和葱花，完成！', tip: '花椒粉用现磨的更香' },
-    ],
-    history: '麻婆豆腐始创于清朝同治年间，由成都万福桥边陈麻婆创制，是川菜中最具代表性的家常菜之一。',
-  },
-  'tomato-egg': {
-    title: '番茄炒蛋',
-    description: '最经典的入门菜，几乎人人都会做，但要做得好吃也有小窍门',
-    difficulty: 'easy',
-    difficultyLabel: '新手零失败',
-    cookTime: 10,
-    servings: 2,
-    calories: 150,
-    protein: 9,
-    carbs: 6,
-    fat: 9,
-    cuisine: '家常菜',
-    regions: ['全国'],
-    methods: ['炒'],
-    tags: ['新手', '快手菜'],
-    ingredients: [
-      { name: '番茄', amount: '2个', isMain: true },
-      { name: '鸡蛋', amount: '3个', isMain: true },
-      { name: '葱花', amount: '适量', isMain: false },
-      { name: '盐', amount: '适量', isMain: false },
-      { name: '糖', amount: '1小勺', isMain: false },
-      { name: '食用油', amount: '2大勺', isMain: false },
-    ],
-    steps: [
-      { number: 1, text: '番茄顶部划十字，开水烫30秒去皮，切块备用。', tip: '去皮后口感更好' },
-      { number: 2, text: '鸡蛋打散，加少许盐搅匀。', tip: '可以加几滴醋去腥' },
-      { number: 3, text: '热锅凉油，油温7成热倒入蛋液，快速翻炒至凝固，盛出。', tip: '不要炒太老' },
-      { number: 4, text: '锅中再加少许油，下番茄块翻炒出汁。', tip: '可以加一点糖提鲜' },
-      { number: 5, text: '番茄炒软后加入炒好的鸡蛋，翻炒均匀，加盐调味，出锅。', tip: null },
-    ],
-    history: '番茄炒蛋是中国最普及的家常菜之一，做法简单却百吃不厌。',
-  },
-  'hongshao-rou': {
-    title: '红烧肉',
-    description: '肥而不腻、入口即化的经典硬菜，宴客必备',
-    difficulty: 'medium',
-    difficultyLabel: '中等挑战',
-    cookTime: 90,
-    servings: 4,
-    calories: 480,
-    protein: 18,
-    carbs: 5,
-    fat: 40,
-    cuisine: '家常菜',
-    regions: ['湖南', '上海', '全国'],
-    methods: ['炖/煲'],
-    tags: ['硬菜', '宴客菜'],
-    ingredients: [
-      { name: '五花肉', amount: '500g', isMain: true },
-      { name: '冰糖', amount: '30g', isMain: false },
-      { name: '生抽', amount: '2大勺', isMain: false },
-      { name: '老抽', amount: '1大勺', isMain: false },
-      { name: '料酒', amount: '2大勺', isMain: false },
-      { name: '姜片', amount: '4片', isMain: false },
-      { name: '八角', amount: '2个', isMain: false },
-      { name: '桂皮', amount: '1小段', isMain: false },
-    ],
-    steps: [
-      { number: 1, text: '五花肉切3cm方块，冷水下锅焯水3分钟，捞出洗净。', tip: '冷水下锅焯水去腥更彻底' },
-      { number: 2, text: '锅中少许油，下冰糖小火炒糖色至焦糖色。', tip: '糖色要小火，大了会苦' },
-      { number: 3, text: '放入焯好的五花肉翻炒上色。', tip: null },
-      { number: 4, text: '加入料酒、生抽、老抽、姜片、八角、桂皮翻炒均匀。', tip: null },
-      { number: 5, text: '加入没过肉的热水，大火烧开后转小火炖60分钟。', tip: '一定要加热水' },
-      { number: 6, text: '大火收汁至浓稠，出锅装盘。', tip: '收汁时注意翻动防糊' },
-    ],
-    history: '红烧肉是中国最具代表性的传统名菜之一，苏东坡曾写下"慢著火，少著水，火候足时它自美"的佳句。',
-  },
-};
-
-const recipe = recipesData[slug as keyof typeof recipesData];
+const recipe = await getRecipeBySlug(slug as string);
 
 if (!recipe) {
   return Astro.redirect('/recipes');
 }
+
+const ingredients = recipe.ingredients || [];
+const steps = (recipe.steps || []).sort((a: any, b: any) => a.stepNumber - b.stepNumber);
+const relatedRecipes = recipe.relatedRecipes || [];
 ---
 
-<BaseLayout title={recipe.title} description={recipe.description}>
+<BaseLayout title={recipe.title}>
   <Header />
 
   <article class="recipe-detail">
     <div class="container">
+      <!-- 面包屑 -->
+      <nav class="breadcrumb">
+        <a href="/">首页</a>
+        <span class="sep">/</span>
+        <a href="/recipes">食谱</a>
+        <span class="sep">/</span>
+        <span>{recipe.title}</span>
+      </nav>
+
+      <!-- 头部信息 -->
       <div class="recipe-header">
-        <div class="recipe-header-text">
+        <div class="recipe-header-left">
           <div class="recipe-tags">
-            <span class="tag">{recipe.cuisine}</span>
-            {recipe.methods.map((m) => <span class="tag">{m}</span>)}
-            {recipe.tags.map((t) => <span class="tag">{t}</span>)}
+            {recipe.cuisine && <a href={`/recipes?cuisine=${recipe.cuisine.name}`} class="tag-cuisine">{recipe.cuisine.name}</a>}
+            {(recipe.methods || []).map((m: any) => (
+              <span class="tag-method">{m.name}</span>
+            ))}
+            {(recipe.tags || []).map((t: any) => (
+              <span class="tag-scene">{t.icon} {t.name}</span>
+            ))}
           </div>
           <h1 class="recipe-title">{recipe.title}</h1>
           <p class="recipe-desc">{recipe.description}</p>
           <div class="recipe-meta">
-            <span class="meta-item">✨ {recipe.difficultyLabel}</span>
-            <span class="meta-item">⏱ {recipe.cookTime}分钟</span>
-            <span class="meta-item">👥 {recipe.servings}人份</span>
-            <span class="meta-item">📍 {recipe.regions.join(' · ')}</span>
+            <span class="meta-item">
+              <span class="meta-label">难度</span>
+              <span class="meta-value" style={`color: ${difficultyColor(recipe.difficulty)}`}>{difficultyLabel(recipe.difficulty)}</span>
+            </span>
+            <span class="meta-item">
+              <span class="meta-label">烹饪</span>
+              <span class="meta-value">{recipe.cookTime}分钟</span>
+            </span>
+            <span class="meta-item">
+              <span class="meta-label">份量</span>
+              <span class="meta-value">{recipe.servings}人份</span>
+            </span>
+            {recipe.calories && (
+            <span class="meta-item">
+              <span class="meta-label">热量</span>
+              <span class="meta-value">{recipe.calories}千卡</span>
+            </span>
+            )}
           </div>
         </div>
       </div>
 
-      <div class="nutrition-bar">
-        <div class="nutrition-item">
-          <span class="nutrition-value">{recipe.calories}</span>
-          <span class="nutrition-label">千卡/份</span>
-        </div>
-        <div class="nutrition-item">
-          <span class="nutrition-value">{recipe.protein}g</span>
-          <span class="nutrition-label">蛋白质</span>
-        </div>
-        <div class="nutrition-item">
-          <span class="nutrition-value">{recipe.carbs}g</span>
-          <span class="nutrition-label">碳水</span>
-        </div>
-        <div class="nutrition-item">
-          <span class="nutrition-value">{recipe.fat}g</span>
-          <span class="nutrition-label">脂肪</span>
-        </div>
-      </div>
-
-      <section class="recipe-section">
-        <h2 class="section-subtitle">用料</h2>
-        <div class="ingredients-grid">
-          <div class="ingredient-group">
-            <h3 class="ingredient-group-title">主料</h3>
-            <ul class="ingredient-list">
-              {recipe.ingredients.filter(i => i.isMain).map((item) => (
-                <li>
-                  <span class="ingredient-name">{item.name}</span>
-                  <span class="ingredient-amount">{item.amount}</span>
-                  {item.substitute && <span class="ingredient-sub">可替换：{item.substitute}</span>}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div class="ingredient-group">
-            <h3 class="ingredient-group-title">调料</h3>
-            <ul class="ingredient-list">
-              {recipe.ingredients.filter(i => !i.isMain).map((item) => (
-                <li>
-                  <span class="ingredient-name">{item.name}</span>
-                  <span class="ingredient-amount">{item.amount}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="recipe-section">
-        <h2 class="section-subtitle">做法步骤</h2>
-        <div class="steps-layout">
-          <div class="step-index">
-            {recipe.steps.map((step, i) => (
-              <a href={`#step-${step.number}`} class:list={['step-index-item', { active: i === 0 }]}>
-                {step.number}
-              </a>
-            ))}
-          </div>
-          <div class="steps-content">
-            {recipe.steps.map((step) => (
-              <div id={`step-${step.number}`} class="step-card">
-                <div class="step-number">{step.number}</div>
-                <div class="step-body">
-                  <p class="step-text">{step.text}</p>
-                  {step.tip && <div class="step-tip">💡 {step.tip}</div>}
+      <!-- 主体两栏 -->
+      <div class="recipe-body">
+        <!-- 左栏：步骤 -->
+        <div class="recipe-main">
+          <section class="recipe-section">
+            <h2 class="section-heading">制作步骤</h2>
+            <div class="steps">
+              {steps.map((step: any, i: number) => (
+                <div class="step">
+                  <div class="step-num">{step.stepNumber}</div>
+                  <div class="step-content">
+                    <p class="step-desc">{step.description}</p>
+                    {step.tip && <p class="step-tip">💡 {step.tip}</p>}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <!-- 右栏：用料 -->
+        <aside class="recipe-sidebar">
+          <section class="recipe-section sidebar-section">
+            <h2 class="section-heading">用料清单</h2>
+            <ul class="ingredient-list">
+              {ingredients.map((ing: any) => (
+                <li class={`ingredient-item ${ing.isMain ? '' : 'ingredient-minor'}`}>
+                  <span class="ingredient-name">{ing.name}</span>
+                  <span class="ingredient-amount">{ing.amount}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {(recipe.regions && recipe.regions.length > 0) && (
+          <section class="recipe-section sidebar-section">
+            <h2 class="section-heading">地域</h2>
+            <div class="region-list">
+              {recipe.regions.map((r: any) => (
+                <span class="region-tag">{r.name}</span>
+              ))}
+            </div>
+          </section>
+          )}
+        </aside>
+      </div>
+
+      <!-- 相关食谱 -->
+      {relatedRecipes.length > 0 && (
+      <section class="recipe-related">
+        <h2 class="section-heading">相关食谱</h2>
+        <div class="grid-3">
+          {relatedRecipes.slice(0, 3).map((r: any) => (
+            <RecipeCard
+              title={r.title}
+              slug={r.slug}
+              difficulty={difficultyLabel(r.difficulty)}
+              cookTime={r.cookTime}
+              calories={r.calories}
+              tags={[]}
+              cover={r.cover?.url || null}
+            />
+          ))}
         </div>
       </section>
-
-      {recipe.history && (
-        <section class="recipe-section">
-          <h2 class="section-subtitle">文化渊源</h2>
-          <div class="history-card">
-            <p>{recipe.history}</p>
-          </div>
-        </section>
       )}
     </div>
   </article>
@@ -237,41 +148,216 @@ if (!recipe) {
 </BaseLayout>
 
 <style>
-  .recipe-detail { padding-top: 40px; }
-  .recipe-header { margin-bottom: 32px; }
-  .recipe-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .recipe-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-bottom: 8px; }
-  .recipe-desc { font-size: 1rem; color: var(--color-muted); margin-bottom: 16px; }
-  .recipe-meta { display: flex; gap: 20px; flex-wrap: wrap; }
-  .meta-item { font-size: 0.85rem; color: var(--color-text); }
-  .nutrition-bar { display: flex; gap: 24px; padding: 20px 24px; background: var(--color-bg-warm); border-radius: var(--radius); margin-bottom: 40px; }
-  .nutrition-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
-  .nutrition-value { font-size: 1.4rem; font-weight: 700; color: var(--color-title); }
-  .nutrition-label { font-size: 0.75rem; color: var(--color-muted); margin-top: 4px; }
-  .recipe-section { margin-bottom: 48px; }
-  .section-subtitle { font-size: 1.3rem; font-weight: 600; color: var(--color-title); margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid var(--color-accent); display: inline-block; }
-  .ingredients-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .ingredient-group-title { font-size: 0.9rem; font-weight: 600; color: var(--color-accent); margin-bottom: 12px; }
-  .ingredient-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .ingredient-list li { display: flex; align-items: baseline; gap: 8px; font-size: 0.9rem; }
-  .ingredient-name { color: var(--color-title); font-weight: 500; }
-  .ingredient-amount { color: var(--color-muted); margin-left: auto; white-space: nowrap; }
-  .ingredient-sub { display: block; font-size: 0.8rem; color: var(--color-green); margin-top: 2px; }
-  .steps-layout { display: flex; gap: 24px; }
-  .step-index { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; position: sticky; top: 80px; align-self: flex-start; }
-  .step-index-item { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85rem; font-weight: 600; color: var(--color-muted); border: 1.5px solid var(--color-border); transition: all 0.2s; }
-  .step-index-item.active, .step-index-item:hover { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
-  .steps-content { flex: 1; display: flex; flex-direction: column; gap: 16px; }
-  .step-card { display: flex; gap: 16px; padding: 20px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); transition: border-color 0.2s; }
-  .step-card:hover { border-color: var(--color-accent); }
-  .step-number { flex-shrink: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--color-accent); color: #fff; border-radius: 50%; font-size: 0.85rem; font-weight: 700; }
-  .step-body { flex: 1; }
-  .step-text { font-size: 0.95rem; color: var(--color-title); line-height: 1.7; }
-  .step-tip { margin-top: 10px; padding: 10px 14px; background: var(--color-accent-light); border-radius: 4px; font-size: 0.8rem; color: var(--color-accent); }
-  .history-card { padding: 24px; background: var(--color-bg-warm); border-radius: var(--radius); border-left: 3px solid var(--color-accent); font-size: 0.9rem; color: var(--color-text); line-height: 1.8; }
+  .recipe-detail { padding-top: 24px; }
+
+  .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    margin-bottom: 24px;
+  }
+  .breadcrumb a { color: var(--color-muted); transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--color-accent); }
+  .breadcrumb .sep { margin: 0 6px; }
+
+  .recipe-header {
+    margin-bottom: 40px;
+  }
+
+  .recipe-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .tag-cuisine, .tag-method, .tag-scene {
+    padding: 3px 12px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+  .tag-cuisine {
+    background: #FFF3E0;
+    color: #E65100;
+  }
+  .tag-method {
+    background: #E8F5E9;
+    color: #2E7D32;
+  }
+  .tag-scene {
+    background: #F3E5F5;
+    color: #6A1B9A;
+  }
+  .tag-cuisine:hover { background: #FFE0B2; }
+
+  .recipe-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-title);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .recipe-desc {
+    font-size: 1rem;
+    color: var(--color-muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .recipe-meta {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .meta-value {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* Two column layout */
+  .recipe-body {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  .section-heading {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-title);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+  }
+
+  /* Steps */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .step-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-top: 5px;
+  }
+
+  .step-tip {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    background: var(--color-accent-light);
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+
+  /* Sidebar - Ingredients */
+  .sidebar-section {
+    background: var(--color-bg-warm);
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    margin-bottom: 20px;
+  }
+
+  .ingredient-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--color-border);
+    font-size: 0.9rem;
+  }
+
+  .ingredient-item:last-child {
+    border-bottom: none;
+  }
+
+  .ingredient-minor {
+    color: var(--color-muted);
+  }
+
+  .ingredient-name {
+    color: var(--color-text);
+  }
+
+  .ingredient-amount {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .region-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .region-tag {
+    padding: 4px 12px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    font-size: 0.82rem;
+    color: var(--color-text);
+  }
+
+  .recipe-related {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+  }
+
   @media (max-width: 768px) {
-    .ingredients-grid { grid-template-columns: 1fr; }
-    .step-index { display: none; }
-    .nutrition-bar { gap: 16px; padding: 16px; }
+    .recipe-body {
+      grid-template-columns: 1fr;
+    }
+    .recipe-title {
+      font-size: 1.5rem;
+    }
+    .recipe-meta {
+      gap: 16px;
+    }
   }
 </style>
