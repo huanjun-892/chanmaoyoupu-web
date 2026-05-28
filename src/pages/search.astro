@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import RecipeCard from '../../components/RecipeCard.astro';
-import { getAllRecipes, difficultyLabel } from '../../lib/strapi';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+import { getAllRecipes, difficultyLabel } from '../lib/strapi';
 
 const recipes = await getAllRecipes();
 const recipeData = recipes.map((r: any) => ({
