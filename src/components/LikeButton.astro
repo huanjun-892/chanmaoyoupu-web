@@ -67,7 +67,7 @@ const { slug, initialLiked = false, initialCount = 0 } = Astro.props;
 </style>
 
 <script>
-import { toggleLike, isLoggedIn, openLoginModal } from '../lib/auth';
+import { toggleLike, isLoggedIn } from '../lib/auth';
 
 declare global {
   interface Window {
