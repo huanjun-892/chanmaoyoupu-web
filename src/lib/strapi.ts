@@ -1,18 +1,46 @@
 const STRAPI_URL = 'https://inspired-freedom-62e32d3a2b.strapiapp.com/api';
 
-export async function fetchAPI(path: string, params: Record<string, string> = {}) {
+export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
   const url = new URL(path, STRAPI_URL);
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, value);
   });
 
-  try {
-    const res = await fetch(url.toString());
-    if (!res.ok) return null;
-    return await res.json();
-  } catch {
-    return null;
+  const maxRetries = 3;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 30000);
+      
+      const res = await fetch(url.toString(), {
+        signal: controller.signal,
+        headers: {
+          'Accept': 'application/json',
+        },
+      });
+      clearTimeout(timeout);
+      
+      if (!res.ok) {
+        console.error(`Strapi API ${path} returned ${res.status}, attempt ${attempt}/${maxRetries}`);
+        if (attempt < maxRetries) {
+          await new Promise(r => setTimeout(r, 2000 * attempt));
+          continue;
+        }
+        return null;
+      }
+      
+      const data = await res.json();
+      return data;
+    } catch (err: any) {
+      console.error(`Strapi API ${path} fetch error (attempt ${attempt}/${maxRetries}): ${err.message}`);
+      if (attempt < maxRetries) {
+        await new Promise(r => setTimeout(r, 2000 * attempt));
+        continue;
+      }
+      return null;
+    }
   }
+  return null;
 }
 
 export async function getAllRecipes() {
