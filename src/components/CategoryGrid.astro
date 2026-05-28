@@ -1,18 +1,37 @@
 ---
-const categories = [
-  { label: '川菜', href: '/recipes?cuisine=sichuan', img: '/images/categories/sichuan.jpg' },
-  { label: '粤菜', href: '/recipes?cuisine=cantonese', img: '/images/categories/cantonese.jpg' },
-  { label: '湘菜', href: '/recipes?cuisine=hunan', img: '/images/categories/hunan.jpg' },
-  { label: '鲁菜', href: '/recipes?cuisine=shandong', img: '/images/categories/shandong.jpg' },
-  { label: '东北菜', href: '/recipes?cuisine=dongbei', img: '/images/categories/dongbei.jpg' },
-  { label: '新手零失败', href: '/recipes?difficulty=easy', img: '/images/categories/easy.jpg' },
-  { label: '快手菜', href: '/recipes?scene=quick', img: '/images/categories/quick.jpg' },
-  { label: '减脂餐', href: '/recipes?scene=diet', img: '/images/categories/diet.jpg' },
-  { label: '夜宵', href: '/recipes?scene=latesnack', img: '/images/categories/latesnack.jpg' },
-  { label: '烘焙', href: '/recipes?scene=baking', img: '/images/categories/baking.jpg' },
-  { label: '一人食', href: '/recipes?scene=solo', img: '/images/categories/solo.jpg' },
-  { label: '家常菜', href: '/recipes?scene=home', img: '/images/categories/home.jpg' },
-];
+import { getAllCuisines, getAllTags } from '../lib/strapi';
+
+const cuisines = await getAllCuisines();
+const tags = await getAllTags();
+
+// 菜系emoji映射
+const cuisineEmoji: Record<string, string> = {
+  '川菜': '🌶️', '粤菜': '🥘', '湘菜': '🔥',
+  '浙菜': '🍵', '鲁菜': '🍖', '家常菜': '🏠',
+};
+
+// 标签emoji映射
+const tagEmoji: Record<string, string> = {
+  '快手菜': '⚡', '减脂餐': '🥗', '下饭菜': '🍚',
+  '夜宵': '🌙', '家常菜': '🏠', '宴客菜': '🎉',
+};
+
+// 菜系入口
+const cuisineItems = cuisines.slice(0, 6).map((c: any) => ({
+  label: c.name,
+  href: `/recipes?cuisine=${c.name}`,
+  emoji: cuisineEmoji[c.name] || '🍽️',
+}));
+
+// 标签入口
+const tagItems = tags.slice(0, 6).map((t: any) => ({
+  label: t.name,
+  href: `/recipes?tag=${t.name}`,
+  emoji: t.icon || tagEmoji[t.name] || '🏷️',
+}));
+
+// 合并：菜系优先，标签补充
+const categories = [...cuisineItems, ...tagItems].slice(0, 6);
 ---
 
 <section class="section categories-section">
@@ -21,7 +40,7 @@ const categories = [
     <div class="category-grid">
       {categories.map((cat) => (
         <a href={cat.href} class="category-item">
-          <img src={cat.img} alt={cat.label} class="category-img" loading="lazy" />
+          <span class="category-emoji">{cat.emoji}</span>
           <span class="category-label">{cat.label}</span>
         </a>
       ))}
@@ -41,64 +60,38 @@ const categories = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     border-radius: var(--radius);
     overflow: hidden;
     aspect-ratio: 1 / 1;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border: 1px solid var(--color-border-light);
+    background: var(--color-bg-warm);
+    text-decoration: none;
   }
 
-  .category-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  /* Semi-transparent overlay for text readability */
-  .category-item::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0) 30%,
-      rgba(0, 0, 0, 0.35) 100%
-    );
-    pointer-events: none;
-    transition: background 0.3s;
+  .category-emoji {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    transition: transform 0.3s;
   }
 
   .category-item:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: var(--color-accent);
+    background: var(--color-accent-light);
   }
 
-  .category-item:hover .category-img {
-    transform: scale(1.08);
-  }
-
-  .category-item:hover::after {
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0) 20%,
-      rgba(255, 140, 66, 0.25) 100%
-    );
+  .category-item:hover .category-emoji {
+    transform: scale(1.15);
   }
 
   .category-label {
-    position: relative;
-    z-index: 1;
     font-size: 0.82rem;
     font-weight: 600;
-    color: #fff;
-    padding: 6px 0 12px;
+    color: var(--color-title);
     letter-spacing: 0.02em;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   }
 
   @media (max-width: 768px) {
@@ -113,7 +106,9 @@ const categories = [
     }
     .category-label {
       font-size: 0.75rem;
-      padding: 4px 0 8px;
+    }
+    .category-emoji {
+      font-size: 1.6rem;
     }
   }
 </style>
