@@ -1,7 +1,7 @@
-const STRAPI_URL = 'https://inspired-freedom-62e32d3a2b.strapiapp.com/api';
+const STRAPI_BASE = 'https://inspired-freedom-62e32d3a2b.strapiapp.com';
 
 export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
-  const url = new URL(path, STRAPI_URL);
+  const url = new URL(`/api${path}`, STRAPI_BASE);
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, value);
   });
@@ -52,6 +52,7 @@ export async function getAllRecipes() {
     'populate[regions]': 'true',
     'populate[ingredients]': 'true',
     'populate[steps]': 'true',
+    'populate[cover]': 'true',
   });
   return data?.data || [];
 }
@@ -65,6 +66,7 @@ export async function getRecipeBySlug(slug: string) {
     'populate[regions]': 'true',
     'populate[ingredients]': 'true',
     'populate[steps]': 'true',
+    'populate[cover]': 'true',
     'populate[relatedRecipes]': 'true',
     'populate[relatedKnowledge]': 'true',
   });
