@@ -5,22 +5,40 @@ import Footer from '../components/Footer.astro';
 import CategoryGrid from '../components/CategoryGrid.astro';
 import RecipeCard from '../components/RecipeCard.astro';
 import KnowledgeCard from '../components/KnowledgeCard.astro';
+import { getAllRecipes, getAllKnowledge, difficultyLabel } from '../lib/strapi';
 
-const featuredRecipes = [
-  { title: '麻婆豆腐', slug: 'mapo-tofu', difficulty: 'easy', cookTime: 20, calories: 185, tags: ['川菜', '快手菜'], cover: '/images/recipes/mapo-tofu.jpg' },
-  { title: '番茄炒蛋', slug: 'tomato-egg', difficulty: 'easy', cookTime: 10, calories: 150, tags: ['家常菜', '新手'], cover: '/images/recipes/tomato-egg.jpg' },
-  { title: '红烧肉', slug: 'hongshao-rou', difficulty: 'medium', cookTime: 90, calories: 480, tags: ['家常菜', '硬菜'], cover: '/images/recipes/hongshao-rou.jpg' },
-];
+const allRecipes = await getAllRecipes();
+const knowledgeItems = await getAllKnowledge();
 
-const newRecipes = [
-  { title: '酸辣土豆丝', slug: 'suanla-tudousi', difficulty: 'easy', cookTime: 15, calories: 120, tags: ['家常菜', '素食'], cover: '/images/recipes/suanla-tudousi.jpg' },
-  { title: '可乐鸡翅', slug: 'kele-jichi', difficulty: 'simple', cookTime: 30, calories: 290, tags: ['家常菜', '甜味'], cover: '/images/recipes/kele-jichi.jpg' },
-];
+// 最新2道作为"今日上新"
+const newRecipes = allRecipes.slice(0, 2).map(r => ({
+  title: r.title,
+  slug: r.slug,
+  difficulty: difficultyLabel(r.difficulty),
+  cookTime: r.cookTime,
+  calories: r.calories,
+  tags: (r.tags || []).map((t: any) => t.name),
+  cover: r.cover?.url || null,
+}));
 
-const knowledgeItems = [
-  { title: '什么是"糊辣味"？川菜灵魂味型全解析', slug: 'hulao-flavor', category: 'flavor', excerpt: '糊辣味是川菜最经典的味型之一，干辣椒炝至微糊，释放出独特的焦香...' },
-  { title: '炒菜火候指南：从大火爆炒到小火慢炖', slug: 'heat-control', category: 'technique', excerpt: '火候是中餐最核心也最难掌握的技法，不同菜品对火力的要求截然不同...' },
-];
+// 接下来3道作为"热门食谱"
+const featuredRecipes = allRecipes.slice(2, 5).map(r => ({
+  title: r.title,
+  slug: r.slug,
+  difficulty: difficultyLabel(r.difficulty),
+  cookTime: r.cookTime,
+  calories: r.calories,
+  tags: (r.tags || []).map((t: any) => t.name),
+  cover: r.cover?.url || null,
+}));
+
+// 知识库精选
+const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
+  title: k.title,
+  slug: k.slug,
+  category: k.category,
+  excerpt: k.content ? k.content.replace(/<[^>]*>/g, '').slice(0, 80) + '...' : '',
+}));
 ---
 
 <BaseLayout title="首页">
@@ -43,8 +61,8 @@ const knowledgeItems = [
         </form>
         <div class="hero-hot">
           <span class="hero-hot-label">热门：</span>
-          <a href="/recipes?cuisine=sichuan">川菜</a>
-          <a href="/recipes?scene=diet">减脂餐</a>
+          <a href="/recipes?cuisine=川菜">川菜</a>
+          <a href="/recipes?tag=减脂餐">减脂餐</a>
           <a href="/recipes?difficulty=easy">新手菜</a>
         </div>
       </div>
@@ -88,6 +106,7 @@ const knowledgeItems = [
   </section>
 
   <!-- 知识库精选 -->
+  {knowledgeFeatured.length > 0 && (
   <section class="section">
     <div class="container">
       <div class="section-header">
@@ -95,12 +114,13 @@ const knowledgeItems = [
         <a href="/knowledge" class="view-all">进入知识库 →</a>
       </div>
       <div class="grid-2">
-        {knowledgeItems.map((item) => (
+        {knowledgeFeatured.map((item) => (
           <KnowledgeCard {...item} />
         ))}
       </div>
     </div>
   </section>
+  )}
 
   <Footer />
 </BaseLayout>
