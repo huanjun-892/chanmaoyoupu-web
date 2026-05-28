@@ -2,7 +2,7 @@
  * 馋猫有谱 - 认证工具函数
  */
 
-// API基础URL - 开发环境和生产环境
+// API基础URL
 const API_BASE = typeof window !== 'undefined' 
   ? (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
       ? 'http://localhost:8787' 
@@ -19,6 +19,8 @@ export interface User {
   email: string;
   nickname: string;
   avatar_url: string;
+  phone: string;
+  birthday: string;
   created_at?: string;
 }
 
@@ -103,11 +105,21 @@ async function apiRequest<T>(url: string, options: RequestInit = {}): Promise<Ap
   }
 }
 
+// 检查昵称是否可用
+export async function checkNickname(nickname: string): Promise<ApiResponse<{ available: boolean }>> {
+  return await apiRequest<{ available: boolean }>(`${API_BASE}/api/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`);
+}
+
 // 注册
-export async function register(email: string, password: string, nickname?: string): Promise<AuthResponse> {
+export async function register(email: string, password: string, nickname?: string, phone?: string, birthday?: string): Promise<AuthResponse> {
+  const body: any = { email, password };
+  if (nickname) body.nickname = nickname;
+  if (phone) body.phone = phone;
+  if (birthday) body.birthday = birthday;
+  
   const response = await apiRequest<{ user: User; token: string }>(`${API_BASE}/api/auth/register`, {
     method: 'POST',
-    body: JSON.stringify({ email, password, nickname }),
+    body: JSON.stringify(body),
   });
   
   if (response.success && response.data) {
@@ -153,7 +165,6 @@ export async function updateProfile(data: Partial<User>): Promise<ApiResponse<Us
 // 登出
 export function logout(): void {
   clearAuth();
-  // 触发登出事件，让组件可以响应
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new Event('auth_change'));
   }
@@ -216,7 +227,7 @@ export async function getFavoritesRanking(limit: number = 20): Promise<ApiRespon
   return await apiRequest<RankingItem[]>(`${API_BASE}/api/rankings/favorites?limit=${limit}`);
 }
 
-// OAuth预留接口（仅供调用，不实现具体逻辑）
+// OAuth预留接口
 export async function oauthLogin(provider: 'wechat' | 'douyin' | 'kuaishou'): Promise<ApiResponse<{ provider: string; status: string }>> {
   return await apiRequest<{ provider: string; status: string }>(`${API_BASE}/api/oauth/${provider}`, {
     method: 'POST',
