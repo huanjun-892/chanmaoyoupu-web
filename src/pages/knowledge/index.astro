@@ -2,21 +2,32 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { getAllKnowledge } from '../../lib/strapi';
 
-const categories = [
-  { name: '技法', slug: 'technique', icon: '🔥', count: 12, desc: '炒、炖、蒸、炸…每种技法的关键要点' },
-  { name: '食材', slug: 'ingredient', icon: '🥬', count: 28, desc: '食材属性、搭配宜忌、替代方案' },
-  { name: '味型', slug: 'flavor', icon: '👅', count: 8, desc: '糊辣、荔枝、鱼香…味型的秘密' },
-  { name: '文化', slug: 'culture', icon: '📜', count: 15, desc: '菜品背后的历史与地域文化' },
-  { name: '历史', slug: 'history', icon: '📖', count: 10, desc: '从古至今的美食演变' },
-];
+const knowledgeItems = await getAllKnowledge();
 
-const recentKnowledge = [
-  { title: '什么是"糊辣味"？川菜灵魂味型全解析', slug: 'hulao-flavor', category: '味型', excerpt: '糊辣味是川菜最经典的味型之一，干辣椒炝至微糊，释放出独特的焦香与辣味交织的风味...' },
-  { title: '炒菜火候指南：从大火爆炒到小火慢炖', slug: 'heat-control', category: '技法', excerpt: '火候是中餐最核心也最难掌握的技法，不同菜品对火力的要求截然不同...' },
-  { title: '豆腐家族：嫩豆腐、老豆腐、内酯豆腐怎么选？', slug: 'tofu-types', category: '食材', excerpt: '同样是豆腐，嫩老之间差别巨大。选对了豆腐，菜品成功率直接翻倍...' },
-  { title: '川菜的前世今生：从湖广填川到现代川菜', slug: 'sichuan-history', category: '历史', excerpt: '现代川菜的形成不过百年，却成为了中国最具影响力的菜系之一...' },
-];
+const categoryMap: Record<string, { icon: string; label: string }> = {
+  technique: { icon: '🔥', label: '技法' },
+  ingredient: { icon: '🥬', label: '食材' },
+  flavor: { icon: '👅', label: '味型' },
+  culture: { icon: '📜', label: '文化' },
+  history: { icon: '📖', label: '历史' },
+};
+
+// 统计各分类数量
+const categoryCounts: Record<string, number> = {};
+knowledgeItems.forEach((k: any) => {
+  const cat = k.category || 'other';
+  categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+});
+
+const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => ({
+  name: label,
+  slug,
+  icon,
+  count: categoryCounts[slug] || 0,
+  desc: `${label}相关美食知识`,
+}));
 ---
 
 <BaseLayout title="知识库">
@@ -27,7 +38,7 @@ const recentKnowledge = [
       <h1 class="page-title">美食知识库</h1>
       <p class="page-desc">不仅要会做，还要懂。从技法到食材，从味型到文化，吃个明白。</p>
 
-      <!-- 分类卡片 -->
+      {categories.length > 0 && (
       <div class="grid-5 category-cards">
         {categories.map((cat) => (
           <a href={`/knowledge?category=${cat.slug}`} class="category-card">
@@ -38,21 +49,33 @@ const recentKnowledge = [
           </a>
         ))}
       </div>
+      )}
 
-      <!-- 最新条目 -->
+      {knowledgeItems.length > 0 ? (
       <div class="knowledge-list">
-        <h2 class="section-subtitle">最新条目</h2>
-        {recentKnowledge.map((item) => (
-          <a href={`/knowledge/${item.slug}`} class="knowledge-item">
-            <div class="knowledge-item-left">
-              <span class="tag">{item.category}</span>
-              <h3 class="knowledge-item-title">{item.title}</h3>
-              <p class="knowledge-item-excerpt">{item.excerpt}</p>
-            </div>
-            <span class="knowledge-item-arrow">→</span>
-          </a>
-        ))}
+        <h2 class="section-subtitle">全部条目</h2>
+        {knowledgeItems.map((item: any) => {
+          const catInfo = categoryMap[item.category] || { icon: '📚', label: '知识' };
+          const excerpt = item.content ? item.content.replace(/<[^>]*>/g, '').slice(0, 80) + '...' : '';
+          return (
+            <a href={`/knowledge/${item.slug}`} class="knowledge-item">
+              <div class="knowledge-item-left">
+                <span class="tag">{catInfo.icon} {catInfo.label}</span>
+                <h3 class="knowledge-item-title">{item.title}</h3>
+                <p class="knowledge-item-excerpt">{excerpt}</p>
+              </div>
+              <span class="knowledge-item-arrow">→</span>
+            </a>
+          );
+        })}
       </div>
+      ) : (
+      <div class="coming-soon">
+        <span class="coming-soon-icon">📝</span>
+        <p class="coming-soon-text">知识库正在筹备中，敬请期待！</p>
+        <p class="coming-soon-sub">先去看看<a href="/recipes">食谱</a>吧～</p>
+      </div>
+      )}
     </div>
   </section>
 
@@ -177,6 +200,33 @@ const recentKnowledge = [
   }
 
   .knowledge-item:hover .knowledge-item-arrow {
+    color: var(--color-accent);
+  }
+
+  .coming-soon {
+    text-align: center;
+    padding: 80px 20px;
+  }
+
+  .coming-soon-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .coming-soon-text {
+    font-size: 1.2rem;
+    color: var(--color-title);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .coming-soon-sub {
+    font-size: 0.95rem;
+    color: var(--color-muted);
+  }
+
+  .coming-soon-sub a {
     color: var(--color-accent);
   }
 
