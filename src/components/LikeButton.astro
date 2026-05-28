@@ -81,7 +81,7 @@ window.toggleLike = async function(btn: HTMLButtonElement) {
   
   // 检查登录状态
   if (!isLoggedIn()) {
-    openLoginModal();
+    (window as any).openLoginModal();
     return;
   }
   
