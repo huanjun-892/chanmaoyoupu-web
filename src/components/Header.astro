@@ -12,12 +12,14 @@ const currentPath = Astro.url.pathname;
       <a href="/" class:list={['nav-link', { active: currentPath === '/' }]}>首页</a>
       <a href="/recipes" class:list={['nav-link', { active: currentPath.startsWith('/recipes') }]}>食谱</a>
       <a href="/knowledge" class:list={['nav-link', { active: currentPath.startsWith('/knowledge') }]}>知识库</a>
+      <a href="/rankings" class:list={['nav-link', { active: currentPath === '/rankings' }]}>排行榜</a>
     </nav>
     <div class="header-right">
       <form action="/search" method="get" class="search-box">
         <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" name="q" placeholder="搜食谱、食材..." class="search-input" />
       </form>
+      <button id="auth-btn" class="auth-btn" onclick="openLoginModal()">登录</button>
     </div>
   </div>
 </header>
@@ -96,6 +98,9 @@ const currentPath = Astro.url.pathname;
 
   .header-right {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
 
   .search-box {
@@ -133,6 +138,34 @@ const currentPath = Astro.url.pathname;
     color: var(--color-muted);
   }
 
+  .auth-btn {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #ff6b35, #ff8f65);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+
+  .auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.35);
+  }
+
+  .header-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
   @media (max-width: 768px) {
     .nav { gap: 20px; }
     .search-input { width: 110px; }
@@ -142,5 +175,6 @@ const currentPath = Astro.url.pathname;
   @media (max-width: 480px) {
     .search-input { width: 80px; }
     .header-inner { gap: 14px; }
+    .auth-btn { padding: 6px 14px; font-size: 0.8rem; }
   }
 </style>

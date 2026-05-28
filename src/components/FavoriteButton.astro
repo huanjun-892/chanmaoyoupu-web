@@ -1,0 +1,135 @@
+---
+// 收藏按钮组件
+interface Props {
+  slug: string;
+  initialFavorited?: boolean;
+  initialCount?: number;
+}
+
+const { slug, initialFavorited = false, initialCount = 0 } = Astro.props;
+---
+
+<button 
+  class="favorite-btn" 
+  id={`favorite-btn-${slug}`}
+  data-slug={slug}
+  data-favorited={initialFavorited.toString()}
+  onclick="toggleFavorite(this)"
+>
+  <svg class="favorite-icon" viewBox="0 0 24 24" width="20" height="20">
+    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+  </svg>
+  <span class="favorite-text" id={`favorite-text-${slug}`}>
+    {initialFavorited ? '已收藏' : '收藏'}
+  </span>
+</button>
+
+<style>
+.favorite-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  background: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #666;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.favorite-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.favorite-btn.favorited {
+  color: #ffb300;
+  background: #fffbf0;
+}
+
+.favorite-btn.favorited .favorite-icon path {
+  fill: #ffb300;
+  stroke: #ffb300;
+}
+
+.favorite-icon path {
+  fill: transparent;
+  stroke: #999;
+  stroke-width: 2;
+  transition: all 0.2s;
+}
+
+.favorite-text {
+  font-weight: 500;
+}
+</style>
+
+<script>
+import { toggleFavorite, isLoggedIn, openLoginModal } from '../lib/auth';
+
+declare global {
+  interface Window {
+    toggleFavorite: (btn: HTMLButtonElement) => Promise<void>;
+  }
+}
+
+window.toggleFavorite = async function(btn: HTMLButtonElement) {
+  const slug = btn.dataset.slug;
+  if (!slug) return;
+  
+  if (!isLoggedIn()) {
+    openLoginModal();
+    return;
+  }
+  
+  const isFavorited = btn.dataset.favorited === 'true';
+  const textEl = document.getElementById(`favorite-text-${slug}`);
+  const currentText = textEl?.textContent || '';
+  
+  // 即时UI反馈
+  btn.dataset.favorited = (!isFavorited).toString();
+  btn.classList.toggle('favorited', !isFavorited);
+  if (textEl) {
+    textEl.textContent = !isFavorited ? '已收藏' : '收藏';
+  }
+  
+  // 播放动画
+  btn.style.transform = 'scale(1.2)';
+  setTimeout(() => {
+    btn.style.transform = '';
+  }, 150);
+  
+  try {
+    const result = await toggleFavorite(slug);
+    
+    if (result.success && result.data) {
+      btn.dataset.favorited = result.data.favorited.toString();
+      btn.classList.toggle('favorited', result.data.favorited);
+      if (textEl) {
+        textEl.textContent = result.data.favorited ? '已收藏' : '收藏';
+      }
+    } else {
+      // 回滚
+      btn.dataset.favorited = isFavorited.toString();
+      btn.classList.toggle('favorited', isFavorited);
+      if (textEl) {
+        textEl.textContent = currentText;
+      }
+      if (result.error && result.error !== '请先登录') {
+        console.error('收藏失败:', result.error);
+      }
+    }
+  } catch (err) {
+    // 回滚
+    btn.dataset.favorited = isFavorited.toString();
+    btn.classList.toggle('favorited', isFavorited);
+    if (textEl) {
+      textEl.textContent = currentText;
+    }
+    console.error('收藏请求失败:', err);
+  }
+};
+</script>

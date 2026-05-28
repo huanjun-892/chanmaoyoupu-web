@@ -1,0 +1,137 @@
+---
+// 点赞按钮组件
+interface Props {
+  slug: string;
+  initialLiked?: boolean;
+  initialCount?: number;
+}
+
+const { slug, initialLiked = false, initialCount = 0 } = Astro.props;
+---
+
+<button 
+  class="like-btn" 
+  id={`like-btn-${slug}`}
+  data-slug={slug}
+  data-liked={initialLiked.toString()}
+  onclick="toggleLike(this)"
+>
+  <svg class="like-icon" viewBox="0 0 24 24" width="20" height="20">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>
+  <span class="like-count" id={`like-count-${slug}`}>{initialCount}</span>
+</button>
+
+<style>
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  background: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #666;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.like-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.like-btn.liked {
+  color: #e53935;
+  background: #fff5f5;
+}
+
+.like-btn.liked .like-icon path {
+  fill: #e53935;
+}
+
+.like-icon path {
+  fill: transparent;
+  stroke: #999;
+  stroke-width: 2;
+  transition: all 0.2s;
+}
+
+.like-count {
+  font-weight: 500;
+  min-width: 20px;
+  text-align: left;
+}
+</style>
+
+<script>
+import { toggleLike, isLoggedIn, openLoginModal } from '../lib/auth';
+
+declare global {
+  interface Window {
+    toggleLike: (btn: HTMLButtonElement) => Promise<void>;
+  }
+}
+
+window.toggleLike = async function(btn: HTMLButtonElement) {
+  const slug = btn.dataset.slug;
+  if (!slug) return;
+  
+  // 检查登录状态
+  if (!isLoggedIn()) {
+    openLoginModal();
+    return;
+  }
+  
+  const isLiked = btn.dataset.liked === 'true';
+  const countEl = document.getElementById(`like-count-${slug}`);
+  const currentCount = parseInt(countEl?.textContent || '0');
+  
+  // 即时UI反馈（乐观更新）
+  btn.dataset.liked = (!isLiked).toString();
+  btn.classList.toggle('liked', !isLiked);
+  if (countEl) {
+    countEl.textContent = (currentCount + (isLiked ? -1 : 1)).toString();
+  }
+  
+  // 播放动画
+  btn.style.transform = 'scale(1.2)';
+  setTimeout(() => {
+    btn.style.transform = '';
+  }, 150);
+  
+  try {
+    const result = await toggleLike(slug);
+    
+    if (result.success && result.data) {
+      // 更新为服务器返回的真实状态
+      btn.dataset.liked = result.data.liked.toString();
+      btn.classList.toggle('liked', result.data.liked);
+      if (countEl) {
+        countEl.textContent = result.data.count.toString();
+      }
+    } else {
+      // 回滚UI
+      btn.dataset.liked = isLiked.toString();
+      btn.classList.toggle('liked', isLiked);
+      if (countEl) {
+        countEl.textContent = currentCount.toString();
+      }
+      // 显示错误
+      if (result.error && result.error !== '请先登录') {
+        console.error('点赞失败:', result.error);
+      }
+    }
+  } catch (err) {
+    // 回滚UI
+    btn.dataset.liked = isLiked.toString();
+    btn.classList.toggle('liked', isLiked);
+    if (countEl) {
+      countEl.textContent = currentCount.toString();
+    }
+    console.error('点赞请求失败:', err);
+  }
+};
+</script>

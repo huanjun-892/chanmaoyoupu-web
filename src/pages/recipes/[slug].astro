@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import LikeButton from '../../components/LikeButton.astro';
+import FavoriteButton from '../../components/FavoriteButton.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
 import { getAllRecipes, getRecipeBySlug, difficultyLabel, difficultyColor, getCoverUrl, getCoverFullUrl } from '../../lib/strapi';
 
@@ -25,8 +25,6 @@ const relatedRecipes = recipe.relatedRecipes || [];
 ---
 
 <BaseLayout title={recipe.title}>
-  <Header />
-
   <article class="recipe-detail">
     <div class="container">
       <!-- 面包屑 -->
@@ -76,6 +74,12 @@ const relatedRecipes = recipe.relatedRecipes || [];
               <span class="meta-value">{recipe.calories}千卡</span>
             </span>
             )}
+          </div>
+          
+          <!-- 点赞和收藏按钮 -->
+          <div class="recipe-actions">
+            <LikeButton slug={recipe.slug} />
+            <FavoriteButton slug={recipe.slug} />
           </div>
         </div>
       </div>
@@ -148,8 +152,6 @@ const relatedRecipes = recipe.relatedRecipes || [];
       )}
     </div>
   </article>
-
-  <Footer />
 </BaseLayout>
 
 <style>
@@ -244,6 +246,14 @@ const relatedRecipes = recipe.relatedRecipes || [];
   .meta-value {
     font-size: 1rem;
     font-weight: 600;
+  }
+
+  .recipe-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--color-border-light);
   }
 
   /* Two column layout */
@@ -377,6 +387,9 @@ const relatedRecipes = recipe.relatedRecipes || [];
     }
     .recipe-meta {
       gap: 16px;
+    }
+    .recipe-actions {
+      flex-wrap: wrap;
     }
   }
 </style>
