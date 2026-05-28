@@ -81,7 +81,7 @@ window.toggleFavorite = async function(btn: HTMLButtonElement) {
   if (!slug) return;
   
   if (!isLoggedIn()) {
-    openLoginModal();
+    (window as any).openLoginModal();
     return;
   }
   
