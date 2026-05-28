@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import CategoryGrid from '../components/CategoryGrid.astro';
 import RecipeCard from '../components/RecipeCard.astro';
 import KnowledgeCard from '../components/KnowledgeCard.astro';
-import { getAllRecipes, getAllKnowledge, difficultyLabel } from '../lib/strapi';
+import { getAllRecipes, getAllKnowledge, difficultyLabel, getCoverUrl } from '../lib/strapi';
 
 const allRecipes = await getAllRecipes();
 const knowledgeItems = await getAllKnowledge();
@@ -18,7 +18,7 @@ const newRecipes = allRecipes.slice(0, 2).map(r => ({
   cookTime: r.cookTime,
   calories: r.calories,
   tags: (r.tags || []).map((t: any) => t.name),
-  cover: r.cover?.url || null,
+  cover: getCoverUrl(r.cover),
 }));
 
 // 接下来3道作为"热门食谱"
@@ -29,7 +29,7 @@ const featuredRecipes = allRecipes.slice(2, 5).map(r => ({
   cookTime: r.cookTime,
   calories: r.calories,
   tags: (r.tags || []).map((t: any) => t.name),
-  cover: r.cover?.url || null,
+  cover: getCoverUrl(r.cover),
 }));
 
 // 知识库精选
@@ -259,6 +259,7 @@ const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
   }
 
   .hero-cat {
+    object-fit: contain;
     width: 200px;
     height: 200px;
     filter: drop-shadow(0 4px 20px rgba(255, 140, 66, 0.15));
@@ -297,7 +298,8 @@ const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
     .hero-title { font-size: 2.2rem; }
     .hero-search { max-width: 100%; }
     .hero-illustration { width: auto; }
-    .hero-cat { width: 140px; height: 140px; }
+    .hero-cat {
+    object-fit: contain; width: 140px; height: 140px; }
     .hero-hot { justify-content: center; }
   }
 </style>

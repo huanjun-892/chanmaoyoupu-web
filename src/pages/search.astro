@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import RecipeCard from '../components/RecipeCard.astro';
-import { getAllRecipes, difficultyLabel } from '../lib/strapi';
+import { getAllRecipes, difficultyLabel, getCoverUrl } from '../lib/strapi';
 
 const recipes = await getAllRecipes();
 const recipeData = recipes.map((r: any) => ({
@@ -14,7 +14,7 @@ const recipeData = recipes.map((r: any) => ({
   calories: r.calories,
   tags: (r.tags || []).map((t: any) => t.name),
   cuisine: r.cuisine?.name || '',
-  cover: r.cover?.url || null,
+  cover: getCoverUrl(r.cover),
   description: r.description || '',
   ingredientNames: (r.ingredients || []).map((i: any) => i.name).join(','),
 }));

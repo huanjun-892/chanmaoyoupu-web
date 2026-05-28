@@ -14,9 +14,7 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
       
       const res = await fetch(url.toString(), {
         signal: controller.signal,
-        headers: {
-          'Accept': 'application/json',
-        },
+        headers: { 'Accept': 'application/json' },
       });
       clearTimeout(timeout);
       
@@ -29,8 +27,7 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
         return null;
       }
       
-      const data = await res.json();
-      return data;
+      return await res.json();
     } catch (err: any) {
       console.error(`Strapi API ${path} fetch error (attempt ${attempt}/${maxRetries}): ${err.message}`);
       if (attempt < maxRetries) {
@@ -40,6 +37,21 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
       return null;
     }
   }
+  return null;
+}
+
+// Get cover URL - prefer small format for performance
+export function getCoverUrl(cover: any): string | null {
+  if (!cover) return null;
+  if (cover.formats?.small?.url) return cover.formats.small.url;
+  if (cover.url) return cover.url;
+  return null;
+}
+
+// Get full-size cover URL for detail pages
+export function getCoverFullUrl(cover: any): string | null {
+  if (!cover) return null;
+  if (cover.url) return cover.url;
   return null;
 }
 
@@ -108,21 +120,11 @@ export async function getAllKnowledge() {
 }
 
 export function difficultyLabel(d: string): string {
-  const map: Record<string, string> = {
-    easy: '入门',
-    simple: '简单',
-    medium: '中级',
-    hard: '高级',
-  };
+  const map: Record<string, string> = { easy: '入门', simple: '简单', medium: '中级', hard: '高级' };
   return map[d] || d;
 }
 
 export function difficultyColor(d: string): string {
-  const map: Record<string, string> = {
-    easy: '#5CB85C',
-    simple: '#5CB85C',
-    medium: '#FF8C42',
-    hard: '#E57373',
-  };
+  const map: Record<string, string> = { easy: '#5CB85C', simple: '#5CB85C', medium: '#FF8C42', hard: '#E57373' };
   return map[d] || '#9A9A9A';
 }
