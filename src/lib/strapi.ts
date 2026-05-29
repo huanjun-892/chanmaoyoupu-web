@@ -10,7 +10,7 @@ const fallbackCuisines: any[] = fallback.cuisines || [];
 const fallbackTags: any[] = fallback.tags || [];
 
 export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
-  const url = new URL(\`/api\${path}\`, STRAPI_BASE);
+  const url = new URL(`/api${path}`, STRAPI_BASE);
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, value);
   });
@@ -28,7 +28,7 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
       clearTimeout(timeout);
       
       if (!res.ok) {
-        console.warn(\`Strapi API \${path} returned \${res.status}\`);
+        console.warn(`Strapi API ${path} returned ${res.status}`);
         if (attempt < maxRetries) {
           await new Promise(r => setTimeout(r, 1000));
           continue;
@@ -38,7 +38,7 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
       
       return await res.json();
     } catch (err: any) {
-      console.warn(\`Strapi API \${path} error: \${err.message}\`);
+      console.warn(`Strapi API ${path} error: ${err.message}`);
       if (attempt < maxRetries) {
         await new Promise(r => setTimeout(r, 1000));
         continue;
@@ -136,7 +136,7 @@ export async function getRecipeBySlug(slug: string) {
   });
   const item = data?.data?.[0] || null;
   if (!item && fallbackRecipe) {
-    console.warn(\`Using fallback for recipe: \${slug}\`);
+    console.warn(`Using fallback for recipe: ${slug}`);
     return fallbackRecipe;
   }
   return item;
