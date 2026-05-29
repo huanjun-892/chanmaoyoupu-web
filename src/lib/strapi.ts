@@ -1,4 +1,32 @@
+import fs from 'fs';
+import path from 'path';
+
 const STRAPI_BASE = 'https://inspired-freedom-62e32d3a2b.strapiapp.com';
+const CACHE_DIR = 'node_modules/.strapi-cache';
+
+function ensureCacheDir() {
+  if (!fs.existsSync(CACHE_DIR)) {
+    fs.mkdirSync(CACHE_DIR, { recursive: true });
+  }
+}
+
+function getCached(key: string): any | null {
+  try {
+    const fpath = path.join(CACHE_DIR, `${key}.json`);
+    if (fs.existsSync(fpath)) {
+      return JSON.parse(fs.readFileSync(fpath, 'utf-8'));
+    }
+  } catch {}
+  return null;
+}
+
+function setCache(key: string, data: any) {
+  try {
+    ensureCacheDir();
+    const fpath = path.join(CACHE_DIR, `${key}.json`);
+    fs.writeFileSync(fpath, JSON.stringify(data), 'utf-8');
+  } catch {}
+}
 
 export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
   const url = new URL(`/api${path}`, STRAPI_BASE);
@@ -6,6 +34,7 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
     url.searchParams.set(key, value);
   });
 
+  const cacheKey = path.replace(/[^a-zA-Z0-9]/g, '_');
   const maxRetries = 3;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -24,15 +53,32 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
           await new Promise(r => setTimeout(r, 2000 * attempt));
           continue;
         }
+        // API failed, try cache
+        const cached = getCached(cacheKey);
+        if (cached) {
+          console.warn(`Strapi API ${path} failed, using cached data`);
+          return cached;
+        }
         return null;
       }
       
-      return await res.json();
+      const data = await res.json();
+      // Save to cache on success
+      if (data?.data) {
+        setCache(cacheKey, data);
+      }
+      return data;
     } catch (err: any) {
       console.error(`Strapi API ${path} fetch error (attempt ${attempt}/${maxRetries}): ${err.message}`);
       if (attempt < maxRetries) {
         await new Promise(r => setTimeout(r, 2000 * attempt));
         continue;
+      }
+      // Network error, try cache
+      const cached = getCached(cacheKey);
+      if (cached) {
+        console.warn(`Strapi API ${path} failed, using cached data`);
+        return cached;
       }
       return null;
     }
@@ -51,6 +97,37 @@ export function getCoverFullUrl(cover: any): string | null {
   if (!cover) return null;
   if (cover.url) return cover.url;
   return null;
+}
+
+/**
+ * Process content that may contain markdown artifacts
+ * Converts **bold** to <strong>, *italic* to <em>, etc.
+ */
+export function processContent(content: string): string {
+  if (!content) return '<p>暂无内容</p>';
+  
+  let html = content;
+  
+  // Convert **bold** to <strong>bold</strong>
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  
+  // Convert *italic* to <em>italic</em>
+  html = html.replace(/(?<![>\w*])\*(?!\*)(.+?)(?<!\*)\*(?![<\w*])/g, '<em>$1</em>');
+  
+  // Convert ### headings
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  
+  // Convert - list items to <li>
+  html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+  
+  // Convert numbered list items
+  html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+  
+  // Convert --- to <hr>
+  html = html.replace(/^---$/gm, '<hr>');
+  
+  return html;
 }
 
 export async function getAllRecipes() {

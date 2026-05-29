@@ -5,7 +5,7 @@ const currentPath = Astro.url.pathname;
 <header class="header">
   <div class="container header-inner">
     <a href="/" class="logo">
-      <img src="/images/logo-small.png" alt="馋猫有谱" class="logo-icon" width="32" height="32" />
+      <img src="/images/logo.svg" alt="馋猫有谱" class="logo-icon" />
       <span class="logo-text">馋猫有谱</span>
     </a>
     <nav class="nav">
@@ -146,9 +146,9 @@ const currentPath = Astro.url.pathname;
     flex-shrink: 0;
   }
 
-  .logo-icon {
-    width: 32px;
-    height: 32px;
+  ".logo-icon {
+    width: 44px;
+    height: auto;
     object-fit: contain;
   }
 
@@ -664,3 +664,4 @@ const currentPath = Astro.url.pathname;
   updateAuthUI();
   (window as any).updateAuthUI = updateAuthUI;
 </script>
+
