@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
 import { getAllKnowledge } from '../../lib/strapi';
 
 const knowledgeItems = await getAllKnowledge();
@@ -12,6 +10,7 @@ const categoryMap: Record<string, { icon: string; label: string }> = {
   flavor: { icon: '👅', label: '味型' },
   culture: { icon: '📜', label: '文化' },
   history: { icon: '📖', label: '历史' },
+  secret: { icon: '🗝️', label: '秘方' },
 };
 
 // 统计各分类数量
@@ -31,7 +30,6 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
 ---
 
 <BaseLayout title="知识库">
-  <Header />
 
   <section class="section">
     <div class="container">
@@ -39,26 +37,29 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
       <p class="page-desc">不仅要会做，还要懂。从技法到食材，从味型到文化，吃个明白。</p>
 
       {categories.length > 0 && (
-      <div class="grid-5 category-cards">
+      <div class="grid-6 category-cards">
         {categories.map((cat) => (
-          <a href={`/knowledge?category=${cat.slug}`} class="category-card">
+          <button class="category-card" data-category={cat.slug} onclick="filterCategory(this)">
             <span class="category-icon">{cat.icon}</span>
             <h3 class="category-name">{cat.name}</h3>
             <p class="category-desc">{cat.desc}</p>
             <span class="category-count">{cat.count}篇</span>
-          </a>
+          </button>
         ))}
       </div>
       )}
 
       {knowledgeItems.length > 0 ? (
       <div class="knowledge-list">
-        <h2 class="section-subtitle">全部条目</h2>
+        <div class="list-header">
+          <h2 class="section-subtitle" id="list-title">全部条目</h2>
+          <button class="clear-filter-btn" id="clear-filter-btn" style="display:none;" onclick="clearFilter()">显示全部</button>
+        </div>
         {knowledgeItems.map((item: any) => {
           const catInfo = categoryMap[item.category] || { icon: '📚', label: '知识' };
           const excerpt = item.content ? item.content.replace(/<[^>]*>/g, '').slice(0, 80) + '...' : '';
           return (
-            <a href={`/knowledge/${item.slug}`} class="knowledge-item">
+            <a href={`/knowledge/${item.slug}`} class="knowledge-item" data-category={item.category || 'other'}>
               <div class="knowledge-item-left">
                 <span class="tag">{catInfo.icon} {catInfo.label}</span>
                 <h3 class="knowledge-item-title">{item.title}</h3>
@@ -79,8 +80,64 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
     </div>
   </section>
 
-  <Footer />
 </BaseLayout>
+
+<script>
+  let activeCategory: string | null = null;
+
+  // URL参数筛选
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('category')) {
+    const cat = params.get('category');
+    const btn = document.querySelector(`.category-card[data-category="${cat}"]`) as HTMLElement;
+    if (btn) filterCategory(btn);
+  }
+
+  function filterCategory(el: HTMLElement) {
+    const category = el.getAttribute('data-category');
+    if (!category) return;
+
+    // 切换分类卡片高亮
+    document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+
+    activeCategory = category;
+
+    // 筛选列表
+    let visibleCount = 0;
+    document.querySelectorAll('.knowledge-item').forEach((item) => {
+      const itemCat = (item as HTMLElement).dataset.category;
+      const show = itemCat === category;
+      (item as HTMLElement).style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+
+    // 更新标题
+    const titleEl = document.getElementById('list-title');
+    const catLabel = el.querySelector('.category-name')?.textContent || category;
+    if (titleEl) titleEl.textContent = `${catLabel}条目`;
+
+    // 显示清除按钮
+    const clearBtn = document.getElementById('clear-filter-btn');
+    if (clearBtn) clearBtn.style.display = 'inline-block';
+  }
+
+  function clearFilter() {
+    activeCategory = null;
+    document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.knowledge-item').forEach(item => {
+      (item as HTMLElement).style.display = '';
+    });
+    const titleEl = document.getElementById('list-title');
+    if (titleEl) titleEl.textContent = '全部条目';
+    const clearBtn = document.getElementById('clear-filter-btn');
+    if (clearBtn) clearBtn.style.display = 'none';
+  }
+
+  // 暴露到全局
+  (window as any).filterCategory = filterCategory;
+  (window as any).clearFilter = clearFilter;
+</script>
 
 <style>
   .page-title {
@@ -96,10 +153,10 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
     margin-bottom: 40px;
   }
 
-  .grid-5 {
+  .grid-6 {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
     margin-bottom: 48px;
   }
 
@@ -108,11 +165,12 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 24px 16px;
+    padding: 20px 12px;
     background: var(--color-bg-warm);
     border-radius: var(--radius);
-    border: 1px solid var(--color-border);
+    border: 2px solid transparent;
     transition: all 0.2s;
+    cursor: pointer;
   }
 
   .category-card:hover {
@@ -120,23 +178,29 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
     transform: translateY(-2px);
   }
 
+  .category-card.active {
+    border-color: var(--color-accent);
+    background: #fff7f0;
+    box-shadow: 0 2px 12px rgba(255, 107, 53, 0.15);
+  }
+
   .category-icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
   }
 
   .category-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--color-title);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .category-desc {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--color-muted);
-    line-height: 1.5;
-    margin-bottom: 10px;
+    line-height: 1.4;
+    margin-bottom: 8px;
   }
 
   .category-count {
@@ -145,14 +209,37 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
     font-weight: 600;
   }
 
+  .list-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
   .section-subtitle {
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--color-title);
-    margin-bottom: 20px;
     padding-bottom: 8px;
     border-bottom: 2px solid var(--color-accent);
     display: inline-block;
+    margin-bottom: 0;
+  }
+
+  .clear-filter-btn {
+    padding: 4px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    background: var(--color-bg);
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .clear-filter-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
   }
 
   .knowledge-list {
@@ -231,13 +318,13 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
   }
 
   @media (max-width: 768px) {
-    .grid-5 {
+    .grid-6 {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media (max-width: 480px) {
-    .grid-5 {
+    .grid-6 {
       grid-template-columns: repeat(2, 1fr);
     }
     .knowledge-item {

@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
 import { getAllRecipes, getAllCuisines, getAllTags, difficultyLabel, getCoverUrl } from '../../lib/strapi';
 
@@ -26,7 +24,6 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
 ---
 
 <BaseLayout title="食谱列表">
-  <Header />
 
   <section class="section">
     <div class="container">
@@ -80,8 +77,6 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
       </div>
     </div>
   </section>
-
-  <Footer />
 </BaseLayout>
 
 <script>
