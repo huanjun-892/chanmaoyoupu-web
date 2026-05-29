@@ -1,16 +1,44 @@
 import fallbackDataRaw from '../data/strapi-fallback.json';
 
+// ==================== 数据源配置 ====================
+// 优先级：Workers Content API > Strapi Cloud > 本地fallback
+const CONTENT_API_BASE = 'https://api.chanmaoyoupu.com';
 const STRAPI_BASE = 'https://inspired-freedom-62e32d3a2b.strapiapp.com';
 
-// Load fallback data via Vite JSON import (reliable in all build environments)
+// Load fallback data via Vite JSON import
 const fallback = (fallbackDataRaw as any).default || fallbackDataRaw;
 const fallbackKnowledge: any[] = fallback.knowledge || [];
 const fallbackRecipes: any[] = fallback.recipes || [];
 const fallbackCuisines: any[] = fallback.cuisines || [];
 const fallbackTags: any[] = fallback.tags || [];
 
+// ==================== Workers Content API ====================
+async function fetchContentAPI(path: string): Promise<any> {
+  const url = new URL(path, CONTENT_API_BASE);
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    const res = await fetch(url.toString(), {
+      signal: controller.signal,
+      headers: { 'Accept': 'application/json' },
+    });
+    clearTimeout(timeout);
+    if (!res.ok) {
+      console.warn('Content API ' + path + ' returned ' + res.status);
+      return null;
+    }
+    const data = await res.json();
+    if (data && data.success && data.data) return data.data;
+    return null;
+  } catch (err: any) {
+    console.warn('Content API ' + path + ' error: ' + err.message);
+    return null;
+  }
+}
+
+// ==================== Strapi Cloud API ====================
 export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
-  const url = new URL(`/api${path}`, STRAPI_BASE);
+  const url = new URL('/api' + path, STRAPI_BASE);
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, value);
   });
@@ -20,25 +48,22 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 15000);
-      
       const res = await fetch(url.toString(), {
         signal: controller.signal,
         headers: { 'Accept': 'application/json' },
       });
       clearTimeout(timeout);
-      
       if (!res.ok) {
-        console.warn(`Strapi API ${path} returned ${res.status}`);
+        console.warn('Strapi API ' + path + ' returned ' + res.status);
         if (attempt < maxRetries) {
           await new Promise(r => setTimeout(r, 1000));
           continue;
         }
         return null;
       }
-      
       return await res.json();
     } catch (err: any) {
-      console.warn(`Strapi API ${path} error: ${err.message}`);
+      console.warn('Strapi API ' + path + ' error: ' + err.message);
       if (attempt < maxRetries) {
         await new Promise(r => setTimeout(r, 1000));
         continue;
@@ -62,35 +87,18 @@ export function getCoverFullUrl(cover: any): string | null {
   return null;
 }
 
-/**
- * Process content that may contain markdown artifacts
- * Converts **bold** to <strong>, *italic* to <em>, etc.
- */
 export function processContent(content: string): string {
   if (!content) return '<p>暂无内容</p>';
-  
   let html = content;
-  
-  // Convert **bold** to <strong>bold</strong>
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  
-  // Convert ### headings
   html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
   html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-  
-  // Convert - list items to <li>
   html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
-  
-  // Convert numbered list items
   html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
-  
-  // Convert --- to <hr>
   html = html.replace(/^---$/gm, '<hr>');
-  
   return html;
 }
 
-// Fallback data helpers
 function getFallbackKnowledge(): any[] {
   return fallbackKnowledge.filter((e: any) => e.category !== 'secret');
 }
@@ -99,7 +107,10 @@ function getFallbackSecrets(): any[] {
   return fallbackKnowledge.filter((e: any) => e.category === 'secret');
 }
 
+// ==================== 食谱 ====================
 export async function getAllRecipes() {
+  const contentData = await fetchContentAPI('/api/content/recipes');
+  if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/recipes', {
     'pagination[pageSize]': '100',
     'populate[cuisine]': 'true',
@@ -111,17 +122,14 @@ export async function getAllRecipes() {
     'populate[cover]': 'true',
   });
   const items = data?.data || [];
-  if (items.length === 0) {
-    console.warn('Strapi returned no recipes, using fallback data');
-    return fallbackRecipes;
-  }
-  return items;
+  if (items.length > 0) return items;
+  console.warn('All APIs returned no recipes, using fallback data');
+  return fallbackRecipes;
 }
 
 export async function getRecipeBySlug(slug: string) {
-  // First try fallback
-  const fallbackRecipe = fallbackRecipes.find((r: any) => r.slug === slug);
-  
+  const contentData = await fetchContentAPI('/api/content/recipes/' + slug);
+  if (contentData) return contentData;
   const data = await fetchAPI('/recipes', {
     'filters[slug][$eq]': slug,
     'populate[cuisine]': 'true',
@@ -135,66 +143,61 @@ export async function getRecipeBySlug(slug: string) {
     'populate[relatedKnowledge]': 'true',
   });
   const item = data?.data?.[0] || null;
-  if (!item && fallbackRecipe) {
-    console.warn(`Using fallback for recipe: ${slug}`);
+  if (item) return item;
+  const fallbackRecipe = fallbackRecipes.find((r: any) => r.slug === slug);
+  if (fallbackRecipe) {
+    console.warn('Using fallback for recipe: ' + slug);
     return fallbackRecipe;
   }
-  return item;
+  return null;
 }
 
+// ==================== 菜系 ====================
 export async function getAllCuisines() {
+  const contentData = await fetchContentAPI('/api/content/cuisines');
+  if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/cuisines', {
     'pagination[pageSize]': '100',
     'populate[cover]': 'true',
   });
   const items = data?.data || [];
-  if (items.length === 0) {
-    console.warn('Strapi returned no cuisines, using fallback data');
-    return fallbackCuisines;
-  }
-  return items;
+  if (items.length > 0) return items;
+  console.warn('All APIs returned no cuisines, using fallback data');
+  return fallbackCuisines;
 }
 
-export async function getAllRegions() {
-  const data = await fetchAPI('/regions', { 'pagination[pageSize]': '100' });
-  return data?.data || [];
-}
-
-export async function getAllMethods() {
-  const data = await fetchAPI('/methods', { 'pagination[pageSize]': '100' });
-  return data?.data || [];
-}
-
+// ==================== 标签 ====================
 export async function getAllTags() {
+  const contentData = await fetchContentAPI('/api/content/tags');
+  if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/tags', { 'pagination[pageSize]': '100' });
   const items = data?.data || [];
-  if (items.length === 0) {
-    console.warn('Strapi returned no tags, using fallback data');
-    return fallbackTags;
-  }
-  return items;
+  if (items.length > 0) return items;
+  console.warn('All APIs returned no tags, using fallback data');
+  return fallbackTags;
 }
 
-export async function getAllIngredients() {
-  const data = await fetchAPI('/ingredients', { 'pagination[pageSize]': '100' });
-  return data?.data || [];
-}
-
+// ==================== 知识库 ====================
 export async function getAllKnowledge() {
+  const contentData = await fetchContentAPI('/api/content/knowledge');
+  if (contentData && contentData.length > 0) {
+    return contentData.filter((k: any) => k.category !== 'secret');
+  }
   const data = await fetchAPI('/knowledge-entries', {
     'pagination[pageSize]': '100',
     'populate[relatedRecipes]': 'true',
     'populate[relatedKnowledge]': 'true',
   });
   const items = data?.data || [];
-  if (items.length === 0) {
-    console.warn('Strapi returned no knowledge entries, using fallback data');
-    return getFallbackKnowledge();
-  }
-  return items;
+  if (items.length > 0) return items;
+  console.warn('All APIs returned no knowledge entries, using fallback data');
+  return getFallbackKnowledge();
 }
 
+// ==================== 秘方 ====================
 export async function getAllSecrets() {
+  const contentData = await fetchContentAPI('/api/content/secrets');
+  if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/knowledge-entries', {
     'pagination[pageSize]': '100',
     'filters[category][$eq]': 'secret',
@@ -202,11 +205,29 @@ export async function getAllSecrets() {
     'populate[relatedKnowledge]': 'true',
   });
   const items = data?.data || [];
-  if (items.length === 0) {
-    console.warn('Strapi returned no secrets, using fallback data');
-    return getFallbackSecrets();
-  }
-  return items;
+  if (items.length > 0) return items;
+  console.warn('All APIs returned no secrets, using fallback data');
+  return getFallbackSecrets();
+}
+
+// ==================== 辅助函数 ====================
+export async function getAllRegions() {
+  const contentData = await fetchContentAPI('/api/content/regions');
+  if (contentData && contentData.length > 0) return contentData;
+  const data = await fetchAPI('/regions', { 'pagination[pageSize]': '100' });
+  return data?.data || [];
+}
+
+export async function getAllMethods() {
+  const contentData = await fetchContentAPI('/api/content/methods');
+  if (contentData && contentData.length > 0) return contentData;
+  const data = await fetchAPI('/methods', { 'pagination[pageSize]': '100' });
+  return data?.data || [];
+}
+
+export async function getAllIngredients() {
+  const data = await fetchAPI('/ingredients', { 'pagination[pageSize]': '100' });
+  return data?.data || [];
 }
 
 export function difficultyLabel(d: string): string {
