@@ -40,7 +40,6 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
   return null;
 }
 
-// Get cover URL - prefer small format for performance
 export function getCoverUrl(cover: any): string | null {
   if (!cover) return null;
   if (cover.formats?.small?.url) return cover.formats.small.url;
@@ -48,7 +47,6 @@ export function getCoverUrl(cover: any): string | null {
   return null;
 }
 
-// Get full-size cover URL for detail pages
 export function getCoverFullUrl(cover: any): string | null {
   if (!cover) return null;
   if (cover.url) return cover.url;
@@ -86,7 +84,10 @@ export async function getRecipeBySlug(slug: string) {
 }
 
 export async function getAllCuisines() {
-  const data = await fetchAPI('/cuisines', { 'pagination[pageSize]': '100' });
+  const data = await fetchAPI('/cuisines', {
+    'pagination[pageSize]': '100',
+    'populate[cover]': 'true',
+  });
   return data?.data || [];
 }
 
