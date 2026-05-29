@@ -133,9 +133,9 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
   .page-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-bottom: 8px; }
   .page-desc { font-size: 1rem; color: var(--color-muted); margin-bottom: 40px; }
   .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 48px; }
-  .category-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 12px; background: var(--color-bg-warm); border-radius: var(--radius); border: 2px solid transparent; transition: all 0.2s; cursor: pointer; }
+  .category-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 12px; background: #F8F9FA; border-radius: var(--radius); border: 2px solid transparent; transition: all 0.2s; cursor: pointer; }
   .category-card:hover { border-color: var(--color-accent); transform: translateY(-2px); }
-  .category-card.active { border-color: var(--color-accent); background: #fff7f0; box-shadow: 0 2px 12px rgba(255, 107, 53, 0.15); }
+  .category-card.active { border-color: var(--color-accent); background: rgba(255, 140, 66, 0.06); box-shadow: 0 2px 12px rgba(255, 107, 53, 0.15); }
   .category-icon { font-size: 1.8rem; margin-bottom: 8px; }
   .category-name { font-size: 0.95rem; font-weight: 600; color: var(--color-title); margin-bottom: 4px; }
   .category-desc { font-size: 0.7rem; color: var(--color-muted); line-height: 1.4; margin-bottom: 8px; }
