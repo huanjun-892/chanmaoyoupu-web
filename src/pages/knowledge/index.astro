@@ -2,7 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAllKnowledge } from '../../lib/strapi';
 
-const knowledgeItems = await getAllKnowledge();
+const allKnowledge = await getAllKnowledge();
+// 过滤掉秘方条目（秘方已独立为顶级页面）
+const knowledgeItems = allKnowledge.filter((k: any) => k.category !== 'secret');
 
 const categoryMap: Record<string, { icon: string; label: string }> = {
   technique: { icon: '🔥', label: '技法' },
@@ -10,7 +12,6 @@ const categoryMap: Record<string, { icon: string; label: string }> = {
   flavor: { icon: '👅', label: '味型' },
   culture: { icon: '📜', label: '文化' },
   history: { icon: '📖', label: '历史' },
-  secret: { icon: '🗝️', label: '秘方' },
 };
 
 // 统计各分类数量
@@ -34,10 +35,10 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
   <section class="section">
     <div class="container">
       <h1 class="page-title">美食知识库</h1>
-      <p class="page-desc">不仅要会做，还要懂。从技法到食材，从味型到秘方，吃个明白。</p>
+      <p class="page-desc">不仅要会做，还要懂。从技法到食材，从味型到文化，吃个明白。</p>
 
       {categories.length > 0 && (
-      <div class="grid-6 category-cards">
+      <div class="grid-5 category-cards">
         {categories.map((cat) => (
           <button class="category-card" data-category={cat.slug} onclick="filterCategory(this)">
             <span class="category-icon">{cat.icon}</span>
@@ -74,7 +75,7 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
       <div class="coming-soon">
         <span class="coming-soon-icon">📝</span>
         <p class="coming-soon-text">知识库正在筹备中，敬请期待！</p>
-        <p class="coming-soon-sub">先去看看<a href="/recipes">食谱</a>吧～</p>
+        <p class="coming-soon-sub">先去看看<a href="/recipes">食谱</a>或<a href="/secrets">秘方</a>吧～</p>
       </div>
       )}
     </div>
@@ -85,7 +86,6 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
 <script>
   let activeCategory: string | null = null;
 
-  // URL参数筛选
   const params = new URLSearchParams(window.location.search);
   if (params.has('category')) {
     const cat = params.get('category');
@@ -96,14 +96,9 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
   function filterCategory(el: HTMLElement) {
     const category = el.getAttribute('data-category');
     if (!category) return;
-
-    // 切换分类卡片高亮
     document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
-
     activeCategory = category;
-
-    // 筛选列表
     let visibleCount = 0;
     document.querySelectorAll('.knowledge-item').forEach((item) => {
       const itemCat = (item as HTMLElement).dataset.category;
@@ -111,13 +106,9 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
       (item as HTMLElement).style.display = show ? '' : 'none';
       if (show) visibleCount++;
     });
-
-    // 更新标题
     const titleEl = document.getElementById('list-title');
     const catLabel = el.querySelector('.category-name')?.textContent || category;
     if (titleEl) titleEl.textContent = `${catLabel}条目`;
-
-    // 显示清除按钮
     const clearBtn = document.getElementById('clear-filter-btn');
     if (clearBtn) clearBtn.style.display = 'inline-block';
   }
@@ -134,203 +125,37 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
     if (clearBtn) clearBtn.style.display = 'none';
   }
 
-  // 暴露到全局
   (window as any).filterCategory = filterCategory;
   (window as any).clearFilter = clearFilter;
 </script>
 
 <style>
-  .page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-title);
-    margin-bottom: 8px;
-  }
-
-  .page-desc {
-    font-size: 1rem;
-    color: var(--color-muted);
-    margin-bottom: 40px;
-  }
-
-  .grid-6 {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 14px;
-    margin-bottom: 48px;
-  }
-
-  .category-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 20px 12px;
-    background: var(--color-bg-warm);
-    border-radius: var(--radius);
-    border: 2px solid transparent;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-
-  .category-card:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-2px);
-  }
-
-  .category-card.active {
-    border-color: var(--color-accent);
-    background: #fff7f0;
-    box-shadow: 0 2px 12px rgba(255, 107, 53, 0.15);
-  }
-
-  .category-icon {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-  }
-
-  .category-name {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--color-title);
-    margin-bottom: 4px;
-  }
-
-  .category-desc {
-    font-size: 0.7rem;
-    color: var(--color-muted);
-    line-height: 1.4;
-    margin-bottom: 8px;
-  }
-
-  .category-count {
-    font-size: 0.7rem;
-    color: var(--color-accent);
-    font-weight: 600;
-  }
-
-  .list-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .section-subtitle {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--color-title);
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--color-accent);
-    display: inline-block;
-    margin-bottom: 0;
-  }
-
-  .clear-filter-btn {
-    padding: 4px 14px;
-    border: 1px solid var(--color-border);
-    border-radius: 100px;
-    background: var(--color-bg);
-    color: var(--color-muted);
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .clear-filter-btn:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-
-  .knowledge-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .knowledge-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    transition: all 0.2s;
-  }
-
-  .knowledge-item:hover {
-    border-color: var(--color-accent);
-  }
-
-  .knowledge-item-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-title);
-    margin: 6px 0;
-  }
-
-  .knowledge-item-excerpt {
-    font-size: 0.85rem;
-    color: var(--color-muted);
-    line-height: 1.6;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .knowledge-item-arrow {
-    font-size: 1.2rem;
-    color: var(--color-muted);
-    transition: color 0.2s;
-  }
-
-  .knowledge-item:hover .knowledge-item-arrow {
-    color: var(--color-accent);
-  }
-
-  .coming-soon {
-    text-align: center;
-    padding: 80px 20px;
-  }
-
-  .coming-soon-icon {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 16px;
-  }
-
-  .coming-soon-text {
-    font-size: 1.2rem;
-    color: var(--color-title);
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-
-  .coming-soon-sub {
-    font-size: 0.95rem;
-    color: var(--color-muted);
-  }
-
-  .coming-soon-sub a {
-    color: var(--color-accent);
-  }
-
-  @media (max-width: 768px) {
-    .grid-6 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .grid-6 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .knowledge-item {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-  }
+  .page-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-bottom: 8px; }
+  .page-desc { font-size: 1rem; color: var(--color-muted); margin-bottom: 40px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 48px; }
+  .category-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 12px; background: var(--color-bg-warm); border-radius: var(--radius); border: 2px solid transparent; transition: all 0.2s; cursor: pointer; }
+  .category-card:hover { border-color: var(--color-accent); transform: translateY(-2px); }
+  .category-card.active { border-color: var(--color-accent); background: #fff7f0; box-shadow: 0 2px 12px rgba(255, 107, 53, 0.15); }
+  .category-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .category-name { font-size: 0.95rem; font-weight: 600; color: var(--color-title); margin-bottom: 4px; }
+  .category-desc { font-size: 0.7rem; color: var(--color-muted); line-height: 1.4; margin-bottom: 8px; }
+  .category-count { font-size: 0.7rem; color: var(--color-accent); font-weight: 600; }
+  .list-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+  .section-subtitle { font-size: 1.3rem; font-weight: 600; color: var(--color-title); padding-bottom: 8px; border-bottom: 2px solid var(--color-accent); display: inline-block; margin-bottom: 0; }
+  .clear-filter-btn { padding: 4px 14px; border: 1px solid var(--color-border); border-radius: 100px; background: var(--color-bg); color: var(--color-muted); font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+  .clear-filter-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .knowledge-list { display: flex; flex-direction: column; gap: 12px; }
+  .knowledge-item { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); transition: all 0.2s; }
+  .knowledge-item:hover { border-color: var(--color-accent); }
+  .knowledge-item-title { font-size: 1rem; font-weight: 600; color: var(--color-title); margin: 6px 0; }
+  .knowledge-item-excerpt { font-size: 0.85rem; color: var(--color-muted); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .knowledge-item-arrow { font-size: 1.2rem; color: var(--color-muted); transition: color 0.2s; }
+  .knowledge-item:hover .knowledge-item-arrow { color: var(--color-accent); }
+  .coming-soon { text-align: center; padding: 80px 20px; }
+  .coming-soon-icon { font-size: 3rem; display: block; margin-bottom: 16px; }
+  .coming-soon-text { font-size: 1.2rem; color: var(--color-title); font-weight: 600; margin-bottom: 8px; }
+  .coming-soon-sub { font-size: 0.95rem; color: var(--color-muted); }
+  .coming-soon-sub a { color: var(--color-accent); }
+  @media (max-width: 768px) { .grid-5 { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 480px) { .grid-5 { grid-template-columns: repeat(2, 1fr); } .knowledge-item { flex-direction: column; align-items: flex-start; gap: 12px; } }
 </style>
