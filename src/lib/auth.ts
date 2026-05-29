@@ -162,6 +162,14 @@ export async function updateProfile(data: Partial<User>): Promise<ApiResponse<Us
   return response;
 }
 
+// 修改密码
+export async function changePassword(oldPassword: string, newPassword: string): Promise<ApiResponse<{ success: boolean }>> {
+  return await apiRequest<{ success: boolean }>(`${API_BASE}/api/auth/change-password`, {
+    method: 'POST',
+    body: JSON.stringify({ old_password: oldPassword, new_password: newPassword }),
+  });
+}
+
 // 登出
 export function logout(): void {
   clearAuth();
