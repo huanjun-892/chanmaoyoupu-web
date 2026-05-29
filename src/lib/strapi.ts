@@ -1,32 +1,5 @@
-import fs from 'fs';
-import path from 'path';
-
 const STRAPI_BASE = 'https://inspired-freedom-62e32d3a2b.strapiapp.com';
-const CACHE_DIR = 'node_modules/.strapi-cache';
-
-function ensureCacheDir() {
-  if (!fs.existsSync(CACHE_DIR)) {
-    fs.mkdirSync(CACHE_DIR, { recursive: true });
-  }
-}
-
-function getCached(key: string): any | null {
-  try {
-    const fpath = path.join(CACHE_DIR, `${key}.json`);
-    if (fs.existsSync(fpath)) {
-      return JSON.parse(fs.readFileSync(fpath, 'utf-8'));
-    }
-  } catch {}
-  return null;
-}
-
-function setCache(key: string, data: any) {
-  try {
-    ensureCacheDir();
-    const fpath = path.join(CACHE_DIR, `${key}.json`);
-    fs.writeFileSync(fpath, JSON.stringify(data), 'utf-8');
-  } catch {}
-}
+import fallbackData from '../data/strapi-fallback.json';
 
 export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
   const url = new URL(`/api${path}`, STRAPI_BASE);
@@ -34,12 +7,11 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
     url.searchParams.set(key, value);
   });
 
-  const cacheKey = path.replace(/[^a-zA-Z0-9]/g, '_');
-  const maxRetries = 3;
+  const maxRetries = 2;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 30000);
+      const timeout = setTimeout(() => controller.abort(), 15000);
       
       const res = await fetch(url.toString(), {
         signal: controller.signal,
@@ -48,37 +20,20 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
       clearTimeout(timeout);
       
       if (!res.ok) {
-        console.error(`Strapi API ${path} returned ${res.status}, attempt ${attempt}/${maxRetries}`);
+        console.warn(`Strapi API ${path} returned ${res.status}`);
         if (attempt < maxRetries) {
-          await new Promise(r => setTimeout(r, 2000 * attempt));
+          await new Promise(r => setTimeout(r, 1000));
           continue;
-        }
-        // API failed, try cache
-        const cached = getCached(cacheKey);
-        if (cached) {
-          console.warn(`Strapi API ${path} failed, using cached data`);
-          return cached;
         }
         return null;
       }
       
-      const data = await res.json();
-      // Save to cache on success
-      if (data?.data) {
-        setCache(cacheKey, data);
-      }
-      return data;
+      return await res.json();
     } catch (err: any) {
-      console.error(`Strapi API ${path} fetch error (attempt ${attempt}/${maxRetries}): ${err.message}`);
+      console.warn(`Strapi API ${path} error: ${err.message}`);
       if (attempt < maxRetries) {
-        await new Promise(r => setTimeout(r, 2000 * attempt));
+        await new Promise(r => setTimeout(r, 1000));
         continue;
-      }
-      // Network error, try cache
-      const cached = getCached(cacheKey);
-      if (cached) {
-        console.warn(`Strapi API ${path} failed, using cached data`);
-        return cached;
       }
       return null;
     }
@@ -111,8 +66,8 @@ export function processContent(content: string): string {
   // Convert **bold** to <strong>bold</strong>
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   
-  // Convert *italic* to <em>italic</em>
-  html = html.replace(/(?<![>\w*])\*(?!\*)(.+?)(?<!\*)\*(?![<\w*])/g, '<em>$1</em>');
+  // Convert *italic* to <em>italic</em> (safe version without lookbehind)
+  html = html.replace(/(?:^|\s)\*([^*]+)\*(?:\s|$|[，。！？；：、])/g, ' <em>$1</em> ');
   
   // Convert ### headings
   html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
@@ -128,6 +83,15 @@ export function processContent(content: string): string {
   html = html.replace(/^---$/gm, '<hr>');
   
   return html;
+}
+
+// Fallback data for when Strapi is unreachable
+function getFallbackKnowledge() {
+  return (fallbackData as any[]).filter((e: any) => e.category !== 'secret');
+}
+
+function getFallbackSecrets() {
+  return (fallbackData as any[]).filter((e: any) => e.category === 'secret');
 }
 
 export async function getAllRecipes() {
@@ -194,7 +158,30 @@ export async function getAllKnowledge() {
     'populate[relatedRecipes]': 'true',
     'populate[relatedKnowledge]': 'true',
   });
-  return data?.data || [];
+  const items = data?.data || [];
+  // Fallback: if Strapi returns empty, use local data
+  if (items.length === 0) {
+    console.warn('Strapi returned no knowledge entries, using fallback data');
+    return getFallbackKnowledge();
+  }
+  return items;
+}
+
+export async function getAllSecrets() {
+  // Secrets are knowledge entries with category=secret
+  // If Strapi is down, use fallback
+  const data = await fetchAPI('/knowledge-entries', {
+    'pagination[pageSize]': '100',
+    'filters[category][$eq]': 'secret',
+    'populate[relatedRecipes]': 'true',
+    'populate[relatedKnowledge]': 'true',
+  });
+  const items = data?.data || [];
+  if (items.length === 0) {
+    console.warn('Strapi returned no secrets, using fallback data');
+    return getFallbackSecrets();
+  }
+  return items;
 }
 
 export function difficultyLabel(d: string): string {
