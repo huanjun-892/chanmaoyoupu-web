@@ -1,5 +1,16 @@
+import fs from 'fs';
+import path from 'path';
+
 const STRAPI_BASE = 'https://inspired-freedom-62e32d3a2b.strapiapp.com';
-import fallbackData from '../data/strapi-fallback.json';
+
+// Load fallback data from static JSON file
+let fallbackData: any[] = [];
+try {
+  const fallbackPath = path.join(process.cwd(), 'src/data/strapi-fallback.json');
+  fallbackData = JSON.parse(fs.readFileSync(fallbackPath, 'utf-8'));
+} catch (e) {
+  console.warn('Could not load fallback data:', e);
+}
 
 export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
   const url = new URL(`/api${path}`, STRAPI_BASE);
@@ -66,9 +77,6 @@ export function processContent(content: string): string {
   // Convert **bold** to <strong>bold</strong>
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   
-  // Convert *italic* to <em>italic</em> (safe version without lookbehind)
-  html = html.replace(/(?:^|\s)\*([^*]+)\*(?:\s|$|[，。！？；：、])/g, ' <em>$1</em> ');
-  
   // Convert ### headings
   html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
   html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
@@ -85,13 +93,13 @@ export function processContent(content: string): string {
   return html;
 }
 
-// Fallback data for when Strapi is unreachable
-function getFallbackKnowledge() {
-  return (fallbackData as any[]).filter((e: any) => e.category !== 'secret');
+// Fallback data helpers
+function getFallbackKnowledge(): any[] {
+  return fallbackData.filter((e: any) => e.category !== 'secret');
 }
 
-function getFallbackSecrets() {
-  return (fallbackData as any[]).filter((e: any) => e.category === 'secret');
+function getFallbackSecrets(): any[] {
+  return fallbackData.filter((e: any) => e.category === 'secret');
 }
 
 export async function getAllRecipes() {
@@ -159,7 +167,6 @@ export async function getAllKnowledge() {
     'populate[relatedKnowledge]': 'true',
   });
   const items = data?.data || [];
-  // Fallback: if Strapi returns empty, use local data
   if (items.length === 0) {
     console.warn('Strapi returned no knowledge entries, using fallback data');
     return getFallbackKnowledge();
@@ -168,8 +175,6 @@ export async function getAllKnowledge() {
 }
 
 export async function getAllSecrets() {
-  // Secrets are knowledge entries with category=secret
-  // If Strapi is down, use fallback
   const data = await fetchAPI('/knowledge-entries', {
     'pagination[pageSize]': '100',
     'filters[category][$eq]': 'secret',
