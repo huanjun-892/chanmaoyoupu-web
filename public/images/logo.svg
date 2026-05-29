@@ -1,52 +1,56 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" fill="none">
-  <!-- 厨师帽 - 蓬松高大版 -->
-  <!-- 帽身主体 -->
-  <path d="M40,88 C40,88 32,24 56,12 C66,6 76,18 88,10 C100,2 112,16 124,10 C148,2 144,88 144,88 Z" fill="white" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- 厨师帽 - 3/4右视角 -->
+  <!-- 帽身 -->
+  <path d="M30,92 C30,92 24,30 46,16 C56,8 64,22 76,14 C86,6 96,20 106,12 C126,2 130,92 130,92 Z" fill="white" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
   <!-- 帽子褶皱 -->
-  <path d="M68,18 C66,40 68,64 68,88" fill="none" stroke="#FFE0C4" stroke-width="1"/>
-  <path d="M92,14 C92,36 92,62 92,88" fill="none" stroke="#FFE0C4" stroke-width="1"/>
-  <path d="M116,18 C118,40 116,64 116,88" fill="none" stroke="#FFE0C4" stroke-width="1"/>
+  <path d="M58,22 C56,44 56,68 58,92" fill="none" stroke="#FFE0C4" stroke-width="1"/>
+  <path d="M82,16 C82,38 82,64 82,92" fill="none" stroke="#FFE0C4" stroke-width="1"/>
+  <path d="M106,20 C108,42 108,66 106,92" fill="none" stroke="#FFE0C4" stroke-width="1"/>
   <!-- 帽檐 -->
-  <rect x="36" y="84" width="112" height="12" rx="3" fill="white" stroke="#FF8C42" stroke-width="2.5"/>
-  
-  <!-- 猫头 -->
-  <ellipse cx="100" cy="156" rx="52" ry="46" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5"/>
-  
-  <!-- 左耳 -->
-  <path d="M58,126 L40,74 L82,114 Z" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
-  <path d="M60,120 L48,82 L78,112 Z" fill="#FFDEC4"/>
-  
-  <!-- 右耳 -->
-  <path d="M142,126 L160,74 L118,114 Z" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
-  <path d="M140,120 L152,82 L122,112 Z" fill="#FFDEC4"/>
-  
-  <!-- 脸部浅色区域 -->
-  <ellipse cx="100" cy="168" rx="38" ry="30" fill="#FFDEC4"/>
-  
-  <!-- 眯眼微笑（弯弯的弧线） -->
-  <path d="M76,148 Q84,138 92,148" stroke="#FF8C42" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M108,148 Q116,138 124,148" stroke="#FF8C42" stroke-width="3" fill="none" stroke-linecap="round"/>
-  
-  <!-- 鼻子 -->
-  <ellipse cx="100" cy="160" rx="5" ry="4" fill="#FF8C42"/>
-  
-  <!-- 嘴巴（微笑弧线） -->
-  <path d="M90,168 Q100,178 110,168" stroke="#FF8C42" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-  
-  <!-- 胡须 -->
-  <line x1="64" y1="152" x2="32" y2="146" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="64" y1="160" x2="30" y2="160" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="64" y1="168" x2="32" y2="174" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="136" y1="152" x2="168" y2="146" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="136" y1="160" x2="170" y2="160" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="136" y1="168" x2="168" y2="174" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
-  
+  <rect x="26" y="88" width="112" height="12" rx="3" fill="white" stroke="#FF8C42" stroke-width="2.5"/>
+
+  <!-- 猫头 - 3/4右视角（脸朝右） -->
+  <ellipse cx="90" cy="160" rx="54" ry="48" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5"/>
+
+  <!-- 左耳（远侧，稍小） -->
+  <path d="M50,130 L34,78 L74,118 Z" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M52,124 L42,86 L70,116 Z" fill="#FFDEC4"/>
+
+  <!-- 右耳（近侧，稍大） -->
+  <path d="M132,128 L154,74 L112,116 Z" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M130,122 L148,82 L118,114 Z" fill="#FFDEC4"/>
+
+  <!-- 脸部浅色区域 - 偏右 -->
+  <ellipse cx="96" cy="172" rx="38" ry="30" fill="#FFDEC4"/>
+
+  <!-- 眯眼微笑 - 偏右看 -->
+  <!-- 左眼（远侧，较小） -->
+  <path d="M64,152 Q70,142 78,152" stroke="#FF8C42" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <!-- 右眼（近侧，较大） -->
+  <path d="M94,150 Q102,138 112,150" stroke="#FF8C42" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- 鼻子 - 偏右 -->
+  <ellipse cx="92" cy="164" rx="5" ry="4" fill="#FF8C42"/>
+
+  <!-- 嘴巴 - 偏右微笑 -->
+  <path d="M82,172 Q92,182 104,170" stroke="#FF8C42" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+  <!-- 胡须 - 右侧（近侧，长且明显） -->
+  <line x1="110" y1="156" x2="160" y2="148" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="110" y1="164" x2="162" y2="164" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="110" y1="172" x2="158" y2="180" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- 胡须 - 左侧（远侧，短且淡） -->
+  <line x1="64" y1="158" x2="34" y2="152" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+  <line x1="64" y1="166" x2="30" y2="166" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+  <line x1="64" y1="174" x2="34" y2="180" stroke="#FF8C42" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+
   <!-- 腮红 -->
-  <circle cx="76" cy="166" r="9" fill="#FFB88C" opacity="0.3"/>
-  <circle cx="124" cy="166" r="9" fill="#FFB88C" opacity="0.3"/>
-  
-  <!-- 小爪子（右侧） -->
-  <ellipse cx="146" cy="150" rx="12" ry="10" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2" transform="rotate(-15 146 150)"/>
-  <path d="M140,143 Q142,138 144,143" stroke="#FF8C42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <circle cx="106" cy="170" r="10" fill="#FFB88C" opacity="0.3"/>
+  <circle cx="68" cy="170" r="8" fill="#FFB88C" opacity="0.2"/>
+
+  <!-- 小爪子 - 右侧伸出 -->
+  <ellipse cx="140" cy="148" rx="14" ry="11" fill="#FFF5EB" stroke="#FF8C42" stroke-width="2" transform="rotate(-20 140 148)"/>
+  <path d="M134,141 Q136,136 138,141" stroke="#FF8C42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M140,139 Q142,134 144,139" stroke="#FF8C42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
   <path d="M146,141 Q148,136 150,141" stroke="#FF8C42" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 </svg>
