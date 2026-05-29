@@ -1,16 +1,9 @@
-import fs from 'fs';
-import path from 'path';
+import fallbackDataRaw from '../data/strapi-fallback.json';
 
 const STRAPI_BASE = 'https://inspired-freedom-62e32d3a2b.strapiapp.com';
 
-// Load fallback data from static JSON file
-let fallbackData: any[] = [];
-try {
-  const fallbackPath = path.join(process.cwd(), 'src/data/strapi-fallback.json');
-  fallbackData = JSON.parse(fs.readFileSync(fallbackPath, 'utf-8'));
-} catch (e) {
-  console.warn('Could not load fallback data:', e);
-}
+// Load fallback data via Vite JSON import (reliable in all build environments)
+const fallbackData: any[] = Array.isArray(fallbackDataRaw) ? fallbackDataRaw : (fallbackDataRaw as any).default || [];
 
 export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
   const url = new URL(`/api${path}`, STRAPI_BASE);
