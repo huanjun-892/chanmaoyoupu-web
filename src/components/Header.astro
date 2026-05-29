@@ -5,7 +5,7 @@ const currentPath = Astro.url.pathname;
 <header class="header">
   <div class="container header-inner">
     <a href="/" class="logo">
-      <img src="/images/logo-small.png" alt="馋猫有谱" class="logo-icon" width="36" height="36" />
+      <img src="/images/logo-small.png" alt="馋猫有谱" class="logo-icon" width="32" height="32" />
       <span class="logo-text">馋猫有谱</span>
     </a>
     <nav class="nav">
@@ -17,7 +17,7 @@ const currentPath = Astro.url.pathname;
     </nav>
     <div class="header-right">
       <form action="/search" method="get" class="search-box">
-        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" name="q" placeholder="搜食谱、食材..." class="search-input" />
       </form>
       <button id="auth-btn" class="auth-btn" onclick="openLoginModal()">登录</button>
@@ -28,7 +28,6 @@ const currentPath = Astro.url.pathname;
           <img id="header-user-avatar" src="/images/default-avatar.jpg" alt="头像" class="header-avatar" />
           <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l3 3 3-3"/></svg>
         </button>
-        
         <div id="user-dropdown" class="user-dropdown">
           <div class="dropdown-header" onclick="openProfileModal()">
             <img id="user-dropdown-avatar" src="/images/default-avatar.jpg" alt="头像" class="dropdown-avatar" />
@@ -56,3 +55,612 @@ const currentPath = Astro.url.pathname;
     </div>
   </div>
 </header>
+
+<!-- 个人中心弹窗 -->
+<div id="profile-modal" class="modal-overlay" style="display: none;">
+  <div class="profile-modal-content">
+    <button class="modal-close" onclick="closeProfileModal()">&times;</button>
+    
+    <div class="profile-tabs">
+      <button class="profile-tab active" data-ptab="info" onclick="switchProfileTab('info')">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        个人资料
+      </button>
+      <button class="profile-tab" data-ptab="password" onclick="switchProfileTab('password')">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        修改密码
+      </button>
+    </div>
+    
+    <div id="profile-info-panel" class="profile-panel">
+      <div class="avatar-section">
+        <div class="avatar-preview-wrap">
+          <img id="profile-avatar-preview" src="/images/default-avatar.jpg" alt="头像预览" class="avatar-preview" />
+        </div>
+        <div class="avatar-field">
+          <label>头像URL</label>
+          <input type="url" id="profile-avatar-url" placeholder="粘贴头像图片链接" />
+          <button type="button" class="btn-sm" onclick="previewAvatar()">预览</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="profile-nickname">昵称</label>
+        <input type="text" id="profile-nickname" placeholder="输入昵称" maxlength="20" />
+      </div>
+      <div class="form-group">
+        <label for="profile-email">邮箱</label>
+        <input type="email" id="profile-email" readonly />
+      </div>
+      <div class="form-group">
+        <label for="profile-phone">手机号</label>
+        <input type="tel" id="profile-phone" placeholder="选填" maxlength="11" />
+      </div>
+      <div class="form-group">
+        <label for="profile-birthday">生日</label>
+        <input type="date" id="profile-birthday" />
+      </div>
+      <button type="button" class="submit-btn" onclick="saveProfile()">保存资料</button>
+    </div>
+    
+    <div id="profile-password-panel" class="profile-panel" style="display: none;">
+      <div class="form-group">
+        <label for="current-password">当前密码</label>
+        <input type="password" id="current-password" placeholder="输入当前密码" />
+      </div>
+      <div class="form-group">
+        <label for="new-password">新密码</label>
+        <input type="password" id="new-password" placeholder="至少6位" minlength="6" />
+      </div>
+      <div class="form-group">
+        <label for="confirm-new-password">确认新密码</label>
+        <input type="password" id="confirm-new-password" placeholder="再次输入新密码" />
+      </div>
+      <button type="button" class="submit-btn" onclick="changePassword()">修改密码</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    gap: 32px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-title);
+    letter-spacing: -0.01em;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .nav-link {
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    border-radius: 8px;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .nav-link:hover {
+    color: var(--color-title);
+    background: var(--color-bg-warm);
+  }
+
+  .nav-link.active {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--color-bg-warm);
+    border: 1px solid var(--color-border-light);
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+
+  .search-box:focus-within {
+    border-color: var(--color-accent);
+    background: var(--color-bg);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+  }
+
+  .search-icon {
+    color: var(--color-muted);
+    flex-shrink: 0;
+  }
+
+  .search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.82rem;
+    color: var(--color-text);
+    width: 140px;
+  }
+
+  .search-input::placeholder {
+    color: var(--color-muted);
+  }
+
+  .auth-btn {
+    padding: 7px 20px;
+    border: 1.5px solid var(--color-accent);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--color-accent);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .auth-btn:hover {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  /* User menu */
+  .user-menu {
+    position: relative;
+  }
+
+  .user-menu-trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .header-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .dropdown-arrow {
+    color: var(--color-muted);
+  }
+
+  .user-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 220px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 8px;
+    display: none;
+    z-index: 200;
+  }
+
+  .user-dropdown.show {
+    display: block;
+  }
+
+  .dropdown-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .dropdown-header:hover {
+    background: var(--color-bg-warm);
+  }
+
+  .dropdown-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .dropdown-user-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dropdown-nickname {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-title);
+  }
+
+  .dropdown-edit-profile {
+    font-size: 0.72rem;
+    color: var(--color-accent);
+  }
+
+  .dropdown-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 6px 0;
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 10px;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    border-radius: 6px;
+    transition: background 0.15s;
+    text-decoration: none;
+    width: 100%;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  .dropdown-item:hover {
+    background: var(--color-bg-warm);
+    color: var(--color-title);
+  }
+
+  .logout-item {
+    color: var(--color-red);
+  }
+
+  /* Profile modal */
+  .profile-modal-content {
+    background: var(--color-bg);
+    border-radius: var(--radius);
+    padding: 32px;
+    max-width: 440px;
+    width: 90%;
+    position: relative;
+  }
+
+  .profile-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0;
+  }
+
+  .profile-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: -1px;
+  }
+
+  .profile-tab:hover {
+    color: var(--color-text);
+  }
+
+  .profile-tab.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .profile-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+
+  .avatar-preview-wrap {
+    flex-shrink: 0;
+  }
+
+  .avatar-preview {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-border);
+  }
+
+  .avatar-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .avatar-field label {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+  }
+
+  .avatar-field input {
+    font-size: 0.82rem;
+    padding: 6px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    outline: none;
+    width: 100%;
+  }
+
+  .btn-sm {
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    background: var(--color-bg-warm);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .form-group label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .form-group input {
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+  }
+
+  .submit-btn {
+    padding: 10px 24px;
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 4px;
+  }
+
+  .submit-btn:hover {
+    background: var(--color-accent-hover);
+  }
+
+  @media (max-width: 768px) {
+    .header-inner { gap: 16px; height: 56px; }
+    .nav { gap: 0; }
+    .nav-link { padding: 6px 8px; font-size: 0.82rem; }
+    .search-input { width: 100px; }
+    .header-avatar { width: 28px; height: 28px; }
+  }
+
+  @media (max-width: 480px) {
+    .header-inner { gap: 8px; }
+    .logo-text { display: none; }
+    .search-box { display: none; }
+    .nav-link { padding: 6px 6px; font-size: 0.78rem; }
+    .auth-btn { padding: 6px 14px; font-size: 0.78rem; }
+  }
+</style>
+
+<script>
+  // Toggle user dropdown
+  function toggleUserDropdown() {
+    const dropdown = document.getElementById('user-dropdown');
+    if (dropdown) dropdown.classList.toggle('show');
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('user-menu');
+    const dropdown = document.getElementById('user-dropdown');
+    if (menu && !menu.contains(e.target as Node)) {
+      if (dropdown) dropdown.classList.remove('show');
+    }
+  });
+
+  // Profile modal
+  function openProfileModal() {
+    const modal = document.getElementById('profile-modal') as HTMLElement;
+    if (modal) modal.style.display = 'flex';
+    const dropdown = document.getElementById('user-dropdown');
+    if (dropdown) dropdown.classList.remove('show');
+    // Load profile data
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user) {
+      const nickEl = document.getElementById('profile-nickname') as HTMLInputElement;
+      const emailEl = document.getElementById('profile-email') as HTMLInputElement;
+      const phoneEl = document.getElementById('profile-phone') as HTMLInputElement;
+      const bdayEl = document.getElementById('profile-birthday') as HTMLInputElement;
+      const avatarEl = document.getElementById('profile-avatar-url') as HTMLInputElement;
+      const avatarPreview = document.getElementById('profile-avatar-preview') as HTMLImageElement;
+      if (nickEl) nickEl.value = user.nickname || '';
+      if (emailEl) emailEl.value = user.email || '';
+      if (phoneEl) phoneEl.value = user.phone || '';
+      if (bdayEl) bdayEl.value = user.birthday || '';
+      if (avatarEl) avatarEl.value = user.avatar_url || '';
+      if (avatarPreview) avatarPreview.src = user.avatar_url || '/images/default-avatar.jpg';
+    }
+  }
+
+  function closeProfileModal() {
+    const modal = document.getElementById('profile-modal') as HTMLElement;
+    if (modal) modal.style.display = 'none';
+  }
+
+  function switchProfileTab(tab: string) {
+    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.profile-panel').forEach(p => (p as HTMLElement).style.display = 'none');
+    const btn = document.querySelector(`.profile-tab[data-ptab="${tab}"]`);
+    if (btn) btn.classList.add('active');
+    const panel = document.getElementById(tab === 'info' ? 'profile-info-panel' : 'profile-password-panel');
+    if (panel) panel.style.display = 'flex';
+  }
+
+  function previewAvatar() {
+    const url = (document.getElementById('profile-avatar-url') as HTMLInputElement)?.value;
+    const preview = document.getElementById('profile-avatar-preview') as HTMLImageElement;
+    if (url && preview) preview.src = url;
+  }
+
+  async function saveProfile() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    const nickname = (document.getElementById('profile-nickname') as HTMLInputElement)?.value;
+    const phone = (document.getElementById('profile-phone') as HTMLInputElement)?.value;
+    const birthday = (document.getElementById('profile-birthday') as HTMLInputElement)?.value;
+    const avatar_url = (document.getElementById('profile-avatar-url') as HTMLInputElement)?.value;
+    try {
+      const res = await fetch('https://api.chanmaoyoupu.com/api/auth/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ nickname, phone, birthday, avatar_url })
+      });
+      const data = await res.json();
+      if (data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+        alert('资料已更新');
+        closeProfileModal();
+        location.reload();
+      } else {
+        alert(data.error || '更新失败');
+      }
+    } catch (e) {
+      alert('网络错误');
+    }
+  }
+
+  async function changePassword() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    const currentPassword = (document.getElementById('current-password') as HTMLInputElement)?.value;
+    const newPassword = (document.getElementById('new-password') as HTMLInputElement)?.value;
+    const confirmPassword = (document.getElementById('confirm-new-password') as HTMLInputElement)?.value;
+    if (!currentPassword || !newPassword) { alert('请填写完整'); return; }
+    if (newPassword !== confirmPassword) { alert('两次密码不一致'); return; }
+    try {
+      const res = await fetch('https://api.chanmaoyoupu.com/api/auth/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ currentPassword, newPassword })
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert('密码已修改，请重新登录');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        location.reload();
+      } else {
+        alert(data.error || '修改失败');
+      }
+    } catch (e) {
+      alert('网络错误');
+    }
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    location.reload();
+  }
+
+  // Auth UI
+  function updateAuthUI() {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const authBtn = document.getElementById('auth-btn') as HTMLElement;
+    const userMenu = document.getElementById('user-menu') as HTMLElement;
+    const headerAvatar = document.getElementById('header-user-avatar') as HTMLImageElement;
+    const dropdownNickname = document.getElementById('user-dropdown-nickname') as HTMLElement;
+    const dropdownAvatar = document.getElementById('user-dropdown-avatar') as HTMLImageElement;
+
+    if (token && user.email) {
+      if (authBtn) authBtn.style.display = 'none';
+      if (userMenu) userMenu.style.display = 'block';
+      if (dropdownNickname) dropdownNickname.textContent = user.nickname || user.email;
+      const avatarUrl = user.avatar_url || '/images/default-avatar.jpg';
+      if (headerAvatar) headerAvatar.src = avatarUrl;
+      if (dropdownAvatar) dropdownAvatar.src = avatarUrl;
+    } else {
+      if (authBtn) authBtn.style.display = 'inline-block';
+      if (userMenu) userMenu.style.display = 'none';
+    }
+  }
+
+  updateAuthUI();
+  (window as any).updateAuthUI = updateAuthUI;
+</script>
