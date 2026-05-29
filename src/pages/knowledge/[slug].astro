@@ -1,15 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
 import { getAllKnowledge } from '../../lib/strapi';
 
 export async function getStaticPaths() {
   const knowledgeItems = await getAllKnowledge();
   if (knowledgeItems.length === 0) {
-    return []; // 无数据时不生成详情页
+    return [];
   }
-  return knowledgeItems.map((k: any) => ({
+  // 只生成非秘方条目的路径（秘方走 /secrets/ 路径）
+  const nonSecretItems = knowledgeItems.filter((k: any) => k.category !== 'secret');
+  return nonSecretItems.map((k: any) => ({
     params: { slug: k.slug },
   }));
 }
@@ -28,12 +28,12 @@ const categoryMap: Record<string, string> = {
   flavor: '味型',
   culture: '文化',
   history: '历史',
+  secret: '秘方',
 };
 ---
 
 <BaseLayout title={entry.title}>
-  <Header />
-
+  
   <article class="knowledge-detail">
     <div class="container">
       <div class="knowledge-header">
@@ -68,7 +68,6 @@ const categoryMap: Record<string, string> = {
     </div>
   </article>
 
-  <Footer />
 </BaseLayout>
 
 <style>
@@ -77,6 +76,13 @@ const categoryMap: Record<string, string> = {
   .knowledge-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-top: 12px; }
   .knowledge-body { max-width: 720px; font-size: 0.95rem; line-height: 1.9; color: var(--color-text); }
   .knowledge-body :global(h2) { font-size: 1.3rem; font-weight: 600; color: var(--color-title); margin: 36px 0 16px; padding-left: 12px; border-left: 3px solid var(--color-accent); }
+  .knowledge-body :global(h3) { font-size: 1.15rem; font-weight: 600; color: var(--color-title); margin: 28px 0 12px; }
+  .knowledge-body :global(h4) { font-size: 1rem; font-weight: 600; color: var(--color-title); margin: 20px 0 8px; }
+  .knowledge-body :global(p) { margin-bottom: 12px; }
+  .knowledge-body :global(strong) { color: var(--color-title); }
+  .knowledge-body :global(table) { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+  .knowledge-body :global(th) { background: var(--color-bg-warm); padding: 8px 12px; text-align: left; font-weight: 600; }
+  .knowledge-body :global(td) { padding: 8px 12px; border-bottom: 1px solid var(--color-border); }
   .knowledge-body :global(ul) { margin-bottom: 16px; padding-left: 24px; }
   .knowledge-body :global(li) { margin-bottom: 6px; }
   .related { margin-top: 60px; padding-top: 32px; border-top: 1px solid var(--color-border); display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
