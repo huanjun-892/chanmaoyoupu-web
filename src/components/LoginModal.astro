@@ -54,7 +54,7 @@
       <div class="optional-divider">以下信息选填</div>
       <div class="form-group optional">
         <label for="register-phone">手机号</label>
-        <input type="tel" id="register-phone" name="phone" placeholder="选填，如 13800138000" pattern="1[3-9]\d{9}" maxlength="11">
+        <input type="tel" id="register-phone" name="phone" placeholder="选填，如13800138000" maxlength="11">
       </div>
       <div class="form-group optional">
         <label for="register-birthday">出生日期</label>
@@ -106,6 +106,7 @@
   padding: 32px;
   width: 90%;
   max-width: 420px;
+  min-width: 320px;
   position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   max-height: 90vh;
@@ -131,11 +132,12 @@
   display: flex;
   gap: 8px;
   margin-bottom: 24px;
+  flex-wrap: nowrap;
 }
 
 .tab-btn {
   flex: 1;
-  padding: 12px;
+  padding: 12px 0;
   border: none;
   background: #f5f5f5;
   border-radius: 8px;
@@ -144,6 +146,7 @@
   font-weight: 500;
   color: #666;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .tab-btn.active {
@@ -302,7 +305,7 @@
 </style>
 
 <script>
-import { login, register, checkNickname, oauthLogin, logout, getStoredUser, isLoggedIn, onAuthChange, type User } from '../lib/auth';
+import { login, register, checkNickname, oauthLogin, logout, getStoredUser, isLoggedIn, onAuthChange, updateProfile, type User } from '../lib/auth';
 
 declare global {
   interface Window {
@@ -313,6 +316,7 @@ declare global {
     handleRegister: (e: Event) => Promise<void>;
     oauthLogin: (provider: string) => Promise<void>;
     updateAuthUI: () => void;
+    handleLogout: () => void;
   }
 }
 
@@ -348,7 +352,7 @@ window.closeLoginModal = function() {
 window.switchTab = function(tab: 'login' | 'register') {
   const loginForm = document.getElementById('login-form');
   const registerForm = document.getElementById('register-form');
-  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabBtns = document.querySelectorAll('.modal-tabs .tab-btn');
   
   tabBtns.forEach(btn => {
     if (btn.getAttribute('data-tab') === tab) {
@@ -374,6 +378,12 @@ function showError(elementId: string, message: string) {
     errorEl.textContent = message;
     errorEl.style.display = 'block';
   }
+}
+
+// 手机号校验（宽松模式：11位数字，1开头即可）
+function isValidPhone(phone: string): boolean {
+  if (!phone) return true; // 选填，空值合法
+  return /^1\d{10}$/.test(phone);
 }
 
 // 昵称实时查重
@@ -461,6 +471,14 @@ window.handleRegister = async function(e: Event) {
   submitBtn.textContent = '注册中...';
   showError('register-error', '');
   
+  // 手机号格式校验
+  if (phone && !isValidPhone(phone)) {
+    showError('register-error', '手机号格式不正确，请输入11位手机号');
+    submitBtn.disabled = false;
+    submitBtn.textContent = '注册';
+    return;
+  }
+  
   // 检查昵称是否已被占用
   if (nickname) {
     const nickResult = await checkNickname(nickname);
@@ -504,31 +522,46 @@ window.oauthLogin = async function(provider: string) {
   }
 };
 
+// 退出登录
+window.handleLogout = function() {
+  logout();
+  window.updateAuthUI();
+  // 关闭用户下拉菜单
+  const dropdown = document.getElementById('user-dropdown');
+  if (dropdown) dropdown.classList.remove('show');
+};
+
 // 更新认证UI
 window.updateAuthUI = function() {
   const user = getStoredUser();
   const loggedIn = isLoggedIn();
   const authBtn = document.getElementById('auth-btn');
-  const userAvatar = document.getElementById('user-avatar');
+  const userMenu = document.getElementById('user-menu');
+  const userDropdownAvatar = document.getElementById('user-dropdown-avatar');
+  const userDropdownNickname = document.getElementById('user-dropdown-nickname');
   
-  if (authBtn) {
-    if (loggedIn && user) {
-      authBtn.innerHTML = `<img src="${user.avatar_url || '/default-avatar.png'}" alt="${user.nickname}" class="header-avatar" />`;
-      authBtn.onclick = () => {
-        window.location.href = '/profile/favorites';
-      };
-    } else {
-      authBtn.innerHTML = '登录';
-      authBtn.onclick = window.openLoginModal;
+  if (loggedIn && user) {
+    // 隐藏登录按钮，显示用户菜单
+    if (authBtn) authBtn.style.display = 'none';
+    if (userMenu) userMenu.style.display = 'flex';
+    
+    // 更新头部头像
+    const headerAvatar = document.getElementById('header-user-avatar') as HTMLImageElement;
+    if (headerAvatar) {
+      headerAvatar.src = user.avatar_url || '/images/default-avatar.jpg';
     }
-  }
-  
-  if (userAvatar) {
-    if (loggedIn && user) {
-      userAvatar.innerHTML = `<img src="${user.avatar_url || '/default-avatar.png'}" alt="${user.nickname}" />`;
-    } else {
-      userAvatar.innerHTML = '';
+    
+    // 更新下拉菜单信息
+    if (userDropdownAvatar) {
+      (userDropdownAvatar as HTMLImageElement).src = user.avatar_url || '/images/default-avatar.jpg';
     }
+    if (userDropdownNickname) {
+      userDropdownNickname.textContent = user.nickname || user.email;
+    }
+  } else {
+    // 显示登录按钮，隐藏用户菜单
+    if (authBtn) authBtn.style.display = 'inline-block';
+    if (userMenu) userMenu.style.display = 'none';
   }
 };
 
@@ -543,6 +576,9 @@ document.getElementById('login-modal')?.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     window.closeLoginModal();
+    // 同时关闭用户下拉菜单
+    const dropdown = document.getElementById('user-dropdown');
+    if (dropdown) dropdown.classList.remove('show');
   }
 });
 
