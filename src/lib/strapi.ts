@@ -3,10 +3,14 @@ import fallbackDataRaw from '../data/strapi-fallback.json';
 const STRAPI_BASE = 'https://inspired-freedom-62e32d3a2b.strapiapp.com';
 
 // Load fallback data via Vite JSON import (reliable in all build environments)
-const fallbackData: any[] = Array.isArray(fallbackDataRaw) ? fallbackDataRaw : (fallbackDataRaw as any).default || [];
+const fallback = (fallbackDataRaw as any).default || fallbackDataRaw;
+const fallbackKnowledge: any[] = fallback.knowledge || [];
+const fallbackRecipes: any[] = fallback.recipes || [];
+const fallbackCuisines: any[] = fallback.cuisines || [];
+const fallbackTags: any[] = fallback.tags || [];
 
 export async function fetchAPI(path: string, params: Record<string, string> = {}): Promise<any> {
-  const url = new URL(`/api${path}`, STRAPI_BASE);
+  const url = new URL(\`/api\${path}\`, STRAPI_BASE);
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, value);
   });
@@ -24,7 +28,7 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
       clearTimeout(timeout);
       
       if (!res.ok) {
-        console.warn(`Strapi API ${path} returned ${res.status}`);
+        console.warn(\`Strapi API \${path} returned \${res.status}\`);
         if (attempt < maxRetries) {
           await new Promise(r => setTimeout(r, 1000));
           continue;
@@ -34,7 +38,7 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
       
       return await res.json();
     } catch (err: any) {
-      console.warn(`Strapi API ${path} error: ${err.message}`);
+      console.warn(\`Strapi API \${path} error: \${err.message}\`);
       if (attempt < maxRetries) {
         await new Promise(r => setTimeout(r, 1000));
         continue;
@@ -88,11 +92,11 @@ export function processContent(content: string): string {
 
 // Fallback data helpers
 function getFallbackKnowledge(): any[] {
-  return fallbackData.filter((e: any) => e.category !== 'secret');
+  return fallbackKnowledge.filter((e: any) => e.category !== 'secret');
 }
 
 function getFallbackSecrets(): any[] {
-  return fallbackData.filter((e: any) => e.category === 'secret');
+  return fallbackKnowledge.filter((e: any) => e.category === 'secret');
 }
 
 export async function getAllRecipes() {
@@ -106,10 +110,18 @@ export async function getAllRecipes() {
     'populate[steps]': 'true',
     'populate[cover]': 'true',
   });
-  return data?.data || [];
+  const items = data?.data || [];
+  if (items.length === 0) {
+    console.warn('Strapi returned no recipes, using fallback data');
+    return fallbackRecipes;
+  }
+  return items;
 }
 
 export async function getRecipeBySlug(slug: string) {
+  // First try fallback
+  const fallbackRecipe = fallbackRecipes.find((r: any) => r.slug === slug);
+  
   const data = await fetchAPI('/recipes', {
     'filters[slug][$eq]': slug,
     'populate[cuisine]': 'true',
@@ -122,7 +134,12 @@ export async function getRecipeBySlug(slug: string) {
     'populate[relatedRecipes]': 'true',
     'populate[relatedKnowledge]': 'true',
   });
-  return data?.data?.[0] || null;
+  const item = data?.data?.[0] || null;
+  if (!item && fallbackRecipe) {
+    console.warn(\`Using fallback for recipe: \${slug}\`);
+    return fallbackRecipe;
+  }
+  return item;
 }
 
 export async function getAllCuisines() {
@@ -130,7 +147,12 @@ export async function getAllCuisines() {
     'pagination[pageSize]': '100',
     'populate[cover]': 'true',
   });
-  return data?.data || [];
+  const items = data?.data || [];
+  if (items.length === 0) {
+    console.warn('Strapi returned no cuisines, using fallback data');
+    return fallbackCuisines;
+  }
+  return items;
 }
 
 export async function getAllRegions() {
@@ -145,7 +167,12 @@ export async function getAllMethods() {
 
 export async function getAllTags() {
   const data = await fetchAPI('/tags', { 'pagination[pageSize]': '100' });
-  return data?.data || [];
+  const items = data?.data || [];
+  if (items.length === 0) {
+    console.warn('Strapi returned no tags, using fallback data');
+    return fallbackTags;
+  }
+  return items;
 }
 
 export async function getAllIngredients() {
