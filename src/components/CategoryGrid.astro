@@ -1,49 +1,36 @@
 ---
-import { getAllCuisines, getAllTags } from '../lib/strapi';
+import { getAllCuisines, getCoverUrl } from '../lib/strapi';
 
-const cuisines = await getAllCuisines();
-const tags = await getAllTags();
+const allCuisines = await getAllCuisines();
 
-// 菜系emoji映射
-const cuisineEmoji: Record<string, string> = {
-  '川菜': '🌶️', '粤菜': '🥘', '湘菜': '🔥',
-  '浙菜': '🍵', '鲁菜': '🍖', '家常菜': '🏠',
-};
+// 首页展示12个精选分类：八大菜系 + 特色
+const priorityNames = [
+  '川菜', '粤菜', '湘菜', '浙菜', '鲁菜', '苏菜',
+  '闽菜', '徽菜', '东北菜', '日料', '减脂餐', '儿童餐',
+];
 
-// 标签emoji映射
-const tagEmoji: Record<string, string> = {
-  '快手菜': '⚡', '减脂餐': '🥗', '下饭菜': '🍚',
-  '夜宵': '🌙', '家常菜': '🏠', '宴客菜': '🎉',
-};
-
-// 菜系入口
-const cuisineItems = cuisines.slice(0, 6).map((c: any) => ({
-  label: c.name,
-  href: `/recipes?cuisine=${c.name}`,
-  emoji: cuisineEmoji[c.name] || '🍽️',
-}));
-
-// 标签入口
-const tagItems = tags.slice(0, 6).map((t: any) => ({
-  label: t.name,
-  href: `/recipes?tag=${t.name}`,
-  emoji: t.icon || tagEmoji[t.name] || '🏷️',
-}));
-
-// 合并：菜系优先，标签补充
-const categories = [...cuisineItems, ...tagItems].slice(0, 6);
+const priorityCuisines = priorityNames
+  .map(name => allCuisines.find((c: any) => c.name === name))
+  .filter(Boolean) as any[];
 ---
 
 <section class="section categories-section">
   <div class="container">
     <h2 class="section-title">想做什么菜？</h2>
     <div class="category-grid">
-      {categories.map((cat) => (
-        <a href={cat.href} class="category-item">
-          <span class="category-emoji">{cat.emoji}</span>
-          <span class="category-label">{cat.label}</span>
-        </a>
-      ))}
+      {priorityCuisines.map((cuisine) => {
+        const coverUrl = getCoverUrl(cuisine.cover);
+        return (
+          <a href={`/recipes?cuisine=${cuisine.name}`} class="category-item">
+            {coverUrl ? (
+              <img src={coverUrl} alt={cuisine.name} class="category-img" loading="lazy" />
+            ) : (
+              <span class="category-emoji-fallback">🍽️</span>
+            )}
+            <span class="category-label">{cuisine.name}</span>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -60,31 +47,35 @@ const categories = [...cuisineItems, ...tagItems].slice(0, 6);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     border-radius: var(--radius);
     overflow: hidden;
-    aspect-ratio: 1 / 1;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border: 1px solid var(--color-border-light);
-    background: var(--color-bg-warm);
+    background: #fff;
     text-decoration: none;
   }
 
-  .category-emoji {
+  .category-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .category-emoji-fallback {
+    width: 100%;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 2rem;
-    margin-bottom: 8px;
-    transition: transform 0.3s;
+    background: #fafafa;
   }
 
   .category-item:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
     border-color: var(--color-accent);
-    background: var(--color-accent-light);
-  }
-
-  .category-item:hover .category-emoji {
-    transform: scale(1.15);
   }
 
   .category-label {
@@ -92,6 +83,10 @@ const categories = [...cuisineItems, ...tagItems].slice(0, 6);
     font-weight: 600;
     color: var(--color-title);
     letter-spacing: 0.02em;
+    padding: 10px 4px;
+    background: #fff;
+    width: 100%;
+    text-align: center;
   }
 
   @media (max-width: 768px) {
@@ -106,9 +101,7 @@ const categories = [...cuisineItems, ...tagItems].slice(0, 6);
     }
     .category-label {
       font-size: 0.75rem;
-    }
-    .category-emoji {
-      font-size: 1.6rem;
+      padding: 8px 2px;
     }
   }
 </style>
