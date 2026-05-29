@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import CategoryGrid from '../components/CategoryGrid.astro';
 import RecipeCard from '../components/RecipeCard.astro';
 import KnowledgeCard from '../components/KnowledgeCard.astro';
@@ -32,13 +30,26 @@ const featuredRecipes = allRecipes.slice(2, 5).map(r => ({
   cover: getCoverUrl(r.cover),
 }));
 
-// 知识库精选
-const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
-  title: k.title,
-  slug: k.slug,
-  category: k.category,
-  excerpt: k.content ? k.content.replace(/<[^>]*>/g, '').slice(0, 80) + '...' : '',
-}));
+// 知识库精选（非秘方）
+const knowledgeFeatured = knowledgeItems
+  .filter((k: any) => k.category !== 'secret')
+  .slice(0, 2)
+  .map((k: any) => ({
+    title: k.title,
+    slug: k.slug,
+    category: k.category,
+    excerpt: k.content ? k.content.replace(/<[^>]*>/g, '').slice(0, 80) + '...' : '',
+  }));
+
+// 秘方精选
+const secretsFeatured = knowledgeItems
+  .filter((k: any) => k.category === 'secret')
+  .slice(0, 4)
+  .map((k: any) => ({
+    title: k.title,
+    slug: k.slug,
+    excerpt: k.content ? k.content.replace(/<[^>]*>/g, '').slice(0, 60) + '...' : '',
+  }));
 ---
 
 <BaseLayout title="首页">
@@ -47,7 +58,7 @@ const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-text">
-        <div class="hero-badge">食谱 + 知识库</div>
+        <div class="hero-badge">食谱 + 秘方 + 知识库</div>
         <h1 class="hero-title">
           馋得明白<br/>
           <span class="accent">做得靠谱</span>
@@ -61,7 +72,7 @@ const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
         <div class="hero-hot">
           <span class="hero-hot-label">热门：</span>
           <a href="/recipes?cuisine=川菜">川菜</a>
-          <a href="/recipes?tag=减脂餐">减脂餐</a>
+          <a href="/secrets">秘方</a>
           <a href="/recipes?difficulty=easy">新手菜</a>
         </div>
       </div>
@@ -104,9 +115,30 @@ const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
     </div>
   </section>
 
+  <!-- 秘方精选 -->
+  {secretsFeatured.length > 0 && (
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">🗝️ 秘方精选</h2>
+        <a href="/secrets" class="view-all">全部秘方 →</a>
+      </div>
+      <div class="secrets-featured-grid">
+        {secretsFeatured.map((item) => (
+          <a href={`/secrets/${item.slug}`} class="secret-featured-card">
+            <h3>{item.title}</h3>
+            <p>{item.excerpt}</p>
+            <span class="secret-link">查看秘方 →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
+
   <!-- 知识库精选 -->
   {knowledgeFeatured.length > 0 && (
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">知识库精选</h2>
@@ -130,7 +162,6 @@ const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
     position: relative;
     overflow: hidden;
   }
-
   .hero::before {
     content: '';
     position: absolute;
@@ -141,152 +172,74 @@ const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
     background: radial-gradient(circle, rgba(255, 140, 66, 0.06) 0%, transparent 70%);
     border-radius: 50%;
   }
-
-  .hero-inner {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-    position: relative;
-  }
-
-  .hero-text {
-    flex: 1;
-    max-width: 520px;
-  }
-
-  .hero-badge {
-    display: inline-block;
-    padding: 5px 14px;
-    background: var(--color-accent-light);
-    color: var(--color-accent);
-    border-radius: 100px;
-    font-size: 0.76rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    margin-bottom: 20px;
-  }
-
-  .hero-title {
-    font-size: 3.2rem;
-    font-weight: 800;
-    color: var(--color-title);
-    line-height: 1.18;
-    margin-bottom: 18px;
-    letter-spacing: -0.02em;
-  }
-
-  .accent {
-    color: var(--color-accent);
-  }
-
-  .hero-desc {
-    font-size: 1.05rem;
-    color: var(--color-muted);
-    margin-bottom: 32px;
-    line-height: 1.7;
-  }
-
-  .hero-search {
-    display: flex;
-    gap: 10px;
-    background: var(--color-bg);
-    border: 1.5px solid var(--color-border);
-    border-radius: 100px;
-    padding: 5px 5px 5px 18px;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.25s;
-  }
-
-  .hero-search:focus-within {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px var(--color-accent-light);
-  }
-
-  .hero-search-icon {
-    color: var(--color-muted);
-    flex-shrink: 0;
-    margin-top: 10px;
-  }
-
-  .hero-search-input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 0.95rem;
-    color: var(--color-text);
-  }
-
-  .hero-search-input::placeholder {
-    color: var(--color-muted);
-  }
-
-  .hero-search .btn {
-    flex-shrink: 0;
-    padding: 10px 24px;
-  }
-
-  .hero-hot {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 18px;
-    font-size: 0.82rem;
-  }
-
-  .hero-hot-label {
-    color: var(--color-muted);
-  }
-
-  .hero-hot a {
-    color: var(--color-text);
-    transition: color 0.2s;
-  }
-
-  .hero-hot a:hover {
-    color: var(--color-accent);
-  }
-
-  .hero-illustration {
-    flex-shrink: 0;
-    width: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-cat {
-    object-fit: contain;
-    width: 200px;
-    height: 200px;
-    filter: drop-shadow(0 4px 20px rgba(255, 140, 66, 0.15));
-  }
+  .hero-inner { display: flex; align-items: center; gap: 60px; position: relative; }
+  .hero-text { flex: 1; max-width: 520px; }
+  .hero-badge { display: inline-block; padding: 5px 14px; background: var(--color-accent-light); color: var(--color-accent); border-radius: 100px; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 20px; }
+  .hero-title { font-size: 3.2rem; font-weight: 800; color: var(--color-title); line-height: 1.18; margin-bottom: 18px; letter-spacing: -0.02em; }
+  .accent { color: var(--color-accent); }
+  .hero-desc { font-size: 1.05rem; color: var(--color-muted); margin-bottom: 32px; line-height: 1.7; }
+  .hero-search { display: flex; gap: 10px; background: var(--color-bg); border: 1.5px solid var(--color-border); border-radius: 100px; padding: 5px 5px 5px 18px; box-shadow: var(--shadow-sm); transition: all 0.25s; }
+  .hero-search:focus-within { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-light); }
+  .hero-search-icon { color: var(--color-muted); flex-shrink: 0; margin-top: 10px; }
+  .hero-search-input { flex: 1; border: none; background: transparent; outline: none; font-size: 0.95rem; color: var(--color-text); }
+  .hero-search-input::placeholder { color: var(--color-muted); }
+  .hero-search .btn { flex-shrink: 0; padding: 10px 24px; }
+  .hero-hot { display: flex; align-items: center; gap: 16px; margin-top: 18px; font-size: 0.82rem; }
+  .hero-hot-label { color: var(--color-muted); }
+  .hero-hot a { color: var(--color-text); transition: color 0.2s; }
+  .hero-hot a:hover { color: var(--color-accent); }
+  .hero-illustration { flex-shrink: 0; width: 220px; display: flex; align-items: center; justify-content: center; }
+  .hero-cat { object-fit: contain; width: 200px; height: 200px; filter: drop-shadow(0 4px 20px rgba(255, 140, 66, 0.15)); }
 
   /* Section header */
-  .section-header {
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .section-header .section-title { margin-bottom: 0; }
+  .view-all { font-size: 0.82rem; font-weight: 500; color: var(--color-accent); transition: opacity 0.2s; }
+  .view-all:hover { opacity: 0.7; }
+  .section-alt { background: var(--color-bg-warm); }
+
+  /* 秘方精选 */
+  .secrets-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .secret-featured-card {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 28px;
+    flex-direction: column;
+    padding: 24px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: all 0.25s;
+    text-decoration: none;
   }
-
-  .section-header .section-title {
-    margin-bottom: 0;
+  .secret-featured-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.1);
   }
-
-  .view-all {
-    font-size: 0.82rem;
-    font-weight: 500;
+  .secret-featured-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-bottom: 8px;
+  }
+  .secret-featured-card p {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .secret-link {
+    font-size: 0.85rem;
     color: var(--color-accent);
-    transition: opacity 0.2s;
-  }
-
-  .view-all:hover {
-    opacity: 0.7;
-  }
-
-  .section-alt {
-    background: var(--color-bg-warm);
+    font-weight: 500;
   }
 
   @media (max-width: 768px) {
@@ -295,8 +248,8 @@ const knowledgeFeatured = knowledgeItems.slice(0, 2).map((k: any) => ({
     .hero-title { font-size: 2.2rem; }
     .hero-search { max-width: 100%; }
     .hero-illustration { width: auto; }
-    .hero-cat {
-    object-fit: contain; width: 140px; height: 140px; }
+    .hero-cat { object-fit: contain; width: 140px; height: 140px; }
     .hero-hot { justify-content: center; }
+    .secrets-featured-grid { grid-template-columns: 1fr; }
   }
 </style>
