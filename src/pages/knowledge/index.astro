@@ -6,15 +6,15 @@ const allKnowledge = await getAllKnowledge();
 // 过滤掉秘方条目（秘方已独立为顶级页面）
 const knowledgeItems = allKnowledge.filter((k: any) => k.category !== 'secret');
 
-const categoryMap: Record<string, { icon: string; label: string }> = {
-  seasoning: { icon: '🧂', label: '调味' },
-  science: { icon: '🔬', label: '科学' },
-  technique: { icon: '🔥', label: '技法' },
-  ingredient: { icon: '🥬', label: '食材' },
-  nutrition: { icon: '🥗', label: '营养' },
-  flavor: { icon: '👅', label: '味型' },
-  culture: { icon: '📜', label: '文化' },
-  history: { icon: '📖', label: '历史' },
+const categoryMap: Record<string, { icon: string; label: string; cover: string }> = {
+  seasoning: { icon: '🧂', label: '调味', cover: '/images/knowledge/seasoning.jpg' },
+  science: { icon: '🔬', label: '科学', cover: '/images/knowledge/science.jpg' },
+  technique: { icon: '🔥', label: '技法', cover: '/images/knowledge/technique.jpg' },
+  ingredient: { icon: '🥬', label: '食材', cover: '/images/knowledge/ingredient.jpg' },
+  nutrition: { icon: '🥗', label: '营养', cover: '/images/knowledge/nutrition.jpg' },
+  flavor: { icon: '👅', label: '味型', cover: '/images/knowledge/flavor.jpg' },
+  culture: { icon: '📜', label: '文化', cover: '/images/knowledge/culture.jpg' },
+  history: { icon: '📖', label: '历史', cover: '/images/knowledge/history.jpg' },
 };
 
 // 统计各分类数量
@@ -24,12 +24,12 @@ knowledgeItems.forEach((k: any) => {
   categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
 });
 
-const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => ({
+const categories = Object.entries(categoryMap).map(([slug, { icon, label, cover }]) => ({
   name: label,
   slug,
   icon,
+  cover,
   count: categoryCounts[slug] || 0,
-  desc: `${label}相关美食知识`,
 }));
 ---
 
@@ -43,11 +43,13 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
       {categories.length > 0 && (
       <div class="grid-8 category-cards">
         {categories.map((cat) => (
-          <button class="category-card" data-category={cat.slug} onclick="filterCategory(this)">
-            <span class="category-icon">{cat.icon}</span>
-            <h3 class="category-name">{cat.name}</h3>
-            <p class="category-desc">{cat.desc}</p>
-            <span class="category-count">{cat.count}篇</span>
+          <button class="category-card" data-category={cat.slug} onclick="filterCategory(this)" style={`background-image: url('${cat.cover}')`}>
+            <div class="category-overlay"></div>
+            <div class="category-content">
+              <span class="category-icon">{cat.icon}</span>
+              <h3 class="category-name">{cat.name}</h3>
+              <span class="category-count">{cat.count}篇</span>
+            </div>
           </button>
         ))}
       </div>
@@ -136,13 +138,16 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
   .page-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-bottom: 8px; }
   .page-desc { font-size: 1rem; color: var(--color-muted); margin-bottom: 40px; }
   .grid-8 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 14px; margin-bottom: 48px; }
-  .category-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 12px; background: #F8F9FA; border-radius: var(--radius); border: 2px solid transparent; transition: all 0.2s; cursor: pointer; }
-  .category-card:hover { border-color: var(--color-accent); transform: translateY(-2px); }
-  .category-card.active { border-color: var(--color-accent); background: rgba(255, 140, 66, 0.06); box-shadow: 0 2px 12px rgba(255, 107, 53, 0.15); }
-  .category-icon { font-size: 1.8rem; margin-bottom: 8px; }
-  .category-name { font-size: 0.95rem; font-weight: 600; color: var(--color-title); margin-bottom: 4px; }
-  .category-desc { font-size: 0.7rem; color: var(--color-muted); line-height: 1.4; margin-bottom: 8px; }
-  .category-count { font-size: 0.7rem; color: var(--color-accent); font-weight: 600; }
+  .category-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0; height: 140px; background-size: cover; background-position: center; border-radius: var(--radius); border: 2px solid transparent; transition: all 0.25s; cursor: pointer; overflow: hidden; }
+  .category-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%); transition: background 0.25s; }
+  .category-card:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+  .category-card:hover .category-overlay { background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%); }
+  .category-card.active { border-color: var(--color-accent); box-shadow: 0 0 0 2px var(--color-accent), 0 4px 16px rgba(255,107,53,0.3); }
+  .category-card.active .category-overlay { background: linear-gradient(180deg, rgba(255,107,53,0.15) 0%, rgba(0,0,0,0.5) 100%); }
+  .category-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+  .category-icon { font-size: 1.6rem; margin-bottom: 6px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3)); }
+  .category-name { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 4px; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+  .category-count { font-size: 0.7rem; color: rgba(255,255,255,0.85); font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
   .list-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
   .section-subtitle { font-size: 1.3rem; font-weight: 600; color: var(--color-title); padding-bottom: 8px; border-bottom: 2px solid var(--color-accent); display: inline-block; margin-bottom: 0; }
   .clear-filter-btn { padding: 4px 14px; border: 1px solid var(--color-border); border-radius: 100px; background: var(--color-bg); color: var(--color-muted); font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
