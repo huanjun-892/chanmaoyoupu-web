@@ -7,8 +7,11 @@ const allKnowledge = await getAllKnowledge();
 const knowledgeItems = allKnowledge.filter((k: any) => k.category !== 'secret');
 
 const categoryMap: Record<string, { icon: string; label: string }> = {
+  seasoning: { icon: '🧂', label: '调味' },
+  science: { icon: '🔬', label: '科学' },
   technique: { icon: '🔥', label: '技法' },
   ingredient: { icon: '🥬', label: '食材' },
+  nutrition: { icon: '🥗', label: '营养' },
   flavor: { icon: '👅', label: '味型' },
   culture: { icon: '📜', label: '文化' },
   history: { icon: '📖', label: '历史' },
@@ -38,7 +41,7 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
       <p class="page-desc">不仅要会做，还要懂。从技法到食材，从味型到文化，吃个明白。</p>
 
       {categories.length > 0 && (
-      <div class="grid-5 category-cards">
+      <div class="grid-8 category-cards">
         {categories.map((cat) => (
           <button class="category-card" data-category={cat.slug} onclick="filterCategory(this)">
             <span class="category-icon">{cat.icon}</span>
@@ -132,7 +135,7 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
 <style>
   .page-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-bottom: 8px; }
   .page-desc { font-size: 1rem; color: var(--color-muted); margin-bottom: 40px; }
-  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 48px; }
+  .grid-8 { display: grid; grid-template-columns: repeat(8, 1fr); gap: 14px; margin-bottom: 48px; }
   .category-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 12px; background: #F8F9FA; border-radius: var(--radius); border: 2px solid transparent; transition: all 0.2s; cursor: pointer; }
   .category-card:hover { border-color: var(--color-accent); transform: translateY(-2px); }
   .category-card.active { border-color: var(--color-accent); background: rgba(255, 140, 66, 0.06); box-shadow: 0 2px 12px rgba(255, 107, 53, 0.15); }
@@ -156,6 +159,6 @@ const categories = Object.entries(categoryMap).map(([slug, { icon, label }]) => 
   .coming-soon-text { font-size: 1.2rem; color: var(--color-title); font-weight: 600; margin-bottom: 8px; }
   .coming-soon-sub { font-size: 0.95rem; color: var(--color-muted); }
   .coming-soon-sub a { color: var(--color-accent); }
-  @media (max-width: 768px) { .grid-5 { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 480px) { .grid-5 { grid-template-columns: repeat(2, 1fr); } .knowledge-item { flex-direction: column; align-items: flex-start; gap: 12px; } }
+  @media (max-width: 768px) { .grid-8 { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 480px) { .grid-8 { grid-template-columns: repeat(2, 1fr); } .knowledge-item { flex-direction: column; align-items: flex-start; gap: 12px; } }
 </style>
