@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
-import { getAllRecipes, getAllCuisines, getAllTags, difficultyLabel, getCoverUrl } from '../../lib/strapi';
+import { getAllRecipes, getAllCuisines, getAllTags, getAllRegions, difficultyLabel, getCoverUrl } from '../../lib/strapi';
 
 const recipes = await getAllRecipes();
 const cuisines = await getAllCuisines();
 const tags = await getAllTags();
+const regions = await getAllRegions();
 
 const recipeList = recipes.map((r: any) => ({
   title: r.title,
@@ -14,11 +15,13 @@ const recipeList = recipes.map((r: any) => ({
   cookTime: r.cookTime,
   calories: r.calories,
   tags: (r.tags || []).map((t: any) => t.name),
+  regions: (r.regions || []).map((rg: any) => rg.name),
   cuisine: r.cuisine?.name || '',
   cover: getCoverUrl(r.cover),
 }));
 
 const cuisineList = ['全部', ...cuisines.map((c: any) => c.name)];
+const regionList = ['全部', ...regions.map((r: any) => r.name)];
 const tagList = ['全部', ...tags.map((t: any) => t.name)];
 const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
 ---
@@ -37,6 +40,15 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
           <div class="filter-options">
             {cuisineList.map((c: string) => (
               <button class="filter-btn" data-filter="cuisine" data-value={c === '全部' ? '' : c}>{c}</button>
+            ))}
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <span class="filter-label">地域</span>
+          <div class="filter-options">
+            {regionList.map((r: string) => (
+              <button class="filter-btn" data-filter="region" data-value={r === '全部' ? '' : r}>{r}</button>
             ))}
           </div>
         </div>
@@ -65,6 +77,7 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
         {recipeList.map((recipe: any) => (
           <div class="recipe-item"
             data-cuisine={recipe.cuisine}
+            data-region={recipe.regions.join(',')}
             data-tag={recipe.tags.join(',')}
             data-difficulty={recipe.difficulty}>
             <RecipeCard {...recipe} />
@@ -103,6 +116,7 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
       document.querySelectorAll('.recipe-item').forEach((item: any) => {
         let show = true;
         if (activeFilters.cuisine && item.dataset.cuisine !== activeFilters.cuisine) show = false;
+        if (activeFilters.region && !item.dataset.region?.split(',').includes(activeFilters.region)) show = false;
         if (activeFilters.tag && !item.dataset.tag?.split(',').includes(activeFilters.tag)) show = false;
         if (activeFilters.difficulty && item.dataset.difficulty !== activeFilters.difficulty) show = false;
 

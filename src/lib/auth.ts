@@ -225,14 +225,29 @@ export interface RankingItem {
   recipe_slug: string;
   like_count?: number;
   favorite_count?: number;
+  title?: string;
+  cover_url?: string;
+  difficulty?: string;
+  cook_time?: number;
+  cuisine?: string;
+  regions?: string[];
+  tags?: string[];
 }
 
-export async function getLikesRanking(limit: number = 20): Promise<ApiResponse<RankingItem[]>> {
-  return await apiRequest<RankingItem[]>(`${API_BASE}/api/rankings/likes?limit=${limit}`);
+export async function getLikesRanking(limit: number = 20, filters?: { cuisine?: string; region?: string; tag?: string }): Promise<ApiResponse<RankingItem[]>> {
+  const params = new URLSearchParams({ limit: String(limit) });
+  if (filters?.cuisine) params.set('cuisine', filters.cuisine);
+  if (filters?.region) params.set('region', filters.region);
+  if (filters?.tag) params.set('tag', filters.tag);
+  return await apiRequest<RankingItem[]>(`${API_BASE}/api/rankings/likes?${params}`);
 }
 
-export async function getFavoritesRanking(limit: number = 20): Promise<ApiResponse<RankingItem[]>> {
-  return await apiRequest<RankingItem[]>(`${API_BASE}/api/rankings/favorites?limit=${limit}`);
+export async function getFavoritesRanking(limit: number = 20, filters?: { cuisine?: string; region?: string; tag?: string }): Promise<ApiResponse<RankingItem[]>> {
+  const params = new URLSearchParams({ limit: String(limit) });
+  if (filters?.cuisine) params.set('cuisine', filters.cuisine);
+  if (filters?.region) params.set('region', filters.region);
+  if (filters?.tag) params.set('tag', filters.tag);
+  return await apiRequest<RankingItem[]>(`${API_BASE}/api/rankings/favorites?${params}`);
 }
 
 // OAuth预留接口

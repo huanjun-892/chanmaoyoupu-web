@@ -7,11 +7,12 @@ export interface Props {
   cookTime?: number;
   calories?: number;
   tags?: string[];
+  regions?: string[];
   likeCount?: number;
   favoriteCount?: number;
 }
 
-const { title, slug, cover, difficulty, cookTime, calories, tags = [], likeCount = 0, favoriteCount = 0 } = Astro.props;
+const { title, slug, cover, difficulty, cookTime, calories, tags = [], regions = [], likeCount = 0, favoriteCount = 0 } = Astro.props;
 ---
 
 <a href={`/recipes/${slug}`} class="card recipe-card">
@@ -42,9 +43,12 @@ const { title, slug, cover, difficulty, cookTime, calories, tags = [], likeCount
       {difficulty && <span>{difficulty}</span>}
       {cookTime && <span>⏱ {cookTime}分钟</span>}
     </div>
-    {tags.length > 0 && (
+    {(tags.length > 0 || regions.length > 0) && (
       <div class="card-tags">
-        {tags.slice(0, 3).map((tag) => (
+        {regions.slice(0, 2).map((region) => (
+          <span class="tag tag-region">📍 {region}</span>
+        ))}
+        {tags.slice(0, 2).map((tag) => (
           <span class="tag">{tag}</span>
         ))}
       </div>
@@ -104,6 +108,11 @@ const { title, slug, cover, difficulty, cookTime, calories, tags = [], likeCount
     gap: 6px;
     margin-top: 10px;
     flex-wrap: wrap;
+  }
+
+  .tag-region {
+    background: #f0f7ff;
+    color: #3b82f6;
   }
 </style>
 

@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 
-// SSG模式下，排行榜数据需要客户端获取
 const pageTitle = '排行榜 - 馋猫有谱';
 ---
 
 <BaseLayout title={pageTitle}>
+  
   <main class="rankings-page">
     <div class="container">
       <h1 class="page-title">🏆 排行榜</h1>
@@ -22,186 +22,101 @@ const pageTitle = '排行榜 - 馋猫有谱';
         </button>
       </div>
 
-      <!-- 点赞榜 -->
-      <div id="likes-ranking" class="ranking-list">
-        <div class="loading">
-          <div class="spinner"></div>
-          <span>加载中...</span>
+      <div class="filter-bar" id="filter-bar">
+        <div class="filter-group">
+          <span class="filter-label">菜系</span>
+          <div class="filter-options">
+            <button class="filter-chip active" data-filter="cuisine" data-value="" onclick="setFilter(this)">全部</button>
+            <button class="filter-chip" data-filter="cuisine" data-value="川菜" onclick="setFilter(this)">🌶️ 川菜</button>
+            <button class="filter-chip" data-filter="cuisine" data-value="粤菜" onclick="setFilter(this)">🥢 粤菜</button>
+            <button class="filter-chip" data-filter="cuisine" data-value="湘菜" onclick="setFilter(this)">🔥 湘菜</button>
+            <button class="filter-chip" data-filter="cuisine" data-value="浙菜" onclick="setFilter(this)">🍵 浙菜</button>
+            <button class="filter-chip" data-filter="cuisine" data-value="鲁菜" onclick="setFilter(this)">🍖 鲁菜</button>
+            <button class="filter-chip" data-filter="cuisine" data-value="苏菜" onclick="setFilter(this)">🦀 苏菜</button>
+            <button class="filter-chip" data-filter="cuisine" data-value="东北菜" onclick="setFilter(this)">🥟 东北菜</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">地域</span>
+          <div class="filter-options">
+            <button class="filter-chip active" data-filter="region" data-value="" onclick="setFilter(this)">全部</button>
+            <button class="filter-chip" data-filter="region" data-value="四川" onclick="setFilter(this)">四川</button>
+            <button class="filter-chip" data-filter="region" data-value="广东" onclick="setFilter(this)">广东</button>
+            <button class="filter-chip" data-filter="region" data-value="湖南" onclick="setFilter(this)">湖南</button>
+            <button class="filter-chip" data-filter="region" data-value="浙江" onclick="setFilter(this)">浙江</button>
+            <button class="filter-chip" data-filter="region" data-value="山东" onclick="setFilter(this)">山东</button>
+            <button class="filter-chip" data-filter="region" data-value="东北" onclick="setFilter(this)">东北</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">场景</span>
+          <div class="filter-options">
+            <button class="filter-chip active" data-filter="tag" data-value="" onclick="setFilter(this)">全部</button>
+            <button class="filter-chip" data-filter="tag" data-value="快手菜" onclick="setFilter(this)">⚡ 快手菜</button>
+            <button class="filter-chip" data-filter="tag" data-value="下饭菜" onclick="setFilter(this)">🍚 下饭菜</button>
+            <button class="filter-chip" data-filter="tag" data-value="家常菜" onclick="setFilter(this)">🏠 家常菜</button>
+            <button class="filter-chip" data-filter="tag" data-value="减脂" onclick="setFilter(this)">🥗 减脂</button>
+            <button class="filter-chip" data-filter="tag" data-value="夜宵" onclick="setFilter(this)">🌙 夜宵</button>
+          </div>
         </div>
       </div>
 
-      <!-- 收藏榜 -->
+      <div id="likes-ranking" class="ranking-list">
+        <div class="loading"><div class="spinner"></div><span>加载中...</span></div>
+      </div>
+
       <div id="favorites-ranking" class="ranking-list" style="display: none;">
-        <div class="loading">
-          <div class="spinner"></div>
-          <span>加载中...</span>
-        </div>
+        <div class="loading"><div class="spinner"></div><span>加载中...</span></div>
       </div>
     </div>
   </main>
+
 </BaseLayout>
 
 <style>
-.rankings-page {
-  min-height: 100vh;
-  padding: 40px 0;
-}
+.rankings-page { min-height: 100vh; padding: 40px 0; }
+.page-title { font-size: 2rem; font-weight: 700; color: var(--color-title); text-align: center; margin-bottom: 32px; }
 
-.page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-title);
-  text-align: center;
-  margin-bottom: 32px;
-}
+.tabs { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
+.tab-btn { display: flex; align-items: center; gap: 8px; padding: 12px 24px; border: none; background: var(--color-bg-subtle); border-radius: 30px; font-size: 1rem; font-weight: 500; color: var(--color-muted); cursor: pointer; transition: all 0.25s; }
+.tab-btn.active { background: linear-gradient(135deg, #ff6b35, #ff8f65); color: #fff; }
+.tab-btn:not(.active):hover { background: var(--color-bg); color: var(--color-title); }
 
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
+.filter-bar { max-width: 800px; margin: 0 auto 28px; display: flex; flex-direction: column; gap: 12px; }
+.filter-group { display: flex; align-items: center; gap: 10px; }
+.filter-label { font-size: 0.85rem; font-weight: 600; color: var(--color-muted); min-width: 40px; flex-shrink: 0; }
+.filter-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-chip { padding: 6px 14px; border: 1px solid var(--color-border-light); border-radius: 20px; background: var(--color-bg); font-size: 0.82rem; color: var(--color-muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.filter-chip:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.filter-chip.active { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
 
-.tab-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border: none;
-  background: var(--color-bg-subtle);
-  border-radius: 30px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-muted);
-  cursor: pointer;
-  transition: all 0.25s;
-}
+.ranking-list { max-width: 800px; margin: 0 auto; }
+.ranking-item { display: flex; align-items: center; padding: 16px 24px; background: var(--color-bg); border-radius: 16px; margin-bottom: 12px; transition: all 0.25s; cursor: pointer; }
+.ranking-item:hover { transform: translateX(8px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.ranking-item a { display: flex; align-items: center; width: 100%; text-decoration: none; color: inherit; }
 
-.tab-btn.active {
-  background: linear-gradient(135deg, #ff6b35, #ff8f65);
-  color: #fff;
-}
+.ranking-rank { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin-right: 16px; flex-shrink: 0; }
+.ranking-rank.top-1 { background: linear-gradient(135deg, #ffd700, #ffb800); color: #fff; border-radius: 50%; }
+.ranking-rank.top-2 { background: linear-gradient(135deg, #c0c0c0, #a8a8a8); color: #fff; border-radius: 50%; }
+.ranking-rank.top-3 { background: linear-gradient(135deg, #cd7f32, #b5651d); color: #fff; border-radius: 50%; }
+.ranking-rank.normal { background: var(--color-bg-subtle); color: var(--color-muted); border-radius: 50%; }
 
-.tab-btn:not(.active):hover {
-  background: var(--color-bg);
-  color: var(--color-title);
-}
+.ranking-cover { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; margin-right: 16px; flex-shrink: 0; }
+.ranking-cover-placeholder { width: 56px; height: 56px; border-radius: 12px; background: var(--color-bg-subtle); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-right: 16px; flex-shrink: 0; }
 
-.ranking-list {
-  max-width: 800px;
-  margin: 0 auto;
-}
+.ranking-info { flex: 1; min-width: 0; }
+.ranking-title { font-size: 1.1rem; font-weight: 600; color: var(--color-title); margin-bottom: 4px; }
+.ranking-meta { font-size: 0.82rem; color: var(--color-muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ranking-meta-tag { display: inline-flex; align-items: center; gap: 2px; }
 
-.ranking-item {
-  display: flex;
-  align-items: center;
-  padding: 16px 24px;
-  background: var(--color-bg);
-  border-radius: 16px;
-  margin-bottom: 12px;
-  transition: all 0.25s;
-  cursor: pointer;
-}
+.ranking-count { font-size: 1.4rem; font-weight: 700; color: var(--color-accent); margin-left: 20px; flex-shrink: 0; }
+.ranking-count-label { font-size: 0.7rem; color: var(--color-muted); margin-top: 2px; text-align: center; }
 
-.ranking-item:hover {
-  transform: translateX(8px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
+.loading { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px; color: var(--color-muted); gap: 16px; }
+.spinner { width: 40px; height: 40px; border: 3px solid var(--color-border-light); border-top-color: var(--color-accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.ranking-item a {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  text-decoration: none;
-  color: inherit;
-}
-
-.ranking-rank {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-right: 20px;
-}
-
-.ranking-rank.top-1 {
-  background: linear-gradient(135deg, #ffd700, #ffb800);
-  color: #fff;
-  border-radius: 50%;
-}
-
-.ranking-rank.top-2 {
-  background: linear-gradient(135deg, #c0c0c0, #a8a8a8);
-  color: #fff;
-  border-radius: 50%;
-}
-
-.ranking-rank.top-3 {
-  background: linear-gradient(135deg, #cd7f32, #b5651d);
-  color: #fff;
-  border-radius: 50%;
-}
-
-.ranking-rank.normal {
-  background: var(--color-bg-subtle);
-  color: var(--color-muted);
-  border-radius: 50%;
-}
-
-.ranking-info {
-  flex: 1;
-}
-
-.ranking-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--color-title);
-  margin-bottom: 4px;
-}
-
-.ranking-meta {
-  font-size: 0.875rem;
-  color: var(--color-muted);
-}
-
-.ranking-count {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  margin-left: 20px;
-}
-
-.loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px;
-  color: var(--color-muted);
-  gap: 16px;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--color-border-light);
-  border-top-color: var(--color-accent);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.empty-state {
-  text-align: center;
-  padding: 60px;
-  color: var(--color-muted);
-}
+.empty-state { text-align: center; padding: 60px; color: var(--color-muted); }
 
 @media (max-width: 768px) {
   .page-title { font-size: 1.5rem; }
@@ -209,7 +124,8 @@ const pageTitle = '排行榜 - 馋猫有谱';
   .tab-btn { padding: 10px 16px; font-size: 0.9rem; }
   .ranking-item { padding: 12px 16px; }
   .ranking-rank { width: 40px; height: 40px; font-size: 1rem; margin-right: 12px; }
-  .ranking-count { font-size: 1.2rem; }
+  .ranking-count { font-size: 1.1rem; }
+  .filter-group { flex-wrap: wrap; }
 }
 </style>
 
@@ -219,25 +135,21 @@ import { getLikesRanking, getFavoritesRanking, type RankingItem } from '../lib/a
 declare global {
   interface Window {
     switchRankingTab: (tab: 'likes' | 'favorites') => void;
-    loadLikesRanking: () => Promise<void>;
-    loadFavoritesRanking: () => Promise<void>;
+    setFilter: (el: HTMLElement) => void;
   }
 }
 
-const likesData: RankingItem[] = [];
-const favoritesData: RankingItem[] = [];
+let currentTab: 'likes' | 'favorites' = 'likes';
+let currentFilters = { cuisine: '', region: '', tag: '' };
 
 window.switchRankingTab = function(tab: 'likes' | 'favorites') {
+  currentTab = tab;
   const tabBtns = document.querySelectorAll('.tab-btn');
   const likesList = document.getElementById('likes-ranking');
   const favoritesList = document.getElementById('favorites-ranking');
   
   tabBtns.forEach(btn => {
-    if (btn.getAttribute('data-tab') === tab) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
+    btn.classList.toggle('active', btn.getAttribute('data-tab') === tab);
   });
   
   if (tab === 'likes') {
@@ -247,6 +159,24 @@ window.switchRankingTab = function(tab: 'likes' | 'favorites') {
     if (likesList) likesList.style.display = 'none';
     if (favoritesList) favoritesList.style.display = 'block';
   }
+  loadCurrentRanking();
+};
+
+window.setFilter = function(el: HTMLElement) {
+  const filterType = el.getAttribute('data-filter') || '';
+  const value = el.getAttribute('data-value') || '';
+  
+  // Update active state within same filter group
+  const siblings = el.parentElement?.querySelectorAll('.filter-chip') || [];
+  siblings.forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  
+  // Update filter
+  if (filterType === 'cuisine') currentFilters.cuisine = value;
+  else if (filterType === 'region') currentFilters.region = value;
+  else if (filterType === 'tag') currentFilters.tag = value;
+  
+  loadCurrentRanking();
 };
 
 function renderRankingList(containerId: string, items: RankingItem[], type: 'likes' | 'favorites') {
@@ -254,73 +184,67 @@ function renderRankingList(containerId: string, items: RankingItem[], type: 'lik
   if (!container) return;
   
   if (items.length === 0) {
-    container.innerHTML = '<div class="empty-state">暂无数据</div>';
+    container.innerHTML = '<div class="empty-state">暂无数据，快去给喜欢的食谱点赞吧！</div>';
     return;
   }
   
-  const countLabel = type === 'likes' ? '个点赞' : '次收藏';
+  const countLabel = type === 'likes' ? '点赞' : '收藏';
+  const countKey = type === 'likes' ? 'like_count' : 'favorite_count';
   
   container.innerHTML = items.map((item, index) => {
     const rank = index + 1;
     const rankClass = rank <= 3 ? `top-${rank}` : 'normal';
-    const title = item.recipe_slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const title = item.title || item.recipe_slug.replace(/-/g, ' ');
+    const coverHtml = item.cover_url 
+      ? `<img src="${item.cover_url}" alt="${title}" class="ranking-cover" loading="lazy" />`
+      : `<div class="ranking-cover-placeholder">🍽️</div>`;
+    
+    const metaParts: string[] = [];
+    if (item.cuisine) metaParts.push(`<span class="ranking-meta-tag">🍳 ${item.cuisine}</span>`);
+    if (item.regions?.length) metaParts.push(...item.regions.map(r => `<span class="ranking-meta-tag">📍 ${r}</span>`));
+    if (item.tags?.length) metaParts.push(...item.tags!.map(t => `<span class="ranking-meta-tag"># ${t}</span>`));
     
     return `
       <div class="ranking-item">
         <a href="/recipes/${item.recipe_slug}">
           <div class="ranking-rank ${rankClass}">${rank}</div>
+          ${coverHtml}
           <div class="ranking-info">
             <div class="ranking-title">${title}</div>
-            <div class="ranking-meta">查看食谱详情</div>
+            <div class="ranking-meta">${metaParts.join('') || '查看食谱详情'}</div>
           </div>
-          <div class="ranking-count">${item[`${type}_count` as keyof RankingItem] || 0}${countLabel}</div>
+          <div style="text-align:right;flex-shrink:0;margin-left:12px;">
+            <div class="ranking-count">${item[countKey as keyof RankingItem] || 0}</div>
+            <div class="ranking-count-label">${countLabel}</div>
+          </div>
         </a>
       </div>
     `;
   }).join('');
 }
 
-window.loadLikesRanking = async function() {
-  const container = document.getElementById('likes-ranking');
+async function loadCurrentRanking() {
+  const containerId = currentTab === 'likes' ? 'likes-ranking' : 'favorites-ranking';
+  const container = document.getElementById(containerId);
   if (!container) return;
   
+  container.innerHTML = '<div class="loading"><div class="spinner"></div><span>加载中...</span></div>';
+  
   try {
-    const result = await getLikesRanking(50);
+    const fn = currentTab === 'likes' ? getLikesRanking : getFavoritesRanking;
+    const result = await fn(50, currentFilters);
     if (result.success && result.data) {
-      likesData.length = 0;
-      likesData.push(...result.data);
-      renderRankingList('likes-ranking', likesData, 'likes');
+      renderRankingList(containerId, result.data, currentTab);
     } else {
       container.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
     }
   } catch (err) {
-    console.error('加载点赞榜失败:', err);
+    console.error('加载排行榜失败:', err);
     container.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
   }
-};
+}
 
-window.loadFavoritesRanking = async function() {
-  const container = document.getElementById('favorites-ranking');
-  if (!container) return;
-  
-  try {
-    const result = await getFavoritesRanking(50);
-    if (result.success && result.data) {
-      favoritesData.length = 0;
-      favoritesData.push(...result.data);
-      renderRankingList('favorites-ranking', favoritesData, 'favorites');
-    } else {
-      container.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
-    }
-  } catch (err) {
-    console.error('加载收藏榜失败:', err);
-    container.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
-  }
-};
-
-// 页面加载时获取数据
 document.addEventListener('DOMContentLoaded', () => {
-  window.loadLikesRanking();
-  window.loadFavoritesRanking();
+  loadCurrentRanking();
 });
 </script>
