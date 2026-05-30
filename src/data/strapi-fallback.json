@@ -776,10 +776,10 @@
       "slug": "chuan-cai",
       "description": "麻辣鲜香，百菜百味",
       "cover": {
-        "url": "/images/cuisines/chuan.svg",
+        "url": "/images/cuisines/chuan.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/chuan.svg"
+            "url": "/images/cuisines/chuan.jpg"
           }
         }
       }
@@ -790,10 +790,10 @@
       "slug": "yue-cai",
       "description": "清鲜嫩滑，讲究本味",
       "cover": {
-        "url": "/images/cuisines/yue.svg",
+        "url": "/images/cuisines/yue.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/yue.svg"
+            "url": "/images/cuisines/yue.jpg"
           }
         }
       }
@@ -804,10 +804,10 @@
       "slug": "xiang-cai",
       "description": "香辣酸鲜，够味够劲",
       "cover": {
-        "url": "/images/cuisines/xiang.svg",
+        "url": "/images/cuisines/xiang.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/xiang.svg"
+            "url": "/images/cuisines/xiang.jpg"
           }
         }
       }
@@ -818,10 +818,10 @@
       "slug": "zhe-cai",
       "description": "鲜嫩清爽，精致讲究",
       "cover": {
-        "url": "/images/cuisines/zhe.svg",
+        "url": "/images/cuisines/zhe.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/zhe.svg"
+            "url": "/images/cuisines/zhe.jpg"
           }
         }
       }
@@ -832,10 +832,10 @@
       "slug": "lu-cai",
       "description": "咸鲜醇厚，大气大方",
       "cover": {
-        "url": "/images/cuisines/lu.svg",
+        "url": "/images/cuisines/lu.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/lu.svg"
+            "url": "/images/cuisines/lu.jpg"
           }
         }
       }
@@ -846,10 +846,10 @@
       "slug": "su-cai",
       "description": "甜咸适中，酥烂入味",
       "cover": {
-        "url": "/images/cuisines/su.svg",
+        "url": "/images/cuisines/su.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/su.svg"
+            "url": "/images/cuisines/su.jpg"
           }
         }
       }
@@ -860,10 +860,10 @@
       "slug": "min-cai",
       "description": "鲜香清甜，汤菜居多",
       "cover": {
-        "url": "/images/cuisines/min.svg",
+        "url": "/images/cuisines/min.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/min.svg"
+            "url": "/images/cuisines/min.jpg"
           }
         }
       }
@@ -874,10 +874,10 @@
       "slug": "hui-cai",
       "description": "重油重色，火功独到",
       "cover": {
-        "url": "/images/cuisines/hui.svg",
+        "url": "/images/cuisines/hui.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/hui.svg"
+            "url": "/images/cuisines/hui.jpg"
           }
         }
       }
@@ -888,10 +888,10 @@
       "slug": "dongbei-cai",
       "description": "量大实惠，豪爽过瘾",
       "cover": {
-        "url": "/images/cuisines/dongbei.svg",
+        "url": "/images/cuisines/dongbei.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/dongbei.svg"
+            "url": "/images/cuisines/dongbei.jpg"
           }
         }
       }
@@ -902,10 +902,10 @@
       "slug": "ri-liao",
       "description": "精致鲜美，匠心独运",
       "cover": {
-        "url": "/images/cuisines/riliao.svg",
+        "url": "/images/cuisines/riliao.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/riliao.svg"
+            "url": "/images/cuisines/riliao.jpg"
           }
         }
       }
@@ -916,10 +916,10 @@
       "slug": "jianzhi-can",
       "description": "低卡高蛋白，好吃不胖",
       "cover": {
-        "url": "/images/cuisines/jianzhi.svg",
+        "url": "/images/cuisines/jianzhi.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/jianzhi.svg"
+            "url": "/images/cuisines/jianzhi.jpg"
           }
         }
       }
@@ -930,10 +930,10 @@
       "slug": "ertong-can",
       "description": "营养均衡，孩子爱吃",
       "cover": {
-        "url": "/images/cuisines/ertong.svg",
+        "url": "/images/cuisines/ertong.jpg",
         "formats": {
           "small": {
-            "url": "/images/cuisines/ertong.svg"
+            "url": "/images/cuisines/ertong.jpg"
           }
         }
       }

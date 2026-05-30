@@ -516,152 +516,161 @@ const currentPath = Astro.url.pathname;
   }
 </style>
 
+
 <script>
-  // Toggle user dropdown
-  function toggleUserDropdown() {
-    const dropdown = document.getElementById('user-dropdown');
-    if (dropdown) dropdown.classList.toggle('show');
+import { getToken, getStoredUser, isLoggedIn, logout as authLogout, updateProfile as authUpdateProfile, changePassword as authChangePassword, onAuthChange } from '../lib/auth';
+
+declare global {
+  interface Window {
+    toggleUserDropdown: () => void;
+    openProfileModal: () => void;
+    closeProfileModal: () => void;
+    switchProfileTab: (tab: string) => void;
+    previewAvatar: () => void;
+    saveProfile: () => Promise<void>;
+    changePassword: () => Promise<void>;
+    handleLogout: () => void;
+    updateAuthUI: () => void;
   }
+}
 
-  // Close dropdown when clicking outside
-  document.addEventListener('click', (e) => {
-    const menu = document.getElementById('user-menu');
-    const dropdown = document.getElementById('user-dropdown');
-    if (menu && !menu.contains(e.target as Node)) {
-      if (dropdown) dropdown.classList.remove('show');
-    }
-  });
+// Toggle user dropdown
+window.toggleUserDropdown = function() {
+  const dropdown = document.getElementById('user-dropdown');
+  if (dropdown) dropdown.classList.toggle('show');
+};
 
-  // Profile modal
-  function openProfileModal() {
-    const modal = document.getElementById('profile-modal') as HTMLElement;
-    if (modal) modal.style.display = 'flex';
-    const dropdown = document.getElementById('user-dropdown');
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('user-menu');
+  const dropdown = document.getElementById('user-dropdown');
+  if (menu && !menu.contains(e.target as Node)) {
     if (dropdown) dropdown.classList.remove('show');
-    // Load profile data
-    const token = localStorage.getItem('token');
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (user) {
-      const nickEl = document.getElementById('profile-nickname') as HTMLInputElement;
-      const emailEl = document.getElementById('profile-email') as HTMLInputElement;
-      const phoneEl = document.getElementById('profile-phone') as HTMLInputElement;
-      const bdayEl = document.getElementById('profile-birthday') as HTMLInputElement;
-      const avatarEl = document.getElementById('profile-avatar-url') as HTMLInputElement;
-      const avatarPreview = document.getElementById('profile-avatar-preview') as HTMLImageElement;
-      if (nickEl) nickEl.value = user.nickname || '';
-      if (emailEl) emailEl.value = user.email || '';
-      if (phoneEl) phoneEl.value = user.phone || '';
-      if (bdayEl) bdayEl.value = user.birthday || '';
-      if (avatarEl) avatarEl.value = user.avatar_url || '';
-      if (avatarPreview) avatarPreview.src = user.avatar_url || '/images/default-avatar.jpg';
-    }
   }
+});
 
-  function closeProfileModal() {
-    const modal = document.getElementById('profile-modal') as HTMLElement;
-    if (modal) modal.style.display = 'none';
+// Profile modal
+window.openProfileModal = function() {
+  const modal = document.getElementById('profile-modal') as HTMLElement;
+  if (modal) modal.style.display = 'flex';
+  const dropdown = document.getElementById('user-dropdown');
+  if (dropdown) dropdown.classList.remove('show');
+  // Load profile data from auth module
+  const user = getStoredUser();
+  if (user) {
+    const nickEl = document.getElementById('profile-nickname') as HTMLInputElement;
+    const emailEl = document.getElementById('profile-email') as HTMLInputElement;
+    const phoneEl = document.getElementById('profile-phone') as HTMLInputElement;
+    const bdayEl = document.getElementById('profile-birthday') as HTMLInputElement;
+    const avatarEl = document.getElementById('profile-avatar-url') as HTMLInputElement;
+    const avatarPreview = document.getElementById('profile-avatar-preview') as HTMLImageElement;
+    if (nickEl) nickEl.value = user.nickname || '';
+    if (emailEl) emailEl.value = user.email || '';
+    if (phoneEl) phoneEl.value = user.phone || '';
+    if (bdayEl) bdayEl.value = user.birthday || '';
+    if (avatarEl) avatarEl.value = user.avatar_url || '';
+    if (avatarPreview) avatarPreview.src = user.avatar_url || '/images/default-avatar.jpg';
   }
+};
 
-  function switchProfileTab(tab: string) {
-    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.profile-panel').forEach(p => (p as HTMLElement).style.display = 'none');
-    const btn = document.querySelector(`.profile-tab[data-ptab="${tab}"]`);
-    if (btn) btn.classList.add('active');
-    const panel = document.getElementById(tab === 'info' ? 'profile-info-panel' : 'profile-password-panel');
-    if (panel) panel.style.display = 'flex';
-  }
+window.closeProfileModal = function() {
+  const modal = document.getElementById('profile-modal') as HTMLElement;
+  if (modal) modal.style.display = 'none';
+};
 
-  function previewAvatar() {
-    const url = (document.getElementById('profile-avatar-url') as HTMLInputElement)?.value;
-    const preview = document.getElementById('profile-avatar-preview') as HTMLImageElement;
-    if (url && preview) preview.src = url;
-  }
+window.switchProfileTab = function(tab: string) {
+  document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.profile-panel').forEach(p => (p as HTMLElement).style.display = 'none');
+  const btn = document.querySelector(`.profile-tab[data-ptab="${tab}"]`);
+  if (btn) btn.classList.add('active');
+  const panel = document.getElementById(tab === 'info' ? 'profile-info-panel' : 'profile-password-panel');
+  if (panel) panel.style.display = 'flex';
+};
 
-  async function saveProfile() {
-    const token = localStorage.getItem('token');
-    if (!token) return;
-    const nickname = (document.getElementById('profile-nickname') as HTMLInputElement)?.value;
-    const phone = (document.getElementById('profile-phone') as HTMLInputElement)?.value;
-    const birthday = (document.getElementById('profile-birthday') as HTMLInputElement)?.value;
-    const avatar_url = (document.getElementById('profile-avatar-url') as HTMLInputElement)?.value;
-    try {
-      const res = await fetch('https://api.chanmaoyoupu.com/api/auth/profile', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        body: JSON.stringify({ nickname, phone, birthday, avatar_url })
-      });
-      const data = await res.json();
-      if (data.user) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-        alert('资料已更新');
-        closeProfileModal();
-        location.reload();
-      } else {
-        alert(data.error || '更新失败');
-      }
-    } catch (e) {
-      alert('网络错误');
-    }
-  }
+window.previewAvatar = function() {
+  const url = (document.getElementById('profile-avatar-url') as HTMLInputElement)?.value;
+  const preview = document.getElementById('profile-avatar-preview') as HTMLImageElement;
+  if (url && preview) preview.src = url;
+};
 
-  async function changePassword() {
-    const token = localStorage.getItem('token');
-    if (!token) return;
-    const currentPassword = (document.getElementById('current-password') as HTMLInputElement)?.value;
-    const newPassword = (document.getElementById('new-password') as HTMLInputElement)?.value;
-    const confirmPassword = (document.getElementById('confirm-new-password') as HTMLInputElement)?.value;
-    if (!currentPassword || !newPassword) { alert('请填写完整'); return; }
-    if (newPassword !== confirmPassword) { alert('两次密码不一致'); return; }
-    try {
-      const res = await fetch('https://api.chanmaoyoupu.com/api/auth/change-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-        body: JSON.stringify({ currentPassword, newPassword })
-      });
-      const data = await res.json();
-      if (data.success) {
-        alert('密码已修改，请重新登录');
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        location.reload();
-      } else {
-        alert(data.error || '修改失败');
-      }
-    } catch (e) {
-      alert('网络错误');
-    }
-  }
-
-  function handleLogout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    location.reload();
-  }
-
-  // Auth UI
-  function updateAuthUI() {
-    const token = localStorage.getItem('token');
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    const authBtn = document.getElementById('auth-btn') as HTMLElement;
-    const userMenu = document.getElementById('user-menu') as HTMLElement;
-    const headerAvatar = document.getElementById('header-user-avatar') as HTMLImageElement;
-    const dropdownNickname = document.getElementById('user-dropdown-nickname') as HTMLElement;
-    const dropdownAvatar = document.getElementById('user-dropdown-avatar') as HTMLImageElement;
-
-    if (token && user.email) {
-      if (authBtn) authBtn.style.display = 'none';
-      if (userMenu) userMenu.style.display = 'block';
-      if (dropdownNickname) dropdownNickname.textContent = user.nickname || user.email;
-      const avatarUrl = user.avatar_url || '/images/default-avatar.jpg';
-      if (headerAvatar) headerAvatar.src = avatarUrl;
-      if (dropdownAvatar) dropdownAvatar.src = avatarUrl;
+window.saveProfile = async function() {
+  const token = getToken();
+  if (!token) return;
+  const nickname = (document.getElementById('profile-nickname') as HTMLInputElement)?.value;
+  const phone = (document.getElementById('profile-phone') as HTMLInputElement)?.value;
+  const birthday = (document.getElementById('profile-birthday') as HTMLInputElement)?.value;
+  const avatar_url = (document.getElementById('profile-avatar-url') as HTMLInputElement)?.value;
+  try {
+    const result = await authUpdateProfile({ nickname, phone, birthday, avatar_url });
+    if (result.success) {
+      alert('资料已更新');
+      window.closeProfileModal();
+      window.updateAuthUI();
     } else {
-      if (authBtn) authBtn.style.display = 'inline-block';
-      if (userMenu) userMenu.style.display = 'none';
+      alert(result.error || '更新失败');
     }
+  } catch (e) {
+    alert('网络错误');
   }
+};
 
-  updateAuthUI();
-  (window as any).updateAuthUI = updateAuthUI;
+window.changePassword = async function() {
+  const token = getToken();
+  if (!token) return;
+  const currentPassword = (document.getElementById('current-password') as HTMLInputElement)?.value;
+  const newPassword = (document.getElementById('new-password') as HTMLInputElement)?.value;
+  const confirmPassword = (document.getElementById('confirm-new-password') as HTMLInputElement)?.value;
+  if (!currentPassword || !newPassword) { alert('请填写完整'); return; }
+  if (newPassword !== confirmPassword) { alert('两次密码不一致'); return; }
+  try {
+    const result = await authChangePassword(currentPassword, newPassword);
+    if (result.success) {
+      alert('密码已修改，请重新登录');
+      authLogout();
+      location.reload();
+    } else {
+      alert(result.error || '修改失败');
+    }
+  } catch (e) {
+    alert('网络错误');
+  }
+};
+
+window.handleLogout = function() {
+  authLogout();
+  const dropdown = document.getElementById('user-dropdown');
+  if (dropdown) dropdown.classList.remove('show');
+  window.updateAuthUI();
+};
+
+// Auth UI - unified with auth.ts module
+window.updateAuthUI = function() {
+  const user = getStoredUser();
+  const loggedIn = isLoggedIn();
+  const authBtn = document.getElementById('auth-btn') as HTMLElement;
+  const userMenu = document.getElementById('user-menu') as HTMLElement;
+  const headerAvatar = document.getElementById('header-user-avatar') as HTMLImageElement;
+  const dropdownNickname = document.getElementById('user-dropdown-nickname') as HTMLElement;
+  const dropdownAvatar = document.getElementById('user-dropdown-avatar') as HTMLImageElement;
+
+  if (loggedIn && user) {
+    if (authBtn) authBtn.style.display = 'none';
+    if (userMenu) userMenu.style.display = 'flex';
+    if (dropdownNickname) dropdownNickname.textContent = user.nickname || user.email;
+    const avatarUrl = user.avatar_url || '/images/default-avatar.jpg';
+    if (headerAvatar) headerAvatar.src = avatarUrl;
+    if (dropdownAvatar) dropdownAvatar.src = avatarUrl;
+  } else {
+    if (authBtn) authBtn.style.display = 'inline-block';
+    if (userMenu) userMenu.style.display = 'none';
+  }
+};
+
+// Initialize
+window.updateAuthUI();
+
+// Listen for auth changes
+onAuthChange(() => {
+  window.updateAuthUI();
+});
 </script>
-

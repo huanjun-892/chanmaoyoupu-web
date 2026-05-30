@@ -523,47 +523,11 @@ window.oauthLogin = async function(provider: string) {
 };
 
 // 退出登录
-window.handleLogout = function() {
-  logout();
-  window.updateAuthUI();
-  // 关闭用户下拉菜单
-  const dropdown = document.getElementById('user-dropdown');
-  if (dropdown) dropdown.classList.remove('show');
-};
+  // handleLogout is defined in Header.astro
+  // Just call it from the logout button onclick
 
 // 更新认证UI
-window.updateAuthUI = function() {
-  const user = getStoredUser();
-  const loggedIn = isLoggedIn();
-  const authBtn = document.getElementById('auth-btn');
-  const userMenu = document.getElementById('user-menu');
-  const userDropdownAvatar = document.getElementById('user-dropdown-avatar');
-  const userDropdownNickname = document.getElementById('user-dropdown-nickname');
-  
-  if (loggedIn && user) {
-    // 隐藏登录按钮，显示用户菜单
-    if (authBtn) authBtn.style.display = 'none';
-    if (userMenu) userMenu.style.display = 'flex';
-    
-    // 更新头部头像
-    const headerAvatar = document.getElementById('header-user-avatar') as HTMLImageElement;
-    if (headerAvatar) {
-      headerAvatar.src = user.avatar_url || '/images/default-avatar.jpg';
-    }
-    
-    // 更新下拉菜单信息
-    if (userDropdownAvatar) {
-      (userDropdownAvatar as HTMLImageElement).src = user.avatar_url || '/images/default-avatar.jpg';
-    }
-    if (userDropdownNickname) {
-      userDropdownNickname.textContent = user.nickname || user.email;
-    }
-  } else {
-    // 显示登录按钮，隐藏用户菜单
-    if (authBtn) authBtn.style.display = 'inline-block';
-    if (userMenu) userMenu.style.display = 'none';
-  }
-};
+  // updateAuthUI is defined in Header.astro
 
 // 点击遮罩关闭
 document.getElementById('login-modal')?.addEventListener('click', (e) => {
