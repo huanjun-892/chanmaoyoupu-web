@@ -255,6 +255,15 @@ export async function getIngredientBySlug(slug: string) {
 // ==================== 全站搜索 ====================
 export async function searchAll(query: string, type: string = 'all') {
   const contentData = await fetchContentAPI(`/api/content/search?q=${encodeURIComponent(query)}&type=${type}`);
-  if (contentData) return contentData;
-  return { recipes: [], knowledge: [], ingredients: [], total: 0 };
+  if (contentData) {
+    const data = contentData.data || contentData;
+    return {
+      recipes: data.recipes || [],
+      knowledge: data.knowledge || [],
+      secrets: data.secrets || [],
+      ingredients: data.ingredients || [],
+      total: data.total || 0,
+    };
+  }
+  return { recipes: [], knowledge: [], secrets: [], ingredients: [], total: 0 };
 }

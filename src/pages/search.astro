@@ -29,6 +29,7 @@ if (q.trim()) {
             <option value="all" selected={type === 'all'}>全部</option>
             <option value="recipes" selected={type === 'recipes'}>食谱</option>
             <option value="knowledge" selected={type === 'knowledge'}>知识库</option>
+            <option value="secrets" selected={type === 'secrets'}>秘方</option>
             <option value="ingredients" selected={type === 'ingredients'}>食材调料</option>
           </select>
         </div>
@@ -92,6 +93,21 @@ if (q.trim()) {
                     <span class="ing-name">{ing.name}</span>
                     <span class="ing-desc">{ing.description ? ing.description.substring(0, 80) : ''}</span>
                   </div>
+                </a>
+              ))}
+            </div>
+          </div>
+          )}
+
+          <!-- 秘方结果 -->
+          {results.secrets && results.secrets.length > 0 && (
+          <div class="result-section" data-section="secrets">
+            <h2 class="section-label">🗝 秘方</h2>
+            <div class="knowledge-list">
+              {results.secrets.map((s: any) => (
+                <a href={`/secrets/${s.slug}`} class="knowledge-item">
+                  <span class="knowledge-category" style="background:#FFF3E0;color:#E65100;">secret</span>
+                  <span class="knowledge-title">{s.title}</span>
                 </a>
               ))}
             </div>
