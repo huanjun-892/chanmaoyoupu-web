@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
-import { getAllRecipes, getAllCuisines, getAllTags, getAllRegions, difficultyLabel, getCoverUrl } from '../../lib/strapi';
+import { getAllRecipes, getAllCuisines, getAllTags, getAllRegions, getAllMethods, difficultyLabel, getCoverUrl } from '../../lib/strapi';
 
 const recipes = await getAllRecipes();
 const cuisines = await getAllCuisines();
 const tags = await getAllTags();
 const regions = await getAllRegions();
+const methods = await getAllMethods();
 
 const recipeList = recipes.map((r: any) => ({
   title: r.title,
@@ -17,6 +18,7 @@ const recipeList = recipes.map((r: any) => ({
   tags: (r.tags || []).map((t: any) => t.name),
   regions: (r.regions || []).map((rg: any) => rg.name),
   cuisine: r.cuisine?.name || '',
+  methods: (r.methods || []).map((m: any) => m.name),
   cover: getCoverUrl(r.cover),
 }));
 
@@ -24,6 +26,7 @@ const cuisineList = ['全部', ...cuisines.map((c: any) => c.name)];
 const regionList = ['全部', ...regions.map((r: any) => r.name)];
 const tagList = ['全部', ...tags.map((t: any) => t.name)];
 const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
+const methodList = ['全部', ...methods.map((m: any) => m.name)];
 ---
 
 <BaseLayout title="食谱列表">
@@ -70,6 +73,14 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
             ))}
           </div>
         </div>
+        <div class="filter-group">
+          <span class="filter-label">做法</span>
+          <div class="filter-options">
+            {methodList.map((m: string) => (
+              <button class="filter-btn" data-filter="method" data-value={m === '全部' ? '' : m}>{m}</button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <!-- 食谱列表 -->
@@ -79,7 +90,8 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
             data-cuisine={recipe.cuisine}
             data-region={recipe.regions.join(',')}
             data-tag={recipe.tags.join(',')}
-            data-difficulty={recipe.difficulty}>
+            data-difficulty={recipe.difficulty}
+            data-method={recipe.methods.join(',')}>
             <RecipeCard {...recipe} />
           </div>
         ))}
@@ -119,6 +131,7 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
         if (activeFilters.region && !item.dataset.region?.split(',').includes(activeFilters.region)) show = false;
         if (activeFilters.tag && !item.dataset.tag?.split(',').includes(activeFilters.tag)) show = false;
         if (activeFilters.difficulty && item.dataset.difficulty !== activeFilters.difficulty) show = false;
+        if (activeFilters.method && item.dataset.method && !item.dataset.method.split(',').includes(activeFilters.method)) show = false;
 
         item.style.display = show ? '' : 'none';
         if (show) visibleCount++;
@@ -145,6 +158,11 @@ const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
     const val = params.get('tag');
     document.querySelector(`.filter-btn[data-filter="tag"][data-value="${val}"]`)?.dispatchEvent(new Event('click'));
   }
+  if (params.has('method')) {
+    const val = params.get('method');
+    document.querySelector(`.filter-btn[data-filter="method"][data-value="${val}"]`)?.dispatchEvent(new Event('click'));
+  }
+
   if (params.has('difficulty')) {
     const val = params.get('difficulty');
     const labelMap: Record<string, string> = { easy: '入门', simple: '简单', medium: '中级', hard: '高级' };

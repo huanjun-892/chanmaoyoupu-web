@@ -6,7 +6,17 @@ const allCuisines = await getAllCuisines();
 // 首页展示12个精选分类：八大菜系 + 特色
 const priorityNames = [
   '川菜', '粤菜', '湘菜', '浙菜', '鲁菜', '苏菜',
-  '闽菜', '徽菜', '东北菜', '日料', '减脂餐', '儿童餐',
+  '闽菜', '徽菜', '东北菜', '日料', '主食', '减脂餐', '儿童餐',
+
+const cookingMethods = [
+  { name: '炒', emoji: '🍳' },
+  { name: '煮', emoji: '🍲' },
+  { name: '蒸', emoji: '♨️' },
+  { name: '炖', emoji: '🫕' },
+  { name: '煎', emoji: '🥘' },
+  { name: '炸', emoji: '🔥' },
+  { name: '烤', emoji: '🧑‍🍳' },
+];
 ];
 
 const priorityCuisines = priorityNames
@@ -31,6 +41,16 @@ const priorityCuisines = priorityNames
           </a>
         );
       })}
+    </div>
+
+    <h2 class="section-title" style="margin-top: 28px;">按做法找</h2>
+    <div class="method-grid">
+      {cookingMethods.map((m) => (
+        <a href={`/recipes?method=${m.name}`} class="method-item">
+          <span class="method-emoji">{m.emoji}</span>
+          <span class="method-label">{m.name}</span>
+        </a>
+      ))}
     </div>
   </div>
 </section>
@@ -104,4 +124,9 @@ const priorityCuisines = priorityNames
       padding: 8px 2px;
     }
   }
+
+  .method-grid { display: flex; gap: 12px; flex-wrap: wrap; }
+  .method-item { display: flex; align-items: center; gap: 6px; padding: 10px 20px; background: #fff; border: 1px solid var(--color-border-light); border-radius: 100px; text-decoration: none; color: var(--color-text); font-size: 0.9rem; font-weight: 500; transition: all 0.25s; }
+  .method-item:hover { border-color: var(--color-accent); color: var(--color-accent); transform: translateY(-1px); box-shadow: 0 2px 8px rgba(255, 140, 66, 0.12); }
+  .method-emoji { font-size: 1.1rem; }
 </style>
