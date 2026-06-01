@@ -285,7 +285,10 @@
       "cookTime": 5,
       "servings": 2,
       "calories": 180,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炒"
@@ -374,7 +377,10 @@
       "cookTime": 25,
       "servings": 2,
       "calories": 380,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炖"
@@ -573,7 +579,10 @@
       "cookTime": 60,
       "servings": 4,
       "calories": 520,
-      "cuisine": null,
+      "cuisine": {
+        "name": "鲁菜",
+        "slug": "lu-cai"
+      },
       "methods": [
         {
           "name": "炖"
@@ -598,7 +607,7 @@
       ],
       "regions": [
         {
-          "name": "全国"
+          "name": "山东"
         }
       ],
       "ingredients": [
@@ -912,7 +921,10 @@
       "cookTime": 15,
       "servings": 2,
       "calories": 120,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "蒸"
@@ -991,7 +1003,10 @@
       "cookTime": 40,
       "servings": 3,
       "calories": 420,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炖"
@@ -1205,7 +1220,10 @@
       "cookTime": 8,
       "servings": 1,
       "calories": 200,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "煎"
@@ -1288,7 +1306,10 @@
       "cookTime": 15,
       "servings": 2,
       "calories": 130,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "蒸"
@@ -1487,7 +1508,10 @@
       "cookTime": 8,
       "servings": 2,
       "calories": 160,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炒"
@@ -1585,7 +1609,10 @@
       "cookTime": 10,
       "servings": 1,
       "calories": 320,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "煮"
@@ -1678,7 +1705,10 @@
       "cookTime": 10,
       "servings": 2,
       "calories": 200,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "煎"
@@ -1978,7 +2008,10 @@
       "cookTime": 8,
       "servings": 2,
       "calories": 150,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炒"
@@ -2177,7 +2210,10 @@
       "cookTime": 15,
       "servings": 3,
       "calories": 280,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炒"
@@ -2659,7 +2695,10 @@
       "cookTime": 5,
       "servings": 1,
       "calories": 380,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炒"
@@ -2838,7 +2877,10 @@
       "cookTime": 3,
       "servings": 2,
       "calories": 130,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "煮"
@@ -2941,7 +2983,10 @@
       "cookTime": 5,
       "servings": 2,
       "calories": 60,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "煮"
@@ -3044,7 +3089,10 @@
       "cookTime": 90,
       "servings": 4,
       "calories": 350,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炖"
@@ -3147,7 +3195,10 @@
       "cookTime": 5,
       "servings": 2,
       "calories": 80,
-      "cuisine": null,
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
       "methods": [
         {
           "name": "炒"
