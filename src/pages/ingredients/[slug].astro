@@ -18,7 +18,7 @@ if (!ingredient) {
 }
 
 const categoryLabel = ingredient.category === 'seasoning' ? '调料' : '食材';
-const categoryIcon = ingredient.category === 'seasoning' ? '🧂' : '🥬';
+const categoryIcon = ingredient.category === 'seasoning' ? '🧂' : '🥬';  // fallback when no image
 ---
 
 <BaseLayout title={ingredient.name}>
@@ -33,7 +33,7 @@ const categoryIcon = ingredient.category === 'seasoning' ? '🧂' : '🥬';
       </nav>
 
       <div class="ingredient-header">
-        <div class="header-icon">{categoryIcon}</div>
+        <div class="header-icon">{ingredient.imageUrl ? <img src={ingredient.imageUrl} alt={ingredient.name} /> : categoryIcon}</div>
         <div class="header-info">
           <div class="header-tags">
             <span class="tag-category">{categoryLabel}</span>
@@ -116,7 +116,8 @@ const categoryIcon = ingredient.category === 'seasoning' ? '🧂' : '🥬';
     background: var(--color-bg-warm); border-radius: var(--radius);
     border: 1px solid var(--color-border);
   }
-  .header-icon { font-size: 3.5rem; flex-shrink: 0; }
+  .header-icon { font-size: 3.5rem; flex-shrink: 0; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 16px; overflow: hidden; background: var(--color-bg-warm); }
+  .header-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
   .header-info { flex: 1; }
   .header-tags { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
   .tag-category { padding: 3px 12px; border-radius: 100px; font-size: 0.78rem; font-weight: 500; background: #FFF3E0; color: #E65100; }
