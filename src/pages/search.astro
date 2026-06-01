@@ -1,154 +1,166 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import RecipeCard from '../components/RecipeCard.astro';
-import { searchAll, difficultyLabel, getCoverUrl } from '../lib/strapi';
-
-const url = new URL(Astro.request.url);
-const q = url.searchParams.get('q') || '';
-const type = url.searchParams.get('type') || 'all';
-
-let results: any = { recipes: [], knowledge: [], ingredients: [], total: 0 };
-if (q.trim()) {
-  results = await searchAll(q, type);
-}
 ---
 
-<BaseLayout title={`搜索: ${q}`}>
+<BaseLayout title="搜索">
+  
   <section class="section">
     <div class="container">
-      <h1 class="page-title">搜索结果</h1>
+      <h1 class="page-title">搜索</h1>
 
-      <form class="search-form" action="/search" method="get">
+      <form class="search-form" id="search-form">
         <div class="search-row">
-          <input type="text" name="q" value={q} placeholder="搜索食谱、食材、知识库..." class="search-input" />
+          <input type="text" id="search-q" name="q" placeholder="搜索食谱、食材、秘方、知识库..." class="search-input" />
           <button type="submit" class="search-btn">搜索</button>
         </div>
         <div class="filter-row">
           <label class="filter-label">搜索范围：</label>
-          <select name="type" class="filter-select">
-            <option value="all" selected={type === 'all'}>全部</option>
-            <option value="recipes" selected={type === 'recipes'}>食谱</option>
-            <option value="knowledge" selected={type === 'knowledge'}>知识库</option>
-            <option value="secrets" selected={type === 'secrets'}>秘方</option>
-            <option value="ingredients" selected={type === 'ingredients'}>食材调料</option>
+          <select id="search-type" name="type" class="filter-select">
+            <option value="all">全部</option>
+            <option value="recipes">食谱</option>
+            <option value="ingredients">食材</option>
+            <option value="secrets">秘方</option>
+            <option value="knowledge">知识库</option>
           </select>
         </div>
       </form>
 
-      {q.trim() ? (
-        <>
-          <p class="result-summary">找到 <strong>{results.total}</strong> 条与「{q}」相关的结果</p>
-
-          <!-- 分类Tab -->
-          <div class="result-tabs">
-            <button class="result-tab active" data-type="all">全部 ({results.total})</button>
-            <button class="result-tab" data-type="recipes">食谱 ({results.recipes?.length || 0})</button>
-            <button class="result-tab" data-type="knowledge">知识库 ({results.knowledge?.length || 0})</button>
-            <button class="result-tab" data-type="ingredients">食材调料 ({results.ingredients?.length || 0})</button>
-          </div>
-
-          <!-- 食谱结果 -->
-          {results.recipes && results.recipes.length > 0 && (
-          <div class="result-section" data-section="recipes">
-            <h2 class="section-label">🍽 食谱</h2>
-            <div class="grid-3">
-              {results.recipes.map((r: any) => (
-                <RecipeCard
-                  title={r.title}
-                  slug={r.slug}
-                  difficulty={difficultyLabel(r.difficulty)}
-                  cookTime={r.cookTime}
-                  tags={[]}
-                  cover={getCoverUrl(r.cover)}
-                />
-              ))}
-            </div>
-          </div>
-          )}
-
-          <!-- 知识库结果 -->
-          {results.knowledge && results.knowledge.length > 0 && (
-          <div class="result-section" data-section="knowledge">
-            <h2 class="section-label">📚 知识库</h2>
-            <div class="knowledge-list">
-              {results.knowledge.map((k: any) => (
-                <a href={`/knowledge/${k.slug}`} class="knowledge-item">
-                  <span class="knowledge-category">{k.category}</span>
-                  <span class="knowledge-title">{k.title}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-          )}
-
-          <!-- 食材调料结果 -->
-          {results.ingredients && results.ingredients.length > 0 && (
-          <div class="result-section" data-section="ingredients">
-            <h2 class="section-label">🥬 食材调料</h2>
-            <div class="ingredient-results">
-              {results.ingredients.map((ing: any) => (
-                <a href={`/ingredients/${ing.slug}`} class="ingredient-result-item">
-                  <span class="ing-icon">{ing.category === 'seasoning' ? '🧂' : '🥬'}</span>
-                  <div class="ing-info">
-                    <span class="ing-name">{ing.name}</span>
-                    <span class="ing-desc">{ing.description ? ing.description.substring(0, 80) : ''}</span>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-          )}
-
-          <!-- 秘方结果 -->
-          {results.secrets && results.secrets.length > 0 && (
-          <div class="result-section" data-section="secrets">
-            <h2 class="section-label">🗝 秘方</h2>
-            <div class="knowledge-list">
-              {results.secrets.map((s: any) => (
-                <a href={`/secrets/${s.slug}`} class="knowledge-item">
-                  <span class="knowledge-category" style="background:#FFF3E0;color:#E65100;">secret</span>
-                  <span class="knowledge-title">{s.title}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-          )}
-
-          {results.total === 0 && (
-            <div class="no-results">
-              <p>没有找到与「{q}」相关的内容</p>
-              <p class="hint">试试换个关键词，或搜索食材名、菜名等</p>
-            </div>
-          )}
-        </>
-      ) : (
+      <div id="search-results">
         <div class="no-results">
-          <p>请输入关键词开始搜索</p>
+          <p>输入关键词开始搜索</p>
         </div>
-      )}
+      </div>
     </div>
   </section>
 </BaseLayout>
 
-<script>
-  const tabs = document.querySelectorAll('.result-tab');
-  const sections = document.querySelectorAll('.result-section');
-  
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const type = tab.getAttribute('data-type');
-      
-      sections.forEach(section => {
-        if (type === 'all') {
-          section.style.display = '';
-        } else {
-          section.style.display = section.getAttribute('data-section') === type ? '' : 'none';
-        }
+<script define:vars={{ API_BASE: 'https://api.chanmaoyoupu.com' }}>
+  const params = new URLSearchParams(window.location.search);
+  const initQ = params.get('q') || '';
+  const initType = params.get('type') || 'all';
+
+  const inputQ = document.getElementById('search-q');
+  const selectType = document.getElementById('search-type');
+  const resultsDiv = document.getElementById('search-results');
+
+  if (initQ) {
+    inputQ.value = initQ;
+    selectType.value = initType;
+    doSearch(initQ, initType);
+  }
+
+  document.getElementById('search-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = inputQ.value.trim();
+    const type = selectType.value;
+    if (q) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('q', q);
+      url.searchParams.set('type', type);
+      history.replaceState(null, '', url);
+      doSearch(q, type);
+    }
+  });
+
+  async function doSearch(q, type) {
+    resultsDiv.innerHTML = '<div class="loading">搜索中...</div>';
+    try {
+      const res = await fetch(`${API_BASE}/api/content/search?q=${encodeURIComponent(q)}&type=${type}`);
+      const json = await res.json();
+      const data = json.data || json;
+      renderResults(data, q, type);
+    } catch (err) {
+      resultsDiv.innerHTML = '<div class="no-results"><p>搜索出错了，请稍后重试</p></div>';
+    }
+  }
+
+  function renderResults(data, q, type) {
+    const recipes = data.recipes || [];
+    const knowledge = data.knowledge || [];
+    const secrets = data.secrets || [];
+    const ingredients = data.ingredients || [];
+    const total = data.total || 0;
+
+    if (total === 0) {
+      resultsDiv.innerHTML = '<div class="no-results"><p>没有找到与「' + q + '」相关的内容</p><p class="hint">试试换个关键词，或搜索食材名、菜名等</p></div>';
+      return;
+    }
+
+    let html = '<p class="result-summary">找到 <strong>' + total + '</strong> 条与「' + q + '」相关的结果</p>';
+
+    // Tabs
+    html += '<div class="result-tabs">';
+    html += '<button class="result-tab active" data-type="all">全部 (' + total + ')</button>';
+    html += '<button class="result-tab" data-type="recipes">食谱 (' + recipes.length + ')</button>';
+    html += '<button class="result-tab" data-type="ingredients">食材 (' + ingredients.length + ')</button>';
+    html += '<button class="result-tab" data-type="secrets">秘方 (' + secrets.length + ')</button>';
+    html += '<button class="result-tab" data-type="knowledge">知识库 (' + knowledge.length + ')</button>';
+    html += '</div>';
+
+    // Recipes
+    if (recipes.length > 0) {
+      html += '<div class="result-section" data-section="recipes">';
+      html += '<h2 class="section-label">🍽 食谱</h2>';
+      html += '<div class="grid-3">';
+      recipes.forEach(r => {
+        const coverUrl = (r.cover && (r.cover.url || r.cover.formats?.small?.url)) || '/images/default-recipe.jpg';
+        const diff = r.difficulty === 'easy' ? '简单' : r.difficulty === 'medium' ? '中级' : '高级';
+        html += '<a href="/recipes/' + r.slug + '" class="card recipe-card"><div class="card-img-wrap"><img src="' + coverUrl + '" alt="' + r.title + '" class="card-img" loading="lazy"/></div><div class="card-body"><h3 class="card-title">' + r.title + '</h3><div class="card-meta"><span>' + diff + '</span><span>⏱ ' + (r.cookTime || 0) + '分钟</span></div></div></a>';
+      });
+      html += '</div></div>';
+    }
+
+    // Ingredients
+    if (ingredients.length > 0) {
+      html += '<div class="result-section" data-section="ingredients">';
+      html += '<h2 class="section-label">🥬 食材调料</h2>';
+      html += '<div class="ingredient-results">';
+      ingredients.forEach(ing => {
+        const icon = ing.category === 'seasoning' ? '🧂' : '🥬';
+        const desc = ing.description ? ing.description.substring(0, 80) : '';
+        html += '<a href="/ingredients/' + ing.slug + '" class="ingredient-result-item"><span class="ing-icon">' + icon + '</span><div class="ing-info"><span class="ing-name">' + ing.name + '</span><span class="ing-desc">' + desc + '</span></div></a>';
+      });
+      html += '</div></div>';
+    }
+
+    // Secrets
+    if (secrets.length > 0) {
+      html += '<div class="result-section" data-section="secrets">';
+      html += '<h2 class="section-label">🗝 秘方</h2>';
+      html += '<div class="knowledge-list">';
+      secrets.forEach(s => {
+        html += '<a href="/secrets/' + s.slug + '" class="knowledge-item"><span class="knowledge-category" style="background:#FFF3E0;color:#E65100;">秘方</span><span class="knowledge-title">' + s.title + '</span></a>';
+      });
+      html += '</div></div>';
+    }
+
+    // Knowledge
+    if (knowledge.length > 0) {
+      html += '<div class="result-section" data-section="knowledge">';
+      html += '<h2 class="section-label">📚 知识库</h2>';
+      html += '<div class="knowledge-list">';
+      knowledge.forEach(k => {
+        html += '<a href="/knowledge/' + k.slug + '" class="knowledge-item"><span class="knowledge-category">' + k.category + '</span><span class="knowledge-title">' + k.title + '</span></a>';
+      });
+      html += '</div></div>';
+    }
+
+    resultsDiv.innerHTML = html;
+
+    // Tab switching
+    const tabs = resultsDiv.querySelectorAll('.result-tab');
+    const sections = resultsDiv.querySelectorAll('.result-section');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const tabType = tab.getAttribute('data-type');
+        sections.forEach(section => {
+          section.style.display = (tabType === 'all' || section.getAttribute('data-section') === tabType) ? '' : 'none';
+        });
       });
     });
-  });
+  }
 </script>
 
 <style>
@@ -174,6 +186,7 @@ if (q.trim()) {
     border-radius: var(--radius); font-size: 0.85rem; outline: none;
   }
 
+  .loading { text-align: center; padding: 40px; color: var(--color-muted); }
   .result-summary { font-size: 0.9rem; color: var(--color-muted); margin-bottom: 20px; }
   .result-summary strong { color: var(--color-accent); }
 
