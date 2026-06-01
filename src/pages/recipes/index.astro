@@ -24,8 +24,7 @@ const recipeList = recipes.map((r: any) => ({
 
 const cuisineList = ['全部', ...cuisines.map((c: any) => c.name).filter((n: string) => !['主食', '日料'].includes(n))];
 const regionList = ['全部', ...regions.map((r: any) => r.name)];
-const sceneList = ['全部', '主食', ...tags.map((t: any) => t.name)];
-const sceneSpecialFilters: Record<string, string> = { '主食': 'cuisine' };
+const sceneList = ['全部', ...tags.map((t: any) => t.name)];
 const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
 const methodList = ['全部', ...methods.map((m: any) => m.name)];
 ---
@@ -60,10 +59,9 @@ const methodList = ['全部', ...methods.map((m: any) => m.name)];
         <div class="filter-group">
           <span class="filter-label">场景</span>
           <div class="filter-options">
-            {sceneList.map((s: string) => {
-              const filterType = sceneSpecialFilters[s] || 'tag';
-              return <button class="filter-btn" data-filter={filterType} data-value={s === '全部' ? '' : s}>{s}</button>;
-            })}
+            {sceneList.map((s: string) => (
+              <button class="filter-btn" data-filter="tag" data-value={s === '全部' ? '' : s}>{s}</button>
+            ))}
           </div>
         </div>
 
