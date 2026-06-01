@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import LikeButton from '../../components/LikeButton.astro';
 import FavoriteButton from '../../components/FavoriteButton.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
-import { getAllRecipes, getRecipeBySlug, difficultyLabel, difficultyColor, getCoverUrl, getCoverFullUrl } from '../../lib/strapi';
+import { getAllRecipes, getRecipeBySlug, getAllIngredients, difficultyLabel, difficultyColor, getCoverUrl, getCoverFullUrl } from '../../lib/strapi';
 
 export async function getStaticPaths() {
   const recipes = await getAllRecipes();
@@ -14,6 +14,14 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const recipe = await getRecipeBySlug(slug as string);
+const allIngredients = await getAllIngredients();
+const ingredientSlugMap: Record<string, string> = {};
+for (const ing of allIngredients) {
+  ingredientSlugMap[ing.name] = ing.slug;
+  if (ing.aliases) {
+    ing.aliases.split(',').forEach((a: string) => { ingredientSlugMap[a.trim()] = ing.slug; });
+  }
+}
 
 if (!recipe) {
   return Astro.redirect('/recipes');
@@ -111,7 +119,7 @@ const relatedRecipes = recipe.relatedRecipes || [];
             <ul class="ingredient-list">
               {ingredients.map((ing: any) => (
                 <li class={`ingredient-item ${ing.isMain ? '' : 'ingredient-minor'}`}>
-                  <span class="ingredient-name">{ing.name}</span>
+                  {ingredientSlugMap[ing.name] ? <a href={`/ingredients/${ingredientSlugMap[ing.name]}`} class="ingredient-link">{ing.name}</a> : <span class="ingredient-name">{ing.name}</span>}
                   <span class="ingredient-amount">{ing.amount}</span>
                 </li>
               ))}
@@ -348,6 +356,8 @@ const relatedRecipes = recipe.relatedRecipes || [];
     color: var(--color-muted);
   }
 
+  .ingredient-link { color: var(--color-accent); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+  .ingredient-link:hover { text-decoration: underline; }
   .ingredient-name {
     color: var(--color-text);
   }

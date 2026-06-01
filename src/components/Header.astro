@@ -13,12 +13,19 @@ const currentPath = Astro.url.pathname;
       <a href="/recipes" class:list={['nav-link', { active: currentPath.startsWith('/recipes') }]}>食谱</a>
       <a href="/secrets" class:list={['nav-link', { active: currentPath.startsWith('/secrets') }]}>秘方</a>
       <a href="/knowledge" class:list={['nav-link', { active: currentPath.startsWith('/knowledge') }]}>知识库</a>
+      <a href="/ingredients" class:list={["nav-link", { active: currentPath.startsWith("/ingredients") }]}>食材</a>
       <a href="/rankings" class:list={['nav-link', { active: currentPath === '/rankings' }]}>排行榜</a>
     </nav>
     <div class="header-right">
       <form action="/search" method="get" class="search-box">
         <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" name="q" placeholder="搜食谱、食材..." class="search-input" />
+        <input type="text" name="q" placeholder="搜索全站内容..." class="search-input" />
+        <select name="type" class="search-scope">
+          <option value="all">全部</option>
+          <option value="recipes">食谱</option>
+          <option value="knowledge">知识库</option>
+          <option value="ingredients">食材</option>
+        </select>
       </form>
       <button id="auth-btn" class="auth-btn" onclick="openLoginModal()">登录</button>
     
@@ -224,6 +231,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .search-input::placeholder {
+  .search-scope { border: none; background: transparent; font-size: 0.78rem; color: var(--color-muted); cursor: pointer; outline: none; padding: 0 4px; }
     color: var(--color-muted);
   }
 

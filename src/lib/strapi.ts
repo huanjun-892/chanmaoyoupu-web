@@ -225,10 +225,7 @@ export async function getAllMethods() {
   return data?.data || [];
 }
 
-export async function getAllIngredients() {
-  const data = await fetchAPI('/ingredients', { 'pagination[pageSize]': '100' });
-  return data?.data || [];
-}
+
 
 export function difficultyLabel(d: string): string {
   const map: Record<string, string> = { easy: '入门', simple: '简单', medium: '中级', hard: '高级' };
@@ -238,4 +235,26 @@ export function difficultyLabel(d: string): string {
 export function difficultyColor(d: string): string {
   const map: Record<string, string> = { easy: '#5CB85C', simple: '#5CB85C', medium: '#FF8C42', hard: '#E57373' };
   return map[d] || '#9A9A9A';
+}
+
+// ==================== 食材调料 ====================
+export async function getAllIngredients(category?: string) {
+  const params: Record<string, string> = {};
+  if (category) params['category'] = category;
+  const contentData = await fetchContentAPI('/api/content/ingredients' + (category ? '?category=' + category : ''));
+  if (contentData && contentData.length > 0) return contentData;
+  return [];
+}
+
+export async function getIngredientBySlug(slug: string) {
+  const contentData = await fetchContentAPI('/api/content/ingredients/' + slug);
+  if (contentData) return contentData;
+  return null;
+}
+
+// ==================== 全站搜索 ====================
+export async function searchAll(query: string, type: string = 'all') {
+  const contentData = await fetchContentAPI(`/api/content/search?q=${encodeURIComponent(query)}&type=${type}`);
+  if (contentData) return contentData;
+  return { recipes: [], knowledge: [], ingredients: [], total: 0 };
 }

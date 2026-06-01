@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllIngredients } from '../../lib/strapi';
+
+const ingredients = await getAllIngredients();
+const foodIngredients = ingredients.filter((i: any) => i.category === 'ingredient');
+const seasonings = ingredients.filter((i: any) => i.category === 'seasoning');
+---
+
+<BaseLayout title="食材调料">
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">食材调料百科</h1>
+      <p class="page-desc">认识每一种食材，做菜更有底气</p>
+
+      <!-- 分类Tab -->
+      <div class="tab-bar" id="tab-bar">
+        <button class="tab-btn active" data-tab="ingredient">🥬 食材</button>
+        <button class="tab-btn" data-tab="seasoning">🧂 调料</button>
+        <button class="tab-btn" data-tab="all">📋 全部</button>
+      </div>
+
+      <!-- 搜索 -->
+      <div class="search-box-inline">
+        <input type="text" id="ingredient-search" placeholder="搜索食材或调料..." />
+      </div>
+
+      <!-- 食材列表 -->
+      <div class="ingredient-grid" id="ingredient-grid">
+        {ingredients.map((ing: any) => (
+          <a href={`/ingredients/${ing.slug}`} class="ingredient-card" data-category={ing.category} data-name={ing.name} data-aliases={ing.aliases || ''}>
+            <div class="card-icon">{ing.category === 'seasoning' ? '🧂' : '🥬'}</div>
+            <div class="card-body">
+              <h3 class="card-title">{ing.name}</h3>
+              <p class="card-desc">{ing.description ? ing.description.substring(0, 60) + (ing.description.length > 60 ? '...' : '') : '暂无介绍'}</p>
+              <div class="card-meta">
+                <span class="tag-category">{ing.category === 'seasoning' ? '调料' : '食材'}</span>
+                {ing.season && <span class="tag-season">🗓 {ing.season}</span>}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <p>没有找到匹配的食材或调料</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const tabBar = document.getElementById('tab-bar');
+  const searchInput = document.getElementById('ingredient-search') as HTMLInputElement;
+  const cards = document.querySelectorAll('.ingredient-card');
+  const emptyState = document.getElementById('empty-state');
+
+  function filterCards() {
+    const activeTab = tabBar?.querySelector('.tab-btn.active')?.getAttribute('data-tab') || 'all';
+    const keyword = searchInput?.value.trim().toLowerCase() || '';
+    let visible = 0;
+
+    cards.forEach((card: any) => {
+      const category = card.dataset.category;
+      const name = card.dataset.name?.toLowerCase() || '';
+      const aliases = card.dataset.aliases?.toLowerCase() || '';
+      
+      const tabMatch = activeTab === 'all' || category === activeTab;
+      const searchMatch = !keyword || name.includes(keyword) || aliases.includes(keyword);
+      
+      const show = tabMatch && searchMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (emptyState) emptyState.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  tabBar?.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBar.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterCards();
+    });
+  });
+
+  searchInput?.addEventListener('input', filterCards);
+</script>
+
+<style>
+  .page-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-bottom: 8px; }
+  .page-desc { font-size: 1rem; color: var(--color-muted); margin-bottom: 32px; }
+
+  .tab-bar {
+    display: flex; gap: 8px; margin-bottom: 20px;
+  }
+  .tab-btn {
+    padding: 8px 20px; border: 1px solid var(--color-border); border-radius: 100px;
+    background: var(--color-bg); color: var(--color-text); font-size: 0.9rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .tab-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .tab-btn.active { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+
+  .search-box-inline {
+    margin-bottom: 24px;
+  }
+  .search-box-inline input {
+    width: 100%; max-width: 400px; padding: 10px 16px;
+    border: 1px solid var(--color-border); border-radius: var(--radius);
+    font-size: 0.9rem; outline: none;
+  }
+  .search-box-inline input:focus { border-color: var(--color-accent); }
+
+  .ingredient-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .ingredient-card {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 18px; background: var(--color-bg);
+    border: 1px solid var(--color-border); border-radius: var(--radius);
+    text-decoration: none; color: inherit; transition: all 0.2s;
+  }
+  .ingredient-card:hover { border-color: var(--color-accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+
+  .card-icon { font-size: 2rem; flex-shrink: 0; }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-size: 1rem; font-weight: 600; color: var(--color-title); margin-bottom: 6px; }
+  .card-desc { font-size: 0.82rem; color: var(--color-muted); line-height: 1.5; margin-bottom: 8px; }
+  .card-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag-category, .tag-season {
+    padding: 2px 8px; border-radius: 100px; font-size: 0.72rem; font-weight: 500;
+  }
+  .tag-category { background: #FFF3E0; color: #E65100; }
+  .tag-season { background: #E8F5E9; color: #2E7D32; }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--color-muted); }
+</style>

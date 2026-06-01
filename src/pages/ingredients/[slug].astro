@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+import { getAllIngredients, getIngredientBySlug, difficultyLabel, getCoverUrl } from '../../lib/strapi';
+
+export async function getStaticPaths() {
+  const ingredients = await getAllIngredients();
+  return ingredients.map((i: any) => ({
+    params: { slug: i.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const ingredient = await getIngredientBySlug(slug as string);
+
+if (!ingredient) {
+  return Astro.redirect('/ingredients');
+}
+
+const categoryLabel = ingredient.category === 'seasoning' ? '调料' : '食材';
+const categoryIcon = ingredient.category === 'seasoning' ? '🧂' : '🥬';
+---
+
+<BaseLayout title={ingredient.name}>
+  <article class="ingredient-detail">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/">首页</a>
+        <span class="sep">/</span>
+        <a href="/ingredients">食材调料</a>
+        <span class="sep">/</span>
+        <span>{ingredient.name}</span>
+      </nav>
+
+      <div class="ingredient-header">
+        <div class="header-icon">{categoryIcon}</div>
+        <div class="header-info">
+          <div class="header-tags">
+            <span class="tag-category">{categoryLabel}</span>
+            {ingredient.aliases && <span class="tag-alias">又名：{ingredient.aliases}</span>}
+          </div>
+          <h1 class="ingredient-name">{ingredient.name}</h1>
+          <p class="ingredient-desc">{ingredient.description}</p>
+        </div>
+      </div>
+
+      <div class="ingredient-body">
+        <div class="info-grid">
+          {ingredient.nutrition && (
+          <section class="info-card">
+            <h2 class="info-title">🥗 营养价值</h2>
+            <div class="info-content" set:html={ingredient.nutrition} />
+          </section>
+          )}
+
+          {ingredient.tips && (
+          <section class="info-card">
+            <h2 class="info-title">💡 选购与使用技巧</h2>
+            <div class="info-content" set:html={ingredient.tips} />
+          </section>
+          )}
+
+          {ingredient.season && (
+          <section class="info-card">
+            <h2 class="info-title">🗓 时令季节</h2>
+            <div class="info-content" set:html={ingredient.season} />
+          </section>
+          )}
+
+          {ingredient.origin && (
+          <section class="info-card">
+            <h2 class="info-title">📍 产地来源</h2>
+            <div class="info-content" set:html={ingredient.origin} />
+          </section>
+          )}
+
+          {ingredient.storageMethod && (
+          <section class="info-card">
+            <h2 class="info-title">🗄 储存方法</h2>
+            <div class="info-content" set:html={ingredient.storageMethod} />
+          </section>
+          )}
+        </div>
+      </div>
+
+      {ingredient.relatedRecipes && ingredient.relatedRecipes.length > 0 && (
+      <section class="related-recipes">
+        <h2 class="section-heading">相关食谱</h2>
+        <div class="grid-3">
+          {ingredient.relatedRecipes.map((r: any) => (
+            <RecipeCard
+              title={r.title}
+              slug={r.slug}
+              difficulty={difficultyLabel(r.difficulty)}
+              cookTime={r.cookTime}
+              tags={[]}
+              cover={getCoverUrl(r.cover)}
+            />
+          ))}
+        </div>
+      </section>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .breadcrumb { font-size: 0.82rem; color: var(--color-muted); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--color-muted); transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--color-accent); }
+  .breadcrumb .sep { margin: 0 6px; }
+
+  .ingredient-header {
+    display: flex; align-items: flex-start; gap: 20px;
+    margin-bottom: 40px; padding: 28px;
+    background: var(--color-bg-warm); border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+  }
+  .header-icon { font-size: 3.5rem; flex-shrink: 0; }
+  .header-info { flex: 1; }
+  .header-tags { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .tag-category { padding: 3px 12px; border-radius: 100px; font-size: 0.78rem; font-weight: 500; background: #FFF3E0; color: #E65100; }
+  .tag-alias { padding: 3px 12px; border-radius: 100px; font-size: 0.78rem; background: #F3E5F5; color: #6A1B9A; }
+  .ingredient-name { font-size: 2rem; font-weight: 800; color: var(--color-title); margin-bottom: 10px; }
+  .ingredient-desc { font-size: 1rem; color: var(--color-text); line-height: 1.7; }
+
+  .info-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px; margin-bottom: 40px;
+  }
+  .info-card {
+    padding: 20px; background: var(--color-bg);
+    border: 1px solid var(--color-border); border-radius: var(--radius);
+  }
+  .info-title { font-size: 1.05rem; font-weight: 700; color: var(--color-title); margin-bottom: 12px; }
+  .info-content { font-size: 0.9rem; color: var(--color-text); line-height: 1.7; }
+
+  .section-heading {
+    font-size: 1.15rem; font-weight: 700; color: var(--color-title);
+    margin-bottom: 20px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-accent); display: inline-block;
+  }
+  .related-recipes { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--color-border); }
+
+  @media (max-width: 768px) {
+    .ingredient-header { flex-direction: column; align-items: center; text-align: center; }
+    .header-tags { justify-content: center; }
+    .ingredient-name { font-size: 1.5rem; }
+  }
+</style>
