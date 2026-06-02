@@ -23,7 +23,18 @@ const recipeList = recipes.map((r: any) => ({
 }));
 
 const cuisineList = ['全部', ...cuisines.map((c: any) => c.name)];
-const regionList = ['全部', ...regions.map((r: any) => r.name)];
+
+// 地域排序：国内在前，国外在后，各自按拼音排序
+const domesticRegions = ['全国', '北京', '上海', '四川', '广东', '山东', '浙江', '湖南', '江苏', '安徽', '福建', '东北', '云南', '贵州', '西北', '湖北', '广西'];
+const internationalRegions = ['日本', '韩国', '法国', '意大利', '东南亚', '印度'];
+const allRegionNames = regions.map((r: any) => r.name);
+const sortedRegionNames = [
+  ...domesticRegions.filter(n => allRegionNames.includes(n)),
+  ...internationalRegions.filter(n => allRegionNames.includes(n)),
+  ...allRegionNames.filter(n => !domesticRegions.includes(n) && !internationalRegions.includes(n))
+];
+const regionList = ['全部', ...sortedRegionNames];
+
 const sceneList = ['全部', ...tags.map((t: any) => t.name)];
 const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
 const methodList = ['全部', ...methods.map((m: any) => m.name)];

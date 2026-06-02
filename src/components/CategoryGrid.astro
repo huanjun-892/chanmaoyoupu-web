@@ -3,20 +3,25 @@ import { getAllCuisines, getCoverUrl } from '../lib/strapi';
 
 const allCuisines = await getAllCuisines();
 
-// 首页展示12个精选分类：八大菜系 + 特色
+// 首页展示10个菜系分类
 const priorityNames = [
   '川菜', '粤菜', '湘菜', '浙菜', '鲁菜', '苏菜',
-  '闽菜', '徽菜', '东北菜', '主食', '减脂餐', '儿童餐',
+  '闽菜', '徽菜', '东北菜', '家常菜',
 ];
 
 const cookingMethods = [
   { name: '炒', emoji: '🍳' },
+  { name: '炖', emoji: '🫕' },
   { name: '煮', emoji: '🍲' },
   { name: '蒸', emoji: '♨️' },
-  { name: '炖', emoji: '🫕' },
   { name: '煎', emoji: '🥘' },
   { name: '炸', emoji: '🔥' },
   { name: '烤', emoji: '🧑‍🍳' },
+  { name: '焖', emoji: '🥩' },
+  { name: '卤', emoji: '🍖' },
+  { name: '拌', emoji: '🥗' },
+  { name: '烩', emoji: '🍜' },
+  { name: '腌', emoji: '🫙' },
 ];
 
 const priorityCuisines = priorityNames
