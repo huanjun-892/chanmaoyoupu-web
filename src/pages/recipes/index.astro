@@ -22,7 +22,7 @@ const recipeList = recipes.map((r: any) => ({
   cover: getCoverUrl(r.cover),
 }));
 
-const cuisineList = ['全部', ...cuisines.map((c: any) => c.name).filter((n: string) => !['主食', '日料'].includes(n))];
+const cuisineList = ['全部', ...cuisines.map((c: any) => c.name)];
 const regionList = ['全部', ...regions.map((r: any) => r.name)];
 const sceneList = ['全部', ...tags.map((t: any) => t.name)];
 const difficultyList = ['全部', '入门', '简单', '中级', '高级'];
