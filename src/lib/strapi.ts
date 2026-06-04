@@ -181,7 +181,7 @@ export async function getAllTags() {
 export async function getAllKnowledge() {
   const contentData = await fetchContentAPI('/api/content/knowledge');
   if (contentData && contentData.length > 0) {
-    return contentData.filter((k: any) => k.category !== 'secret');
+    return contentData;
   }
   const data = await fetchAPI('/knowledge-entries', {
     'pagination[pageSize]': '100',
