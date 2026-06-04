@@ -8,8 +8,8 @@ import { getAllRecipes, getAllKnowledge, difficultyLabel, getCoverUrl } from '..
 const allRecipes = await getAllRecipes();
 const knowledgeItems = await getAllKnowledge();
 
-// 最新2道作为"今日上新"
-const newRecipes = allRecipes.slice(0, 2).map(r => ({
+// 最新6道作为"今日上新"（API已按id DESC排序，最新在前）
+const newRecipes = allRecipes.slice(0, 6).map(r => ({
   title: r.title,
   slug: r.slug,
   difficulty: difficultyLabel(r.difficulty),
@@ -20,8 +20,8 @@ const newRecipes = allRecipes.slice(0, 2).map(r => ({
   cover: getCoverUrl(r.cover),
 }));
 
-// 接下来3道作为"热门食谱"
-const featuredRecipes = allRecipes.slice(2, 5).map(r => ({
+// 接下来6道作为"热门食谱"
+const featuredRecipes = allRecipes.slice(6, 12).map(r => ({
   title: r.title,
   slug: r.slug,
   difficulty: difficultyLabel(r.difficulty),
@@ -32,7 +32,17 @@ const featuredRecipes = allRecipes.slice(2, 5).map(r => ({
   cover: getCoverUrl(r.cover),
 }));
 
-// 知识库精选（非秘方）
+// 最新6条秘方（API已按id DESC排序）
+const secretsFeatured = knowledgeItems
+  .filter((k: any) => k.category === 'secret')
+  .slice(0, 6)
+  .map((k: any) => ({
+    title: k.title,
+    slug: k.slug,
+    excerpt: k.content ? k.content.replace(/<[^>]*>/g, '').slice(0, 60) + '...' : '',
+  }));
+
+// 知识库精选（非秘方，最新2篇）
 const knowledgeFeatured = knowledgeItems
   .filter((k: any) => k.category !== 'secret')
   .slice(0, 2)
@@ -41,16 +51,6 @@ const knowledgeFeatured = knowledgeItems
     slug: k.slug,
     category: k.category,
     excerpt: k.content ? k.content.replace(/<[^>]*>/g, '').slice(0, 80) + '...' : '',
-  }));
-
-// 秘方精选
-const secretsFeatured = knowledgeItems
-  .filter((k: any) => k.category === 'secret')
-  .slice(0, 4)
-  .map((k: any) => ({
-    title: k.title,
-    slug: k.slug,
-    excerpt: k.content ? k.content.replace(/<[^>]*>/g, '').slice(0, 60) + '...' : '',
   }));
 ---
 
@@ -93,10 +93,10 @@ const secretsFeatured = knowledgeItems
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">今日上新</h2>
+        <h2 class="section-title">✨ 今日上新</h2>
         <a href="/recipes" class="view-all">查看全部 →</a>
       </div>
-      <div class="grid-2">
+      <div class="grid-3">
         {newRecipes.map((recipe) => (
           <RecipeCard {...recipe} />
         ))}
@@ -124,10 +124,10 @@ const secretsFeatured = knowledgeItems
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">🗝️ 秘方精选</h2>
+        <h2 class="section-title">🗝️ 秘方上新</h2>
         <a href="/secrets" class="view-all">全部秘方 →</a>
       </div>
-      <div class="secrets-featured-grid">
+      <div class="secrets-featured-grid secrets-grid-3">
         {secretsFeatured.map((item) => (
           <a href={`/secrets/${item.slug}`} class="secret-featured-card">
             <h3>{item.title}</h3>
@@ -210,6 +210,9 @@ const secretsFeatured = knowledgeItems
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+  .secrets-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
   .secret-featured-card {
     display: flex;
     flex-direction: column;
@@ -258,5 +261,6 @@ const secretsFeatured = knowledgeItems
     .hero-cat { object-fit: contain; width: 140px; height: 140px; }
     .hero-hot { justify-content: center; }
     .secrets-featured-grid { grid-template-columns: 1fr; }
+    .secrets-grid-3 { grid-template-columns: 1fr; }
   }
 </style>
