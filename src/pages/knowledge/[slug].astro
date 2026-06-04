@@ -42,6 +42,11 @@ const categoryMap: Record<string, string> = {
       <div class="knowledge-header">
         <span class="tag">{categoryMap[entry.category] || entry.category}</span>
         <h1 class="knowledge-title">{entry.title}</h1>
+        <div class="knowledge-meta">
+          {entry.author && <span class="meta-item">✍️ {entry.author}</span>}
+          {entry.is_original == 1 && <span class="meta-item meta-original">🔒 原创内容</span>}
+          {entry.published_at && <span class="meta-item">📅 {entry.published_at}</span>}
+        </div>
       </div>
 
       <div class="knowledge-body" set:html={processContent(entry.content || '')} />
@@ -77,6 +82,9 @@ const categoryMap: Record<string, string> = {
   .knowledge-detail { padding-top: 40px; }
   .knowledge-header { margin-bottom: 40px; }
   .knowledge-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-top: 12px; }
+  .knowledge-meta { display: flex; align-items: center; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+  .meta-item { font-size: 0.82rem; color: var(--color-muted); }
+  .meta-original { background: #FFF3E0; color: #E65100; padding: 2px 10px; border-radius: 100px; font-weight: 500; font-size: 0.75rem; }
   .knowledge-body { max-width: 720px; font-size: 0.95rem; line-height: 1.9; color: var(--color-text); }
   .knowledge-body :global(h2) { font-size: 1.3rem; font-weight: 600; color: var(--color-title); margin: 36px 0 16px; padding-left: 12px; border-left: 3px solid var(--color-accent); }
   .knowledge-body :global(h3) { font-size: 1.15rem; font-weight: 600; color: var(--color-title); margin: 28px 0 12px; }
