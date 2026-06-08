@@ -3,25 +3,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import LikeButton from '../../components/LikeButton.astro';
 import FavoriteButton from '../../components/FavoriteButton.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
-import { getAllRecipes, getRecipeBySlug, getAllIngredients, difficultyLabel, difficultyColor, getCoverUrl, getCoverFullUrl } from '../../lib/strapi';
+import { getAllRecipes, getAllIngredients, difficultyLabel, difficultyColor, getCoverUrl, getCoverFullUrl } from '../../lib/strapi';
 
 export async function getStaticPaths() {
   const recipes = await getAllRecipes();
+  const allIngredients = await getAllIngredients();
+  const ingredientSlugMap: Record<string, string> = {};
+  for (const ing of allIngredients) {
+    ingredientSlugMap[ing.name] = ing.slug;
+    if (ing.aliases) {
+      ing.aliases.split(',').forEach((a: string) => { ingredientSlugMap[a.trim()] = ing.slug; });
+    }
+  }
   return recipes.map((r: any) => ({
     params: { slug: r.slug },
+    props: { recipe: r, ingredientSlugMap },
   }));
 }
 
-const { slug } = Astro.params;
-const recipe = await getRecipeBySlug(slug as string);
-const allIngredients = await getAllIngredients();
-const ingredientSlugMap: Record<string, string> = {};
-for (const ing of allIngredients) {
-  ingredientSlugMap[ing.name] = ing.slug;
-  if (ing.aliases) {
-    ing.aliases.split(',').forEach((a: string) => { ingredientSlugMap[a.trim()] = ing.slug; });
-  }
-}
+const { recipe, ingredientSlugMap } = Astro.props;
 
 if (!recipe) {
   return Astro.redirect('/recipes');

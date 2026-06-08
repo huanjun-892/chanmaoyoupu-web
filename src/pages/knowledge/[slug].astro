@@ -11,12 +11,11 @@ export async function getStaticPaths() {
   const nonSecretItems = knowledgeItems.filter((k: any) => k.category !== 'secret');
   return nonSecretItems.map((k: any) => ({
     params: { slug: k.slug },
+    props: { entry: k },
   }));
 }
 
-const { slug } = Astro.params;
-const knowledgeItems = await getAllKnowledge();
-const entry = knowledgeItems.find((k: any) => k.slug === slug);
+const { entry } = Astro.props;
 
 if (!entry) {
   return Astro.redirect('/knowledge');
