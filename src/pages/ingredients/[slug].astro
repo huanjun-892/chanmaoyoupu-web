@@ -98,17 +98,17 @@ const foodSchema = {
           </section>
           )}
 
-          {ingredient.pairing_suggestions && (
+          {ingredient.pairingSuggestions && (
           <section class="info-card">
             <h2 class="info-title">🤝 搭配建议</h2>
-            <div class="info-content" set:html={ingredient.pairing_suggestions} />
+            <div class="info-content" set:html={ingredient.pairingSuggestions} />
           </section>
           )}
 
-          {ingredient.avoid_with && (
+          {ingredient.avoidWith && (
           <section class="info-card info-card-warning">
             <h2 class="info-title">🚫 不宜搭配</h2>
-            <div class="info-content" set:html={ingredient.avoid_with} />
+            <div class="info-content" set:html={ingredient.avoidWith} />
           </section>
           )}
         </div>
