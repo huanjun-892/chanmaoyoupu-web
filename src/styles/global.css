@@ -49,6 +49,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -56,11 +57,23 @@ body {
   color: var(--color-text);
   background: #FFFFFF;
   line-height: 1.7;
+  -webkit-tap-highlight-color: transparent;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 16px; /* 防止iOS自动缩放 */
 }
 
 img {
@@ -108,6 +121,8 @@ img {
   cursor: pointer;
   transition: all 0.25s ease;
   letter-spacing: 0.01em;
+  min-height: 40px;
+  touch-action: manipulation;
 }
 
 .btn-primary {
@@ -120,6 +135,10 @@ img {
   background: var(--color-accent-hover);
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(255, 140, 66, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-outline {
@@ -218,13 +237,46 @@ img {
 @media (max-width: 768px) {
   .grid-3, .grid-4 {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .grid-2 {
+    gap: 16px;
   }
   .section { padding: 48px 0; }
+  .section-title { font-size: 1.15rem; margin-bottom: 20px; }
+  .container { padding: 0 16px; }
+  .card-body { padding: 14px 16px; }
+  .card-title { font-size: 0.92rem; }
+  .btn { padding: 12px 24px; min-height: 44px; font-size: 0.9rem; }
 }
 
 @media (max-width: 480px) {
+  html { font-size: 15px; }
   .grid-2, .grid-3, .grid-4 {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .section { padding: 36px 0; }
+  .section-title { font-size: 1.05rem; margin-bottom: 16px; }
+  .container { padding: 0 14px; }
+  .card-body { padding: 12px 14px; }
+  .card-title { font-size: 0.9rem; }
+  .btn { 
+    padding: 14px 28px; 
+    min-height: 48px; 
+    font-size: 0.95rem;
+    width: 100%;
+  }
+  .btn-outline { width: auto; }
+}
+
+/* 安全区域适配（刘海屏等） */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .header {
+    padding-top: env(safe-area-inset-top);
+  }
+  .footer {
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
   }
 }
 

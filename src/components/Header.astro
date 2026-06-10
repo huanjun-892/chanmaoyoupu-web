@@ -185,6 +185,7 @@ const currentPath = Astro.url.pathname;
     border-radius: 8px;
     transition: all 0.2s;
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .nav-link:hover {
@@ -520,18 +521,27 @@ const currentPath = Astro.url.pathname;
   }
 
   @media (max-width: 768px) {
-    .header-inner { gap: 16px; height: 56px; }
-    .nav { gap: 0; }
-    .nav-link { padding: 6px 8px; font-size: 0.82rem; }
-    .search-input { width: 100px; }
+    .header-inner { gap: 12px; height: 56px; }
+    .nav { 
+      gap: 2px; 
+      flex: 1;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      mask-image: linear-gradient(to right, transparent 0, black 8px, black calc(100% - 8px), transparent 100%);
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav-link { padding: 6px 10px; font-size: 0.82rem; }
+    .search-input { width: 80px; }
     .header-avatar { width: 28px; height: 28px; }
+    .logo-icon { width: 36px; }
   }
 
   @media (max-width: 480px) {
     .header-inner { gap: 8px; }
     .logo-text { display: none; }
     .search-box { display: none; }
-    .nav-link { padding: 6px 6px; font-size: 0.78rem; }
+    .nav-link { padding: 6px 8px; font-size: 0.78rem; }
     .auth-btn { padding: 6px 14px; font-size: 0.78rem; }
   }
 </style>
