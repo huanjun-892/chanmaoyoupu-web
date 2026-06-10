@@ -112,7 +112,7 @@ const methodList = ['全部', ...methods.map((m: any) => m.name)];
               <button class="filter-btn" data-filter="region" data-value={r === '全部' ? '' : r}>{r}</button>
             ))}
             {regionList.length > 12 && (
-              <button class="filter-btn filter-more" onclick="toggleMoreRegions()">更多 ▾</button>
+              <button class="filter-btn filter-more" id="toggle-more-btn">更多 ▾</button>
             )}
           </div>
         </div>
@@ -127,7 +127,7 @@ const methodList = ['全部', ...methods.map((m: any) => m.name)];
       <div class="active-filters" id="active-filters" style="display: none;">
         <span class="active-filters-label">已选：</span>
         <div id="active-filter-tags"></div>
-        <button class="clear-filters-btn" onclick="clearAllFilters()">清空全部</button>
+        <button class="clear-filters-btn" id="clear-filters-btn">清空全部</button>
       </div>
 
       <!-- 食谱列表 -->
@@ -153,7 +153,7 @@ const methodList = ['全部', ...methods.map((m: any) => m.name)];
         <div class="empty-icon">🍳</div>
         <h3 class="empty-title">没找到符合条件的食谱</h3>
         <p class="empty-desc">试试调整筛选条件，或者看看其他好吃的？</p>
-        <button class="btn btn-primary" onclick="clearAllFilters()">清空筛选条件</button>
+        <button class="btn btn-primary" id="empty-clear-btn">清空筛选条件</button>
       </div>
 
       <!-- 结果统计 -->
@@ -341,23 +341,31 @@ const methodList = ['全部', ...methods.map((m: any) => m.name)];
       tagsContainer.appendChild(tag);
     });
   }
-
-  // 清空所有筛选
-  function clearAllFilters() {
-    document.querySelectorAll('.filter-btn[data-value=""]').forEach(btn => {
-      btn.click();
-    });
-  }
-
-  // 展开更多地区
   function toggleMoreRegions() {
     const moreEl = document.getElementById('more-regions');
-    const btn = document.querySelector('.filter-more');
+    const btn = document.getElementById('toggle-more-btn');
     if (moreEl && btn) {
       moreEl.classList.toggle('hidden');
       btn.textContent = moreEl.classList.contains('hidden') ? '更多 ▾' : '收起 ▴';
     }
   }
+
+  // 清空所有筛选
+  function clearAllFilters() {
+    document.querySelectorAll('.filter-btn[data-value=""]').forEach(btn => {
+      (btn as HTMLElement).click();
+    });
+  }
+
+  // 绑定按钮事件（替代内联onclick，解决模块作用域问题）
+  const toggleMoreBtn = document.getElementById('toggle-more-btn');
+  if (toggleMoreBtn) toggleMoreBtn.addEventListener('click', toggleMoreRegions);
+
+  const clearFiltersBtn = document.getElementById('clear-filters-btn');
+  if (clearFiltersBtn) clearFiltersBtn.addEventListener('click', clearAllFilters);
+
+  const emptyClearBtn = document.getElementById('empty-clear-btn');
+  if (emptyClearBtn) emptyClearBtn.addEventListener('click', clearAllFilters);
 
   // 初始化
   updateActiveFiltersDisplay();
