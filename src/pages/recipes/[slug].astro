@@ -201,21 +201,21 @@ const recipeSchema = {
           {recipe.suitable_for && (
           <section class="recipe-section sidebar-section">
             <h2 class="section-heading">适合人群</h2>
-            <p class="sidebar-text">{recipe.suitable_for}</p>
+            <div class="sidebar-html" set:html={recipe.suitable_for} />
           </section>
           )}
 
           {recipe.required_tools && (
           <section class="recipe-section sidebar-section">
             <h2 class="section-heading">所需工具</h2>
-            <p class="sidebar-text">{recipe.required_tools}</p>
+            <div class="sidebar-html" set:html={recipe.required_tools} />
           </section>
           )}
 
           {recipe.nutrition && (
           <section class="recipe-section sidebar-section">
             <h2 class="section-heading">营养信息</h2>
-            <p class="sidebar-text">{recipe.nutrition}</p>
+            <div class="sidebar-html" set:html={recipe.nutrition} />
           </section>
           )}
         </aside>
@@ -470,6 +470,17 @@ const recipeSchema = {
     color: var(--color-text);
     margin: 0;
   }
+
+  .sidebar-html {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .sidebar-html p { margin: 0 0 10px 0; }
+  .sidebar-html p:last-child { margin-bottom: 0; }
+  .sidebar-html ul, .sidebar-html ol { margin: 0; padding-left: 20px; }
+  .sidebar-html li { margin-bottom: 4px; }
+  .sidebar-html strong { color: var(--color-title); font-weight: 600; }
 
   .content-box {
     background: var(--color-bg-warm);
