@@ -12,28 +12,76 @@ const fallbackRecipes: any[] = fallback.recipes || [];
 const fallbackCuisines: any[] = fallback.cuisines || [];
 const fallbackTags: any[] = fallback.tags || [];
 
+// ==================== 数据格式统一 ====================
+// Strapi v4 返回嵌套格式 { id, attributes: {...} }，Content API 返回扁平格式
+// 统一转换为扁平格式，与 Content API 保持一致
+function flattenStrapiItem(item: any): any {
+  if (!item) return null;
+  // 如果已经是扁平格式（没有 attributes 字段），直接返回
+  if (!item.attributes) return item;
+  
+  const flat: any = { id: item.id };
+  const attrs = item.attributes;
+  
+  for (const key of Object.keys(attrs)) {
+    const value = attrs[key];
+    // 处理关系数据：toOne 关系 { data: { id, attributes } }
+    if (value && value.data && !Array.isArray(value.data)) {
+      flat[key] = flattenStrapiItem(value.data);
+    }
+    // 处理关系数据：toMany 关系 { data: [{ id, attributes }, ...] }
+    else if (value && value.data && Array.isArray(value.data)) {
+      flat[key] = value.data.map((d: any) => flattenStrapiItem(d));
+    }
+    // 普通字段
+    else {
+      flat[key] = value;
+    }
+  }
+  
+  return flat;
+}
+
+function flattenStrapiList(data: any[] | null | undefined): any[] {
+  if (!data || !Array.isArray(data)) return [];
+  return data.map(item => flattenStrapiItem(item)).filter(Boolean);
+}
+
 // ==================== Workers Content API ====================
 async function fetchContentAPI(path: string): Promise<any> {
   const url = new URL(path, CONTENT_API_BASE);
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-    const res = await fetch(url.toString(), {
-      signal: controller.signal,
-      headers: { 'Accept': 'application/json' },
-    });
-    clearTimeout(timeout);
-    if (!res.ok) {
-      console.warn('Content API ' + path + ' returned ' + res.status);
+  const maxRetries = 3;
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      const res = await fetch(url.toString(), {
+        signal: controller.signal,
+        headers: { 'Accept': 'application/json' },
+      });
+      clearTimeout(timeout);
+      if (!res.ok) {
+        console.warn('Content API ' + path + ' returned ' + res.status + ' (attempt ' + attempt + '/' + maxRetries + ')');
+        if (attempt < maxRetries) {
+          await new Promise(r => setTimeout(r, 1000 * attempt));
+          continue;
+        }
+        return null;
+      }
+      const data = await res.json();
+      if (data && data.success && data.data) return data.data;
+      return null;
+    } catch (err: any) {
+      console.warn('Content API ' + path + ' error: ' + err.message + ' (attempt ' + attempt + '/' + maxRetries + ')');
+      if (attempt < maxRetries) {
+        await new Promise(r => setTimeout(r, 1000 * attempt));
+        continue;
+      }
       return null;
     }
-    const data = await res.json();
-    if (data && data.success && data.data) return data.data;
-    return null;
-  } catch (err: any) {
-    console.warn('Content API ' + path + ' error: ' + err.message);
-    return null;
   }
+  return null;
 }
 
 // ==================== Strapi Cloud API ====================
@@ -121,7 +169,7 @@ export async function getAllRecipes() {
     'populate[steps]': 'true',
     'populate[cover]': 'true',
   });
-  const items = data?.data || [];
+  const items = flattenStrapiList(data?.data);
   if (items.length > 0) return items;
   console.warn('All APIs returned no recipes, using fallback data');
   return fallbackRecipes;
@@ -142,7 +190,7 @@ export async function getRecipeBySlug(slug: string) {
     'populate[relatedRecipes]': 'true',
     'populate[relatedKnowledge]': 'true',
   });
-  const item = data?.data?.[0] || null;
+  const item = flattenStrapiItem(data?.data?.[0]);
   if (item) return item;
   const fallbackRecipe = fallbackRecipes.find((r: any) => r.slug === slug);
   if (fallbackRecipe) {
@@ -160,7 +208,7 @@ export async function getAllCuisines() {
     'pagination[pageSize]': '100',
     'populate[cover]': 'true',
   });
-  const items = data?.data || [];
+  const items = flattenStrapiList(data?.data);
   if (items.length > 0) return items;
   console.warn('All APIs returned no cuisines, using fallback data');
   return fallbackCuisines;
@@ -171,7 +219,7 @@ export async function getAllTags() {
   const contentData = await fetchContentAPI('/api/content/tags');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/tags', { 'pagination[pageSize]': '100' });
-  const items = data?.data || [];
+  const items = flattenStrapiList(data?.data);
   if (items.length > 0) return items;
   console.warn('All APIs returned no tags, using fallback data');
   return fallbackTags;
@@ -188,7 +236,7 @@ export async function getAllKnowledge() {
     'populate[relatedRecipes]': 'true',
     'populate[relatedKnowledge]': 'true',
   });
-  const items = data?.data || [];
+  const items = flattenStrapiList(data?.data);
   if (items.length > 0) return items;
   console.warn('All APIs returned no knowledge entries, using fallback data');
   return getFallbackKnowledge();
@@ -204,7 +252,7 @@ export async function getAllSecrets() {
     'populate[relatedRecipes]': 'true',
     'populate[relatedKnowledge]': 'true',
   });
-  const items = data?.data || [];
+  const items = flattenStrapiList(data?.data);
   if (items.length > 0) return items;
   console.warn('All APIs returned no secrets, using fallback data');
   return getFallbackSecrets();
@@ -215,14 +263,14 @@ export async function getAllRegions() {
   const contentData = await fetchContentAPI('/api/content/regions');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/regions', { 'pagination[pageSize]': '100' });
-  return data?.data || [];
+  return flattenStrapiList(data?.data);
 }
 
 export async function getAllMethods() {
   const contentData = await fetchContentAPI('/api/content/methods');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/methods', { 'pagination[pageSize]': '100' });
-  return data?.data || [];
+  return flattenStrapiList(data?.data);
 }
 
 
