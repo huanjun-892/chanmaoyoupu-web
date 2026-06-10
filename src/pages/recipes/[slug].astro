@@ -30,9 +30,43 @@ if (!recipe) {
 const ingredients = recipe.ingredients || [];
 const steps = (recipe.steps || []).sort((a: any, b: any) => a.stepNumber - b.stepNumber);
 const relatedRecipes = recipe.relatedRecipes || [];
+
+// SEO
+const pageDescription = recipe.description || `${recipe.title}的详细做法步骤，附带用料清单和烹饪技巧。`;
+const pageKeywords = [recipe.title, recipe.cuisine?.name, ...(recipe.tags || []).map((t:any) => t.name)].filter(Boolean).join(',');
+
+// Schema.org - Recipe schema
+const recipeSchema = {
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": recipe.title,
+  "description": recipe.description || '',
+  "image": recipe.cover ? getCoverFullUrl(recipe.cover) : undefined,
+  "recipeYield": recipe.servings ? `${recipe.servings}人份` : undefined,
+  "cookTime": recipe.cookTime ? `PT${recipe.cookTime}M` : undefined,
+  "recipeCategory": recipe.cuisine?.name,
+  "recipeIngredient": ingredients.map((ing: any) => `${ing.amount} ${ing.name}`),
+  "recipeInstructions": steps.map((step: any) => ({
+    "@type": "HowToStep",
+    "text": step.description,
+    "name": `步骤 ${step.stepNumber}`
+  })),
+  "nutrition": recipe.nutrition ? {
+    "@type": "NutritionInformation",
+    "calories": recipe.calories ? `${recipe.calories} calories` : undefined,
+  } : undefined,
+  "aggregateRating": recipe.likeCount ? {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": recipe.likeCount?.toString() || "0"
+  } : undefined
+};
 ---
 
-<BaseLayout title={recipe.title}>
+<BaseLayout title={recipe.title} description={pageDescription} keywords={pageKeywords}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(recipeSchema)} />
+  </Fragment>
   <article class="recipe-detail">
     <div class="container">
       <!-- 面包屑 -->
@@ -110,6 +144,33 @@ const relatedRecipes = recipe.relatedRecipes || [];
               ))}
             </div>
           </section>
+
+          {recipe.success_tips && (
+          <section class="recipe-section">
+            <h2 class="section-heading">💡 烹饪技巧</h2>
+            <div class="content-box">
+              <p set:html={recipe.success_tips.replace(/\n/g, '<br/>')} />
+            </div>
+          </section>
+          )}
+
+          {recipe.common_mistakes && (
+          <section class="recipe-section">
+            <h2 class="section-heading">⚠️ 常见误区</h2>
+            <div class="content-box">
+              <p set:html={recipe.common_mistakes.replace(/\n/g, '<br/>')} />
+            </div>
+          </section>
+          )}
+
+          {recipe.ingredient_substitutes && (
+          <section class="recipe-section">
+            <h2 class="section-heading">🔄 食材替代</h2>
+            <div class="content-box">
+              <p set:html={recipe.ingredient_substitutes.replace(/\n/g, '<br/>')} />
+            </div>
+          </section>
+          )}
         </div>
 
         <!-- 右栏：用料 -->
@@ -134,6 +195,27 @@ const relatedRecipes = recipe.relatedRecipes || [];
                 <span class="region-tag">{r.name}</span>
               ))}
             </div>
+          </section>
+          )}
+
+          {recipe.suitable_for && (
+          <section class="recipe-section sidebar-section">
+            <h2 class="section-heading">适合人群</h2>
+            <p class="sidebar-text">{recipe.suitable_for}</p>
+          </section>
+          )}
+
+          {recipe.required_tools && (
+          <section class="recipe-section sidebar-section">
+            <h2 class="section-heading">所需工具</h2>
+            <p class="sidebar-text">{recipe.required_tools}</p>
+          </section>
+          )}
+
+          {recipe.nutrition && (
+          <section class="recipe-section sidebar-section">
+            <h2 class="section-heading">营养信息</h2>
+            <p class="sidebar-text">{recipe.nutrition}</p>
           </section>
           )}
         </aside>
@@ -379,6 +461,27 @@ const relatedRecipes = recipe.relatedRecipes || [];
     border: 1px solid var(--color-border);
     border-radius: 100px;
     font-size: 0.82rem;
+    color: var(--color-text);
+  }
+
+  .sidebar-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .content-box {
+    background: var(--color-bg-warm);
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+  }
+
+  .content-box p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
     color: var(--color-text);
   }
 

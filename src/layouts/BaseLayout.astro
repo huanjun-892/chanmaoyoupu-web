@@ -6,9 +6,14 @@ import Footer from '../components/Footer.astro';
 export interface Props {
   title: string;
   description?: string;
+  keywords?: string;
 }
 
-const { title, description = '馋得明白，做得靠谱 — 面向小白的食谱分享站与专业美食知识库' } = Astro.props;
+const { 
+  title, 
+  description = '馋得明白，做得靠谱 — 面向小白的食谱分享站与专业美食知识库',
+  keywords = ''
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -17,7 +22,9 @@ const { title, description = '馋得明白，做得靠谱 — 面向小白的食
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
     <title>{title} | 馋猫有谱</title>
   </head>
   <body>

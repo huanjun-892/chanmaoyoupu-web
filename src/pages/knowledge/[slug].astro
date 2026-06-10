@@ -32,9 +32,29 @@ const categoryMap: Record<string, string> = {
   history: '历史',
   secret: '秘方',
 };
+
+// SEO
+const pageDescription = entry.summary || entry.description || `${entry.title} - 馋猫有谱美食知识库`;
+const pageKeywords = entry.keywords ? entry.keywords.split(',').map((k: string) => k.trim()).join(',') : `${entry.title},美食知识,烹饪技巧`;
+
+// Schema.org - Article schema
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": entry.title,
+  "description": entry.summary || entry.description || '',
+  "articleBody": entry.content ? entry.content.replace(/<[^>]*>/g, '').substring(0, 500) : '',
+  "author": entry.author ? { "@type": "Person", "name": entry.author } : undefined,
+  "datePublished": entry.published_at || undefined,
+  "keywords": entry.keywords || undefined,
+  "articleSection": categoryMap[entry.category] || entry.category
+};
 ---
 
-<BaseLayout title={entry.title}>
+<BaseLayout title={entry.title} description={pageDescription} keywords={pageKeywords}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
   
   <article class="knowledge-detail">
     <div class="container">
@@ -46,6 +66,19 @@ const categoryMap: Record<string, string> = {
           {entry.is_original == 1 && <span class="meta-item meta-original">🔒 原创内容</span>}
           {entry.published_at && <span class="meta-item">📅 {entry.published_at}</span>}
         </div>
+        {entry.summary && (
+        <div class="knowledge-summary">
+          <strong>📝 摘要：</strong>{entry.summary}
+        </div>
+        )}
+        {entry.keywords && (
+        <div class="knowledge-keywords">
+          <span class="keywords-label">🏷️ 关键词：</span>
+          {entry.keywords.split(',').map((k: string) => k.trim()).filter(Boolean).map((k: string) => (
+            <span class="keyword-tag">{k}</span>
+          ))}
+        </div>
+        )}
       </div>
 
       <div class="knowledge-body" set:html={processContent(entry.content || '')} />
@@ -84,6 +117,35 @@ const categoryMap: Record<string, string> = {
   .knowledge-meta { display: flex; align-items: center; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
   .meta-item { font-size: 0.82rem; color: var(--color-muted); }
   .meta-original { background: #FFF3E0; color: #E65100; padding: 2px 10px; border-radius: 100px; font-weight: 500; font-size: 0.75rem; }
+
+  .knowledge-summary {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--color-bg-warm);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .knowledge-summary strong { color: var(--color-title); }
+
+  .knowledge-keywords {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .keywords-label { font-size: 0.85rem; color: var(--color-muted); }
+  .keyword-tag {
+    padding: 4px 12px;
+    background: #F3E5F5;
+    color: #6A1B9A;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
   .knowledge-body { max-width: 720px; font-size: 0.95rem; line-height: 1.9; color: var(--color-text); }
   .knowledge-body :global(h2) { font-size: 1.3rem; font-weight: 600; color: var(--color-title); margin: 36px 0 16px; padding-left: 12px; border-left: 3px solid var(--color-accent); }
   .knowledge-body :global(h3) { font-size: 1.15rem; font-weight: 600; color: var(--color-title); margin: 28px 0 12px; }

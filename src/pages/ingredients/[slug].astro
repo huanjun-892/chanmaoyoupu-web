@@ -19,9 +19,26 @@ if (!ingredient) {
 
 const categoryLabel = ingredient.category === 'seasoning' ? '调料' : '食材';
 const categoryIcon = ingredient.category === 'seasoning' ? '🧂' : '🥬';  // fallback when no image
+
+// SEO
+const pageDescription = ingredient.description || `${ingredient.name}的营养价值、选购技巧和搭配建议，了解${ingredient.name}的正确使用方法。`;
+const pageKeywords = `${ingredient.name},${categoryLabel},营养价值,食用方法${ingredient.aliases ? ',' + ingredient.aliases : ''}`;
+
+// Schema.org - Food schema
+const foodSchema = {
+  "@context": "https://schema.org",
+  "@type": "Food",
+  "name": ingredient.name,
+  "description": ingredient.description || '',
+  "image": ingredient.imageUrl || undefined,
+  "category": categoryLabel
+};
 ---
 
-<BaseLayout title={ingredient.name}>
+<BaseLayout title={ingredient.name} description={pageDescription} keywords={pageKeywords}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(foodSchema)} />
+  </Fragment>
   <article class="ingredient-detail">
     <div class="container">
       <nav class="breadcrumb">
@@ -80,6 +97,20 @@ const categoryIcon = ingredient.category === 'seasoning' ? '🧂' : '🥬';  // 
             <div class="info-content" set:html={ingredient.storageMethod} />
           </section>
           )}
+
+          {ingredient.pairing_suggestions && (
+          <section class="info-card">
+            <h2 class="info-title">🤝 搭配建议</h2>
+            <div class="info-content" set:html={ingredient.pairing_suggestions} />
+          </section>
+          )}
+
+          {ingredient.avoid_with && (
+          <section class="info-card info-card-warning">
+            <h2 class="info-title">🚫 不宜搭配</h2>
+            <div class="info-content" set:html={ingredient.avoid_with} />
+          </section>
+          )}
         </div>
       </div>
 
@@ -135,6 +166,14 @@ const categoryIcon = ingredient.category === 'seasoning' ? '🧂' : '🥬';  // 
   }
   .info-title { font-size: 1.05rem; font-weight: 700; color: var(--color-title); margin-bottom: 12px; }
   .info-content { font-size: 0.9rem; color: var(--color-text); line-height: 1.7; }
+
+  .info-card-warning {
+    background: #FFF5F5;
+    border-color: #FFCCC7;
+  }
+  .info-card-warning .info-title {
+    color: #D4380D;
+  }
 
   .section-heading {
     font-size: 1.15rem; font-weight: 700; color: var(--color-title);
