@@ -15,6 +15,7 @@ const currentPath = Astro.url.pathname;
       <a href="/secrets" class:list={['nav-link', { active: currentPath.startsWith('/secrets') }]}>秘方</a>
       <a href="/knowledge" class:list={['nav-link', { active: currentPath.startsWith('/knowledge') }]}>知识库</a>
       <a href="/rankings" class:list={['nav-link', { active: currentPath === '/rankings' }]}>排行榜</a>
+      <a href="/about" class:list={['nav-link', { active: currentPath === '/about' }]}>关于</a>
     </nav>
     <div class="header-right">
       <form action="/search" method="get" class="search-box">
