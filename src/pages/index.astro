@@ -9,6 +9,12 @@ const allRecipes = await getAllRecipes();
 const knowledgeItems = await getAllKnowledge();
 const allIngredients = await getAllIngredients();
 
+// 统计数据
+const recipeCount = allRecipes.length;
+const ingredientCount = allIngredients.length;
+const secretCount = knowledgeItems.filter((k: any) => k.category === 'secret').length;
+const knowledgeCount = knowledgeItems.filter((k: any) => k.category !== 'secret').length;
+
 // 最新6道作为"今日上新"
 const newRecipes = allRecipes.slice(0, 6).map(r => ({
   title: r.title,
@@ -79,7 +85,7 @@ const knowledgeFeatured = knowledgeItems
           <span class="char-highlight">馋</span>得明白<br/>
           做得靠<span class="char-highlight">谱</span>
         </h1>
-        <p class="hero-desc">84道精选食谱 · 156种食材百科 · 38条独家秘方<br/>从零开始，手把手教你做出好味道</p>
+        <p class="hero-desc">{recipeCount}道精选食谱 · {ingredientCount}种食材百科 · {secretCount}条独家秘方<br/>从零开始，手把手教你做出好味道</p>
         <form action="/search" method="get" class="hero-search">
           <svg class="hero-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" name="q" placeholder="搜索菜名、食材、菜系..." class="hero-search-input" />
@@ -106,22 +112,22 @@ const knowledgeFeatured = knowledgeItems
   <section class="stats-bar">
     <div class="container stats-inner">
       <div class="stat-item">
-        <div class="stat-num">84+</div>
+        <div class="stat-num">{recipeCount}+</div>
         <div class="stat-label">精选食谱</div>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
-        <div class="stat-num">156</div>
+        <div class="stat-num">{ingredientCount}</div>
         <div class="stat-label">食材词条</div>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
-        <div class="stat-num">38</div>
+        <div class="stat-num">{secretCount}</div>
         <div class="stat-label">独家秘方</div>
       </div>
       <div class="stat-divider"></div>
       <div class="stat-item">
-        <div class="stat-num">49</div>
+        <div class="stat-num">{knowledgeCount}</div>
         <div class="stat-label">美食知识</div>
       </div>
     </div>
