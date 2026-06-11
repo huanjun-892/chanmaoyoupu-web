@@ -1,5 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAllRecipes, getAllKnowledge, getAllIngredients } from '../lib/strapi';
+
+const allRecipes = await getAllRecipes();
+const knowledgeItems = await getAllKnowledge();
+const allIngredients = await getAllIngredients();
+
+// 统计数据
+const recipeCount = allRecipes.length;
+const ingredientCount = allIngredients.length;
+const secretCount = knowledgeItems.filter((k: any) => k.category === 'secret').length;
+const knowledgeCount = knowledgeItems.filter((k: any) => k.category !== 'secret').length;
 ---
 
 <BaseLayout 
@@ -59,19 +70,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- 数据统计 -->
       <div class="about-section stats-section">
         <div class="stat-item">
-          <div class="stat-number">84</div>
+          <div class="stat-number">{recipeCount}+</div>
           <div class="stat-label">精选食谱</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">156</div>
+          <div class="stat-number">{ingredientCount}</div>
           <div class="stat-label">食材词条</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">38</div>
+          <div class="stat-number">{secretCount}</div>
           <div class="stat-label">独家秘方</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">49</div>
+          <div class="stat-number">{knowledgeCount}</div>
           <div class="stat-label">知识文章</div>
         </div>
       </div>
@@ -82,11 +93,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="about-content">
           <p>如果你有任何问题、建议，或者想分享你的美食故事，欢迎通过以下方式找到我们：</p>
           <ul class="contact-list">
-            <li>
-              <span class="contact-icon">📧</span>
-              <span>邮箱：</span>
-              <a href="mailto:contact@chanmaoyoupu.com">contact@chanmaoyoupu.com</a>
-            </li>
             <li>
               <span class="contact-icon">💬</span>
               <span>微信公众号：</span>
