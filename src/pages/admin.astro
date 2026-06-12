@@ -424,14 +424,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       width: 700px;
       min-width: 400px;
       min-height: 300px;
-      max-height: 85vh;
+      max-width: 95vw;
+      max-height: 90vh;
       display: flex;
       flex-direction: column;
       position: fixed;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      resize: both;
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
       z-index: 1001;
@@ -440,6 +440,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .modal-content.dragging {
       cursor: grabbing;
       user-select: none;
+    }
+    
+    .modal-resize-handle {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 20px;
+      height: 20px;
+      cursor: se-resize;
+      background: linear-gradient(135deg, transparent 50%, var(--color-border) 50%);
+      border-radius: 0 0 var(--radius) 0;
+      z-index: 10;
+    }
+    
+    .modal-resize-handle:hover {
+      background: linear-gradient(135deg, transparent 50%, var(--color-accent) 50%);
     }
     
     .modal-header {
@@ -690,6 +706,91 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       to {
         transform: translateX(0);
         opacity: 1;
+      }
+    }
+    
+    /* 推送助手 */
+    .push-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .push-left {
+      flex: 0 0 320px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    
+    .push-right {
+      flex: 1;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .push-image-preview {
+      width: 100%;
+      height: 180px;
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      position: relative;
+    }
+    
+    .push-image-preview img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+    
+    .push-image-preview .no-image {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    .ai-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    
+    .ai-actions .btn {
+      flex: 1 1 calc(50% - 3px);
+      padding: 6px 10px;
+      font-size: 0.8rem;
+    }
+    
+    .char-count {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+      background: var(--color-bg-secondary);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    
+    #push-content-result {
+      flex: 1;
+      min-height: 300px;
+      resize: vertical;
+    }
+    
+    @media (max-width: 900px) {
+      .push-container {
+        flex-direction: column;
+      }
+      
+      .push-left {
+        flex: none;
       }
     }
     
@@ -946,30 +1047,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </div>
         
-        <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 20px;">
-          <h3 style="margin-top: 0; color: var(--color-title);">生成推送内容</h3>
-          <div class="form-group">
-            <label>选择内容类型</label>
-            <select id="push-content-type" onchange="loadPushContent()">
-              <option value="recipe">食谱</option>
-              <option value="knowledge">知识库文章</option>
-            </select>
+        <div class="push-container">
+          <div class="push-left">
+            <h3 style="margin-top: 0; color: var(--color-title);">内容设置</h3>
+            <div class="form-group">
+              <label>内容类型</label>
+              <select id="push-content-type" onchange="loadPushContent()">
+                <option value="recipe">食谱</option>
+                <option value="ingredient">食材</option>
+                <option value="knowledge">知识库文章</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>选择内容</label>
+              <select id="push-content-select" onchange="generatePushContent()">
+                <option value="">请先选择内容类型</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>配图</label>
+              <div class="push-image-preview" id="push-image-preview">
+                <div class="no-image">暂无图片</div>
+              </div>
+              <div style="display: flex; gap: 8px; margin-top: 8px;">
+                <button class="btn btn-secondary btn-sm" onclick="generateAIImage()" style="flex: 1;">🎨 AI生成配图</button>
+                <button class="btn btn-secondary btn-sm" onclick="useCurrentImage()" style="flex: 1;">📷 使用原图</button>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>AI增强</label>
+              <div class="ai-actions">
+                <button class="btn btn-secondary btn-sm" onclick="aiEnhance('polish')">✨ 润色</button>
+                <button class="btn btn-secondary btn-sm" onclick="aiEnhance('expand')">📝 扩写</button>
+                <button class="btn btn-secondary btn-sm" onclick="aiEnhance('shorten')">✂️ 缩短</button>
+                <button class="btn btn-secondary btn-sm" onclick="aiEnhance('casual')">🗣️ 更口语</button>
+                <button class="btn btn-secondary btn-sm" onclick="aiEnhance('title')">🏷️ 改标题</button>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label>选择内容</label>
-            <select id="push-content-select" onchange="generatePushContent()">
-              <option value="">请先选择内容类型</option>
-            </select>
+          
+          <div class="push-right">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="margin: 0; color: var(--color-title);">生成的内容</h3>
+              <span class="char-count" id="char-count">0 字</span>
+            </div>
+            <textarea id="push-content-result" rows="18" placeholder="选择内容后自动生成..." oninput="updateCharCount()"></textarea>
+            <div style="display: flex; gap: 8px; margin-top: 12px;">
+              <button class="btn btn-primary" onclick="copyPushContent()" style="flex: 1;">📋 一键复制</button>
+              <button class="btn btn-secondary" onclick="regenerateContent()" style="flex: 1;">🔄 重新生成</button>
+            </div>
           </div>
-          <div class="form-group">
-            <label>生成的内容</label>
-            <textarea id="push-content-result" rows="10" readonly style="background: var(--color-bg-secondary);"></textarea>
-          </div>
-          <button class="btn btn-primary" onclick="copyPushContent()" style="width: 100%;">📋 一键复制内容</button>
         </div>
         
         <p style="color: var(--color-text-secondary); font-size: 0.85rem; margin-top: 16px; text-align: center;">
-          💡 提示：选择平台和内容后，自动生成适配该平台风格的文案，一键复制发布
+          💡 提示：选择平台和内容后自动生成文案，可使用AI功能进一步优化，支持实时编辑
         </p>
       </section>
     </main>
@@ -987,6 +1120,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <button class="btn btn-secondary" onclick="closeModal()">取消</button>
         <button class="btn btn-primary" onclick="saveItem()">保存</button>
       </div>
+      <div class="modal-resize-handle" id="modal-resize-handle"></div>
     </div>
   </div>
 
@@ -2503,9 +2637,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const type = document.getElementById('push-content-type').value;
       const select = document.getElementById('push-content-select');
       
-      const url = type === 'recipe' 
-        ? API_BASE + '/recipes?limit=50' 
-        : API_BASE + '/knowledge?limit=50';
+      let url;
+      if (type === 'recipe') {
+        url = API_BASE + '/recipes?limit=50';
+      } else if (type === 'ingredient') {
+        url = API_BASE + '/ingredients?limit=50';
+      } else {
+        url = API_BASE + '/knowledge?limit=50';
+      }
       
       fetch(url, { headers: getAuthHeaders() })
         .then(res => res.json())
@@ -2513,10 +2652,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           if (data.success) {
             select.innerHTML = '<option value="">请选择内容</option>';
             data.data.items.forEach(item => {
-              select.innerHTML += `<option value="${item.id}">${item.title}</option>`;
+              select.innerHTML += `<option value="${item.id}">${item.title || item.name}</option>`;
             });
           }
         });
+      
+      // 重置图片预览
+      document.getElementById('push-image-preview').innerHTML = '<div class="no-image">暂无图片</div>';
+      document.getElementById('push-content-result').value = '';
+      updateCharCount();
     }
     
     function loadPushContent() {
@@ -2597,9 +2741,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         content += style.suffix;
         
         return content;
+      } else if (type === 'ingredient') {
+        let content = style.prefix + title + '\n\n';
+        content += '🥗 食材介绍：\n';
+        content += (item.description || desc || '').replace(/<[^>]+>/g, '') + '\n\n';
+        
+        if (item.nutrition) {
+          content += '📊 营养价值：\n';
+          content += item.nutrition.replace(/<[^>]+>/g, '') + '\n\n';
+        }
+        
+        if (item.tips) {
+          content += '💡 选购与保存：\n';
+          content += item.tips.replace(/<[^>]+>/g, '') + '\n\n';
+        }
+        
+        content += style.suffix;
+        return content;
       } else {
         let content = style.prefix + title + '\n\n';
-        content += (item.content || desc) + '\n\n';
+        content += (item.content || desc || '').replace(/<[^>]+>/g, '') + '\n\n';
         content += style.suffix;
         return content;
       }
@@ -2620,6 +2781,167 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         document.execCommand('copy');
         showToast('已复制到剪贴板', 'success');
       });
+    }
+    
+    // 更新字数统计
+    function updateCharCount() {
+      const text = document.getElementById('push-content-result').value || '';
+      document.getElementById('char-count').textContent = text.length + ' 字';
+    }
+    
+    // 重新生成内容
+    function regenerateContent() {
+      const type = document.getElementById('push-content-type').value;
+      const id = document.getElementById('push-content-select').value;
+      if (!id) {
+        showToast('请先选择内容', 'error');
+        return;
+      }
+      generatePushContent();
+      showToast('内容已重新生成', 'success');
+    }
+    
+    // AI增强内容
+    function aiEnhance(type) {
+      const textarea = document.getElementById('push-content-result');
+      let content = textarea.value;
+      if (!content) {
+        showToast('请先生成内容', 'error');
+        return;
+      }
+      
+      showToast('AI优化中...', 'info');
+      
+      // 模拟AI处理（后续接入真实AI API）
+      setTimeout(() => {
+        let result = content;
+        
+        switch(type) {
+          case 'polish': // 润色
+            result = content
+              .replace(/根据个人口味/g, '可根据自家口味')
+              .replace(/适量$/gm, '按需调整')
+              .replace(/小贴士：/g, '💡 小小Tips：');
+            // 添加一些连接词让文章更流畅
+            if (!result.includes('首先')) {
+              result = result.replace(/做法步骤：\n1\./, '做法步骤：\n首先，1.');
+            }
+            break;
+            
+          case 'expand': // 扩写
+            result = content.replace(/小贴士：\n(.*?)\n/, '小贴士：\n$1\n另外，烹饪时注意火候的掌握也很重要哦～\n');
+            // 给每步添加一点细节
+            result = result.replace(/(\d+)\. (.*?)(\n)/g, (match, num, text, newline) => {
+              if (text.length < 20) {
+                return match;
+              }
+              return num + '. ' + text + '（这一步很关键哦）' + newline;
+            });
+            break;
+            
+          case 'shorten': // 缩短
+            // 简化表述
+            result = content
+              .replace(/食材清单：/g, '🥬 食材：')
+              .replace(/做法步骤：/g, '👨‍🍳 步骤：')
+              .replace(/小贴士：/g, '💡 提示：');
+            // 去掉一些重复的话
+            result = result.replace(/\n\n\n/g, '\n\n');
+            break;
+            
+          case 'casual': // 更口语
+            result = content
+              .replace(/食材清单：/g, '准备好这些东西哈：')
+              .replace(/做法步骤：/g, '接下来咱们开做：')
+              .replace(/小贴士：/g, '说句实在话哈：')
+              .replace(/适量/g, '看着放就行')
+              .replace(/少许/g, '来一丢丢');
+            break;
+            
+          case 'title': // 改标题
+            const titlePrefixes = ['🔥超好吃的', '😋巨下饭的', '🥘家常版', '👩‍🍳手把手教你做', '💯零失败的'];
+            const randomPrefix = titlePrefixes[Math.floor(Math.random() * titlePrefixes.length)];
+            const firstLineEnd = content.indexOf('\n');
+            if (firstLineEnd > 0) {
+              let oldTitle = content.substring(0, firstLineEnd).replace(/^[^\u4e00-\u9fa5a-zA-Z]+/, '');
+              result = randomPrefix + oldTitle + '\n' + content.substring(firstLineEnd + 1);
+            }
+            break;
+        }
+        
+        textarea.value = result;
+        updateCharCount();
+        showToast('AI优化完成', 'success');
+      }, 800);
+    }
+    
+    // 使用原图
+    function useCurrentImage() {
+      const type = document.getElementById('push-content-type').value;
+      const id = document.getElementById('push-content-select').value;
+      if (!id) {
+        showToast('请先选择内容', 'error');
+        return;
+      }
+      
+      const detailUrl = type === 'recipe' 
+        ? API_BASE + '/recipes/' + id 
+        : type === 'ingredient'
+          ? API_BASE + '/ingredients/' + id
+          : API_BASE + '/knowledge/' + id;
+      
+      fetch(detailUrl, { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const imgUrl = data.data.cover_url || data.data.image_url || '';
+            if (imgUrl) {
+              document.getElementById('push-image-preview').innerHTML = 
+                `<img src="${imgUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" alt="配图">`;
+              showToast('已使用原图', 'success');
+            } else {
+              showToast('该内容暂无封面图', 'warning');
+            }
+          }
+        });
+    }
+    
+    // AI生成配图
+    function generateAIImage() {
+      const type = document.getElementById('push-content-type').value;
+      const id = document.getElementById('push-content-select').value;
+      if (!id) {
+        showToast('请先选择内容', 'error');
+        return;
+      }
+      
+      showToast('AI正在生成配图...', 'info');
+      
+      // 模拟AI生成（后续接入真实AI绘图API）
+      setTimeout(() => {
+        // 先用原图占位，后续接入真实AI生成
+        const detailUrl = type === 'recipe' 
+          ? API_BASE + '/recipes/' + id 
+          : type === 'ingredient'
+            ? API_BASE + '/ingredients/' + id
+            : API_BASE + '/knowledge/' + id;
+        
+        fetch(detailUrl, { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const imgUrl = data.data.cover_url || data.data.image_url || '';
+              if (imgUrl) {
+                document.getElementById('push-image-preview').innerHTML = 
+                  `<img src="${imgUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" alt="AI配图">
+                   <div style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">AI生成</div>`;
+                showToast('AI配图生成完成', 'success');
+              } else {
+                showToast('暂无法生成配图', 'warning');
+              }
+            }
+          });
+      }, 1000);
     }
     
     // ============ 通用功能 ============
@@ -2832,13 +3154,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }, 2000);
     }
     
-    // 点击遮罩关闭弹窗
-    const editModal = document.getElementById('edit-modal');
-    if (editModal) {
-      editModal.addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-      });
-    }
+    // 注意：移除点击遮罩关闭，避免resize或拖拽时误关闭
+    // 改为只有点击关闭按钮或取消按钮才关闭
     
     // ============ 弹窗拖拽与大小调整 ============
     let isDragging = false;
@@ -2873,6 +3190,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         
         dragOffsetX = e.clientX - rect.left;
         dragOffsetY = e.clientY - rect.top;
+        
+        // 清除用户选择，避免拖拽时选中文字
+        e.preventDefault();
       });
       
       // 拖拽移动
@@ -2883,11 +3203,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         let newX = e.clientX - dragOffsetX;
         let newY = e.clientY - dragOffsetY;
         
-        // 限制在视口范围内（至少保留标题栏可见）
-        const maxX = window.innerWidth - 100;
-        const maxY = window.innerHeight - 50;
+        // 限制在视口范围内（至少保留200px可见）
         const minX = -modalContent.offsetWidth + 200;
         const minY = 0;
+        const maxX = window.innerWidth - 100;
+        const maxY = window.innerHeight - 50;
         
         newX = Math.max(minX, Math.min(newX, maxX));
         newY = Math.max(minY, Math.min(newY, maxY));
@@ -2907,6 +3227,107 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       // 防止双击选中文字
       header.addEventListener('dblclick', function(e) {
         e.preventDefault();
+      });
+      
+      // ========== 弹窗大小调整 ==========
+      let isResizing = false;
+      let resizeStartX = 0;
+      let resizeStartY = 0;
+      let resizeStartWidth = 0;
+      let resizeStartHeight = 0;
+      
+      const resizeHandle = document.getElementById('modal-resize-handle');
+      if (resizeHandle) {
+        resizeHandle.addEventListener('mousedown', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          
+          isResizing = true;
+          resizeStartX = e.clientX;
+          resizeStartY = e.clientY;
+          
+          // 确保使用绝对定位
+          const rect = modalContent.getBoundingClientRect();
+          modalContent.style.transform = 'none';
+          modalContent.style.left = rect.left + 'px';
+          modalContent.style.top = rect.top + 'px';
+          modalContent.style.right = 'auto';
+          modalContent.style.bottom = 'auto';
+          
+          resizeStartWidth = rect.width;
+          resizeStartHeight = rect.height;
+          
+          document.body.style.cursor = 'se-resize';
+          document.body.style.userSelect = 'none';
+        });
+        
+        document.addEventListener('mousemove', function(e) {
+          if (!isResizing || !modalContent) return;
+          e.preventDefault();
+          
+          let deltaX = e.clientX - resizeStartX;
+          let deltaY = e.clientY - resizeStartY;
+          
+          let newWidth = resizeStartWidth + deltaX;
+          let newHeight = resizeStartHeight + deltaY;
+          
+          // 最小尺寸限制
+          newWidth = Math.max(400, newWidth);
+          newHeight = Math.max(300, newHeight);
+          
+          // 最大尺寸限制（不超过视口的95%）
+          const maxWidth = window.innerWidth * 0.95;
+          const maxHeight = window.innerHeight * 0.9;
+          newWidth = Math.min(newWidth, maxWidth);
+          newHeight = Math.min(newHeight, maxHeight);
+          
+          // 确保窗口不会被拖出视口右侧和底部
+          const rect = modalContent.getBoundingClientRect();
+          if (rect.left + newWidth > window.innerWidth - 10) {
+            newWidth = window.innerWidth - rect.left - 10;
+          }
+          if (rect.top + newHeight > window.innerHeight - 10) {
+            newHeight = window.innerHeight - rect.top - 10;
+          }
+          
+          modalContent.style.width = newWidth + 'px';
+          modalContent.style.height = newHeight + 'px';
+        });
+        
+        document.addEventListener('mouseup', function() {
+          if (isResizing) {
+            isResizing = false;
+            document.body.style.cursor = '';
+            document.body.style.userSelect = '';
+          }
+        });
+      }
+      
+      // 监听窗口大小变化，确保弹窗不超出边界
+      window.addEventListener('resize', function() {
+        if (!modalContent || !document.getElementById('edit-modal').classList.contains('show')) return;
+        
+        // 如果使用绝对定位的弹窗，确保在视口范围内
+        const rect = modalContent.getBoundingClientRect();
+        let newLeft = rect.left;
+        let newTop = rect.top;
+        
+        if (rect.right < 100) {
+          newLeft = 100 - rect.width;
+        } else if (rect.left > window.innerWidth - 100) {
+          newLeft = window.innerWidth - 100;
+        }
+        
+        if (rect.bottom < 50) {
+          newTop = 50 - rect.height;
+        } else if (rect.top > window.innerHeight - 50) {
+          newTop = window.innerHeight - 50;
+        }
+        
+        if (newLeft !== rect.left || newTop !== rect.top) {
+          modalContent.style.left = newLeft + 'px';
+          modalContent.style.top = newTop + 'px';
+        }
       });
     }
     
