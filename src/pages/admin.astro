@@ -794,6 +794,143 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
     }
     
+    /* 平台账号管理 */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    
+    .platform-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+    
+    .platform-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .platform-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .platform-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: var(--color-bg-secondary);
+    }
+    
+    .platform-info h4 {
+      margin: 0;
+      color: var(--color-title);
+      font-size: 1rem;
+    }
+    
+    .platform-info p {
+      margin: 4px 0 0 0;
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+    }
+    
+    .platform-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      width: fit-content;
+    }
+    
+    .platform-status.active {
+      background: rgba(76, 175, 80, 0.15);
+      color: #4caf50;
+    }
+    
+    .platform-status.inactive {
+      background: rgba(158, 158, 158, 0.15);
+      color: #9e9e9e;
+    }
+    
+    .platform-status .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    
+    .platform-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+    }
+    
+    .platform-actions .btn {
+      flex: 1;
+      font-size: 0.85rem;
+      padding: 8px 12px;
+    }
+    
+    /* 平台账号表单 */
+    .platform-form-group {
+      margin-bottom: 16px;
+    }
+    
+    .platform-form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+    }
+    
+    .platform-form-group input,
+    .platform-form-group select,
+    .platform-form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      background: var(--color-bg);
+      color: var(--color-text);
+      box-sizing: border-box;
+    }
+    
+    .platform-form-group input:focus,
+    .platform-form-group select:focus,
+    .platform-form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+    
+    .platform-form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+      font-family: inherit;
+    }
+    
+    .platform-form-hint {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+      margin-top: 4px;
+    }
+    
     .page-section {
       display: none;
     }
@@ -866,6 +1003,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <li><a data-page="categories">🏷️ <span>分类管理</span></a></li>
         <li><a data-page="users">👥 <span>用户管理</span></a></li>
         <li><a data-page="push">📱 <span>内容推送助手</span></a></li>
+        <li><a data-page="platforms">🔗 <span>平台账号</span></a></li>
       </ul>
     </aside>
     
@@ -1096,6 +1234,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <textarea id="push-content-result" rows="18" placeholder="选择内容后自动生成..." oninput="updateCharCount()"></textarea>
             <div style="display: flex; gap: 8px; margin-top: 12px;">
               <button class="btn btn-primary" onclick="copyPushContent()" style="flex: 1;">📋 一键复制</button>
+              <button class="btn btn-secondary" onclick="oneClickPublish()" style="flex: 1;">🚀 一键发布</button>
               <button class="btn btn-secondary" onclick="regenerateContent()" style="flex: 1;">🔄 重新生成</button>
             </div>
           </div>
@@ -1104,6 +1243,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p style="color: var(--color-text-secondary); font-size: 0.85rem; margin-top: 16px; text-align: center;">
           💡 提示：选择平台和内容后自动生成文案，可使用AI功能进一步优化，支持实时编辑
         </p>
+      </section>
+      
+      <!-- 平台账号管理 -->
+      <section id="page-platforms" class="page-section" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 style="margin: 0; color: var(--color-title);">平台账号管理</h2>
+            <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 5px 0 0 0;">
+              绑定各内容平台账号，实现一键发布，减少重复工作
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="openPlatformModal()">
+            ➕ 添加账号
+          </button>
+        </div>
+        
+        <div class="platform-grid" id="platform-list">
+          <!-- 平台账号卡片将通过JS动态生成 -->
+        </div>
+        
+        <div id="platform-empty" style="text-align: center; padding: 60px 20px; color: var(--color-text-secondary); display: none;">
+          <div style="font-size: 3rem; margin-bottom: 16px;">🔗</div>
+          <p>还没有绑定任何平台账号</p>
+          <p style="font-size: 0.9rem;">点击上方"添加账号"按钮开始绑定</p>
+        </div>
       </section>
     </main>
   </div>
@@ -1360,6 +1524,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             else if (page === 'categories') loadCuisines();
             else if (page === 'users') loadUsers();
             else if (page === 'push') loadPushContentOptions();
+            else if (page === 'platforms') loadPlatformList();
           } catch (err) {
             console.error('Navigation error:', err);
           }
@@ -2789,6 +2954,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       document.getElementById('char-count').textContent = text.length + ' 字';
     }
     
+    // 一键发布（复制内容+跳转到发布页）
+    function oneClickPublish() {
+      const content = document.getElementById('push-content-result').value;
+      if (!content) {
+        showToast('请先生成内容', 'error');
+        return;
+      }
+      
+      const platform = currentPlatform || 'wechat';
+      const config = platformConfig[platform];
+      
+      if (!config || !config.publishUrl) {
+        showToast('该平台暂不支持一键发布', 'error');
+        return;
+      }
+      
+      // 复制到剪贴板
+      navigator.clipboard.writeText(content).then(() => {
+        showToast('内容已复制，正在跳转到' + config.name + '...', 'success');
+        // 延迟跳转，给用户看到提示
+        setTimeout(() => {
+          window.open(config.publishUrl, '_blank');
+        }, 500);
+      }).catch(() => {
+        // 降级方案
+        const textarea = document.getElementById('push-content-result');
+        textarea.select();
+        document.execCommand('copy');
+        showToast('内容已复制，正在跳转到' + config.name + '...', 'success');
+        setTimeout(() => {
+          window.open(config.publishUrl, '_blank');
+        }, 500);
+      });
+    }
+    
     // 重新生成内容
     function regenerateContent() {
       const type = document.getElementById('push-content-type').value;
@@ -2942,6 +3142,336 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             }
           });
       }, 1000);
+    }
+    
+    // ============ 平台账号管理 ============
+    const platformConfig = {
+      wechat: {
+        name: '微信公众号',
+        icon: '💬',
+        color: '#07c160',
+        publishUrl: 'https://mp.weixin.qq.com/',
+        fields: [
+          { key: 'app_id', label: 'AppID', type: 'text', placeholder: '请输入公众号AppID' },
+          { key: 'app_secret', label: 'AppSecret', type: 'text', placeholder: '请输入公众号AppSecret' },
+          { key: 'account_name', label: '公众号名称', type: 'text', placeholder: '请输入公众号名称' }
+        ]
+      },
+      xiaohongshu: {
+        name: '小红书',
+        icon: '📕',
+        color: '#fe2c55',
+        publishUrl: 'https://creator.xiaohongshu.com/publish/publish',
+        fields: [
+          { key: 'account_name', label: '账号名称', type: 'text', placeholder: '请输入小红书账号名称' },
+          { key: 'cookie', label: 'Cookie（可选）', type: 'textarea', placeholder: '用于自动发布的Cookie，可不填' }
+        ]
+      },
+      douyin: {
+        name: '抖音',
+        icon: '🎵',
+        color: '#000000',
+        publishUrl: 'https://creator.douyin.com/creator-micro/content/upload',
+        fields: [
+          { key: 'account_name', label: '账号名称', type: 'text', placeholder: '请输入抖音账号名称' }
+        ]
+      },
+      toutiao: {
+        name: '今日头条',
+        icon: '📰',
+        color: '#d81e06',
+        publishUrl: 'https://mp.toutiao.com/profile_v4/graphic/publish',
+        fields: [
+          { key: 'account_name', label: '账号名称', type: 'text', placeholder: '请输入头条号名称' }
+        ]
+      },
+      bilibili: {
+        name: '哔哩哔哩',
+        icon: '📺',
+        color: '#fb7299',
+        publishUrl: 'https://member.bilibili.com/platform/upload/text',
+        fields: [
+          { key: 'account_name', label: '账号名称', type: 'text', placeholder: '请输入B站账号名称' }
+        ]
+      },
+      weibo: {
+        name: '微博',
+        icon: '🌐',
+        color: '#e6162d',
+        publishUrl: 'https://weibo.com/',
+        fields: [
+          { key: 'account_name', label: '账号名称', type: 'text', placeholder: '请输入微博账号名称' }
+        ]
+      },
+      zhihu: {
+        name: '知乎',
+        icon: '💡',
+        color: '#0084ff',
+        publishUrl: 'https://zhuanlan.zhihu.com/write',
+        fields: [
+          { key: 'account_name', label: '账号名称', type: 'text', placeholder: '请输入知乎账号名称' }
+        ]
+      }
+    };
+    
+    let editingPlatformId = null;
+    
+    // 获取平台账号列表
+    function getPlatformAccounts() {
+      const data = localStorage.getItem('admin_platform_accounts');
+      return data ? JSON.parse(data) : [];
+    }
+    
+    // 保存平台账号列表
+    function savePlatformAccounts(accounts) {
+      localStorage.setItem('admin_platform_accounts', JSON.stringify(accounts));
+    }
+    
+    // 加载平台列表
+    function loadPlatformList() {
+      const accounts = getPlatformAccounts();
+      const listContainer = document.getElementById('platform-list');
+      const emptyContainer = document.getElementById('platform-empty');
+      
+      if (accounts.length === 0) {
+        listContainer.innerHTML = '';
+        emptyContainer.style.display = 'block';
+        return;
+      }
+      
+      emptyContainer.style.display = 'none';
+      
+      let html = '';
+      accounts.forEach(account => {
+        const config = platformConfig[account.platform_type];
+        if (!config) return;
+        
+        html += `
+          <div class="platform-card">
+            <div class="platform-card-header">
+              <div class="platform-icon" style="background: ${config.color}20;">${config.icon}</div>
+              <div class="platform-info">
+                <h4>${config.name}</h4>
+                <p>${account.account_name || '未设置账号'}</p>
+              </div>
+            </div>
+            <div class="platform-status ${account.status === 'active' ? 'active' : 'inactive'}">
+              <span class="dot"></span>
+              ${account.status === 'active' ? '已绑定' : '未激活'}
+            </div>
+            <div class="platform-actions">
+              <button class="btn btn-secondary btn-sm" onclick="editPlatformAccount('${account.id}')">✏️ 编辑</button>
+              <button class="btn btn-secondary btn-sm" onclick="deletePlatformAccount('${account.id}')">🗑️ 删除</button>
+              <button class="btn btn-primary btn-sm" onclick="goToPublish('${account.platform_type}')">📤 去发布</button>
+            </div>
+          </div>
+        `;
+      });
+      
+      // 添加未绑定的平台提示卡片
+      const boundTypes = accounts.map(a => a.platform_type);
+      const unboundTypes = Object.keys(platformConfig).filter(t => !boundTypes.includes(t));
+      
+      if (unboundTypes.length > 0) {
+        unboundTypes.forEach(type => {
+          const config = platformConfig[type];
+          html += `
+            <div class="platform-card" style="border-style: dashed; opacity: 0.7;">
+              <div class="platform-card-header">
+                <div class="platform-icon" style="background: ${config.color}20;">${config.icon}</div>
+                <div class="platform-info">
+                  <h4>${config.name}</h4>
+                  <p>未绑定</p>
+                </div>
+              </div>
+              <div class="platform-status inactive">
+                <span class="dot"></span>
+                待绑定
+              </div>
+              <div class="platform-actions">
+                <button class="btn btn-primary btn-sm" onclick="openPlatformModal('${type}')" style="flex: 1;">
+                  ➕ 立即绑定
+                </button>
+              </div>
+            </div>
+          `;
+        });
+      }
+      
+      listContainer.innerHTML = html;
+    }
+    
+    // 打开平台账号编辑弹窗
+    function openPlatformModal(platformType) {
+      // 如果没有传平台类型，先显示平台选择
+      if (!platformType) {
+        showPlatformSelector();
+        return;
+      }
+      editingPlatformId = null;
+      showPlatformModal(platformType, null);
+    }
+    
+    // 显示平台选择弹窗
+    function showPlatformSelector() {
+      let html = '<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">';
+      
+      Object.keys(platformConfig).forEach(type => {
+        const config = platformConfig[type];
+        html += `
+          <div onclick="selectPlatformType('${type}')" style="padding: 20px; border: 1px solid var(--color-border); border-radius: 8px; cursor: pointer; text-align: center; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--color-accent)'" onmouseout="this.style.borderColor='var(--color-border)'">
+            <div style="font-size: 2rem; margin-bottom: 8px;">${config.icon}</div>
+            <div style="font-weight: 500; color: var(--color-title);">${config.name}</div>
+          </div>
+        `;
+      });
+      
+      html += '</div>';
+      
+      document.getElementById('modal-title').textContent = '选择平台';
+      document.getElementById('modal-body').innerHTML = html;
+      
+      const footer = document.getElementById('modal-footer');
+      footer.innerHTML = `
+        <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+      `;
+      
+      document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
+    }
+    
+    // 选择平台类型后跳转到表单
+    function selectPlatformType(type) {
+      showPlatformModal(type, null);
+    }
+    
+    // 编辑平台账号
+    function editPlatformAccount(id) {
+      const accounts = getPlatformAccounts();
+      const account = accounts.find(a => a.id === id);
+      if (!account) return;
+      
+      editingPlatformId = id;
+      showPlatformModal(account.platform_type, account);
+    }
+    
+    // 显示平台表单弹窗
+    function showPlatformModal(platformType, account) {
+      const config = platformConfig[platformType];
+      if (!config) return;
+      
+      let formHtml = `
+        <div class="platform-form-group">
+          <label>平台类型</label>
+          <select id="pf-platform-type" disabled>
+            <option value="${platformType}">${config.icon} ${config.name}</option>
+          </select>
+        </div>
+      `;
+      
+      config.fields.forEach(field => {
+        const value = account ? (account[field.key] || '') : '';
+        if (field.type === 'textarea') {
+          formHtml += `
+            <div class="platform-form-group">
+              <label>${field.label}</label>
+              <textarea id="pf-${field.key}" placeholder="${field.placeholder || ''}">${value}</textarea>
+            </div>
+          `;
+        } else {
+          formHtml += `
+            <div class="platform-form-group">
+              <label>${field.label}</label>
+              <input type="${field.type}" id="pf-${field.key}" value="${value}" placeholder="${field.placeholder || ''}">
+            </div>
+          `;
+        }
+      });
+      
+      formHtml += `
+        <div class="platform-form-group">
+          <label>账号状态</label>
+          <select id="pf-status">
+            <option value="active" ${account?.status === 'active' ? 'selected' : ''}>已激活</option>
+            <option value="inactive" ${account?.status === 'inactive' ? 'selected' : ''}>未激活</option>
+          </select>
+        </div>
+      `;
+      
+      // 使用通用弹窗显示表单
+      document.getElementById('modal-title').textContent = account ? '编辑平台账号' : '添加平台账号';
+      document.getElementById('modal-body').innerHTML = formHtml;
+      
+      // 自定义footer按钮
+      const footer = document.getElementById('modal-footer');
+      footer.innerHTML = `
+        <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+        <button class="btn btn-primary" onclick="savePlatformAccount()">保存</button>
+      `;
+      
+      document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
+    }
+    
+    // 保存平台账号
+    function savePlatformAccount() {
+      const platformType = document.getElementById('pf-platform-type').value;
+      const config = platformConfig[platformType];
+      if (!config) return;
+      
+      const accounts = getPlatformAccounts();
+      const accountData = {
+        platform_type: platformType,
+        status: document.getElementById('pf-status').value,
+        updated_at: new Date().toISOString()
+      };
+      
+      // 收集各字段值
+      config.fields.forEach(field => {
+        const el = document.getElementById('pf-' + field.key);
+        if (el) {
+          accountData[field.key] = el.value;
+        }
+      });
+      
+      if (editingPlatformId) {
+        // 编辑模式
+        const index = accounts.findIndex(a => a.id === editingPlatformId);
+        if (index > -1) {
+          accountData.id = editingPlatformId;
+          accountData.created_at = accounts[index].created_at;
+          accounts[index] = accountData;
+        }
+      } else {
+        // 新增模式
+        accountData.id = 'pf_' + Date.now();
+        accountData.created_at = new Date().toISOString();
+        accounts.push(accountData);
+      }
+      
+      savePlatformAccounts(accounts);
+      closeModal();
+      loadPlatformList();
+      showToast('保存成功', 'success');
+    }
+    
+    // 删除平台账号
+    function deletePlatformAccount(id) {
+      if (!confirm('确定要删除这个平台账号吗？')) return;
+      
+      const accounts = getPlatformAccounts();
+      const filtered = accounts.filter(a => a.id !== id);
+      savePlatformAccounts(filtered);
+      loadPlatformList();
+      showToast('删除成功', 'success');
+    }
+    
+    // 跳转到发布页面
+    function goToPublish(platformType) {
+      const config = platformConfig[platformType];
+      if (config && config.publishUrl) {
+        window.open(config.publishUrl, '_blank');
+      }
     }
     
     // ============ 通用功能 ============
