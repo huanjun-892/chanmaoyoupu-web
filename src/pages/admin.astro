@@ -132,6 +132,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin-bottom: 2px;
     }
     
+    .admin-nav .nav-divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 12px 20px;
+    }
+    
+    .admin-nav .nav-group-title {
+      padding: 8px 20px;
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .form-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--color-text-secondary);
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .badge-success {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .badge-danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    
     .admin-nav a {
       display: block;
       padding: 12px 20px;
@@ -1004,6 +1048,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <li><a data-page="users">👥 <span>用户管理</span></a></li>
         <li><a data-page="push">📱 <span>内容推送助手</span></a></li>
         <li><a data-page="platforms">🔗 <span>平台账号</span></a></li>
+        <li class="nav-divider"></li>
+        <li class="nav-group-title">运营配置</li>
+        <li><a data-page="friend-links">🔗 <span>友情链接</span></a></li>
+        <li><a data-page="nav-menus">📋 <span>导航菜单</span></a></li>
+        <li><a data-page="banners">🖼️ <span>推荐位管理</span></a></li>
+        <li><a data-page="settings">⚙️ <span>网站设置</span></a></li>
+        <li class="nav-divider"></li>
+        <li class="nav-group-title">效率工具</li>
+        <li><a data-page="backup">💾 <span>数据备份</span></a></li>
+        <li><a data-page="ai-writer">🤖 <span>AI写内容</span></a></li>
+        <li><a data-page="schedule">⏰ <span>定时发布</span></a></li>
       </ul>
     </aside>
     
@@ -1215,7 +1270,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
             
             <div class="form-group">
-              <label>AI增强</label>
+              <label>AI增强 <span style="font-size: 0.7rem; color: #999; font-weight: normal;">（演示版）</span></label>
               <div class="ai-actions">
                 <button class="btn btn-secondary btn-sm" onclick="aiEnhance('polish')">✨ 润色</button>
                 <button class="btn btn-secondary btn-sm" onclick="aiEnhance('expand')">📝 扩写</button>
@@ -1267,6 +1322,147 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div style="font-size: 3rem; margin-bottom: 16px;">🔗</div>
           <p>还没有绑定任何平台账号</p>
           <p style="font-size: 0.9rem;">点击上方"添加账号"按钮开始绑定</p>
+        </div>
+      </section>
+      
+      <!-- 友情链接 -->
+      <section id="page-friend-links" class="page-section" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 style="margin: 0; color: var(--color-title);">友情链接</h2>
+            <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 5px 0 0 0;">
+              管理网站底部的友情链接
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="openFriendLinkModal()">
+            ➕ 添加链接
+          </button>
+        </div>
+        <div id="friend-links-table-container"></div>
+      </section>
+      
+      <!-- 导航菜单 -->
+      <section id="page-nav-menus" class="page-section" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 style="margin: 0; color: var(--color-title);">导航菜单</h2>
+            <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 5px 0 0 0;">
+              管理网站顶部导航栏菜单
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="openNavMenuModal()">
+            ➕ 添加菜单
+          </button>
+        </div>
+        <div id="nav-menus-table-container"></div>
+      </section>
+      
+      <!-- 推荐位管理 -->
+      <section id="page-banners" class="page-section" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 style="margin: 0; color: var(--color-title);">推荐位管理</h2>
+            <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 5px 0 0 0;">
+              管理首页轮播图和推荐位
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="openBannerModal()">
+            ➕ 添加推荐位
+          </button>
+        </div>
+        <div id="banners-table-container"></div>
+      </section>
+      
+      <!-- 网站设置 -->
+      <section id="page-settings" class="page-section" style="display: none;">
+        <div style="margin-bottom: 20px;">
+          <h2 style="margin: 0; color: var(--color-title);">网站设置</h2>
+          <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 5px 0 0 0;">
+            配置网站基本信息、SEO设置等
+          </p>
+        </div>
+        <div class="form-card">
+          <div class="form-group">
+            <label>网站标题</label>
+            <input type="text" id="setting-site-title" placeholder="馋猫有谱 - 美食食谱网站">
+          </div>
+          <div class="form-group">
+            <label>网站描述</label>
+            <textarea id="setting-site-description" rows="3" placeholder="专业的美食食谱网站..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>SEO关键词</label>
+            <input type="text" id="setting-keywords" placeholder="食谱,菜谱,家常菜,美食">
+          </div>
+          <div class="form-group">
+            <label>备案号</label>
+            <input type="text" id="setting-icp" placeholder="京ICP备XXXXXXXX号">
+          </div>
+          <div class="form-group">
+            <label>页脚文字</label>
+            <input type="text" id="setting-footer" placeholder="© 2024 馋猫有谱">
+          </div>
+          <button class="btn btn-primary" onclick="saveSiteSettings()">💾 保存设置</button>
+        </div>
+      </section>
+      
+      <!-- 数据备份 -->
+      <section id="page-backup" class="page-section" style="display: none;">
+        <div style="margin-bottom: 20px;">
+          <h2 style="margin: 0; color: var(--color-title);">数据备份</h2>
+          <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 5px 0 0 0;">
+            导出所有数据备份，防止数据丢失
+          </p>
+        </div>
+        <div class="form-card" style="text-align: center; padding: 40px;">
+          <div style="font-size: 4rem; margin-bottom: 16px;">💾</div>
+          <h3 style="margin: 0 0 8px 0; color: var(--color-title);">数据备份</h3>
+          <p style="color: var(--color-text-secondary); margin-bottom: 24px;">
+            导出所有内容数据为 JSON 格式备份文件，包含食谱、食材、知识库、分类等全部数据
+          </p>
+          <button class="btn btn-primary" onclick="exportBackup()" style="padding: 12px 32px; font-size: 1rem;">
+            📥 立即导出备份
+          </button>
+        </div>
+      </section>
+      
+      <!-- AI写内容（占位） -->
+      <section id="page-ai-writer" class="page-section" style="display: none;">
+        <div style="margin-bottom: 20px;">
+          <h2 style="margin: 0; color: var(--color-title);">AI写内容</h2>
+          <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 5px 0 0 0;">
+            智能生成食谱、食材介绍、美食文章
+          </p>
+        </div>
+        <div class="form-card" style="text-align: center; padding: 60px;">
+          <div style="font-size: 4rem; margin-bottom: 16px;">🤖</div>
+          <h3 style="margin: 0 0 8px 0; color: var(--color-title);">AI内容创作</h3>
+          <p style="color: var(--color-text-secondary); margin-bottom: 24px;">
+            即将上线，敬请期待
+          </p>
+          <button class="btn btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+            敬请期待
+          </button>
+        </div>
+      </section>
+      
+      <!-- 定时发布（占位） -->
+      <section id="page-schedule" class="page-section" style="display: none;">
+        <div style="margin-bottom: 20px;">
+          <h2 style="margin: 0; color: var(--color-title);">定时发布</h2>
+          <p style="color: var(--color-text-secondary); font-size: 0.9rem; margin: 5px 0 0 0;">
+            设置定时任务，自动发布内容
+          </p>
+        </div>
+        <div class="form-card" style="text-align: center; padding: 60px;">
+          <div style="font-size: 4rem; margin-bottom: 16px;">⏰</div>
+          <h3 style="margin: 0 0 8px 0; color: var(--color-title);">定时发布</h3>
+          <p style="color: var(--color-text-secondary); margin-bottom: 24px;">
+            即将上线，敬请期待
+          </p>
+          <button class="btn btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+            敬请期待
+          </button>
         </div>
       </section>
     </main>
@@ -1525,6 +1721,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             else if (page === 'users') loadUsers();
             else if (page === 'push') loadPushContentOptions();
             else if (page === 'platforms') loadPlatformList();
+            else if (page === 'friend-links') loadFriendLinks();
+            else if (page === 'nav-menus') loadNavMenus();
+            else if (page === 'banners') loadBanners();
+            else if (page === 'settings') loadSiteSettings();
           } catch (err) {
             console.error('Navigation error:', err);
           }
@@ -3129,11 +3329,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         return;
       }
       
-      showToast('AI正在生成配图...', 'info');
+      const preview = document.getElementById('push-image-preview');
+      preview.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 12px;">
+          <div class="loading-spinner" style="width: 32px; height: 32px; border: 3px solid var(--color-border); border-top-color: var(--color-accent); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+          <span style="font-size: 0.85rem; color: var(--color-muted);">AI正在生成配图...</span>
+        </div>
+      `;
       
-      // 模拟AI生成（后续接入真实AI绘图API）
+      // 模拟AI生成（演示版，后续接入真实AI绘图API）
       setTimeout(() => {
-        // 先用原图占位，后续接入真实AI生成
         const detailUrl = type === 'recipe' 
           ? API_BASE + '/recipes/' + id 
           : type === 'ingredient'
@@ -3146,16 +3351,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             if (data.success) {
               const imgUrl = data.data.cover_url || data.data.image_url || '';
               if (imgUrl) {
-                document.getElementById('push-image-preview').innerHTML = 
-                  `<img src="${imgUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" alt="AI配图">
-                   <div style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">AI生成</div>`;
+                preview.innerHTML = `
+                  <img src="${imgUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" alt="AI配图">
+                  <div style="position: absolute; top: 8px; right: 8px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 500; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                    ✨ AI生成（演示版）
+                  </div>
+                `;
                 showToast('AI配图生成完成', 'success');
               } else {
-                showToast('暂无法生成配图', 'warning');
+                preview.innerHTML = '<div class="no-image">暂无法生成配图<br/><span style="font-size: 0.75rem; opacity: 0.7;">该内容暂无封面图</span></div>';
+                showToast('该内容暂无封面，无法生成配图', 'warning');
               }
             }
           });
-      }, 1000);
+      }, 1500);
     }
     
     // ============ 平台账号管理 ============
@@ -3488,8 +3697,549 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
     }
     
+    // ============ 友情链接 ============
+    function loadFriendLinks() {
+      fetch(API_BASE + '/friend-links?all=1', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            renderFriendLinksTable(data.data);
+          }
+        });
+    }
+    
+    function renderFriendLinksTable(items) {
+      const container = document.getElementById('friend-links-table-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div style="font-size: 2rem; margin-bottom: 12px;">🔗</div><p>暂无友情链接</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>名称</th><th>链接</th><th>排序</th><th>状态</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      items.forEach(item => {
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td><a href="${item.url}" target="_blank" style="color: var(--color-accent); font-size: 0.85rem;">${item.url}</a></td>
+          <td>${item.sort_order || 0}</td>
+          <td>${item.status === 1 ? '<span class="badge badge-success">启用</span>' : '<span class="badge badge-danger">禁用</span>'}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editFriendLink(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteFriendLink(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openFriendLinkModal(id) {
+      currentItemType = 'friend-link';
+      currentItem = null;
+      
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑友情链接' : '添加友情链接';
+      
+      if (id) {
+        fetch(API_BASE + '/friend-links?all=1', { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const item = data.data.find(i => i.id === id);
+              if (item) {
+                currentItem = item;
+                renderFriendLinkForm(item);
+              }
+            }
+          });
+      } else {
+        renderFriendLinkForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
+    }
+    
+    function editFriendLink(id) {
+      openFriendLinkModal(id);
+    }
+    
+    function renderFriendLinkForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>名称 *</label>
+          <input type="text" id="fl-name" value="${data.name || ''}" placeholder="网站名称">
+        </div>
+        <div class="form-group">
+          <label>链接 *</label>
+          <input type="text" id="fl-url" value="${data.url || ''}" placeholder="https://example.com">
+        </div>
+        <div class="form-group">
+          <label>Logo URL</label>
+          <input type="text" id="fl-logo" value="${data.logo || ''}" placeholder="可选，用于展示网站图标">
+        </div>
+        <div class="form-group">
+          <label>描述</label>
+          <textarea id="fl-description" rows="2" placeholder="简短描述">${data.description || ''}</textarea>
+        </div>
+        <div class="form-group">
+          <label>排序</label>
+          <input type="number" id="fl-sort" value="${data.sort_order || 0}" placeholder="数字越小越靠前">
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <select id="fl-status">
+            <option value="1" ${data.status === 1 ? 'selected' : ''}>启用</option>
+            <option value="0" ${data.status === 0 ? 'selected' : ''}>禁用</option>
+          </select>
+        </div>
+      `;
+    }
+    
+    function saveFriendLink() {
+      const data = {
+        name: document.getElementById('fl-name').value.trim(),
+        url: document.getElementById('fl-url').value.trim(),
+        logo: document.getElementById('fl-logo').value.trim(),
+        description: document.getElementById('fl-description').value.trim(),
+        sort_order: parseInt(document.getElementById('fl-sort').value) || 0,
+        status: parseInt(document.getElementById('fl-status').value)
+      };
+      
+      if (!data.name || !data.url) {
+        showToast('名称和链接不能为空', 'error');
+        return;
+      }
+      
+      let url = API_BASE + '/friend-links';
+      let method = 'POST';
+      
+      if (currentItem && currentItem.id) {
+        url += '/' + currentItem.id;
+        method = 'PUT';
+      }
+      
+      fetch(url, {
+        method: method,
+        headers: { ...getAuthHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(res => res.json()).then(result => {
+        if (result.success) {
+          showToast(currentItem ? '更新成功' : '添加成功', 'success');
+          closeModal();
+          loadFriendLinks();
+        } else {
+          showToast(result.error || '操作失败', 'error');
+        }
+      });
+    }
+    
+    function deleteFriendLink(id) {
+      if (!confirm('确定要删除这个友情链接吗？')) return;
+      
+      fetch(API_BASE + '/friend-links/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadFriendLinks();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 导航菜单 ============
+    function loadNavMenus() {
+      fetch(API_BASE + '/nav-menus?all=1', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            renderNavMenusTable(data.data);
+          }
+        });
+    }
+    
+    function renderNavMenusTable(items) {
+      const container = document.getElementById('nav-menus-table-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div style="font-size: 2rem; margin-bottom: 12px;">📋</div><p>暂无导航菜单</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>名称</th><th>链接</th><th>排序</th><th>状态</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      items.forEach(item => {
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td><span style="font-size: 0.85rem; color: var(--color-text-secondary);">${item.link}</span></td>
+          <td>${item.sort_order || 0}</td>
+          <td>${item.status === 1 ? '<span class="badge badge-success">启用</span>' : '<span class="badge badge-danger">禁用</span>'}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editNavMenu(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteNavMenu(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openNavMenuModal(id) {
+      currentItemType = 'nav-menu';
+      currentItem = null;
+      
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑导航菜单' : '添加导航菜单';
+      
+      if (id) {
+        // 注：nav-menus 没有详情接口，直接用列表数据也行，这里简化处理
+        fetch(API_BASE + '/nav-menus?all=1', { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const item = data.data.find(i => i.id === id);
+              if (item) {
+                currentItem = item;
+                renderNavMenuForm(item);
+              }
+            }
+          });
+      } else {
+        renderNavMenuForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
+    }
+    
+    function editNavMenu(id) {
+      openNavMenuModal(id);
+    }
+    
+    function renderNavMenuForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>名称 *</label>
+          <input type="text" id="nm-name" value="${data.name || ''}" placeholder="菜单名称">
+        </div>
+        <div class="form-group">
+          <label>链接 *</label>
+          <input type="text" id="nm-link" value="${data.link || ''}" placeholder="/recipes 或 https://...">
+        </div>
+        <div class="form-group">
+          <label>排序</label>
+          <input type="number" id="nm-sort" value="${data.sort_order || 0}" placeholder="数字越小越靠前">
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <select id="nm-status">
+            <option value="1" ${data.status === 1 ? 'selected' : ''}>启用</option>
+            <option value="0" ${data.status === 0 ? 'selected' : ''}>禁用</option>
+          </select>
+        </div>
+      `;
+    }
+    
+    function saveNavMenu() {
+      const data = {
+        name: document.getElementById('nm-name').value.trim(),
+        link: document.getElementById('nm-link').value.trim(),
+        sort_order: parseInt(document.getElementById('nm-sort').value) || 0,
+        status: parseInt(document.getElementById('nm-status').value)
+      };
+      
+      if (!data.name || !data.link) {
+        showToast('名称和链接不能为空', 'error');
+        return;
+      }
+      
+      let url = API_BASE + '/nav-menus';
+      let method = 'POST';
+      
+      if (currentItem && currentItem.id) {
+        url += '/' + currentItem.id;
+        method = 'PUT';
+      }
+      
+      fetch(url, {
+        method: method,
+        headers: { ...getAuthHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(res => res.json()).then(result => {
+        if (result.success) {
+          showToast(currentItem ? '更新成功' : '添加成功', 'success');
+          closeModal();
+          loadNavMenus();
+        } else {
+          showToast(result.error || '操作失败', 'error');
+        }
+      });
+    }
+    
+    function deleteNavMenu(id) {
+      if (!confirm('确定要删除这个导航菜单吗？')) return;
+      
+      fetch(API_BASE + '/nav-menus/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadNavMenus();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 推荐位管理 ============
+    function loadBanners() {
+      fetch(API_BASE + '/banners?all=1', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            renderBannersTable(data.data);
+          }
+        });
+    }
+    
+    function renderBannersTable(items) {
+      const container = document.getElementById('banners-table-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div style="font-size: 2rem; margin-bottom: 12px;">🖼️</div><p>暂无推荐位</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>标题</th><th>图片</th><th>链接</th><th>排序</th><th>状态</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      items.forEach(item => {
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.title}</td>
+          <td>${item.image_url ? `<img src="${item.image_url}" style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px;">' : '-'}</td>
+          <td><span style="font-size: 0.85rem; color: var(--color-text-secondary);">${item.link || '-'}</span></td>
+          <td>${item.sort_order || 0}</td>
+          <td>${item.status === 1 ? '<span class="badge badge-success">启用</span>' : '<span class="badge badge-danger">禁用</span>'}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editBanner(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteBanner(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openBannerModal(id) {
+      currentItemType = 'banner';
+      currentItem = null;
+      
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑推荐位' : '添加推荐位';
+      
+      if (id) {
+        fetch(API_BASE + '/banners?all=1', { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const item = data.data.find(i => i.id === id);
+              if (item) {
+                currentItem = item;
+                renderBannerForm(item);
+              }
+            }
+          });
+      } else {
+        renderBannerForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
+    }
+    
+    function editBanner(id) {
+      openBannerModal(id);
+    }
+    
+    function renderBannerForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>标题 *</label>
+          <input type="text" id="bn-title" value="${data.title || ''}" placeholder="推荐位标题">
+        </div>
+        <div class="form-group">
+          <label>图片URL</label>
+          <input type="text" id="bn-image" value="${data.image_url || ''}" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>跳转链接</label>
+          <input type="text" id="bn-link" value="${data.link || ''}" placeholder="点击后跳转到哪里">
+        </div>
+        <div class="form-group">
+          <label>排序</label>
+          <input type="number" id="bn-sort" value="${data.sort_order || 0}" placeholder="数字越小越靠前">
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <select id="bn-status">
+            <option value="1" ${data.status === 1 ? 'selected' : ''}>启用</option>
+            <option value="0" ${data.status === 0 ? 'selected' : ''}>禁用</option>
+          </select>
+        </div>
+      `;
+    }
+    
+    function saveBanner() {
+      const data = {
+        title: document.getElementById('bn-title').value.trim(),
+        image_url: document.getElementById('bn-image').value.trim(),
+        link: document.getElementById('bn-link').value.trim(),
+        sort_order: parseInt(document.getElementById('bn-sort').value) || 0,
+        status: parseInt(document.getElementById('bn-status').value)
+      };
+      
+      if (!data.title) {
+        showToast('标题不能为空', 'error');
+        return;
+      }
+      
+      let url = API_BASE + '/banners';
+      let method = 'POST';
+      
+      if (currentItem && currentItem.id) {
+        url += '/' + currentItem.id;
+        method = 'PUT';
+      }
+      
+      fetch(url, {
+        method: method,
+        headers: { ...getAuthHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(res => res.json()).then(result => {
+        if (result.success) {
+          showToast(currentItem ? '更新成功' : '添加成功', 'success');
+          closeModal();
+          loadBanners();
+        } else {
+          showToast(result.error || '操作失败', 'error');
+        }
+      });
+    }
+    
+    function deleteBanner(id) {
+      if (!confirm('确定要删除这个推荐位吗？')) return;
+      
+      fetch(API_BASE + '/banners/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadBanners();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 网站设置 ============
+    function loadSiteSettings() {
+      fetch(API_BASE + '/settings/site', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.data) {
+            document.getElementById('setting-site-title').value = data.data.site_title || '';
+            document.getElementById('setting-site-description').value = data.data.site_description || '';
+            document.getElementById('setting-keywords').value = data.data.site_keywords || '';
+            document.getElementById('setting-icp').value = data.data.icp || '';
+            document.getElementById('setting-footer').value = data.data.footer_text || '';
+          }
+        });
+    }
+    
+    function saveSiteSettings() {
+      const data = {
+        site_title: document.getElementById('setting-site-title').value.trim(),
+        site_description: document.getElementById('setting-site-description').value.trim(),
+        site_keywords: document.getElementById('setting-keywords').value.trim(),
+        icp: document.getElementById('setting-icp').value.trim(),
+        footer_text: document.getElementById('setting-footer').value.trim()
+      };
+      
+      fetch(API_BASE + '/settings/site', {
+        method: 'PUT',
+        headers: { ...getAuthHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(res => res.json()).then(result => {
+        if (result.success) {
+          showToast('设置保存成功', 'success');
+        } else {
+          showToast(result.error || '保存失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 数据备份 ============
+    function exportBackup() {
+      if (!confirm('确定要导出所有数据备份吗？')) return;
+      
+      showToast('正在生成备份文件...', 'info');
+      
+      fetch(API_BASE + '/backup/export', { headers: getAuthHeaders() })
+        .then(res => {
+          if (res.ok) {
+            return res.blob().then(blob => {
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'chanmaoyoupu_backup_' + new Date().toISOString().slice(0, 10) + '.json';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              window.URL.revokeObjectURL(url);
+              showToast('备份导出成功', 'success');
+            });
+          } else {
+            showToast('导出失败', 'error');
+          }
+        })
+        .catch(() => {
+          showToast('导出失败', 'error');
+        });
+    }
+    
     // ============ 通用功能 ============
     function saveItem() {
+      // 新模块使用独立的保存函数
+      if (currentItemType === 'friend-link') {
+        saveFriendLink();
+        return;
+      }
+      if (currentItemType === 'nav-menu') {
+        saveNavMenu();
+        return;
+      }
+      if (currentItemType === 'banner') {
+        saveBanner();
+        return;
+      }
+      
       let data = {};
       let url = API_BASE + '/' + currentItemType + 's';
       let method = 'POST';
