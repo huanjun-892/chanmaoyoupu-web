@@ -1317,7 +1317,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     function renderCuisinesTable(items) {
       const keyword = document.getElementById('cuisine-search').value.toLowerCase();
       const filtered = items.filter(i => 
-        !keyword || i.name.toLowerCase().includes(keyword) || (i.slug && i.slug.toLowerCase().includes(keyword)
+        !keyword || i.name.toLowerCase().includes(keyword) || (i.slug && i.slug.toLowerCase().includes(keyword))
       );
       
       const container = document.getElementById('cuisines-table-container');
