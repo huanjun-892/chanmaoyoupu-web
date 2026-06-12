@@ -959,55 +959,221 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     function renderRecipeForm(data) {
       const body = document.getElementById('modal-body');
+
+      // 构建食材HTML
+      let ingredientsHtml = '';
+      const ingredients = data.ingredients || [];
+      if (ingredients.length === 0) {
+        ingredientsHtml = '<p style="color: var(--color-text-secondary); font-size: 0.85rem; margin: 0;">暂无食材，点击下方按钮添加</p>';
+      } else {
+        ingredients.forEach((ing, idx) => {
+          ingredientsHtml += `
+            <div class="ingredient-row" style="display: flex; gap: 8px; margin-bottom: 8px;">
+              <input type="text" placeholder="食材名称" value="${ing.name || ''}" style="flex: 1; padding: 6px 10px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem; background: var(--color-bg); color: var(--color-text);">
+              <input type="text" placeholder="用量" value="${ing.amount || ''}" style="width: 120px; padding: 6px 10px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem; background: var(--color-bg); color: var(--color-text);">
+              <button type="button" onclick="removeIngredientRow(this)" style="padding: 6px 12px; background: #fee2e2; color: #dc2626; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">删除</button>
+            </div>
+          `;
+        });
+      }
+
+      // 构建步骤HTML
+      let stepsHtml = '';
+      const steps = data.steps || [];
+      if (steps.length === 0) {
+        stepsHtml = '<p style="color: var(--color-text-secondary); font-size: 0.85rem; margin: 0;">暂无步骤，点击下方按钮添加</p>';
+      } else {
+        steps.forEach((step, idx) => {
+          stepsHtml += `
+            <div class="step-row" style="margin-bottom: 8px;">
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="font-weight: 600; color: var(--color-accent); min-width: 24px; padding-top: 6px;">${idx + 1}.</span>
+                <textarea placeholder="步骤描述" rows="2" style="flex: 1; padding: 6px 10px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem; resize: vertical; background: var(--color-bg); color: var(--color-text);">${step.text || ''}</textarea>
+                <button type="button" onclick="removeStepRow(this)" style="padding: 6px 12px; background: #fee2e2; color: #dc2626; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">删除</button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
       body.innerHTML = `
-        <div class="form-group">
-          <label>标题 *</label>
-          <input type="text" id="recipe-title" value="${data.title || ''}" placeholder="食谱标题">
-        </div>
-        <div class="form-group">
-          <label>Slug *</label>
-          <input type="text" id="recipe-slug" value="${data.slug || ''}" placeholder="url-friendly slug">
-        </div>
-        <div class="form-row">
+        <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 12px;">
+          <h4 style="margin: 0 0 12px 0; color: var(--color-title); font-size: 0.95rem;">基本信息</h4>
           <div class="form-group">
-            <label>难度</label>
-            <select id="recipe-difficulty">
-              <option value="简单" ${data.difficulty === '简单' ? 'selected' : ''}>简单</option>
-              <option value="中等" ${data.difficulty === '中等' ? 'selected' : ''}>中等</option>
-              <option value="较难" ${data.difficulty === '较难' ? 'selected' : ''}>较难</option>
+            <label>标题 *</label>
+            <input type="text" id="recipe-title" value="${data.title || ''}" placeholder="食谱标题">
+          </div>
+          <div class="form-group">
+            <label>Slug *</label>
+            <input type="text" id="recipe-slug" value="${data.slug || ''}" placeholder="url-friendly slug">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>难度</label>
+              <select id="recipe-difficulty">
+                <option value="简单" ${data.difficulty === '简单' ? 'selected' : ''}>简单</option>
+                <option value="中等" ${data.difficulty === '中等' ? 'selected' : ''}>中等</option>
+                <option value="较难" ${data.difficulty === '较难' ? 'selected' : ''}>较难</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>烹饪时间(分钟)</label>
+              <input type="number" id="recipe-cooktime" value="${data.cook_time || ''}">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>份量(人份)</label>
+              <input type="number" id="recipe-servings" value="${data.servings || ''}">
+            </div>
+            <div class="form-group">
+              <label>卡路里</label>
+              <input type="number" id="recipe-calories" value="${data.calories || ''}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>菜系</label>
+            <select id="recipe-cuisine">
+              <option value="">无</option>
             </select>
           </div>
           <div class="form-group">
-            <label>烹饪时间(分钟)</label>
-            <input type="number" id="recipe-cooktime" value="${data.cook_time || ''}">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>份量(人份)</label>
-            <input type="number" id="recipe-servings" value="${data.servings || ''}">
+            <label>封面图URL</label>
+            <input type="text" id="recipe-cover" value="${data.cover_url || ''}" placeholder="https://...">
           </div>
           <div class="form-group">
-            <label>卡路里</label>
-            <input type="number" id="recipe-calories" value="${data.calories || ''}">
+            <label>简介</label>
+            <textarea id="recipe-description" rows="3">${data.description || ''}</textarea>
+          </div>
+          <div class="form-group">
+            <label>发布状态</label>
+            <select id="recipe-published">
+              <option value="1" ${data.published === 1 ? 'selected' : ''}>发布</option>
+              <option value="0" ${data.published === 0 ? 'selected' : ''}>草稿</option>
+            </select>
           </div>
         </div>
-        <div class="form-group">
-          <label>封面图URL</label>
-          <input type="text" id="recipe-cover" value="${data.cover_url || ''}" placeholder="https://...">
+
+        <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h4 style="margin: 0; color: var(--color-title); font-size: 0.95rem;">食材清单</h4>
+            <button type="button" onclick="addIngredientRow()" style="padding: 4px 12px; background: var(--color-accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">+ 添加食材</button>
+          </div>
+          <div id="ingredients-list">${ingredientsHtml}</div>
         </div>
-        <div class="form-group">
-          <label>简介</label>
-          <textarea id="recipe-description" rows="3">${data.description || ''}</textarea>
+
+        <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h4 style="margin: 0; color: var(--color-title); font-size: 0.95rem;">烹饪步骤</h4>
+            <button type="button" onclick="addStepRow()" style="padding: 4px 12px; background: var(--color-accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">+ 添加步骤</button>
+          </div>
+          <div id="steps-list">${stepsHtml}</div>
         </div>
-        <div class="form-group">
-          <label>发布状态</label>
-          <select id="recipe-published">
-            <option value="1" ${data.published === 1 ? 'selected' : ''}>发布</option>
-            <option value="0" ${data.published === 0 ? 'selected' : ''}>草稿</option>
-          </select>
+
+        <div>
+          <h4 style="margin: 0 0 12px 0; color: var(--color-title); font-size: 0.95rem;">详细信息</h4>
+          <div class="form-group">
+            <label>营养价值</label>
+            <textarea id="recipe-nutrition" rows="2" placeholder="如：富含蛋白质、维生素...">${data.nutrition || ''}</textarea>
+          </div>
+          <div class="form-group">
+            <label>常见误区</label>
+            <textarea id="recipe-common-mistakes" rows="2" placeholder="如：不要过度翻炒以免变老...">${data.common_mistakes || ''}</textarea>
+          </div>
+          <div class="form-group">
+            <label>成功技巧</label>
+            <textarea id="recipe-success-tips" rows="2" placeholder="如：冷水下锅焯水去腥味...">${data.success_tips || ''}</textarea>
+          </div>
+          <div class="form-group">
+            <label>食材替代</label>
+            <textarea id="recipe-substitutes" rows="2" placeholder="如：没有料酒可用黄酒代替...">${data.ingredient_substitutes || ''}</textarea>
+          </div>
+          <div class="form-group">
+            <label>适宜人群</label>
+            <textarea id="recipe-suitable-for" rows="2" placeholder="如：一般人群均可食用...">${data.suitable_for || ''}</textarea>
+          </div>
+          <div class="form-group">
+            <label>所需厨具</label>
+            <textarea id="recipe-required-tools" rows="2" placeholder="如：炒锅、铲子、盘子...">${data.required_tools || ''}</textarea>
+          </div>
         </div>
       `;
+
+      // 加载菜系选项
+      loadCuisineOptions(data.cuisine_id);
+    }
+
+    // 加载菜系下拉选项
+    function loadCuisineOptions(selectedId) {
+      fetch(API_BASE + '/cuisines?all=1', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const select = document.getElementById('recipe-cuisine');
+            if (!select) return;
+            data.data.forEach(c => {
+              if (c.id === 0) return;
+              const option = document.createElement('option');
+              option.value = c.id;
+              option.textContent = c.name;
+              if (selectedId && c.id === selectedId) option.selected = true;
+              select.appendChild(option);
+            });
+          }
+        });
+    }
+
+    // 添加食材行
+    function addIngredientRow() {
+      const list = document.getElementById('ingredients-list');
+      if (!list) return;
+      const row = document.createElement('div');
+      row.className = 'ingredient-row';
+      row.style.cssText = 'display: flex; gap: 8px; margin-bottom: 8px;';
+      row.innerHTML = `
+        <input type="text" placeholder="食材名称" style="flex: 1; padding: 6px 10px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem; background: var(--color-bg); color: var(--color-text);">
+        <input type="text" placeholder="用量" style="width: 120px; padding: 6px 10px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem; background: var(--color-bg); color: var(--color-text);">
+        <button type="button" onclick="removeIngredientRow(this)" style="padding: 6px 12px; background: #fee2e2; color: #dc2626; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">删除</button>
+      `;
+      list.appendChild(row);
+    }
+
+    // 删除食材行
+    function removeIngredientRow(btn) {
+      const row = btn.closest('.ingredient-row');
+      if (row) row.remove();
+    }
+
+    // 添加步骤行
+    function addStepRow() {
+      const list = document.getElementById('steps-list');
+      if (!list) return;
+      const rows = list.querySelectorAll('.step-row');
+      const stepNum = rows.length + 1;
+
+      const row = document.createElement('div');
+      row.className = 'step-row';
+      row.style.marginBottom = '8px';
+      row.innerHTML = `
+        <div style="display: flex; gap: 8px; align-items: flex-start;">
+          <span style="font-weight: 600; color: var(--color-accent); min-width: 24px; padding-top: 6px;">${stepNum}.</span>
+          <textarea placeholder="步骤描述" rows="2" style="flex: 1; padding: 6px 10px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.85rem; resize: vertical; background: var(--color-bg); color: var(--color-text);"></textarea>
+          <button type="button" onclick="removeStepRow(this)" style="padding: 6px 12px; background: #fee2e2; color: #dc2626; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">删除</button>
+        </div>
+      `;
+      list.appendChild(row);
+    }
+
+    // 删除步骤行
+    function removeStepRow(btn) {
+      const row = btn.closest('.step-row');
+      if (row) row.remove();
+      // 重新编号
+      const rows = document.querySelectorAll('#steps-list .step-row');
+      rows.forEach((rowEl, idx) => {
+        const numSpan = rowEl.querySelector('span');
+        if (numSpan) numSpan.textContent = (idx + 1) + '.';
+      });
     }
     
     function toggleRecipePublish(id, published) {
@@ -1822,6 +1988,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       let method = 'POST';
       
       if (currentItemType === 'recipe') {
+        // 收集食材
+        const ingredients = [];
+        const ingredientRows = document.querySelectorAll('#ingredients-list .ingredient-row');
+        ingredientRows.forEach((row, idx) => {
+          const inputs = row.querySelectorAll('input');
+          const name = inputs[0]?.value.trim();
+          const amount = inputs[1]?.value.trim();
+          if (name) {
+            ingredients.push({ name, amount, sort_order: idx + 1 });
+          }
+        });
+        
+        // 收集步骤
+        const steps = [];
+        const stepRows = document.querySelectorAll('#steps-list .step-row');
+        stepRows.forEach((row, idx) => {
+          const textarea = row.querySelector('textarea');
+          const text = textarea?.value.trim();
+          if (text) {
+            steps.push({ step_number: idx + 1, text });
+          }
+        });
+        
+        const cuisineVal = document.getElementById('recipe-cuisine').value;
         data = {
           title: document.getElementById('recipe-title').value,
           slug: document.getElementById('recipe-slug').value,
@@ -1830,8 +2020,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           cook_time: parseInt(document.getElementById('recipe-cooktime').value) || 0,
           servings: parseInt(document.getElementById('recipe-servings').value) || 1,
           calories: parseInt(document.getElementById('recipe-calories').value) || 0,
+          cuisine_id: cuisineVal ? parseInt(cuisineVal) : null,
           cover_url: document.getElementById('recipe-cover').value,
-          published: parseInt(document.getElementById('recipe-published').value)
+          published: parseInt(document.getElementById('recipe-published').value),
+          nutrition: document.getElementById('recipe-nutrition').value,
+          common_mistakes: document.getElementById('recipe-common-mistakes').value,
+          success_tips: document.getElementById('recipe-success-tips').value,
+          ingredient_substitutes: document.getElementById('recipe-substitutes').value,
+          suitable_for: document.getElementById('recipe-suitable-for').value,
+          required_tools: document.getElementById('recipe-required-tools').value,
+          ingredients: ingredients,
+          steps: steps
         };
       } else if (currentItemType === 'ingredient') {
         data = {
@@ -1922,6 +2121,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     function closeModal() {
       document.getElementById('edit-modal').classList.remove('show');
+      // 重置弹窗底部按钮为默认状态（取消+保存）
+      const footer = document.getElementById('modal-footer');
+      footer.innerHTML = `
+        <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+        <button class="btn btn-primary" onclick="saveItem()">保存</button>
+      `;
       currentItem = null;
       currentItemType = null;
     }
