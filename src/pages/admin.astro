@@ -404,9 +404,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
       resize: both;
       overflow: hidden;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -793,6 +792,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </select>
           <button class="btn btn-primary" onclick="openRecipeModal()">+ 新增食谱</button>
           <button class="btn btn-secondary" onclick="document.getElementById('recipe-import-file').click()">📥 批量导入</button>
+          <button class="btn btn-secondary" onclick="downloadImportTemplate('recipes')">📋 下载模板</button>
           <input type="file" id="recipe-import-file" accept=".xlsx,.xls,.csv" style="display:none" onchange="importFromExcel('recipes', this)">
         </div>
         <div id="recipes-table-container">
@@ -807,6 +807,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <input type="text" class="search-input" id="ingredient-search" placeholder="搜索食材名称..." oninput="searchIngredients()">
           <button class="btn btn-primary" onclick="openIngredientModal()">+ 新增食材</button>
           <button class="btn btn-secondary" onclick="document.getElementById('ingredient-import-file').click()">📥 批量导入</button>
+          <button class="btn btn-secondary" onclick="downloadImportTemplate('ingredients')">📋 下载模板</button>
           <input type="file" id="ingredient-import-file" accept=".xlsx,.xls,.csv" style="display:none" onchange="importFromExcel('ingredients', this)">
         </div>
         <div id="ingredients-table-container">
@@ -826,6 +827,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </select>
           <button class="btn btn-primary" onclick="openKnowledgeModal()">+ 新增文章</button>
           <button class="btn btn-secondary" onclick="document.getElementById('knowledge-import-file').click()">📥 批量导入</button>
+          <button class="btn btn-secondary" onclick="downloadImportTemplate('knowledge')">📋 下载模板</button>
           <input type="file" id="knowledge-import-file" accept=".xlsx,.xls,.csv" style="display:none" onchange="importFromExcel('knowledge', this)">
         </div>
         <div id="knowledge-table-container">
@@ -988,9 +990,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       
       const quill = new Quill('#' + editorId, defaultOptions);
       
-      // 设置初始内容
-      if (options.content) {
-        quill.root.innerHTML = options.content;
+      // 设置初始内容（支持HTML）
+      if (options.content && options.content.trim()) {
+        quill.clipboard.dangerouslyPasteHTML(0, options.content);
       }
       
       // 设置编辑器初始高度
@@ -1295,6 +1297,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       
       document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
     }
     
     function editRecipe(id) {
@@ -1657,6 +1660,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       
       document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
     }
     
     function editIngredient(id) {
@@ -1861,6 +1865,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       
       document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
     }
     
     function editKnowledge(id) {
@@ -2009,6 +2014,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       
       document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
     }
     
     function editCuisine(id) { openCuisineModal(id); }
@@ -2121,6 +2127,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       
       document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
     }
     
     function editTag(id) { openTagModal(id); }
@@ -2217,6 +2224,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       
       document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
     }
     
     function editRegion(id) { openRegionModal(id); }
@@ -2304,6 +2312,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       
       document.getElementById('edit-modal').classList.add('show');
+      resetModalPosition();
     }
     
     function editMethod(id) { openMethodModal(id); }
@@ -2749,11 +2758,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const modal = document.getElementById('edit-modal');
       const content = modal.querySelector('.modal-content');
       if (content) {
-        content.style.transform = 'translate(-50%, -50%)';
-        content.style.left = '50%';
-        content.style.top = '50%';
+        // 先重置大小
         content.style.width = '700px';
         content.style.height = '';
+        content.style.transform = 'none';
+        
+        // 等 DOM 渲染后计算居中位置
+        setTimeout(() => {
+          const rect = content.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+          
+          const left = Math.max(0, (viewportWidth - rect.width) / 2);
+          const top = Math.max(0, (viewportHeight - rect.height) / 2);
+          
+          content.style.left = left + 'px';
+          content.style.top = top + 'px';
+        }, 10);
       }
     }
     
@@ -3010,6 +3031,104 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     function closeImportProgress() {
       const modal = document.getElementById('import-progress-modal');
       if (modal) modal.remove();
+    }
+    
+    // 下载导入模板
+    function downloadImportTemplate(type) {
+      if (!window.XLSX) {
+        showToast('模板生成库加载中，请稍候再试', 'error');
+        return;
+      }
+      
+      // 定义各类型的模板列名和示例数据
+      const templates = {
+        recipes: {
+          sheetName: '食谱导入模板',
+          fileName: '食谱导入模板.xlsx',
+          columns: ['标题', 'Slug', '简介', '难度', '烹饪时间', '份量', '卡路里', '封面图', '菜系', '状态', '营养价值', '常见误区', '成功技巧', '食材替代', '适宜人群', '所需厨具', '食材清单', '烹饪步骤'],
+          sample: [
+            {
+              '标题': '红烧肉',
+              'Slug': 'hong-shao-rou',
+              '简介': '经典家常菜，肥而不腻，入口即化',
+              '难度': '中等',
+              '烹饪时间': 90,
+              '份量': 3,
+              '卡路里': 450,
+              '封面图': '',
+              '菜系': '粤菜',
+              '状态': 1,
+              '营养价值': '富含蛋白质和脂肪，提供充足能量',
+              '常见误区': '不要用大火猛煮，否则肉质会变老',
+              '成功技巧': '冷水下锅焯水，加入料酒去腥',
+              '食材替代': '没有冰糖可用白糖代替',
+              '适宜人群': '一般人群均可食用',
+              '所需厨具': '炒锅、砂锅、铲子',
+              '食材清单': '五花肉500g，冰糖30g，生抽2勺，老抽1勺，料酒2勺，姜片适量，八角2个',
+              '烹饪步骤': '五花肉切块冷水下锅焯水\n锅中放糖炒出糖色\n放入肉块翻炒上色\n加入调料和热水炖煮\n大火收汁即可'
+            }
+          ]
+        },
+        ingredients: {
+          sheetName: '食材导入模板',
+          fileName: '食材导入模板.xlsx',
+          columns: ['名称', 'Slug', '分类', '图片', '别名', '产地', '季节', '状态', '简介', '营养价值', '选购技巧', '搭配建议', '食用禁忌', '储存方法'],
+          sample: [
+            {
+              '名称': '土豆',
+              'Slug': 'tu-dou',
+              '分类': '蔬菜',
+              '图片': '',
+              '别名': '马铃薯、洋芋',
+              '产地': '全国各地',
+              '季节': '秋季',
+              '状态': 1,
+              '简介': '土豆是全球第四大重要的粮食作物',
+              '营养价值': '富含淀粉、蛋白质、维生素C和B族维生素',
+              '选购技巧': '选择表皮光滑、无发芽、无绿色部分的土豆',
+              '搭配建议': '适合与肉类炖炒，也可做主食',
+              '食用禁忌': '发芽和变绿的土豆含有龙葵素，不宜食用',
+              '储存方法': '放置阴凉干燥处，避免阳光直射'
+            }
+          ]
+        },
+        knowledge: {
+          sheetName: '知识库导入模板',
+          fileName: '知识库导入模板.xlsx',
+          columns: ['标题', 'Slug', '分类', '摘要', '内容'],
+          sample: [
+            {
+              '标题': '如何挑选新鲜猪肉',
+              'Slug': 'how-to-choose-fresh-pork',
+              '分类': '烹饪技巧',
+              '摘要': '介绍挑选新鲜猪肉的几个要点，一看二闻三触摸',
+              '内容': '<p>挑选新鲜猪肉有以下几个要点：</p><p><strong>1. 看颜色</strong>：新鲜猪肉呈淡红色，有光泽。</p><p><strong>2. 闻气味</strong>：新鲜猪肉有鲜腥味，无异味。</p><p><strong>3. 摸弹性</strong>：按压后能迅速恢复原状。</p>'
+            }
+          ]
+        }
+      };
+      
+      const template = templates[type];
+      if (!template) {
+        showToast('未知的模板类型', 'error');
+        return;
+      }
+      
+      // 创建工作簿和工作表
+      const wb = XLSX.utils.book_new();
+      const wsData = [template.columns, ...template.sample.map(row => template.columns.map(col => row[col] || ''))];
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      
+      // 设置列宽
+      ws['!cols'] = template.columns.map(() => ({ wch: 15 }));
+      
+      // 添加到工作簿
+      XLSX.utils.book_append_sheet(wb, ws, template.sheetName);
+      
+      // 下载文件
+      XLSX.writeFile(wb, template.fileName);
+      
+      showToast('模板下载成功', 'success');
     }
   </script>
 </BaseLayout>
