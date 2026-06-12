@@ -279,6 +279,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       background: var(--color-bg-secondary);
     }
     
+    /* 徽章 */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .badge-admin {
+      background: var(--color-accent);
+      color: white;
+    }
+    
+    .badge-user {
+      background: var(--color-bg-secondary);
+      color: var(--color-text-secondary);
+    }
+    
     /* 搜索栏 */
     .toolbar {
       display: flex;
@@ -737,6 +756,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <li><a data-page="ingredients">🥬 <span>食材管理</span></a></li>
         <li><a data-page="knowledge">📚 <span>知识库管理</span></a></li>
         <li><a data-page="categories">🏷️ <span>分类管理</span></a></li>
+        <li><a data-page="users">👥 <span>用户管理</span></a></li>
         <li><a data-page="push">📱 <span>内容推送助手</span></a></li>
       </ul>
     </aside>
@@ -876,6 +896,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div id="methods-table-container"></div>
         </div>
+      </section>
+      
+      <!-- 用户管理 -->
+      <section id="page-users" class="page-section">
+        <div class="toolbar">
+          <input type="text" class="search-input" id="user-search" placeholder="搜索用户邮箱或昵称..." oninput="searchUsers()">
+          <select class="search-input" id="user-role-filter" onchange="searchUsers()">
+            <option value="">全部角色</option>
+            <option value="admin">管理员</option>
+            <option value="user">普通用户</option>
+          </select>
+        </div>
+        <div id="users-table-container">
+          <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+        </div>
+        <div class="pagination" id="users-pagination"></div>
       </section>
       
       <!-- 内容推送助手 -->
@@ -1181,6 +1217,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             else if (page === 'ingredients') loadIngredients();
             else if (page === 'knowledge') loadKnowledge();
             else if (page === 'categories') loadCuisines();
+            else if (page === 'users') loadUsers();
             else if (page === 'push') loadPushContentOptions();
           } catch (err) {
             console.error('Navigation error:', err);
@@ -2339,6 +2376,108 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           loadMethods();
         } else {
           showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 用户管理 ============
+    let usersCurrentPage = 1;
+    const usersPageSize = 20;
+    
+    function loadUsers(page = 1, search = '', role = '') {
+      usersCurrentPage = page;
+      const container = document.getElementById('users-table-container');
+      if (!container) return;
+      
+      container.innerHTML = '<div class="loading"><div class="spinner"></div><p>加载中...</p></div>';
+      
+      let url = API_BASE + '/users?page=' + page + '&limit=' + usersPageSize;
+      if (search) url += '&search=' + encodeURIComponent(search);
+      if (role) url += '&role=' + role;
+      
+      fetch(url, { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            renderUsersTable(data.data.users, data.data.total, page);
+          } else {
+            container.innerHTML = '<p style="text-align: center; color: var(--color-error);">加载失败：' + (data.error || '未知错误') + '</p>';
+          }
+        })
+        .catch(err => {
+          container.innerHTML = '<p style="text-align: center; color: var(--color-error);">加载失败：' + err.message + '</p>';
+        });
+    }
+    
+    function searchUsers() {
+      const search = document.getElementById('user-search').value;
+      const role = document.getElementById('user-role-filter').value;
+      loadUsers(1, search, role);
+    }
+    
+    function renderUsersTable(users, total, page) {
+      const container = document.getElementById('users-table-container');
+      if (!container) return;
+      
+      if (!users || users.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--color-text-secondary); padding: 40px;">暂无用户数据</p>';
+        document.getElementById('users-pagination').innerHTML = '';
+        return;
+      }
+      
+      let html = '<table class="data-table">';
+      html += '<thead><tr>';
+      html += '<th>ID</th><th>邮箱</th><th>昵称</th><th>角色</th><th>注册时间</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      users.forEach(user => {
+        const roleBadge = user.role === 'admin' 
+          ? '<span class="badge badge-admin">管理员</span>' 
+          : '<span class="badge badge-user">普通用户</span>';
+        
+        const roleAction = user.role === 'admin'
+          ? `<button class="btn btn-secondary btn-sm" onclick="updateUserRole(${user.id}, 'user')">设为普通用户</button>`
+          : `<button class="btn btn-primary btn-sm" onclick="updateUserRole(${user.id}, 'admin')">设为管理员</button>`;
+        
+        html += `
+          <tr>
+            <td>${user.id}</td>
+            <td>${escapeHtml(user.email || '')}</td>
+            <td>${escapeHtml(user.nickname || '-')}</td>
+            <td>${roleBadge}</td>
+            <td>${formatDate(user.created_at)}</td>
+            <td>${roleAction}</td>
+          </tr>
+        `;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+      
+      // 渲染分页
+      renderPagination('users', total, usersPageSize, page, function(p) {
+        const search = document.getElementById('user-search').value;
+        const role = document.getElementById('user-role-filter').value;
+        loadUsers(p, search, role);
+      });
+    }
+    
+    function updateUserRole(id, role) {
+      const action = role === 'admin' ? '设为管理员' : '设为普通用户';
+      if (!confirm('确定要将该用户' + action + '吗？')) return;
+      
+      fetch(API_BASE + '/users/' + id + '/role', {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ role: role })
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('操作成功', 'success');
+          const search = document.getElementById('user-search').value;
+          const role = document.getElementById('user-role-filter').value;
+          loadUsers(usersCurrentPage, search, role);
+        } else {
+          showToast(data.error || '操作失败', 'error');
         }
       });
     }
