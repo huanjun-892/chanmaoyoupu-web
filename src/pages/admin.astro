@@ -384,28 +384,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       inset: 0;
       background: rgba(0, 0, 0, 0.5);
       display: none;
-      align-items: center;
-      justify-content: center;
       z-index: 1000;
     }
     
     .modal-overlay.show {
-      display: flex;
+      display: block;
     }
     
     .modal-content {
       background: var(--color-bg);
       border-radius: var(--radius);
-      width: 90%;
-      max-width: 700px;
+      width: 700px;
       min-width: 400px;
       min-height: 300px;
       max-height: 85vh;
       display: flex;
       flex-direction: column;
-      position: relative;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       resize: both;
       overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     }
     
     .modal-content.dragging {
@@ -489,9 +490,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       background: var(--color-bg);
       border-bottom-left-radius: var(--radius-sm);
       border-bottom-right-radius: var(--radius-sm);
-      resize: vertical;
-      overflow: hidden;
       min-height: 80px;
+      max-height: 400px;
     }
     
     .ql-toolbar {
@@ -502,8 +502,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     .ql-editor {
       min-height: 80px;
+      max-height: 400px;
       color: var(--color-text);
-      height: 100%;
+      overflow-y: auto;
+    }
+    
+    /* 编辑器包装器 - 支持拖拽调整高度 */
+    .editor-wrapper {
+      position: relative;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    
+    .editor-wrapper .ql-container {
+      border: none;
+      resize: vertical;
+      overflow: hidden;
+    }
+    
+    .editor-wrapper .ql-toolbar {
+      border: none;
+      border-bottom: 1px solid var(--color-border);
     }
     
     .ql-editor.ql-blank::before {
@@ -936,6 +956,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const container = document.getElementById(containerId);
       if (!container) return null;
       
+      // 添加包装器类
+      container.classList.add('editor-wrapper');
+      
       // 创建 Quill 容器结构
       const editorId = containerId + '-editor';
       container.innerHTML = `<div id="${editorId}"></div>`;
@@ -958,6 +981,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       // 设置初始内容
       if (options.content) {
         quill.root.innerHTML = options.content;
+      }
+      
+      // 设置编辑器初始高度
+      const qlContainer = container.querySelector('.ql-container');
+      if (qlContainer) {
+        qlContainer.style.height = options.height || '120px';
+        qlContainer.style.resize = 'vertical';
+        qlContainer.style.overflow = 'hidden';
       }
       
       quillEditors[containerId] = quill;
@@ -2574,6 +2605,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       // 先销毁所有富文本编辑器实例
       destroyQuillEditors();
       document.getElementById('edit-modal').classList.remove('show');
+      // 重置弹窗位置和大小
+      resetModalPosition();
       // 重置弹窗底部按钮为默认状态（取消+保存）
       const footer = document.getElementById('modal-footer');
       footer.innerHTML = `
@@ -2634,22 +2667,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         modalContent.style.transform = 'none';
         modalContent.style.left = rect.left + 'px';
         modalContent.style.top = rect.top + 'px';
-        modalContent.style.margin = '0';
       });
       
       // 拖拽移动
       document.addEventListener('mousemove', function(e) {
         if (!isDragging || !modalContent) return;
+        e.preventDefault();
         
-        const newX = e.clientX - dragOffsetX;
-        const newY = e.clientY - dragOffsetY;
+        let newX = e.clientX - dragOffsetX;
+        let newY = e.clientY - dragOffsetY;
         
-        // 限制在视口范围内
-        const maxX = window.innerWidth - modalContent.offsetWidth;
-        const maxY = window.innerHeight - modalContent.offsetHeight;
+        // 限制在视口范围内（至少保留标题栏可见）
+        const maxX = window.innerWidth - 100;
+        const maxY = window.innerHeight - 50;
         
-        modalContent.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
-        modalContent.style.top = Math.max(0, Math.min(newY, maxY)) + 'px';
+        newX = Math.max(-modalContent.offsetWidth + 200, Math.min(newX, maxX));
+        newY = Math.max(0, Math.min(newY, maxY));
+        
+        modalContent.style.left = newX + 'px';
+        modalContent.style.top = newY + 'px';
       });
       
       // 拖拽结束
@@ -2666,11 +2702,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const modal = document.getElementById('edit-modal');
       const content = modal.querySelector('.modal-content');
       if (content) {
-        content.style.transform = '';
-        content.style.left = '';
-        content.style.top = '';
-        content.style.margin = '';
-        content.style.width = '';
+        content.style.transform = 'translate(-50%, -50%)';
+        content.style.left = '50%';
+        content.style.top = '50%';
+        content.style.width = '700px';
         content.style.height = '';
       }
     }
