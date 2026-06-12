@@ -14,6 +14,71 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       background: var(--color-bg-secondary);
     }
     
+    /* 登录页面 */
+    .login-page {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-secondary);
+      padding: 20px;
+    }
+    
+    .login-card {
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    
+    .login-logo {
+      margin-bottom: 16px;
+    }
+    
+    .login-logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .login-title {
+      font-size: 1.4rem;
+      color: var(--color-title);
+      margin: 0 0 8px 0;
+      font-weight: 700;
+    }
+    
+    .login-subtitle {
+      color: var(--color-text-secondary);
+      margin: 0 0 30px 0;
+      font-size: 0.9rem;
+    }
+    
+    .login-form {
+      text-align: left;
+    }
+    
+    .login-form .form-group {
+      margin-bottom: 16px;
+    }
+    
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+    
+    .login-footer {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--color-border);
+    }
+    
     .admin-sidebar {
       width: 220px;
       background: var(--color-bg);
@@ -314,9 +379,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       background: var(--color-bg);
       border-radius: var(--radius);
       width: 90%;
-      max-width: 600px;
-      max-height: 80vh;
-      overflow-y: auto;
+      max-width: 700px;
+      min-width: 400px;
+      min-height: 300px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      resize: both;
+      overflow: hidden;
+    }
+    
+    .modal-content.dragging {
+      cursor: grabbing;
+      user-select: none;
     }
     
     .modal-header {
@@ -325,12 +401,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       display: flex;
       justify-content: space-between;
       align-items: center;
+      cursor: grab;
+      flex-shrink: 0;
     }
     
     .modal-header h3 {
       margin: 0;
       font-size: 1.1rem;
       color: var(--color-title);
+      pointer-events: none;
     }
     
     .modal-close {
@@ -340,10 +419,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       cursor: pointer;
       color: var(--color-text-secondary);
       line-height: 1;
+      flex-shrink: 0;
     }
     
     .modal-body {
       padding: 20px;
+      overflow-y: auto;
+      flex: 1;
     }
     
     .modal-footer {
@@ -389,6 +471,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       background: var(--color-bg);
       border-bottom-left-radius: var(--radius-sm);
       border-bottom-right-radius: var(--radius-sm);
+      resize: vertical;
+      overflow: hidden;
+      min-height: 80px;
     }
     
     .ql-toolbar {
@@ -400,6 +485,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .ql-editor {
       min-height: 80px;
       color: var(--color-text);
+      height: 100%;
     }
     
     .ql-editor.ql-blank::before {
@@ -566,7 +652,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   </style>
   
-  <div class="admin-container">
+  <!-- 登录页面 -->
+  <div class="login-page" id="login-page">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="/images/logo.png" alt="馋猫有谱" style="width: 80px; height: 80px;">
+      </div>
+      <h2 class="login-title">馋猫有谱 · 管理后台</h2>
+      <p class="login-subtitle">馋得明白，做得靠谱</p>
+      
+      <div class="login-form">
+        <div class="form-group">
+          <label>管理员邮箱</label>
+          <input type="email" id="login-email" placeholder="请输入邮箱">
+        </div>
+        <div class="form-group">
+          <label>密码</label>
+          <input type="password" id="login-password" placeholder="请输入密码" onkeypress="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="btn btn-primary btn-login" onclick="doLogin()">登录</button>
+      </div>
+      
+      <div class="login-footer">
+        <p style="color: var(--color-text-tertiary); font-size: 0.8rem;">
+          💡 首次使用请先注册管理员账号
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="admin-container" id="admin-container" style="display: none;">
     <!-- 侧边栏 -->
     <aside class="admin-sidebar">
       <div class="admin-logo">🐱 <span>管理后台</span></div>
@@ -850,7 +965,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // 带富文本的字段配置
     const richTextFields = {
       recipe: ['description', 'nutrition', 'common_mistakes', 'success_tips', 'ingredient_substitutes', 'suitable_for', 'required_tools'],
-      ingredient: ['description'],
+      ingredient: ['description', 'nutrition', 'tips', 'pairing_suggestions', 'avoid_with', 'storage_method'],
       knowledge: ['summary', 'content'],
       cuisine: ['description'],
       tag: []
@@ -859,9 +974,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // 初始化（脚本在DOM之后，直接执行即可）
     function initAdmin() {
       try {
-        checkAuth();
         initNavigation();
-        loadStats();
+        initModalDrag();
+        checkAuth();
       } catch (e) {
         console.error('Admin init error:', e);
       }
@@ -877,47 +992,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     function checkAuth() {
       const token = localStorage.getItem('admin_token');
       if (!token) {
-        showLoginModal();
+        showLoginPage();
       } else {
         fetch(API_BASE + '/stats', {
           headers: { 'Authorization': 'Bearer ' + token }
         }).then(res => {
           if (res.status === 401 || res.status === 403) {
             localStorage.removeItem('admin_token');
-            showLoginModal();
+            localStorage.removeItem('admin_user');
+            showLoginPage();
+          } else {
+            showAdminPanel();
           }
+        }).catch(() => {
+          // 网络错误也显示登录页
+          showLoginPage();
         });
       }
     }
     
-    // 显示登录弹窗
-    function showLoginModal() {
-      const modal = document.getElementById('edit-modal');
-      const body = document.getElementById('modal-body');
-      const title = document.getElementById('modal-title');
-      const footer = document.getElementById('modal-footer');
-      
-      // 销毁可能存在的富文本编辑器
-      destroyQuillEditors();
-      
-      title.textContent = '管理员登录';
-      body.innerHTML = `
-        <div class="form-group">
-          <label>邮箱</label>
-          <input type="email" id="login-email" placeholder="请输入邮箱">
-        </div>
-        <div class="form-group">
-          <label>密码</label>
-          <input type="password" id="login-password" placeholder="请输入密码" onkeypress="if(event.key==='Enter')doLogin()">
-        </div>
-        <p style="color: var(--color-text-secondary); font-size: 0.8rem;">
-          请使用管理员账号登录
-        </p>
-      `;
-      footer.innerHTML = `
-        <button class="btn btn-primary" onclick="doLogin()">登录</button>
-      `;
-      modal.classList.add('show');
+    // 显示登录页面
+    function showLoginPage() {
+      document.getElementById('login-page').style.display = 'flex';
+      document.getElementById('admin-container').style.display = 'none';
+    }
+    
+    // 显示管理后台
+    function showAdminPanel() {
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('admin-container').style.display = 'flex';
+      updateUserInfo();
+      loadStats();
     }
     
     // 登录
@@ -942,8 +1047,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           }
           localStorage.setItem('admin_token', data.data.token);
           localStorage.setItem('admin_user', JSON.stringify(data.data.user));
-          closeModal();
-          updateUserInfo();
+          showAdminPanel();
           loadStats();
           showToast('登录成功', 'success');
         } else {
@@ -956,9 +1060,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     // 退出登录
     function logout() {
+      if (!confirm('确定要退出登录吗？')) return;
       localStorage.removeItem('admin_token');
       localStorage.removeItem('admin_user');
-      showLoginModal();
+      // 清空登录表单
+      document.getElementById('login-email').value = '';
+      document.getElementById('login-password').value = '';
+      showLoginPage();
+      showToast('已退出登录', 'success');
     }
     
     // 更新用户信息显示
@@ -1490,33 +1599,106 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     function renderIngredientForm(data) {
       const body = document.getElementById('modal-body');
       body.innerHTML = `
-        <div class="form-group">
-          <label>名称 *</label>
-          <input type="text" id="ingredient-name" value="${data.name || ''}" placeholder="食材名称">
+        <div class="form-row">
+          <div class="form-group">
+            <label>名称 *</label>
+            <input type="text" id="ingredient-name" value="${data.name || ''}" placeholder="食材名称">
+          </div>
+          <div class="form-group">
+            <label>Slug *</label>
+            <input type="text" id="ingredient-slug" value="${data.slug || ''}" placeholder="url-friendly slug">
+          </div>
         </div>
-        <div class="form-group">
-          <label>Slug *</label>
-          <input type="text" id="ingredient-slug" value="${data.slug || ''}" placeholder="url-friendly slug">
-        </div>
-        <div class="form-group">
-          <label>分类</label>
-          <input type="text" id="ingredient-category" value="${data.category || ''}" placeholder="如：蔬菜、肉类、调料">
+        <div class="form-row">
+          <div class="form-group">
+            <label>分类</label>
+            <input type="text" id="ingredient-category" value="${data.category || ''}" placeholder="如：蔬菜、肉类、调料">
+          </div>
+          <div class="form-group">
+            <label>状态</label>
+            <select id="ingredient-published">
+              <option value="1" ${data.published === 1 ? 'selected' : ''}>已发布</option>
+              <option value="0" ${data.published === 0 ? 'selected' : ''}>草稿</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
           <label>图片URL</label>
           <input type="text" id="ingredient-image" value="${data.image_url || ''}" placeholder="https://...">
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>别名</label>
+            <input type="text" id="ingredient-aliases" value="${data.aliases || ''}" placeholder="多个别名用逗号分隔">
+          </div>
+          <div class="form-group">
+            <label>产地</label>
+            <input type="text" id="ingredient-origin" value="${data.origin || ''}" placeholder="主要产地">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>上市季节</label>
+            <input type="text" id="ingredient-season" value="${data.season || ''}" placeholder="如：春季、秋冬">
+          </div>
+        </div>
         <div class="form-group">
           <label>简介</label>
           <div id="ingredient-description" class="quill-small"></div>
         </div>
+        <div class="form-group">
+          <label>营养价值</label>
+          <div id="ingredient-nutrition" class="quill-small"></div>
+        </div>
+        <div class="form-group">
+          <label>选购与使用技巧</label>
+          <div id="ingredient-tips" class="quill-small"></div>
+        </div>
+        <div class="form-group">
+          <label>搭配建议</label>
+          <div id="ingredient-pairing-suggestions" class="quill-small"></div>
+        </div>
+        <div class="form-group">
+          <label>食用禁忌</label>
+          <div id="ingredient-avoid-with" class="quill-small"></div>
+        </div>
+        <div class="form-group">
+          <label>储存方法</label>
+          <div id="ingredient-storage-method" class="quill-small"></div>
+        </div>
       `;
       
       setTimeout(() => {
+        const simpleToolbar = ['bold', 'italic', { 'list': 'bullet' }, 'clean'];
         initQuillEditor('ingredient-description', {
           content: data.description || '',
           placeholder: '简要介绍这种食材...',
-          toolbar: ['bold', 'italic', { 'list': 'bullet' }, 'clean']
+          toolbar: simpleToolbar
+        });
+        initQuillEditor('ingredient-nutrition', {
+          content: data.nutrition || '',
+          placeholder: '营养价值、功效作用...',
+          toolbar: simpleToolbar
+        });
+        initQuillEditor('ingredient-tips', {
+          content: data.tips || '',
+          placeholder: '如何挑选、处理和使用...',
+          toolbar: simpleToolbar
+        });
+        initQuillEditor('ingredient-pairing-suggestions', {
+          content: data.pairing_suggestions || '',
+          placeholder: '适合与什么搭配...',
+          toolbar: simpleToolbar
+        });
+        initQuillEditor('ingredient-avoid-with', {
+          content: data.avoid_with || '',
+          placeholder: '不宜与什么同食、禁忌人群...',
+          toolbar: simpleToolbar
+        });
+        initQuillEditor('ingredient-storage-method', {
+          content: data.storage_method || '',
+          placeholder: '如何保存、保鲜方法...',
+          toolbar: simpleToolbar
         });
       }, 10);
     }
@@ -2274,7 +2456,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           slug: document.getElementById('ingredient-slug').value,
           category: document.getElementById('ingredient-category').value,
           image_url: document.getElementById('ingredient-image').value,
-          description: getQuillContent('ingredient-description')
+          aliases: document.getElementById('ingredient-aliases').value,
+          origin: document.getElementById('ingredient-origin').value,
+          season: document.getElementById('ingredient-season').value,
+          published: parseInt(document.getElementById('ingredient-published').value),
+          description: getQuillContent('ingredient-description'),
+          nutrition: getQuillContent('ingredient-nutrition'),
+          tips: getQuillContent('ingredient-tips'),
+          pairing_suggestions: getQuillContent('ingredient-pairing-suggestions'),
+          avoid_with: getQuillContent('ingredient-avoid-with'),
+          storage_method: getQuillContent('ingredient-storage-method')
         };
       } else if (currentItemType === 'knowledge') {
         data = {
@@ -2388,6 +2579,76 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       editModal.addEventListener('click', function(e) {
         if (e.target === this) closeModal();
       });
+    }
+    
+    // ============ 弹窗拖拽与大小调整 ============
+    let isDragging = false;
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
+    let modalContent = null;
+    
+    function initModalDrag() {
+      const modal = document.getElementById('edit-modal');
+      modalContent = modal.querySelector('.modal-content');
+      const header = modal.querySelector('.modal-header');
+      
+      if (!header || !modalContent) return;
+      
+      // 拖拽开始
+      header.addEventListener('mousedown', function(e) {
+        // 点击关闭按钮不触发拖拽
+        if (e.target.classList.contains('modal-close')) return;
+        
+        isDragging = true;
+        modalContent.classList.add('dragging');
+        
+        const rect = modalContent.getBoundingClientRect();
+        dragOffsetX = e.clientX - rect.left;
+        dragOffsetY = e.clientY - rect.top;
+        
+        // 取消transform居中，改为绝对定位
+        modalContent.style.transform = 'none';
+        modalContent.style.left = rect.left + 'px';
+        modalContent.style.top = rect.top + 'px';
+        modalContent.style.margin = '0';
+      });
+      
+      // 拖拽移动
+      document.addEventListener('mousemove', function(e) {
+        if (!isDragging || !modalContent) return;
+        
+        const newX = e.clientX - dragOffsetX;
+        const newY = e.clientY - dragOffsetY;
+        
+        // 限制在视口范围内
+        const maxX = window.innerWidth - modalContent.offsetWidth;
+        const maxY = window.innerHeight - modalContent.offsetHeight;
+        
+        modalContent.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
+        modalContent.style.top = Math.max(0, Math.min(newY, maxY)) + 'px';
+      });
+      
+      // 拖拽结束
+      document.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          modalContent?.classList.remove('dragging');
+        }
+      });
+    }
+    
+    // 重置弹窗位置（打开新弹窗时调用）
+    function resetModalPosition() {
+      const modal = document.getElementById('edit-modal');
+      const content = modal.querySelector('.modal-content');
+      if (content) {
+        content.style.transform = '';
+        content.style.left = '';
+        content.style.top = '';
+        content.style.margin = '';
+        content.style.width = '';
+        content.style.height = '';
+      }
     }
   </script>
 </BaseLayout>
