@@ -3,6 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="管理后台 - 馋猫有谱" description="馋猫有谱网站管理后台">
+  <!-- Quill 富文本编辑器 -->
+  <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+  
   <style>
     .admin-container {
       display: flex;
@@ -379,6 +383,97 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       resize: vertical;
     }
     
+    /* Quill 编辑器样式 */
+    .ql-container {
+      font-size: 0.9rem;
+      background: var(--color-bg);
+      border-bottom-left-radius: var(--radius-sm);
+      border-bottom-right-radius: var(--radius-sm);
+    }
+    
+    .ql-toolbar {
+      background: var(--color-bg-secondary);
+      border-top-left-radius: var(--radius-sm);
+      border-top-right-radius: var(--radius-sm);
+    }
+    
+    .ql-editor {
+      min-height: 80px;
+      color: var(--color-text);
+    }
+    
+    .ql-editor.ql-blank::before {
+      color: var(--color-text-secondary);
+      font-style: normal;
+    }
+    
+    .ql-snow .ql-stroke {
+      stroke: var(--color-text-secondary);
+    }
+    
+    .ql-snow .ql-fill,
+    .ql-snow .ql-stroke.ql-fill {
+      fill: var(--color-text-secondary);
+    }
+    
+    .ql-snow.ql-toolbar button:hover,
+    .ql-snow .ql-toolbar button:hover,
+    .ql-snow.ql-toolbar button.ql-active,
+    .ql-snow .ql-toolbar button.ql-active {
+      color: var(--color-accent);
+    }
+    
+    .ql-snow.ql-toolbar button:hover .ql-stroke,
+    .ql-snow .ql-toolbar button:hover .ql-stroke,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+    .ql-snow .ql-toolbar button.ql-active .ql-stroke {
+      stroke: var(--color-accent);
+    }
+    
+    .ql-snow.ql-toolbar button:hover .ql-fill,
+    .ql-snow .ql-toolbar button:hover .ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-fill,
+    .ql-snow .ql-toolbar button.ql-active .ql-fill {
+      fill: var(--color-accent);
+    }
+    
+    .ql-editor h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--color-title);
+    }
+    
+    .ql-editor ul,
+    .ql-editor ol {
+      padding-left: 20px;
+      margin-bottom: 8px;
+    }
+    
+    .ql-editor li {
+      margin-bottom: 4px;
+    }
+    
+    .ql-editor strong {
+      font-weight: 600;
+    }
+    
+    /* 小尺寸编辑器 */
+    .quill-small .ql-editor {
+      min-height: 60px;
+      padding: 8px 12px;
+    }
+    
+    .quill-small .ql-toolbar {
+      padding: 4px 8px;
+    }
+    
+    .quill-small .ql-toolbar button {
+      height: 24px;
+      width: 24px;
+      padding: 2px;
+    }
+    
     .form-group input:focus,
     .form-group textarea:focus,
     .form-group select:focus {
@@ -689,6 +784,77 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     let currentItemType = null;
     let currentCategoryTab = 'cuisines';
     let currentPlatform = 'wechat';
+    let quillEditors = {}; // 存储所有 Quill 编辑器实例
+    
+    // ============ Quill 富文本编辑器工具函数 ============
+    function initQuillEditor(containerId, options = {}) {
+      // 如果已存在，先销毁
+      if (quillEditors[containerId]) {
+        quillEditors[containerId].destroy();
+        delete quillEditors[containerId];
+      }
+      
+      const container = document.getElementById(containerId);
+      if (!container) return null;
+      
+      // 创建 Quill 容器结构
+      const editorId = containerId + '-editor';
+      container.innerHTML = `<div id="${editorId}"></div>`;
+      
+      const defaultOptions = {
+        theme: 'snow',
+        placeholder: options.placeholder || '请输入内容...',
+        modules: {
+          toolbar: options.toolbar || [
+            [{ 'header': [3, 4, false] }],
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['clean']
+          ]
+        }
+      };
+      
+      const quill = new Quill('#' + editorId, defaultOptions);
+      
+      // 设置初始内容
+      if (options.content) {
+        quill.root.innerHTML = options.content;
+      }
+      
+      quillEditors[containerId] = quill;
+      return quill;
+    }
+    
+    function getQuillContent(containerId) {
+      if (quillEditors[containerId]) {
+        return quillEditors[containerId].root.innerHTML;
+      }
+      const container = document.getElementById(containerId);
+      if (container) {
+        const editor = container.querySelector('.ql-editor');
+        if (editor) return editor.innerHTML;
+      }
+      return '';
+    }
+    
+    function destroyQuillEditors() {
+      Object.keys(quillEditors).forEach(key => {
+        try {
+          quillEditors[key].destroy();
+        } catch (e) {}
+        delete quillEditors[key];
+      });
+      quillEditors = {};
+    }
+    
+    // 带富文本的字段配置
+    const richTextFields = {
+      recipe: ['description', 'nutrition', 'common_mistakes', 'success_tips', 'ingredient_substitutes', 'suitable_for', 'required_tools'],
+      ingredient: ['description'],
+      knowledge: ['summary', 'content'],
+      cuisine: ['description'],
+      tag: []
+    };
     
     // 初始化（脚本在DOM之后，直接执行即可）
     function initAdmin() {
@@ -730,6 +896,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const body = document.getElementById('modal-body');
       const title = document.getElementById('modal-title');
       const footer = document.getElementById('modal-footer');
+      
+      // 销毁可能存在的富文本编辑器
+      destroyQuillEditors();
       
       title.textContent = '管理员登录';
       body.innerHTML = `
@@ -1043,7 +1212,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div class="form-group">
             <label>简介</label>
-            <textarea id="recipe-description" rows="3">${data.description || ''}</textarea>
+            <div id="recipe-description" class="quill-small"></div>
           </div>
           <div class="form-group">
             <label>发布状态</label>
@@ -1074,33 +1243,64 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h4 style="margin: 0 0 12px 0; color: var(--color-title); font-size: 0.95rem;">详细信息</h4>
           <div class="form-group">
             <label>营养价值</label>
-            <textarea id="recipe-nutrition" rows="2" placeholder="如：富含蛋白质、维生素...">${data.nutrition || ''}</textarea>
+            <div id="recipe-nutrition"></div>
           </div>
           <div class="form-group">
             <label>常见误区</label>
-            <textarea id="recipe-common-mistakes" rows="2" placeholder="如：不要过度翻炒以免变老...">${data.common_mistakes || ''}</textarea>
+            <div id="recipe-common-mistakes"></div>
           </div>
           <div class="form-group">
             <label>成功技巧</label>
-            <textarea id="recipe-success-tips" rows="2" placeholder="如：冷水下锅焯水去腥味...">${data.success_tips || ''}</textarea>
+            <div id="recipe-success-tips"></div>
           </div>
           <div class="form-group">
             <label>食材替代</label>
-            <textarea id="recipe-substitutes" rows="2" placeholder="如：没有料酒可用黄酒代替...">${data.ingredient_substitutes || ''}</textarea>
+            <div id="recipe-substitutes"></div>
           </div>
           <div class="form-group">
             <label>适宜人群</label>
-            <textarea id="recipe-suitable-for" rows="2" placeholder="如：一般人群均可食用...">${data.suitable_for || ''}</textarea>
+            <div id="recipe-suitable-for"></div>
           </div>
           <div class="form-group">
             <label>所需厨具</label>
-            <textarea id="recipe-required-tools" rows="2" placeholder="如：炒锅、铲子、盘子...">${data.required_tools || ''}</textarea>
+            <div id="recipe-required-tools"></div>
           </div>
         </div>
       `;
 
       // 加载菜系选项
       loadCuisineOptions(data.cuisine_id);
+      
+      // 初始化富文本编辑器
+      setTimeout(() => {
+        initQuillEditor('recipe-description', {
+          content: data.description || '',
+          placeholder: '简要介绍这道菜的特点...',
+          toolbar: ['bold', 'italic', { 'list': 'bullet' }, 'clean']
+        });
+        
+        const fieldConfig = {
+          'recipe-nutrition': { placeholder: '如：富含蛋白质、维生素...', content: data.nutrition || '' },
+          'recipe-common-mistakes': { placeholder: '如：不要过度翻炒以免变老...', content: data.common_mistakes || '' },
+          'recipe-success-tips': { placeholder: '如：冷水下锅焯水去腥味...', content: data.success_tips || '' },
+          'recipe-substitutes': { placeholder: '如：没有料酒可用黄酒代替...', content: data.ingredient_substitutes || '' },
+          'recipe-suitable-for': { placeholder: '如：一般人群均可食用...', content: data.suitable_for || '' },
+          'recipe-required-tools': { placeholder: '如：炒锅、铲子、盘子...', content: data.required_tools || '' }
+        };
+        
+        Object.keys(fieldConfig).forEach(fieldId => {
+          initQuillEditor(fieldId, {
+            content: fieldConfig[fieldId].content,
+            placeholder: fieldConfig[fieldId].placeholder,
+            toolbar: [
+              [{ 'header': [3, 4, false] }],
+              ['bold', 'italic', 'underline'],
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              ['clean']
+            ]
+          });
+        });
+      }, 10);
     }
 
     // 加载菜系下拉选项
@@ -1308,9 +1508,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="form-group">
           <label>简介</label>
-          <textarea id="ingredient-description" rows="3">${data.description || ''}</textarea>
+          <div id="ingredient-description" class="quill-small"></div>
         </div>
       `;
+      
+      setTimeout(() => {
+        initQuillEditor('ingredient-description', {
+          content: data.description || '',
+          placeholder: '简要介绍这种食材...',
+          toolbar: ['bold', 'italic', { 'list': 'bullet' }, 'clean']
+        });
+      }, 10);
     }
     
     function deleteIngredient(id) {
@@ -1429,13 +1637,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="form-group">
           <label>摘要</label>
-          <textarea id="knowledge-summary" rows="2">${data.summary || ''}</textarea>
+          <div id="knowledge-summary" class="quill-small"></div>
         </div>
         <div class="form-group">
           <label>内容</label>
-          <textarea id="knowledge-content" rows="8">${data.content || ''}</textarea>
+          <div id="knowledge-content"></div>
         </div>
       `;
+      
+      setTimeout(() => {
+        initQuillEditor('knowledge-summary', {
+          content: data.summary || '',
+          placeholder: '简要描述文章内容...',
+          toolbar: ['bold', 'italic', { 'list': 'bullet' }, 'clean']
+        });
+        
+        initQuillEditor('knowledge-content', {
+          content: data.content || '',
+          placeholder: '详细内容，支持标题、列表、加粗等格式...',
+          toolbar: [
+            [{ 'header': [2, 3, 4, false] }],
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'align': [] }],
+            ['clean']
+          ]
+        });
+      }, 10);
     }
     
     function deleteKnowledge(id) {
@@ -1548,13 +1776,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="form-group">
           <label>描述</label>
-          <textarea id="cuisine-description" rows="2">${data.description || ''}</textarea>
+          <div id="cuisine-description" class="quill-small"></div>
         </div>
         <div class="form-group">
           <label>排序</label>
           <input type="number" id="cuisine-sort" value="${data.sort_order || ''}">
         </div>
       `;
+      
+      setTimeout(() => {
+        initQuillEditor('cuisine-description', {
+          content: data.description || '',
+          placeholder: '简要描述这个菜系...',
+          toolbar: ['bold', 'italic', { 'list': 'bullet' }, 'clean']
+        });
+      }, 10);
     }
     
     function deleteCuisine(id) {
@@ -2015,7 +2251,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         data = {
           title: document.getElementById('recipe-title').value,
           slug: document.getElementById('recipe-slug').value,
-          description: document.getElementById('recipe-description').value,
+          description: getQuillContent('recipe-description'),
           difficulty: document.getElementById('recipe-difficulty').value,
           cook_time: parseInt(document.getElementById('recipe-cooktime').value) || 0,
           servings: parseInt(document.getElementById('recipe-servings').value) || 1,
@@ -2023,12 +2259,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           cuisine_id: cuisineVal ? parseInt(cuisineVal) : null,
           cover_url: document.getElementById('recipe-cover').value,
           published: parseInt(document.getElementById('recipe-published').value),
-          nutrition: document.getElementById('recipe-nutrition').value,
-          common_mistakes: document.getElementById('recipe-common-mistakes').value,
-          success_tips: document.getElementById('recipe-success-tips').value,
-          ingredient_substitutes: document.getElementById('recipe-substitutes').value,
-          suitable_for: document.getElementById('recipe-suitable-for').value,
-          required_tools: document.getElementById('recipe-required-tools').value,
+          nutrition: getQuillContent('recipe-nutrition'),
+          common_mistakes: getQuillContent('recipe-common-mistakes'),
+          success_tips: getQuillContent('recipe-success-tips'),
+          ingredient_substitutes: getQuillContent('recipe-substitutes'),
+          suitable_for: getQuillContent('recipe-suitable-for'),
+          required_tools: getQuillContent('recipe-required-tools'),
           ingredients: ingredients,
           steps: steps
         };
@@ -2038,21 +2274,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           slug: document.getElementById('ingredient-slug').value,
           category: document.getElementById('ingredient-category').value,
           image_url: document.getElementById('ingredient-image').value,
-          description: document.getElementById('ingredient-description').value
+          description: getQuillContent('ingredient-description')
         };
       } else if (currentItemType === 'knowledge') {
         data = {
           title: document.getElementById('knowledge-title').value,
           slug: document.getElementById('knowledge-slug').value,
           category: document.getElementById('knowledge-category-form').value,
-          summary: document.getElementById('knowledge-summary').value,
-          content: document.getElementById('knowledge-content').value
+          summary: getQuillContent('knowledge-summary'),
+          content: getQuillContent('knowledge-content')
         };
       } else if (currentItemType === 'cuisine') {
         data = {
           name: document.getElementById('cuisine-name').value,
           slug: document.getElementById('cuisine-slug').value,
-          description: document.getElementById('cuisine-description').value,
+          description: getQuillContent('cuisine-description'),
           sort_order: parseInt(document.getElementById('cuisine-sort').value) || 0
         };
       } else if (currentItemType === 'tag') {
@@ -2120,6 +2356,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     
     function closeModal() {
+      // 先销毁所有富文本编辑器实例
+      destroyQuillEditors();
       document.getElementById('edit-modal').classList.remove('show');
       // 重置弹窗底部按钮为默认状态（取消+保存）
       const footer = document.getElementById('modal-footer');
