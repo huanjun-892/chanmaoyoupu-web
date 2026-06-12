@@ -1,0 +1,1914 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="管理后台 - 馋猫有谱" description="馋猫有谱网站管理后台">
+  <style>
+    .admin-container {
+      display: flex;
+      min-height: calc(100vh - 80px);
+      background: var(--color-bg-secondary);
+    }
+    
+    .admin-sidebar {
+      width: 220px;
+      background: var(--color-bg);
+      border-right: 1px solid var(--color-border);
+      padding: 20px 0;
+      flex-shrink: 0;
+    }
+    
+    .admin-logo {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+    
+    .admin-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .admin-nav li {
+      margin-bottom: 2px;
+    }
+    
+    .admin-nav a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+    }
+    
+    .admin-nav a:hover {
+      background: var(--color-bg-secondary);
+      color: var(--color-text);
+    }
+    
+    .admin-nav a.active {
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+      border-left-color: var(--color-accent);
+      font-weight: 500;
+    }
+    
+    .admin-main {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    
+    .admin-header h1 {
+      font-size: 1.4rem;
+      margin: 0;
+      color: var(--color-title);
+    }
+    
+    .admin-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+    }
+    
+    .btn {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: var(--color-accent);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--color-accent-dark);
+    }
+    
+    .btn-secondary {
+      background: var(--color-bg);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--color-bg-secondary);
+    }
+    
+    .btn-danger {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 0.75rem;
+    }
+    
+    /* 统计卡片 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+    }
+    
+    /* 表格 */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    .data-table th {
+      background: var(--color-bg-secondary);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9rem;
+    }
+    
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .data-table tr:hover {
+      background: var(--color-bg-secondary);
+    }
+    
+    /* 搜索栏 */
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .search-input {
+      flex: 1;
+      min-width: 200px;
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+    
+    /* 分页 */
+    .pagination {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    
+    .pagination button {
+      padding: 6px 12px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--color-text);
+    }
+    
+    .pagination button:hover:not(:disabled) {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+    
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .pagination .page-info {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+    }
+    
+    /* Tab切换 */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 20px;
+    }
+    
+    .tab-btn {
+      padding: 10px 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    
+    .tab-btn.active {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+      font-weight: 500;
+    }
+    
+    /* 状态标签 */
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .status-published {
+      background: #dcfce7;
+      color: #166534;
+    }
+    
+    .status-draft {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    
+    /* 弹窗 */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .modal-overlay.show {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: var(--color-bg);
+      border-radius: var(--radius);
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--color-title);
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      line-height: 1;
+    }
+    
+    .modal-body {
+      padding: 20px;
+    }
+    
+    .modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+    
+    .form-group textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    
+    /* 加载状态 */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--color-text-secondary);
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 10px;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Toast提示 */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      color: white;
+      font-size: 0.9rem;
+      z-index: 2000;
+      animation: slideIn 0.3s ease;
+    }
+    
+    .toast-success {
+      background: #22c55e;
+    }
+    
+    .toast-error {
+      background: #ef4444;
+    }
+    
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    .page-section {
+      display: none;
+    }
+    
+    .page-section.active {
+      display: block;
+    }
+    
+    @media (max-width: 768px) {
+      .admin-sidebar {
+        width: 60px;
+      }
+      
+      .admin-logo span,
+      .admin-nav a span {
+        display: none;
+      }
+      
+      .admin-nav a {
+        text-align: center;
+        padding: 12px 0;
+      }
+    }
+  </style>
+  
+  <div class="admin-container">
+    <!-- 侧边栏 -->
+    <aside class="admin-sidebar">
+      <div class="admin-logo">🐱 <span>管理后台</span></div>
+      <ul class="admin-nav">
+        <li><a data-page="dashboard" class="active">📊 <span>数据概览</span></a></li>
+        <li><a data-page="recipes">🍜 <span>食谱管理</span></a></li>
+        <li><a data-page="ingredients">🥬 <span>食材管理</span></a></li>
+        <li><a data-page="knowledge">📚 <span>知识库管理</span></a></li>
+        <li><a data-page="categories">🏷️ <span>分类管理</span></a></li>
+        <li><a data-page="push">📱 <span>内容推送助手</span></a></li>
+      </ul>
+    </aside>
+    
+    <!-- 主内容区 -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1 id="page-title">数据概览</h1>
+        <div class="admin-user">
+          <span id="user-email">加载中...</span>
+          <button class="btn btn-secondary btn-sm" onclick="logout()">退出</button>
+        </div>
+      </div>
+      
+      <!-- 数据概览 -->
+      <section id="page-dashboard" class="page-section active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="stat-recipes">-</div>
+            <div class="stat-label">食谱总数</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-ingredients">-</div>
+            <div class="stat-label">食材数量</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-knowledge">-</div>
+            <div class="stat-label">知识库文章</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-cuisines">-</div>
+            <div class="stat-label">菜系分类</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-tags">-</div>
+            <div class="stat-label">标签数量</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-users">-</div>
+            <div class="stat-label">注册用户</div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 食谱管理 -->
+      <section id="page-recipes" class="page-section">
+        <div class="toolbar">
+          <input type="text" class="search-input" id="recipe-search" placeholder="搜索食谱标题或slug..." oninput="searchRecipes()">
+          <select class="search-input" id="recipe-status" onchange="searchRecipes()">
+            <option value="">全部状态</option>
+            <option value="1">已发布</option>
+            <option value="0">草稿</option>
+          </select>
+          <button class="btn btn-primary" onclick="openRecipeModal()">+ 新增食谱</button>
+        </div>
+        <div id="recipes-table-container">
+          <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+        </div>
+        <div class="pagination" id="recipes-pagination"></div>
+      </section>
+      
+      <!-- 食材管理 -->
+      <section id="page-ingredients" class="page-section">
+        <div class="toolbar">
+          <input type="text" class="search-input" id="ingredient-search" placeholder="搜索食材名称..." oninput="searchIngredients()">
+          <button class="btn btn-primary" onclick="openIngredientModal()">+ 新增食材</button>
+        </div>
+        <div id="ingredients-table-container">
+          <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+        </div>
+        <div class="pagination" id="ingredients-pagination"></div>
+      </section>
+      
+      <!-- 知识库管理 -->
+      <section id="page-knowledge" class="page-section">
+        <div class="toolbar">
+          <input type="text" class="search-input" id="knowledge-search" placeholder="搜索文章标题..." oninput="searchKnowledge()">
+          <select class="search-input" id="knowledge-category" onchange="searchKnowledge()">
+            <option value="">全部分类</option>
+            <option value="secret">独家秘方</option>
+            <option value="普通">普通文章</option>
+          </select>
+          <button class="btn btn-primary" onclick="openKnowledgeModal()">+ 新增文章</button>
+        </div>
+        <div id="knowledge-table-container">
+          <div class="loading"><div class="spinner"></div><p>加载中...</p></div>
+        </div>
+        <div class="pagination" id="knowledge-pagination"></div>
+      </section>
+      
+      <!-- 分类管理 -->
+      <section id="page-categories" class="page-section">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="cuisines" onclick="switchCategoryTab('cuisines')">菜系</button>
+          <button class="tab-btn" data-tab="tags" onclick="switchCategoryTab('tags')">标签</button>
+          <button class="tab-btn" data-tab="regions" onclick="switchCategoryTab('regions')">地区</button>
+          <button class="tab-btn" data-tab="methods" onclick="switchCategoryTab('methods')">做法</button>
+        </div>
+        
+        <div id="tab-cuisines" class="tab-content">
+          <div class="toolbar">
+            <input type="text" class="search-input" id="cuisine-search" placeholder="搜索菜系..." oninput="searchCuisines()">
+            <button class="btn btn-primary" onclick="openCuisineModal()">+ 新增菜系</button>
+          </div>
+          <div id="cuisines-table-container"></div>
+        </div>
+        
+        <div id="tab-tags" class="tab-content" style="display:none;">
+          <div class="toolbar">
+            <input type="text" class="search-input" id="tag-search" placeholder="搜索标签..." oninput="searchTags()">
+            <button class="btn btn-primary" onclick="openTagModal()">+ 新增标签</button>
+          </div>
+          <div id="tags-table-container"></div>
+        </div>
+        
+        <div id="tab-regions" class="tab-content" style="display:none;">
+          <div class="toolbar">
+            <input type="text" class="search-input" id="region-search" placeholder="搜索地区..." oninput="searchRegions()">
+            <button class="btn btn-primary" onclick="openRegionModal()">+ 新增地区</button>
+          </div>
+          <div id="regions-table-container"></div>
+        </div>
+        
+        <div id="tab-methods" class="tab-content" style="display:none;">
+          <div class="toolbar">
+            <input type="text" class="search-input" id="method-search" placeholder="搜索做法..." oninput="searchMethods()">
+            <button class="btn btn-primary" onclick="openMethodModal()">+ 新增做法</button>
+          </div>
+          <div id="methods-table-container"></div>
+        </div>
+      </section>
+      
+      <!-- 内容推送助手 -->
+      <section id="page-push" class="page-section">
+        <div class="stats-grid">
+          <div class="stat-card" style="cursor: pointer; border: 2px solid var(--color-accent);" onclick="selectPlatform('wechat')">
+            <div class="stat-number">💬</div>
+            <div class="stat-label">公众号</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;" onclick="selectPlatform('xiaohongshu')">
+            <div class="stat-number">📕</div>
+            <div class="stat-label">小红书</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;" onclick="selectPlatform('douyin')">
+            <div class="stat-number">🎵</div>
+            <div class="stat-label">抖音</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;" onclick="selectPlatform('toutiao')">
+            <div class="stat-number">📰</div>
+            <div class="stat-label">头条</div>
+          </div>
+          <div class="stat-card" style="cursor: pointer;" onclick="selectPlatform('bilibili')">
+            <div class="stat-number">📺</div>
+            <div class="stat-label">B站</div>
+          </div>
+        </div>
+        
+        <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 20px;">
+          <h3 style="margin-top: 0; color: var(--color-title);">生成推送内容</h3>
+          <div class="form-group">
+            <label>选择内容类型</label>
+            <select id="push-content-type" onchange="loadPushContent()">
+              <option value="recipe">食谱</option>
+              <option value="knowledge">知识库文章</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>选择内容</label>
+            <select id="push-content-select" onchange="generatePushContent()">
+              <option value="">请先选择内容类型</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>生成的内容</label>
+            <textarea id="push-content-result" rows="10" readonly style="background: var(--color-bg-secondary);"></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="copyPushContent()" style="width: 100%;">📋 一键复制内容</button>
+        </div>
+        
+        <p style="color: var(--color-text-secondary); font-size: 0.85rem; margin-top: 16px; text-align: center;">
+          💡 提示：选择平台和内容后，自动生成适配该平台风格的文案，一键复制发布
+        </p>
+      </section>
+    </main>
+  </div>
+  
+  <!-- 编辑弹窗 -->
+  <div class="modal-overlay" id="edit-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">编辑</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer" id="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+        <button class="btn btn-primary" onclick="saveItem()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const API_BASE = 'https://api.chanmaoyoupu.com/api/admin';
+    let currentPage = { recipes: 1, ingredients: 1, knowledge: 1 };
+    let currentItem = null;
+    let currentItemType = null;
+    let currentCategoryTab = 'cuisines';
+    let currentPlatform = 'wechat';
+    
+    // 初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      checkAuth();
+      initNavigation();
+      loadStats();
+    });
+    
+    // 检查登录状态
+    function checkAuth() {
+      const token = localStorage.getItem('admin_token');
+      if (!token) {
+        showLoginModal();
+      } else {
+        fetch(API_BASE + '/stats', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        }).then(res => {
+          if (res.status === 401 || res.status === 403) {
+            localStorage.removeItem('admin_token');
+            showLoginModal();
+          }
+        });
+      }
+    }
+    
+    // 显示登录弹窗
+    function showLoginModal() {
+      const modal = document.getElementById('edit-modal');
+      const body = document.getElementById('modal-body');
+      const title = document.getElementById('modal-title');
+      const footer = document.getElementById('modal-footer');
+      
+      title.textContent = '管理员登录';
+      body.innerHTML = `
+        <div class="form-group">
+          <label>邮箱</label>
+          <input type="email" id="login-email" placeholder="请输入邮箱">
+        </div>
+        <div class="form-group">
+          <label>密码</label>
+          <input type="password" id="login-password" placeholder="请输入密码" onkeypress="if(event.key==='Enter')doLogin()">
+        </div>
+        <p style="color: var(--color-text-secondary); font-size: 0.8rem;">
+          请使用管理员账号登录
+        </p>
+      `;
+      footer.innerHTML = `
+        <button class="btn btn-primary" onclick="doLogin()">登录</button>
+      `;
+      modal.classList.add('show');
+    }
+    
+    // 登录
+    function doLogin() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      if (!email || !password) {
+        showToast('请输入邮箱和密码', 'error');
+        return;
+      }
+      
+      fetch('https://api.chanmaoyoupu.com/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          if (data.data.user.role !== 'admin') {
+            showToast('该账号没有管理员权限', 'error');
+            return;
+          }
+          localStorage.setItem('admin_token', data.data.token);
+          localStorage.setItem('admin_user', JSON.stringify(data.data.user));
+          closeModal();
+          updateUserInfo();
+          loadStats();
+          showToast('登录成功', 'success');
+        } else {
+          showToast(data.error || '登录失败', 'error');
+        }
+      }).catch(() => {
+        showToast('网络错误，请稍后重试', 'error');
+      });
+    }
+    
+    // 退出登录
+    function logout() {
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('admin_user');
+      showLoginModal();
+    }
+    
+    // 更新用户信息显示
+    function updateUserInfo() {
+      const user = JSON.parse(localStorage.getItem('admin_user') || '{}');
+      document.getElementById('user-email').textContent = user.email || '未登录';
+    }
+    
+    // 导航切换
+    function initNavigation() {
+      document.querySelectorAll('.admin-nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const page = this.dataset.page;
+          
+          document.querySelectorAll('.admin-nav a').forEach(a => a.classList.remove('active'));
+          this.classList.add('active');
+          
+          document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+          document.getElementById('page-' + page).classList.add('active');
+          
+          document.getElementById('page-title').textContent = this.querySelector('span').textContent;
+          
+          if (page === 'recipes') loadRecipes();
+          else if (page === 'ingredients') loadIngredients();
+          else if (page === 'knowledge') loadKnowledge();
+          else if (page === 'categories') loadCuisines();
+          else if (page === 'push') loadPushContentOptions();
+        });
+      });
+    }
+    
+    // 获取认证头
+    function getAuthHeaders() {
+      const token = localStorage.getItem('admin_token');
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + (token || '')
+      };
+    }
+    
+    // ============ 统计数据 ============
+    function loadStats() {
+      fetch(API_BASE + '/stats', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            document.getElementById('stat-recipes').textContent = data.data.recipes || 0;
+            document.getElementById('stat-ingredients').textContent = data.data.ingredients || 0;
+            document.getElementById('stat-knowledge').textContent = data.data.knowledge || 0;
+            document.getElementById('stat-cuisines').textContent = data.data.cuisines || 0;
+            document.getElementById('stat-tags').textContent = data.data.tags || 0;
+            document.getElementById('stat-users').textContent = data.data.users || 0;
+          }
+        });
+    }
+    
+    // ============ 食谱管理 ============
+    function loadRecipes() {
+      const page = currentPage.recipes;
+      const keyword = document.getElementById('recipe-search').value;
+      const status = document.getElementById('recipe-status').value;
+      
+      let url = API_BASE + '/recipes?page=' + page + '&limit=10';
+      if (keyword) url += '&keyword=' + encodeURIComponent(keyword);
+      if (status !== '') url += '&published=' + status;
+      
+      fetch(url, { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            renderRecipesTable(data.data.items);
+            renderPagination('recipes', data.data);
+          }
+        });
+    }
+    
+    function searchRecipes() {
+      currentPage.recipes = 1;
+      loadRecipes();
+    }
+    
+    function renderRecipesTable(items) {
+      const container = document.getElementById('recipes-table-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div class="loading"><p>暂无数据</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>标题</th><th>Slug</th><th>难度</th><th>菜系</th><th>状态</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      items.forEach(item => {
+        const statusText = item.published ? '已发布' : '草稿';
+        const statusClass = item.published ? 'status-published' : 'status-draft';
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.title}</td>
+          <td><code style="font-size: 0.8rem;">${item.slug}</code></td>
+          <td>${item.difficulty || '-'}</td>
+          <td>${item.cuisine_name || '-'}</td>
+          <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editRecipe(${item.id})">编辑</button>
+            <button class="btn btn-secondary btn-sm" onclick="toggleRecipePublish(${item.id}, ${item.published ? 0 : 1})">
+              ${item.published ? '下架' : '上架'}
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="deleteRecipe(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openRecipeModal(id) {
+      currentItemType = 'recipe';
+      currentItem = null;
+      
+      const title = document.getElementById('modal-title');
+      
+      if (id) {
+        title.textContent = '编辑食谱';
+        fetch(API_BASE + '/recipes/' + id, { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              currentItem = data.data;
+              renderRecipeForm(data.data);
+            }
+          });
+      } else {
+        title.textContent = '新增食谱';
+        renderRecipeForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+    }
+    
+    function editRecipe(id) {
+      openRecipeModal(id);
+    }
+    
+    function renderRecipeForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>标题 *</label>
+          <input type="text" id="recipe-title" value="${data.title || ''}" placeholder="食谱标题">
+        </div>
+        <div class="form-group">
+          <label>Slug *</label>
+          <input type="text" id="recipe-slug" value="${data.slug || ''}" placeholder="url-friendly slug">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>难度</label>
+            <select id="recipe-difficulty">
+              <option value="简单" ${data.difficulty === '简单' ? 'selected' : ''}>简单</option>
+              <option value="中等" ${data.difficulty === '中等' ? 'selected' : ''}>中等</option>
+              <option value="较难" ${data.difficulty === '较难' ? 'selected' : ''}>较难</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>烹饪时间(分钟)</label>
+            <input type="number" id="recipe-cooktime" value="${data.cook_time || ''}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>份量(人份)</label>
+            <input type="number" id="recipe-servings" value="${data.servings || ''}">
+          </div>
+          <div class="form-group">
+            <label>卡路里</label>
+            <input type="number" id="recipe-calories" value="${data.calories || ''}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>封面图URL</label>
+          <input type="text" id="recipe-cover" value="${data.cover_url || ''}" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>简介</label>
+          <textarea id="recipe-description" rows="3">${data.description || ''}</textarea>
+        </div>
+        <div class="form-group">
+          <label>发布状态</label>
+          <select id="recipe-published">
+            <option value="1" ${data.published === 1 ? 'selected' : ''}>发布</option>
+            <option value="0" ${data.published === 0 ? 'selected' : ''}>草稿</option>
+          </select>
+        </div>
+      `;
+    }
+    
+    function toggleRecipePublish(id, published) {
+      fetch(API_BASE + '/recipes/' + id + '/publish', {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ published })
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast(published ? '已上架' : '已下架', 'success');
+          loadRecipes();
+          loadStats();
+        } else {
+          showToast(data.error || '操作失败', 'error');
+        }
+      });
+    }
+    
+    function deleteRecipe(id) {
+      if (!confirm('确定要删除这道食谱吗？此操作不可恢复。')) return;
+      
+      fetch(API_BASE + '/recipes/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadRecipes();
+          loadStats();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 食材管理 ============
+    function loadIngredients() {
+      const page = currentPage.ingredients;
+      const keyword = document.getElementById('ingredient-search').value;
+      
+      let url = API_BASE + '/ingredients?page=' + page + '&limit=10';
+      if (keyword) url += '&keyword=' + encodeURIComponent(keyword);
+      
+      fetch(url, { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            renderIngredientsTable(data.data.items);
+            renderPagination('ingredients', data.data);
+          }
+        });
+    }
+    
+    function searchIngredients() {
+      currentPage.ingredients = 1;
+      loadIngredients();
+    }
+    
+    function renderIngredientsTable(items) {
+      const container = document.getElementById('ingredients-table-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div class="loading"><p>暂无数据</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>名称</th><th>Slug</th><th>分类</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      items.forEach(item => {
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td><code style="font-size: 0.8rem;">${item.slug}</code></td>
+          <td>${item.category || '-'}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editIngredient(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteIngredient(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openIngredientModal(id) {
+      currentItemType = 'ingredient';
+      currentItem = null;
+      
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑食材' : '新增食材';
+      
+      if (id) {
+        fetch(API_BASE + '/ingredients/' + id, { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              currentItem = data.data;
+              renderIngredientForm(data.data);
+            }
+          });
+      } else {
+        renderIngredientForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+    }
+    
+    function editIngredient(id) {
+      openIngredientModal(id);
+    }
+    
+    function renderIngredientForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>名称 *</label>
+          <input type="text" id="ingredient-name" value="${data.name || ''}" placeholder="食材名称">
+        </div>
+        <div class="form-group">
+          <label>Slug *</label>
+          <input type="text" id="ingredient-slug" value="${data.slug || ''}" placeholder="url-friendly slug">
+        </div>
+        <div class="form-group">
+          <label>分类</label>
+          <input type="text" id="ingredient-category" value="${data.category || ''}" placeholder="如：蔬菜、肉类、调料">
+        </div>
+        <div class="form-group">
+          <label>图片URL</label>
+          <input type="text" id="ingredient-image" value="${data.image_url || ''}" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>简介</label>
+          <textarea id="ingredient-description" rows="3">${data.description || ''}</textarea>
+        </div>
+      `;
+    }
+    
+    function deleteIngredient(id) {
+      if (!confirm('确定要删除这个食材吗？')) return;
+      
+      fetch(API_BASE + '/ingredients/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadIngredients();
+          loadStats();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 知识库管理 ============
+    function loadKnowledge() {
+      const page = currentPage.knowledge;
+      const keyword = document.getElementById('knowledge-search').value;
+      const category = document.getElementById('knowledge-category').value;
+      
+      let url = API_BASE + '/knowledge?page=' + page + '&limit=10';
+      if (keyword) url += '&keyword=' + encodeURIComponent(keyword);
+      if (category) url += '&category=' + encodeURIComponent(category);
+      
+      fetch(url, { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            renderKnowledgeTable(data.data.items);
+            renderPagination('knowledge', data.data);
+          }
+        });
+    }
+    
+    function searchKnowledge() {
+      currentPage.knowledge = 1;
+      loadKnowledge();
+    }
+    
+    function renderKnowledgeTable(items) {
+      const container = document.getElementById('knowledge-table-container');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div class="loading"><p>暂无数据</p></div>';
+        return;
+      }
+      
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>标题</th><th>分类</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      items.forEach(item => {
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.title}</td>
+          <td>${item.category || '-'}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editKnowledge(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteKnowledge(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openKnowledgeModal(id) {
+      currentItemType = 'knowledge';
+      currentItem = null;
+      
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑文章' : '新增文章';
+      
+      if (id) {
+        fetch(API_BASE + '/knowledge/' + id, { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              currentItem = data.data;
+              renderKnowledgeForm(data.data);
+            }
+          });
+      } else {
+        renderKnowledgeForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+    }
+    
+    function editKnowledge(id) {
+      openKnowledgeModal(id);
+    }
+    
+    function renderKnowledgeForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>标题 *</label>
+          <input type="text" id="knowledge-title" value="${data.title || ''}">
+        </div>
+        <div class="form-group">
+          <label>Slug *</label>
+          <input type="text" id="knowledge-slug" value="${data.slug || ''}">
+        </div>
+        <div class="form-group">
+          <label>分类</label>
+          <select id="knowledge-category-form">
+            <option value="普通" ${data.category === '普通' ? 'selected' : ''}>普通文章</option>
+            <option value="secret" ${data.category === 'secret' ? 'selected' : ''}>独家秘方</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>摘要</label>
+          <textarea id="knowledge-summary" rows="2">${data.summary || ''}</textarea>
+        </div>
+        <div class="form-group">
+          <label>内容</label>
+          <textarea id="knowledge-content" rows="8">${data.content || ''}</textarea>
+        </div>
+      `;
+    }
+    
+    function deleteKnowledge(id) {
+      if (!confirm('确定要删除这篇文章吗？')) return;
+      
+      fetch(API_BASE + '/knowledge/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadKnowledge();
+          loadStats();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 分类管理 ============
+    function switchCategoryTab(tab) {
+      currentCategoryTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+      document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+      document.getElementById('tab-' + tab).style.display = 'block';
+      
+      if (tab === 'cuisines') loadCuisines();
+      else if (tab === 'tags') loadTags();
+      else if (tab === 'regions') loadRegions();
+      else if (tab === 'methods') loadMethods();
+    }
+    
+    // 菜系
+    function loadCuisines() {
+      fetch(API_BASE + '/cuisines?all=1', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) renderCuisinesTable(data.data);
+        });
+    }
+    
+    function searchCuisines() { loadCuisines(); }
+    
+    function renderCuisinesTable(items) {
+      const keyword = document.getElementById('cuisine-search').value.toLowerCase();
+      const filtered = items.filter(i => 
+        !keyword || i.name.toLowerCase().includes(keyword) || (i.slug && i.slug.toLowerCase().includes(keyword)
+      );
+      
+      const container = document.getElementById('cuisines-table-container');
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>名称</th><th>Slug</th><th>排序</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      filtered.forEach(item => {
+        if (item.id === 0) return;
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td><code style="font-size: 0.8rem;">${item.slug || '-'}</code></td>
+          <td>${item.sort_order || '-'}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editCuisine(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteCuisine(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openCuisineModal(id) {
+      currentItemType = 'cuisine';
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑菜系' : '新增菜系';
+      
+      if (id) {
+        fetch(API_BASE + '/cuisines?all=1', { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const item = data.data.find(i => i.id === id);
+              if (item) {
+                currentItem = item;
+                renderCuisineForm(item);
+              }
+            }
+          });
+      } else {
+        renderCuisineForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+    }
+    
+    function editCuisine(id) { openCuisineModal(id); }
+    
+    function renderCuisineForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>名称 *</label>
+          <input type="text" id="cuisine-name" value="${data.name || ''}">
+        </div>
+        <div class="form-group">
+          <label>Slug *</label>
+          <input type="text" id="cuisine-slug" value="${data.slug || ''}">
+        </div>
+        <div class="form-group">
+          <label>描述</label>
+          <textarea id="cuisine-description" rows="2">${data.description || ''}</textarea>
+        </div>
+        <div class="form-group">
+          <label>排序</label>
+          <input type="number" id="cuisine-sort" value="${data.sort_order || ''}">
+        </div>
+      `;
+    }
+    
+    function deleteCuisine(id) {
+      if (!confirm('确定要删除这个菜系吗？关联食谱的菜系会被置空。')) return;
+      
+      fetch(API_BASE + '/cuisines/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadCuisines();
+          loadStats();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // 标签
+    function loadTags() {
+      fetch(API_BASE + '/tags?all=1', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) renderTagsTable(data.data);
+        });
+    }
+    
+    function searchTags() { loadTags(); }
+    
+    function renderTagsTable(items) {
+      const keyword = document.getElementById('tag-search').value.toLowerCase();
+      const filtered = items.filter(i => 
+        !keyword || i.name.toLowerCase().includes(keyword) || (i.slug && i.slug.toLowerCase().includes(keyword))
+      );
+      
+      const container = document.getElementById('tags-table-container');
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>名称</th><th>Slug</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      filtered.forEach(item => {
+        if (item.id === 0) return;
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td><code style="font-size: 0.8rem;">${item.slug || '-'}</code></td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editTag(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteTag(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openTagModal(id) {
+      currentItemType = 'tag';
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑标签' : '新增标签';
+      
+      if (id) {
+        fetch(API_BASE + '/tags?all=1', { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const item = data.data.find(i => i.id === id);
+              if (item) {
+                currentItem = item;
+                renderTagForm(item);
+              }
+            }
+          });
+      } else {
+        renderTagForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+    }
+    
+    function editTag(id) { openTagModal(id); }
+    
+    function renderTagForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>名称 *</label>
+          <input type="text" id="tag-name" value="${data.name || ''}">
+        </div>
+        <div class="form-group">
+          <label>Slug *</label>
+          <input type="text" id="tag-slug" value="${data.slug || ''}">
+        </div>
+        <div class="form-group">
+          <label>图标</label>
+          <input type="text" id="tag-icon" value="${data.icon || ''}" placeholder="emoji或图标名">
+        </div>
+      `;
+    }
+    
+    function deleteTag(id) {
+      if (!confirm('确定要删除这个标签吗？')) return;
+      
+      fetch(API_BASE + '/tags/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadTags();
+          loadStats();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // 地区
+    function loadRegions() {
+      fetch(API_BASE + '/regions', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) renderRegionsTable(data.data);
+        });
+    }
+    
+    function searchRegions() { loadRegions(); }
+    
+    function renderRegionsTable(items) {
+      const keyword = document.getElementById('region-search').value.toLowerCase();
+      const filtered = items.filter(i => !keyword || i.name.toLowerCase().includes(keyword));
+      
+      const container = document.getElementById('regions-table-container');
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>名称</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      filtered.forEach(item => {
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editRegion(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteRegion(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openRegionModal(id) {
+      currentItemType = 'region';
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑地区' : '新增地区';
+      
+      if (id) {
+        fetch(API_BASE + '/regions', { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const item = data.data.find(i => i.id === id);
+              if (item) {
+                currentItem = item;
+                renderRegionForm(item);
+              }
+            }
+          });
+      } else {
+        renderRegionForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+    }
+    
+    function editRegion(id) { openRegionModal(id); }
+    
+    function renderRegionForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>名称 *</label>
+          <input type="text" id="region-name" value="${data.name || ''}">
+        </div>
+      `;
+    }
+    
+    function deleteRegion(id) {
+      if (!confirm('确定要删除这个地区吗？')) return;
+      
+      fetch(API_BASE + '/regions/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadRegions();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // 做法
+    function loadMethods() {
+      fetch(API_BASE + '/methods', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) renderMethodsTable(data.data);
+        });
+    }
+    
+    function searchMethods() { loadMethods(); }
+    
+    function renderMethodsTable(items) {
+      const keyword = document.getElementById('method-search').value.toLowerCase();
+      const filtered = items.filter(i => !keyword || i.name.toLowerCase().includes(keyword));
+      
+      const container = document.getElementById('methods-table-container');
+      let html = '<table class="data-table"><thead><tr>';
+      html += '<th>ID</th><th>名称</th><th>操作</th>';
+      html += '</tr></thead><tbody>';
+      
+      filtered.forEach(item => {
+        html += `<tr>
+          <td>${item.id}</td>
+          <td>${item.name}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="editMethod(${item.id})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteMethod(${item.id})">删除</button>
+          </td>
+        </tr>`;
+      });
+      
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+    
+    function openMethodModal(id) {
+      currentItemType = 'method';
+      const title = document.getElementById('modal-title');
+      title.textContent = id ? '编辑做法' : '新增做法';
+      
+      if (id) {
+        fetch(API_BASE + '/methods', { headers: getAuthHeaders() })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              const item = data.data.find(i => i.id === id);
+              if (item) {
+                currentItem = item;
+                renderMethodForm(item);
+              }
+            }
+          });
+      } else {
+        renderMethodForm({});
+      }
+      
+      document.getElementById('edit-modal').classList.add('show');
+    }
+    
+    function editMethod(id) { openMethodModal(id); }
+    
+    function renderMethodForm(data) {
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="form-group">
+          <label>名称 *</label>
+          <input type="text" id="method-name" value="${data.name || ''}">
+        </div>
+      `;
+    }
+    
+    function deleteMethod(id) {
+      if (!confirm('确定要删除这个做法吗？')) return;
+      
+      fetch(API_BASE + '/methods/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('删除成功', 'success');
+          loadMethods();
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    // ============ 推送助手 ============
+    function selectPlatform(platform) {
+      currentPlatform = platform;
+      document.querySelectorAll('#page-push .stat-card').forEach(card => {
+        card.style.borderColor = 'var(--color-border)';
+      });
+      event.currentTarget.style.borderColor = 'var(--color-accent)';
+      generatePushContent();
+    }
+    
+    function loadPushContentOptions() {
+      const type = document.getElementById('push-content-type').value;
+      const select = document.getElementById('push-content-select');
+      
+      const url = type === 'recipe' 
+        ? API_BASE + '/recipes?limit=50' 
+        : API_BASE + '/knowledge?limit=50';
+      
+      fetch(url, { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            select.innerHTML = '<option value="">请选择内容</option>';
+            data.data.items.forEach(item => {
+              select.innerHTML += `<option value="${item.id}">${item.title}</option>`;
+            });
+          }
+        });
+    }
+    
+    function loadPushContent() {
+      loadPushContentOptions();
+      document.getElementById('push-content-result').value = '';
+    }
+    
+    function generatePushContent() {
+      const type = document.getElementById('push-content-type').value;
+      const id = document.getElementById('push-content-select').value;
+      if (!id) return;
+      
+      const detailUrl = type === 'recipe' 
+        ? API_BASE + '/recipes/' + id 
+        : API_BASE + '/knowledge/' + id;
+      
+      fetch(detailUrl, { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const content = generatePlatformContent(data.data, type, currentPlatform);
+            document.getElementById('push-content-result').value = content;
+          }
+        });
+    }
+    
+    function generatePlatformContent(item, type, platform) {
+      const title = item.title;
+      const desc = item.description || item.summary || '';
+      
+      const platformStyles = {
+        wechat: {
+          prefix: '🍜 ',
+          suffix: '\n\n— END —\n喜欢的话记得点赞+在看哦～\n关注「馋猫有谱」，每天学一道家常菜',
+          style: '公众号风格，段落分明，语气亲切'
+        },
+        xiaohongshu: {
+          prefix: '🔥 ',
+          suffix: '\n\n#美食教程 #家常菜 #食谱分享 #做饭教程 #美食日常 #吃货薯',
+          style: '小红书风格，emoji丰富，口语化，有吸引力'
+        },
+        douyin: {
+          prefix: '',
+          suffix: '\n\n喜欢的话记得点赞关注哦 👆',
+          style: '短视频口播文案，口语化，有节奏感'
+        },
+        toutiao: {
+          prefix: '',
+          suffix: '\n\n—— 馋猫有谱 · 专注家常美食 ——',
+          style: '头条风格，信息密度高，结构清晰'
+        },
+        bilibili: {
+          prefix: '',
+          suffix: '\n\n觉得有用的话记得一键三连哦～ 支持一下up主！',
+          style: 'B站风格，轻松活泼，有网感'
+        }
+      };
+      
+      const style = platformStyles[platform] || platformStyles.wechat;
+      
+      if (type === 'recipe') {
+        const ingredients = item.ingredients || [];
+        const steps = item.steps || [];
+        
+        let content = style.prefix + title + '\n\n';
+        content += '📝 食材清单：\n';
+        ingredients.forEach(ing => {
+          content += '• ' + ing.name + '：' + (ing.amount || '适量') + '\n';
+        });
+        
+        content += '\n👨‍🍳 做法步骤：\n';
+        steps.forEach((step, idx) => {
+          content += (idx + 1) + '. ' + (step.text || step.description || '') + '\n';
+        });
+        
+        content += '\n💡 小贴士：\n';
+        content += (item.success_tips || item.tips || '根据个人口味调整盐和调料的用量～') + '\n';
+        content += style.suffix;
+        
+        return content;
+      } else {
+        let content = style.prefix + title + '\n\n';
+        content += (item.content || desc) + '\n\n';
+        content += style.suffix;
+        return content;
+      }
+    }
+    
+    function copyPushContent() {
+      const text = document.getElementById('push-content-result').value;
+      if (!text) {
+        showToast('请先生成内容', 'error');
+        return;
+      }
+      
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('已复制到剪贴板', 'success');
+      }).catch(() => {
+        const textarea = document.getElementById('push-content-result');
+        textarea.select();
+        document.execCommand('copy');
+        showToast('已复制到剪贴板', 'success');
+      });
+    }
+    
+    // ============ 通用功能 ============
+    function saveItem() {
+      let data = {};
+      let url = API_BASE + '/' + currentItemType + 's';
+      let method = 'POST';
+      
+      if (currentItemType === 'recipe') {
+        data = {
+          title: document.getElementById('recipe-title').value,
+          slug: document.getElementById('recipe-slug').value,
+          description: document.getElementById('recipe-description').value,
+          difficulty: document.getElementById('recipe-difficulty').value,
+          cook_time: parseInt(document.getElementById('recipe-cooktime').value) || 0,
+          servings: parseInt(document.getElementById('recipe-servings').value) || 1,
+          calories: parseInt(document.getElementById('recipe-calories').value) || 0,
+          cover_url: document.getElementById('recipe-cover').value,
+          published: parseInt(document.getElementById('recipe-published').value)
+        };
+      } else if (currentItemType === 'ingredient') {
+        data = {
+          name: document.getElementById('ingredient-name').value,
+          slug: document.getElementById('ingredient-slug').value,
+          category: document.getElementById('ingredient-category').value,
+          image_url: document.getElementById('ingredient-image').value,
+          description: document.getElementById('ingredient-description').value
+        };
+      } else if (currentItemType === 'knowledge') {
+        data = {
+          title: document.getElementById('knowledge-title').value,
+          slug: document.getElementById('knowledge-slug').value,
+          category: document.getElementById('knowledge-category-form').value,
+          summary: document.getElementById('knowledge-summary').value,
+          content: document.getElementById('knowledge-content').value
+        };
+      } else if (currentItemType === 'cuisine') {
+        data = {
+          name: document.getElementById('cuisine-name').value,
+          slug: document.getElementById('cuisine-slug').value,
+          description: document.getElementById('cuisine-description').value,
+          sort_order: parseInt(document.getElementById('cuisine-sort').value) || 0
+        };
+      } else if (currentItemType === 'tag') {
+        data = {
+          name: document.getElementById('tag-name').value,
+          slug: document.getElementById('tag-slug').value,
+          icon: document.getElementById('tag-icon').value
+        };
+      } else if (currentItemType === 'region') {
+        data = {
+          name: document.getElementById('region-name').value
+        };
+      } else if (currentItemType === 'method') {
+        data = {
+          name: document.getElementById('method-name').value
+        };
+      }
+      
+      if (currentItem && currentItem.id) {
+        url += '/' + currentItem.id;
+        method = 'PUT';
+      }
+      
+      fetch(url, {
+        method: method,
+        headers: getAuthHeaders(),
+        body: JSON.stringify(data)
+      }).then(res => res.json()).then(result => {
+        if (result.success) {
+          showToast('保存成功', 'success');
+          closeModal();
+          if (currentItemType === 'recipe') loadRecipes();
+          else if (currentItemType === 'ingredient') loadIngredients();
+          else if (currentItemType === 'knowledge') loadKnowledge();
+          else if (currentItemType === 'cuisine') loadCuisines();
+          else if (currentItemType === 'tag') loadTags();
+          else if (currentItemType === 'region') loadRegions();
+          else if (currentItemType === 'method') loadMethods();
+          loadStats();
+        } else {
+          showToast(result.error || '保存失败', 'error');
+        }
+      });
+    }
+    
+    function renderPagination(type, data) {
+      const container = document.getElementById(type + '-pagination');
+      const totalPages = data.pages || 1;
+      const current = data.page || 1;
+      
+      let html = '<span class="page-info">共 ' + data.total + ' 条，第 ' + current + '/' + totalPages + ' 页</span>';
+      html += '<button onclick="goToPage(\'' + type + '\', 1)" ' + (current === 1 ? 'disabled' : '') + '>首页</button>';
+      html += '<button onclick="goToPage(\'' + type + '\', ' + (current - 1) + ')" ' + (current === 1 ? 'disabled' : '') + '>上一页</button>';
+      html += '<button onclick="goToPage(\'' + type + '\', ' + (current + 1) + ')" ' + (current >= totalPages ? 'disabled' : '') + '>下一页</button>';
+      html += '<button onclick="goToPage(\'' + type + '\', ' + totalPages + ')" ' + (current >= totalPages ? 'disabled' : '') + '>末页</button>';
+      
+      container.innerHTML = html;
+    }
+    
+    function goToPage(type, page) {
+      currentPage[type] = page;
+      if (type === 'recipes') loadRecipes();
+      else if (type === 'ingredients') loadIngredients();
+      else if (type === 'knowledge') loadKnowledge();
+    }
+    
+    function closeModal() {
+      document.getElementById('edit-modal').classList.remove('show');
+      currentItem = null;
+      currentItemType = null;
+    }
+    
+    function showToast(message, type) {
+      const toast = document.createElement('div');
+      toast.className = 'toast toast-' + type;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s';
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+    
+    document.getElementById('edit-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+  </script>
+</BaseLayout>
