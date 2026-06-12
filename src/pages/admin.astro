@@ -690,12 +690,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     let currentCategoryTab = 'cuisines';
     let currentPlatform = 'wechat';
     
-    // 初始化
-    document.addEventListener('DOMContentLoaded', function() {
-      checkAuth();
-      initNavigation();
-      loadStats();
-    });
+    // 初始化（脚本在DOM之后，直接执行即可）
+    function initAdmin() {
+      try {
+        checkAuth();
+        initNavigation();
+        loadStats();
+      } catch (e) {
+        console.error('Admin init error:', e);
+      }
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAdmin);
+    } else {
+      initAdmin();
+    }
     
     // 检查登录状态
     function checkAuth() {
@@ -790,24 +800,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     // 导航切换
     function initNavigation() {
-      document.querySelectorAll('.admin-nav a').forEach(link => {
+      const links = document.querySelectorAll('.admin-nav a');
+      if (!links || links.length === 0) {
+        console.warn('Admin nav links not found');
+        return;
+      }
+      
+      links.forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
-          const page = this.dataset.page;
-          
-          document.querySelectorAll('.admin-nav a').forEach(a => a.classList.remove('active'));
-          this.classList.add('active');
-          
-          document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-          document.getElementById('page-' + page).classList.add('active');
-          
-          document.getElementById('page-title').textContent = this.querySelector('span').textContent;
-          
-          if (page === 'recipes') loadRecipes();
-          else if (page === 'ingredients') loadIngredients();
-          else if (page === 'knowledge') loadKnowledge();
-          else if (page === 'categories') loadCuisines();
-          else if (page === 'push') loadPushContentOptions();
+          try {
+            const page = this.dataset.page;
+            if (!page) return;
+            
+            // 切换激活状态
+            links.forEach(a => a.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 切换内容区域
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            const targetSection = document.getElementById('page-' + page);
+            if (targetSection) {
+              targetSection.classList.add('active');
+            }
+            
+            // 更新标题
+            const titleEl = document.getElementById('page-title');
+            const spanEl = this.querySelector('span');
+            if (titleEl && spanEl) {
+              titleEl.textContent = spanEl.textContent;
+            }
+            
+            // 加载对应数据
+            if (page === 'recipes') loadRecipes();
+            else if (page === 'ingredients') loadIngredients();
+            else if (page === 'knowledge') loadKnowledge();
+            else if (page === 'categories') loadCuisines();
+            else if (page === 'push') loadPushContentOptions();
+          } catch (err) {
+            console.error('Navigation error:', err);
+          }
         });
       });
     }
@@ -1907,8 +1939,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }, 2000);
     }
     
-    document.getElementById('edit-modal').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
-    });
+    // 点击遮罩关闭弹窗
+    const editModal = document.getElementById('edit-modal');
+    if (editModal) {
+      editModal.addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+      });
+    }
   </script>
 </BaseLayout>
