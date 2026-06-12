@@ -4,9 +4,10 @@ export interface Props {
   slug: string;
   category?: string;
   excerpt?: string;
+  published_at?: string;
 }
 
-const { title, slug, category, excerpt } = Astro.props;
+const { title, slug, category, excerpt, published_at } = Astro.props;
 
 const categoryIcon: Record<string, string> = {
   technique: '🔥',
@@ -25,6 +26,7 @@ const categoryIcon: Record<string, string> = {
     </div>
     <h3 class="card-title">{title}</h3>
     {excerpt && <p class="knowledge-excerpt">{excerpt}</p>}
+    {published_at && <span class="knowledge-date">📅 {published_at.substring(0, 10)}</span>}
   </div>
 </a>
 
@@ -53,5 +55,12 @@ const categoryIcon: Record<string, string> = {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .knowledge-date {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--color-muted);
   }
 </style>

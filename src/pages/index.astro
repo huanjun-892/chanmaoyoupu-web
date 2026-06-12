@@ -66,6 +66,7 @@ const knowledgeFeatured = knowledgeItems
     slug: k.slug,
     category: k.category,
     excerpt: k.content ? k.content.replace(/<[^>]*>/g, '').slice(0, 80) + '...' : '',
+    published_at: k.published_at,
   }));
 ---
 

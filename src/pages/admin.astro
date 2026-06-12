@@ -2168,14 +2168,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       
       let html = '<table class="data-table"><thead><tr>';
-      html += '<th>ID</th><th>标题</th><th>分类</th><th>操作</th>';
+      html += '<th>ID</th><th>标题</th><th>分类</th><th>发布时间</th><th>操作</th>';
       html += '</tr></thead><tbody>';
       
       items.forEach(item => {
+        const pubTime = item.published_at ? item.published_at.substring(0, 10) : '-';
         html += `<tr>
           <td>${item.id}</td>
           <td>${item.title}</td>
           <td>${item.category || '-'}</td>
+          <td>${pubTime}</td>
           <td>
             <button class="btn btn-secondary btn-sm" onclick="editKnowledge(${item.id})">编辑</button>
             <button class="btn btn-danger btn-sm" onclick="deleteKnowledge(${item.id})">删除</button>
@@ -2204,7 +2206,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             }
           });
       } else {
-        renderKnowledgeForm({});
+        // 新建时自动填充当前时间
+        const now = new Date();
+        const pad = n => n.toString().padStart(2, '0');
+        const defaultTime = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+        renderKnowledgeForm({ published_at: defaultTime });
       }
       
       document.getElementById('edit-modal').classList.add('show');
@@ -2232,6 +2238,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <option value="普通" ${data.category === '普通' ? 'selected' : ''}>普通文章</option>
             <option value="secret" ${data.category === 'secret' ? 'selected' : ''}>独家秘方</option>
           </select>
+        </div>
+        <div class="form-group">
+          <label>关键词（逗号分隔）</label>
+          <input type="text" id="knowledge-keywords" value="${data.keywords || ''}" placeholder="如：烹饪技巧,火候,油温">
+        </div>
+        <div class="form-group">
+          <label>发布时间</label>
+          <input type="text" id="knowledge-published-at" value="${data.published_at || ''}" placeholder="如：2024-01-15 10:30">
         </div>
         <div class="form-group">
           <label>摘要</label>
@@ -3548,7 +3562,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           slug: document.getElementById('knowledge-slug').value,
           category: document.getElementById('knowledge-category-form').value,
           summary: getQuillContent('knowledge-summary'),
-          content: getQuillContent('knowledge-content')
+          content: getQuillContent('knowledge-content'),
+          keywords: document.getElementById('knowledge-keywords').value,
+          published_at: document.getElementById('knowledge-published-at').value
         };
       } else if (currentItemType === 'cuisine') {
         data = {
