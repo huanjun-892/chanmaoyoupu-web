@@ -79,6 +79,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       border-top: 1px solid var(--color-border);
     }
     
+    .login-qr {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    
+    .qr-placeholder {
+      width: 100px;
+      height: 100px;
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed var(--color-border);
+    }
+    
     .admin-sidebar {
       width: 220px;
       background: var(--color-bg);
@@ -674,7 +692,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
       
       <div class="login-footer">
-        <p style="color: var(--color-text-tertiary); font-size: 0.8rem;">
+        <div class="login-qr">
+          <div class="qr-placeholder">
+            <span style="font-size: 2rem;">📱</span>
+            <p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 8px 0 0 0;">扫码关注公众号</p>
+          </div>
+        </div>
+        <p style="color: var(--color-text-tertiary); font-size: 0.8rem; margin-top: 16px;">
           💡 首次使用请先注册管理员账号
         </p>
       </div>
