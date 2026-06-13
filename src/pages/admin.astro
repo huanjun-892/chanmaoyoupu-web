@@ -5035,7 +5035,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       btn.innerHTML = '⏳ 正在触发...';
 
       try {
-        const response = await fetch(API_BASE + '/admin/deploy', {
+        const response = await fetch(API_BASE + '/deploy', {
           method: 'POST',
           headers: getAuthHeaders(),
         });
