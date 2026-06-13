@@ -217,7 +217,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin: 0;
       color: var(--color-title);
     }
-    
+
+    .admin-header-actions {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
     .admin-user {
       display: flex;
       align-items: center;
@@ -259,7 +265,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       background: #fee2e2;
       color: #dc2626;
     }
-    
+
+    .btn-success {
+      background: #10b981;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #059669;
+    }
+
     .btn-sm {
       padding: 5px 10px;
       font-size: 0.75rem;
@@ -1066,6 +1081,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <main class="admin-main">
       <div class="admin-header">
         <h1 id="page-title">数据概览</h1>
+        <div class="admin-header-actions">
+          <button class="btn btn-success btn-sm" id="btn-deploy" onclick="triggerDeploy()">🚀 一键重建网站</button>
+        </div>
         <div class="admin-user">
           <span id="user-email">加载中...</span>
           <button class="btn btn-secondary btn-sm" onclick="logout()">退出</button>
@@ -4996,6 +5014,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       XLSX.writeFile(wb, template.fileName);
       
       showToast('模板下载成功', 'success');
+    }
+
+    // 触发网站重建
+    async function triggerDeploy() {
+      const btn = document.getElementById('btn-deploy');
+      if (!btn) return;
+
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '⏳ 正在触发...';
+
+      try {
+        const response = await fetch(API_BASE + '/admin/deploy', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          showToast(data.data.message || '触发成功！网站正在重建中...', 'success');
+        } else {
+          showToast(data.error || '触发失败', 'error');
+        }
+      } catch (err) {
+        showToast('网络错误，请稍后重试', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
     }
   </script>
 </BaseLayout>
