@@ -5037,10 +5037,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       try {
         const response = await fetch(API_BASE + '/admin/deploy', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-          },
+          headers: getAuthHeaders(),
         });
 
         const data = await response.json();
