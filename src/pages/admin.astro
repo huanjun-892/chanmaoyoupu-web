@@ -2973,14 +2973,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       container.innerHTML = '<div class="loading"><div class="spinner"></div><p>加载中...</p></div>';
       
       let url = API_BASE + '/users?page=' + page + '&limit=' + usersPageSize;
-      if (search) url += '&search=' + encodeURIComponent(search);
+      if (search) url += '&keyword=' + encodeURIComponent(search);
       if (role) url += '&role=' + role;
       
       fetch(url, { headers: getAuthHeaders() })
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            renderUsersTable(data.data.users, data.data.total, page);
+            renderUsersTable(data.data.items, data.data.total, page);
           } else {
             container.innerHTML = '<p style="text-align: center; color: var(--color-error);">加载失败：' + (data.error || '未知错误') + '</p>';
           }
