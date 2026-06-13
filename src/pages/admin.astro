@@ -1022,6 +1022,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- 登录页面 -->
   <div class="login-page" id="login-page">
     <div class="login-card">
+      <div id="no-permission-tip" style="display: none; background: #fff5f5; border: 1px solid #fed7d7; color: #c53030; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85rem;">
+        ⚠️ 您当前的账号没有管理员权限，请使用管理员账号登录
+      </div>
       <div class="login-logo">
         <img src="/images/logo.png" alt="馋猫有谱" style="width: 80px; height: 80px;">
       </div>
@@ -1616,19 +1619,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     // 检查登录状态
     function checkAuth() {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('chanmaoyoupu_token');
       if (!token) {
         showLoginPage();
       } else {
         fetch(API_BASE + '/stats', {
           headers: { 'Authorization': 'Bearer ' + token }
         }).then(res => {
-          if (res.status === 401 || res.status === 403) {
-            localStorage.removeItem('admin_token');
-            localStorage.removeItem('admin_user');
+          if (res.status === 401) {
+            // 未认证，清除token并显示登录页
+            localStorage.removeItem('chanmaoyoupu_token');
+            localStorage.removeItem('chanmaoyoupu_user');
             showLoginPage();
+          } else if (res.status === 403) {
+            // 已登录但无管理员权限，显示无权限提示
+            showNoPermission();
           } else {
             showAdminPanel();
+            loadStats();
           }
         }).catch(() => {
           // 网络错误也显示登录页
@@ -1641,6 +1649,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     function showLoginPage() {
       document.getElementById('login-page').style.display = 'flex';
       document.getElementById('admin-container').style.display = 'none';
+      document.getElementById('no-permission-tip').style.display = 'none';
     }
     
     // 显示管理后台
@@ -1649,6 +1658,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       document.getElementById('admin-container').style.display = 'flex';
       updateUserInfo();
       loadStats();
+    }
+    
+    // 显示无权限提示
+    function showNoPermission() {
+      document.getElementById('login-page').style.display = 'flex';
+      document.getElementById('admin-container').style.display = 'none';
+      document.getElementById('no-permission-tip').style.display = 'block';
     }
     
     // 登录
@@ -1671,8 +1687,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             showToast('该账号没有管理员权限', 'error');
             return;
           }
-          localStorage.setItem('admin_token', data.data.token);
-          localStorage.setItem('admin_user', JSON.stringify(data.data.user));
+          localStorage.setItem('chanmaoyoupu_token', data.data.token);
+          localStorage.setItem('chanmaoyoupu_user', JSON.stringify(data.data.user));
           showAdminPanel();
           loadStats();
           showToast('登录成功', 'success');
@@ -1687,8 +1703,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // 退出登录
     function logout() {
       if (!confirm('确定要退出登录吗？')) return;
-      localStorage.removeItem('admin_token');
-      localStorage.removeItem('admin_user');
+      localStorage.removeItem('chanmaoyoupu_token');
+      localStorage.removeItem('chanmaoyoupu_user');
       // 清空登录表单
       document.getElementById('login-email').value = '';
       document.getElementById('login-password').value = '';
@@ -1698,7 +1714,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     // 更新用户信息显示
     function updateUserInfo() {
-      const user = JSON.parse(localStorage.getItem('admin_user') || '{}');
+      const user = JSON.parse(localStorage.getItem('chanmaoyoupu_user') || '{}');
       document.getElementById('user-email').textContent = user.email || '未登录';
     }
     
@@ -1756,7 +1772,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     // 获取认证头
     function getAuthHeaders() {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('chanmaoyoupu_token');
       return {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + (token || '')
