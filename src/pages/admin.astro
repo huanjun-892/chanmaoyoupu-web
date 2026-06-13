@@ -4030,7 +4030,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         html += `<tr>
           <td>${item.id}</td>
           <td>${item.title}</td>
-          <td>${item.image_url ? `<img src="${item.image_url}" style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px;">' : '-'}</td>
+          <td>${item.image_url ? `<img src="${item.image_url}" style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px;">` : '-'}</td>
           <td><span style="font-size: 0.85rem; color: var(--color-text-secondary);">${item.link || '-'}</span></td>
           <td>${item.sort_order || 0}</td>
           <td>${item.status === 1 ? '<span class="badge badge-success">启用</span>' : '<span class="badge badge-danger">禁用</span>'}</td>
