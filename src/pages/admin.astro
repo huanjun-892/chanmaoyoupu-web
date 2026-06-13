@@ -5378,8 +5378,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       try {
         const task = await generateImage('recipe', name, slug);
-        showToast('已提交生成任务，正在处理中...', 'info');
-
+        showToast('已加入生成队列，请在聊天中发送【生成图片】启动处理', 'info');
+        
+        // 显示状态
+        if (btn) {
+          btn.textContent = '⏳ 待启动';
+        }
+        
+        // 轮询状态（用户手动触发后会自动更新）
         pollGenTask(
           task.id,
           'recipe',
@@ -5387,10 +5393,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           (task) => {
             if (btn) {
               const statusText = {
-                'pending': '排队中...',
-                'processing': '生成中...',
-                'completed': '生成完成',
-                'failed': '生成失败',
+                'pending': '⏳ 待启动',
+                'processing': '🎨 生成中...',
+                'completed': '✅ 生成完成',
+                'failed': '❌ 生成失败',
               };
               btn.textContent = statusText[task.status] || '处理中...';
             }
@@ -5446,8 +5452,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       try {
         const task = await generateImage('ingredient', name, slug);
-        showToast('已提交生成任务，正在处理中...', 'info');
-
+        showToast('已加入生成队列，请在聊天中发送【生成图片】启动处理', 'info');
+        
+        // 显示状态
+        if (btn) {
+          btn.textContent = '⏳ 待启动';
+        }
+        
+        // 轮询状态（用户手动触发后会自动更新）
         pollGenTask(
           task.id,
           'ingredient',
@@ -5455,10 +5467,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           (task) => {
             if (btn) {
               const statusText = {
-                'pending': '排队中...',
-                'processing': '生成中...',
-                'completed': '生成完成',
-                'failed': '生成失败',
+                'pending': '⏳ 待启动',
+                'processing': '🎨 生成中...',
+                'completed': '✅ 生成完成',
+                'failed': '❌ 生成失败',
               };
               btn.textContent = statusText[task.status] || '处理中...';
             }
