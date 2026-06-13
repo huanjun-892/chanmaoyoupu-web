@@ -1950,8 +1950,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </select>
           </div>
           <div class="form-group">
-            <label>封面图URL</label>
-            <input type="text" id="recipe-cover" value="${data.cover_url || ''}" placeholder="https://...">
+            <label>封面图</label>
+            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+              <input type="text" id="recipe-cover" value="${data.cover_url || ''}" placeholder="https://..." style="flex: 1;">
+              <button type="button" id="btn-recipe-upload" onclick="document.getElementById('recipe-cover-file').click()" style="padding: 6px 12px; background: var(--color-bg-secondary); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 4px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">📁 上传</button>
+              <button type="button" id="btn-recipe-ai-gen" onclick="generateRecipeCover()" style="padding: 6px 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">🤖 AI生成</button>
+              <input type="file" id="recipe-cover-file" accept="image/*" style="display: none;" onchange="handleRecipeCoverUpload(event)">
+            </div>
+            <div id="recipe-cover-preview" style="width: 100%; max-width: 200px; border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; display: ${data.cover_url ? 'block' : 'none'};">
+              <img src="${data.cover_url || ''}" alt="封面预览" style="width: 100%; height: auto; display: block;">
+            </div>
           </div>
           <div class="form-group">
             <label>简介</label>
@@ -2259,8 +2267,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </div>
         <div class="form-group">
-          <label>图片URL</label>
-          <input type="text" id="ingredient-image" value="${data.image_url || ''}" placeholder="https://...">
+          <label>图片</label>
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <input type="text" id="ingredient-image" value="${data.image_url || ''}" placeholder="https://..." style="flex: 1;">
+            <button type="button" id="btn-ingredient-upload" onclick="document.getElementById('ingredient-image-file').click()" style="padding: 6px 12px; background: var(--color-bg-secondary); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 4px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">📁 上传</button>
+            <button type="button" id="btn-ingredient-ai-gen" onclick="generateIngredientImage()" style="padding: 6px 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">🤖 AI生成</button>
+            <input type="file" id="ingredient-image-file" accept="image/*" style="display: none;" onchange="handleIngredientImageUpload(event)">
+          </div>
+          <div id="ingredient-image-preview" style="width: 100%; max-width: 200px; border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; display: ${data.image_url ? 'block' : 'none'};">
+            <img src="${data.image_url || ''}" alt="图片预览" style="width: 100%; height: auto; display: block;">
+          </div>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -5116,6 +5132,381 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       // 开始轮询
       deployCheckTimer = setInterval(checkDeployStatus, checkInterval);
+    }
+
+    // ============ 图片上传与 AI 生成 ============
+    
+    // 更新图片预览
+    function updateImagePreview(type, imageUrl) {
+      const previewId = type === 'recipe' ? 'recipe-cover-preview' : 
+                        type === 'ingredient' ? 'ingredient-image-preview' : 
+                        'banner-image-preview';
+      const preview = document.getElementById(previewId);
+      if (preview) {
+        if (imageUrl) {
+          preview.innerHTML = `<img src="${imageUrl}" alt="预览" style="max-width: 100%; max-height: 200px; border-radius: var(--radius); object-fit: cover;">`;
+        } else {
+          preview.innerHTML = '<div style="color: var(--color-text-secondary); font-size: 0.85rem;">暂无图片</div>';
+        }
+      }
+    }
+
+    // 触发文件选择
+    function triggerFileInput(inputId) {
+      const input = document.getElementById(inputId);
+      if (input) {
+        input.click();
+      }
+    }
+
+    // 上传图片
+    async function uploadImage(file, type, slug) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('type', type);
+      if (slug) {
+        formData.append('slug', slug);
+      }
+
+      try {
+        const response = await fetch(API_BASE + '/upload', {
+          method: 'POST',
+          headers: {
+            ...getAuthHeaders(),
+            // 注意：不要设置 Content-Type，浏览器会自动设置 multipart/form-data boundary
+          },
+          body: formData,
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          return data.data;
+        } else {
+          throw new Error(data.error || '上传失败');
+        }
+      } catch (err) {
+        console.error('Upload error:', err);
+        throw err;
+      }
+    }
+
+    // 处理食谱封面上传
+    async function handleRecipeCoverUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      // 检查文件类型和大小
+      if (!file.type.startsWith('image/')) {
+        showToast('请选择图片文件', 'error');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        showToast('图片大小不能超过 5MB', 'error');
+        return;
+      }
+
+      const slug = document.getElementById('recipe-slug')?.value || '';
+      const btn = document.getElementById('btn-recipe-upload');
+      const originalText = btn?.textContent || '';
+      
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '上传中...';
+      }
+
+      try {
+        const result = await uploadImage(file, 'recipe', slug);
+        const urlInput = document.getElementById('recipe-cover');
+        if (urlInput) {
+          urlInput.value = result.url;
+        }
+        updateImagePreview('recipe', result.url);
+        showToast('上传成功', 'success');
+      } catch (err: any) {
+        showToast('上传失败：' + err.message, 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = originalText;
+        }
+        // 清空文件输入
+        event.target.value = '';
+      }
+    }
+
+    // 处理食材图片上传
+    async function handleIngredientImageUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        showToast('请选择图片文件', 'error');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        showToast('图片大小不能超过 5MB', 'error');
+        return;
+      }
+
+      const slug = document.getElementById('ingredient-slug')?.value || '';
+      const btn = document.getElementById('btn-ingredient-upload');
+      const originalText = btn?.textContent || '';
+      
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '上传中...';
+      }
+
+      try {
+        const result = await uploadImage(file, 'ingredient', slug);
+        const urlInput = document.getElementById('ingredient-image');
+        if (urlInput) {
+          urlInput.value = result.url;
+        }
+        updateImagePreview('ingredient', result.url);
+        showToast('上传成功', 'success');
+      } catch (err: any) {
+        showToast('上传失败：' + err.message, 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = originalText;
+        }
+        event.target.value = '';
+      }
+    }
+
+    // AI 生成图片 - 创建任务
+    async function generateImage(type, name, slug, customPrompt) {
+      try {
+        const response = await fetch(API_BASE + '/ai/generate-image', {
+          method: 'POST',
+          headers: {
+            ...getAuthHeaders(),
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            type,
+            name,
+            slug,
+            prompt: customPrompt || '',
+          }),
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          return data.data;
+        } else {
+          throw new Error(data.error || '创建生成任务失败');
+        }
+      } catch (err) {
+        console.error('Generate image error:', err);
+        throw err;
+      }
+    }
+
+    // 查询生成任务状态
+    async function getGenTaskStatus(taskId) {
+      try {
+        const response = await fetch(API_BASE + '/ai/gen-tasks/' + taskId, {
+          headers: getAuthHeaders(),
+        });
+        const data = await response.json();
+        if (data.success) {
+          return data.data;
+        } else {
+          throw new Error(data.error || '查询失败');
+        }
+      } catch (err) {
+        throw err;
+      }
+    }
+
+    // 轮询生成任务状态
+    function pollGenTask(taskId, type, onUpdate, onComplete, onError) {
+      const maxAttempts = 60; // 最多轮询60次（每次2秒 = 2分钟）
+      let attempts = 0;
+
+      function check() {
+        attempts++;
+        
+        getGenTaskStatus(taskId)
+          .then(task => {
+            if (onUpdate) onUpdate(task);
+
+            if (task.status === 'completed') {
+              if (onComplete) onComplete(task);
+            } else if (task.status === 'failed') {
+              if (onError) onError(new Error(task.error || '生成失败'));
+            } else if (attempts < maxAttempts) {
+              // 继续轮询
+              setTimeout(check, 2000);
+            } else {
+              // 超时
+              if (onError) onError(new Error('生成超时，请稍后查看结果'));
+            }
+          })
+          .catch(err => {
+            if (attempts < maxAttempts) {
+              setTimeout(check, 2000);
+            } else {
+              if (onError) onError(err);
+            }
+          });
+      }
+
+      check();
+    }
+
+    // AI 生成食谱封面
+    async function generateRecipeCover() {
+      const name = document.getElementById('recipe-title')?.value;
+      const slug = document.getElementById('recipe-slug')?.value || '';
+      
+      if (!name) {
+        showToast('请先填写食谱名称', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-recipe-ai-gen');
+      const originalText = btn?.textContent || '';
+      
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '生成中...';
+      }
+
+      try {
+        const task = await generateImage('recipe', name, slug);
+        showToast('已提交生成任务，正在处理中...', 'info');
+
+        pollGenTask(
+          task.id,
+          'recipe',
+          // onUpdate
+          (task) => {
+            if (btn) {
+              const statusText = {
+                'pending': '排队中...',
+                'processing': '生成中...',
+                'completed': '生成完成',
+                'failed': '生成失败',
+              };
+              btn.textContent = statusText[task.status] || '处理中...';
+            }
+          },
+          // onComplete
+          (task) => {
+            const urlInput = document.getElementById('recipe-cover');
+            if (urlInput && task.result_url) {
+              urlInput.value = task.result_url;
+            }
+            updateImagePreview('recipe', task.result_url);
+            showToast('图片生成成功！', 'success');
+            if (btn) {
+              btn.disabled = false;
+              btn.textContent = originalText;
+            }
+          },
+          // onError
+          (err) => {
+            showToast('生成失败：' + err.message, 'error');
+            if (btn) {
+              btn.disabled = false;
+              btn.textContent = originalText;
+            }
+          }
+        );
+      } catch (err: any) {
+        showToast('生成失败：' + err.message, 'error');
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = originalText;
+        }
+      }
+    }
+
+    // AI 生成食材图片
+    async function generateIngredientImage() {
+      const name = document.getElementById('ingredient-name')?.value;
+      const slug = document.getElementById('ingredient-slug')?.value || '';
+      
+      if (!name) {
+        showToast('请先填写食材名称', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-ingredient-ai-gen');
+      const originalText = btn?.textContent || '';
+      
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '生成中...';
+      }
+
+      try {
+        const task = await generateImage('ingredient', name, slug);
+        showToast('已提交生成任务，正在处理中...', 'info');
+
+        pollGenTask(
+          task.id,
+          'ingredient',
+          // onUpdate
+          (task) => {
+            if (btn) {
+              const statusText = {
+                'pending': '排队中...',
+                'processing': '生成中...',
+                'completed': '生成完成',
+                'failed': '生成失败',
+              };
+              btn.textContent = statusText[task.status] || '处理中...';
+            }
+          },
+          // onComplete
+          (task) => {
+            const urlInput = document.getElementById('ingredient-image');
+            if (urlInput && task.result_url) {
+              urlInput.value = task.result_url;
+            }
+            updateImagePreview('ingredient', task.result_url);
+            showToast('图片生成成功！', 'success');
+            if (btn) {
+              btn.disabled = false;
+              btn.textContent = originalText;
+            }
+          },
+          // onError
+          (err) => {
+            showToast('生成失败：' + err.message, 'error');
+            if (btn) {
+              btn.disabled = false;
+              btn.textContent = originalText;
+            }
+          }
+        );
+      } catch (err: any) {
+        showToast('生成失败：' + err.message, 'error');
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = originalText;
+        }
+      }
+    }
+
+    // 初始化图片预览（打开编辑弹窗时调用）
+    function initImagePreviews() {
+      // 食谱封面预览
+      const recipeCoverUrl = document.getElementById('recipe-cover')?.value;
+      if (recipeCoverUrl) {
+        updateImagePreview('recipe', recipeCoverUrl);
+      }
+      
+      // 食材图片预览
+      const ingredientImageUrl = document.getElementById('ingredient-image')?.value;
+      if (ingredientImageUrl) {
+        updateImagePreview('ingredient', ingredientImageUrl);
+      }
     }
   </script>
 </BaseLayout>
