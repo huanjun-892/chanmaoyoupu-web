@@ -3629,88 +3629,101 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     let editingPlatformId = null;
     
     // 获取平台账号列表
-    function getPlatformAccounts() {
-      const data = localStorage.getItem('admin_platform_accounts');
-      return data ? JSON.parse(data) : [];
-    }
-    
-    // 保存平台账号列表
-    function savePlatformAccounts(accounts) {
-      localStorage.setItem('admin_platform_accounts', JSON.stringify(accounts));
+    function getPlatformAccounts(callback) {
+      fetch(API_BASE + '/platform-accounts?all=1', { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const accounts = data.data.map(item => ({
+              ...item,
+              config: item.config ? JSON.parse(item.config) : {}
+            }));
+            callback(accounts);
+          } else {
+            callback([]);
+          }
+        })
+        .catch(() => callback([]));
     }
     
     // 加载平台列表
     function loadPlatformList() {
-      const accounts = getPlatformAccounts();
       const listContainer = document.getElementById('platform-list');
       const emptyContainer = document.getElementById('platform-empty');
       
-      if (accounts.length === 0) {
-        listContainer.innerHTML = '';
-        emptyContainer.style.display = 'block';
-        return;
-      }
+      listContainer.innerHTML = '<div style="text-align: center; padding: 20px;">加载中...</div>';
       
-      emptyContainer.style.display = 'none';
-      
-      let html = '';
-      accounts.forEach(account => {
-        const config = platformConfig[account.platform_type];
-        if (!config) return;
+      getPlatformAccounts(function(accounts) {
+        if (accounts.length === 0) {
+          listContainer.innerHTML = '';
+          emptyContainer.style.display = 'block';
+          return;
+        }
         
-        html += `
-          <div class="platform-card">
-            <div class="platform-card-header">
-              <div class="platform-icon" style="background: ${config.color}20;">${config.icon}</div>
-              <div class="platform-info">
-                <h4>${config.name}</h4>
-                <p>${account.account_name || '未设置账号'}</p>
-              </div>
-            </div>
-            <div class="platform-status ${account.status === 'active' ? 'active' : 'inactive'}">
-              <span class="dot"></span>
-              ${account.status === 'active' ? '已绑定' : '未激活'}
-            </div>
-            <div class="platform-actions">
-              <button class="btn btn-secondary btn-sm" onclick="editPlatformAccount('${account.id}')">✏️ 编辑</button>
-              <button class="btn btn-secondary btn-sm" onclick="deletePlatformAccount('${account.id}')">🗑️ 删除</button>
-              <button class="btn btn-primary btn-sm" onclick="goToPublish('${account.platform_type}')">📤 去发布</button>
-            </div>
-          </div>
-        `;
-      });
-      
-      // 添加未绑定的平台提示卡片
-      const boundTypes = accounts.map(a => a.platform_type);
-      const unboundTypes = Object.keys(platformConfig).filter(t => !boundTypes.includes(t));
-      
-      if (unboundTypes.length > 0) {
-        unboundTypes.forEach(type => {
-          const config = platformConfig[type];
+        emptyContainer.style.display = 'none';
+        
+        let html = '';
+        accounts.forEach(account => {
+          const config = platformConfig[account.platform_type];
+          if (!config) return;
+          
+          const isActive = account.status === 1;
+          const accountName = account.account_name || account.config?.account_name || '未设置账号';
+          
           html += `
-            <div class="platform-card" style="border-style: dashed; opacity: 0.7;">
+            <div class="platform-card">
               <div class="platform-card-header">
                 <div class="platform-icon" style="background: ${config.color}20;">${config.icon}</div>
                 <div class="platform-info">
                   <h4>${config.name}</h4>
-                  <p>未绑定</p>
+                  <p>${accountName}</p>
                 </div>
               </div>
-              <div class="platform-status inactive">
+              <div class="platform-status ${isActive ? 'active' : 'inactive'}">
                 <span class="dot"></span>
-                待绑定
+                ${isActive ? '已绑定' : '未激活'}
               </div>
               <div class="platform-actions">
-                <button class="btn btn-primary btn-sm" onclick="openPlatformModal('${type}')" style="flex: 1;">
-                  ➕ 立即绑定
-                </button>
+                <button class="btn btn-secondary btn-sm" onclick="editPlatformAccount(${account.id})">✏️ 编辑</button>
+                <button class="btn btn-secondary btn-sm" onclick="deletePlatformAccount(${account.id})">🗑️ 删除</button>
+                <button class="btn btn-primary btn-sm" onclick="goToPublish('${account.platform_type}')">📤 去发布</button>
               </div>
             </div>
           `;
         });
-      }
-      
-      listContainer.innerHTML = html;
+        
+        // 添加未绑定的平台提示卡片
+        const boundTypes = accounts.map(a => a.platform_type);
+        const unboundTypes = Object.keys(platformConfig).filter(t => !boundTypes.includes(t));
+        
+        if (unboundTypes.length > 0) {
+          unboundTypes.forEach(type => {
+            const config = platformConfig[type];
+            html += `
+              <div class="platform-card" style="border-style: dashed; opacity: 0.7;">
+                <div class="platform-card-header">
+                  <div class="platform-icon" style="background: ${config.color}20;">${config.icon}</div>
+                  <div class="platform-info">
+                    <h4>${config.name}</h4>
+                    <p>未绑定</p>
+                  </div>
+                </div>
+                <div class="platform-status inactive">
+                  <span class="dot"></span>
+                  待绑定
+                </div>
+                <div class="platform-actions">
+                  <button class="btn btn-primary btn-sm" onclick="openPlatformModal('${type}')" style="flex: 1;">
+                    ➕ 立即绑定
+                  </button>
+                </div>
+              </div>
+            `;
+          });
+        }
+        
+        listContainer.innerHTML = html;
+      });
     }
     
     // 打开平台账号编辑弹窗
@@ -3759,12 +3772,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     // 编辑平台账号
     function editPlatformAccount(id) {
-      const accounts = getPlatformAccounts();
-      const account = accounts.find(a => a.id === id);
-      if (!account) return;
-      
-      editingPlatformId = id;
-      showPlatformModal(account.platform_type, account);
+      getPlatformAccounts(function(accounts) {
+        const account = accounts.find(a => a.id === id);
+        if (!account) return;
+        
+        editingPlatformId = id;
+        showPlatformModal(account.platform_type, account);
+      });
     }
     
     // 显示平台表单弹窗
@@ -3782,7 +3796,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       `;
       
       config.fields.forEach(field => {
-        const value = account ? (account[field.key] || '') : '';
+        let value = '';
+        if (account) {
+          if (account[field.key] !== undefined && account[field.key] !== null) {
+            value = account[field.key];
+          } else if (account.config && account.config[field.key] !== undefined) {
+            value = account.config[field.key];
+          }
+        }
         if (field.type === 'textarea') {
           formHtml += `
             <div class="platform-form-group">
@@ -3804,8 +3825,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="platform-form-group">
           <label>账号状态</label>
           <select id="pf-status">
-            <option value="active" ${account?.status === 'active' ? 'selected' : ''}>已激活</option>
-            <option value="inactive" ${account?.status === 'inactive' ? 'selected' : ''}>未激活</option>
+            <option value="1" ${account?.status === 1 ? 'selected' : ''}>已激活</option>
+            <option value="0" ${account?.status === 0 ? 'selected' : ''}>未激活</option>
           </select>
         </div>
       `;
@@ -3831,51 +3852,86 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const config = platformConfig[platformType];
       if (!config) return;
       
-      const accounts = getPlatformAccounts();
-      const accountData = {
-        platform_type: platformType,
-        status: document.getElementById('pf-status').value,
-        updated_at: new Date().toISOString()
-      };
+      // 收集各字段值到config
+      const configData = {};
+      let accountName = '';
       
-      // 收集各字段值
       config.fields.forEach(field => {
         const el = document.getElementById('pf-' + field.key);
         if (el) {
-          accountData[field.key] = el.value;
+          configData[field.key] = el.value;
+          if (field.key === 'account_name') {
+            accountName = el.value;
+          }
         }
       });
       
+      const status = parseInt(document.getElementById('pf-status').value);
+      
+      const payload = {
+        platform_type: platformType,
+        account_name: accountName,
+        config: configData,
+        status: status
+      };
+      
       if (editingPlatformId) {
         // 编辑模式
-        const index = accounts.findIndex(a => a.id === editingPlatformId);
-        if (index > -1) {
-          accountData.id = editingPlatformId;
-          accountData.created_at = accounts[index].created_at;
-          accounts[index] = accountData;
-        }
+        fetch(API_BASE + '/platform-accounts/' + editingPlatformId, {
+          method: 'PUT',
+          headers: getAuthHeaders(),
+          body: JSON.stringify(payload)
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              closeModal();
+              loadPlatformList();
+              showToast('保存成功', 'success');
+            } else {
+              showToast(data.error || '保存失败', 'error');
+            }
+          })
+          .catch(() => showToast('保存失败', 'error'));
       } else {
         // 新增模式
-        accountData.id = 'pf_' + Date.now();
-        accountData.created_at = new Date().toISOString();
-        accounts.push(accountData);
+        fetch(API_BASE + '/platform-accounts', {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify(payload)
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.success) {
+              closeModal();
+              loadPlatformList();
+              showToast('保存成功', 'success');
+            } else {
+              showToast(data.error || '保存失败', 'error');
+            }
+          })
+          .catch(() => showToast('保存失败', 'error'));
       }
-      
-      savePlatformAccounts(accounts);
-      closeModal();
-      loadPlatformList();
-      showToast('保存成功', 'success');
     }
     
     // 删除平台账号
     function deletePlatformAccount(id) {
       if (!confirm('确定要删除这个平台账号吗？')) return;
       
-      const accounts = getPlatformAccounts();
-      const filtered = accounts.filter(a => a.id !== id);
-      savePlatformAccounts(filtered);
-      loadPlatformList();
-      showToast('删除成功', 'success');
+      fetch(API_BASE + '/platform-accounts/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            loadPlatformList();
+            showToast('删除成功', 'success');
+          } else {
+            showToast(data.error || '删除失败', 'error');
+          }
+        })
+        .catch(() => showToast('删除失败', 'error'));
     }
     
     // 跳转到发布页面
