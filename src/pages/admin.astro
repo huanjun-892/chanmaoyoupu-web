@@ -5222,7 +5222,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
         updateImagePreview('recipe', result.url);
         showToast('上传成功', 'success');
-      } catch (err: any) {
+      } catch (err) {
         showToast('上传失败：' + err.message, 'error');
       } finally {
         if (btn) {
@@ -5265,7 +5265,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
         updateImagePreview('ingredient', result.url);
         showToast('上传成功', 'success');
-      } catch (err: any) {
+      } catch (err) {
         showToast('上传失败：' + err.message, 'error');
       } finally {
         if (btn) {
@@ -5417,7 +5417,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             }
           }
         );
-      } catch (err: any) {
+      } catch (err) {
         showToast('生成失败：' + err.message, 'error');
         if (btn) {
           btn.disabled = false;
@@ -5485,7 +5485,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             }
           }
         );
-      } catch (err: any) {
+      } catch (err) {
         showToast('生成失败：' + err.message, 'error');
         if (btn) {
           btn.disabled = false;
