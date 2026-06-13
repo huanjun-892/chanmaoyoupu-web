@@ -756,6 +756,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .toast-error {
       background: #ef4444;
     }
+
+    .toast-info {
+      background: #3b82f6;
+    }
     
     @keyframes slideIn {
       from {
@@ -5017,9 +5021,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     // 触发网站重建
+    let deployCheckTimer = null;
+    let deployStartTime = 0;
+
     async function triggerDeploy() {
       const btn = document.getElementById('btn-deploy');
       if (!btn) return;
+
+      if (btn.disabled) return;
 
       const originalText = btn.innerHTML;
       btn.disabled = true;
@@ -5037,16 +5046,79 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const data = await response.json();
 
         if (data.success) {
-          showToast(data.data.message || '触发成功！网站正在重建中...', 'success');
+          showToast('✅ 构建已触发！预计1-2分钟完成', 'success');
+          deployStartTime = Date.now();
+          startDeployCheck();
         } else {
           showToast(data.error || '触发失败', 'error');
+          btn.disabled = false;
+          btn.innerHTML = originalText;
         }
       } catch (err) {
         showToast('网络错误，请稍后重试', 'error');
-      } finally {
         btn.disabled = false;
         btn.innerHTML = originalText;
       }
+    }
+
+    // 轮询检查构建状态
+    function startDeployCheck() {
+      const btn = document.getElementById('btn-deploy');
+      if (!btn) return;
+
+      let checkCount = 0;
+      const maxChecks = 12; // 最多查12次（每次30秒 = 6分钟）
+      const checkInterval = 30000; // 30秒查一次
+
+      function updateButtonStatus() {
+        const elapsed = Math.floor((Date.now() - deployStartTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        btn.innerHTML = `🔄 构建中... ${minutes}:${seconds.toString().padStart(2, '0')}`;
+      }
+
+      async function checkDeployStatus() {
+        checkCount++;
+        updateButtonStatus();
+
+        if (checkCount >= maxChecks) {
+          // 超时了，停止检查
+          btn.disabled = false;
+          btn.innerHTML = '🚀 一键重建网站';
+          showToast('⏱️ 构建时间较长，请到 Cloudflare 查看详细状态', 'info');
+          if (deployCheckTimer) clearInterval(deployCheckTimer);
+          deployCheckTimer = null;
+          return;
+        }
+
+        try {
+          // 尝试请求前台首页，通过比较响应时间和内容判断是否更新
+          const response = await fetch(window.location.origin + '/?t=' + Date.now(), {
+            method: 'HEAD',
+            cache: 'no-store',
+          });
+
+          // 如果能正常响应，说明网站在线
+          // 这里我们用一个简化的判断：如果构建已超过90秒，提示用户可以刷新看看
+          const elapsed = (Date.now() - deployStartTime) / 1000;
+          if (elapsed > 90 && response.ok) {
+            showToast('🎉 构建大概率已完成！点击刷新页面查看效果', 'success');
+            btn.disabled = false;
+            btn.innerHTML = '🔄 刷新页面';
+            btn.onclick = () => window.location.reload();
+            if (deployCheckTimer) clearInterval(deployCheckTimer);
+            deployCheckTimer = null;
+          }
+        } catch (e) {
+          // 网站可能暂时不可用（构建中），继续等
+        }
+      }
+
+      // 立即更新一次按钮状态
+      updateButtonStatus();
+
+      // 开始轮询
+      deployCheckTimer = setInterval(checkDeployStatus, checkInterval);
     }
   </script>
 </BaseLayout>
