@@ -3128,6 +3128,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             const content = generatePlatformContent(data.data, type, currentPlatform);
             setPushEditorContent(content);
             updateCharCount();
+            
+            // 同时更新图片预览
+            const imgUrl = data.data.cover?.url || data.data.cover_url || data.data.imageUrl || data.data.image_url || '';
+            if (imgUrl) {
+              currentPushImageUrl = imgUrl;
+              document.getElementById('push-image-preview').innerHTML = 
+                `<img src="${imgUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" alt="配图">`;
+            } else {
+              document.getElementById('push-image-preview').innerHTML = '<div class="no-image">暂无图片</div>';
+              currentPushImageUrl = '';
+            }
           }
         });
     }
