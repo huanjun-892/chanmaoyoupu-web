@@ -3117,7 +3117,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       
       const detailUrl = type === 'recipe' 
         ? API_BASE + '/recipes/' + id 
-        : API_BASE + '/knowledge/' + id;
+        : type === 'ingredient'
+          ? API_BASE + '/ingredients/' + id
+          : API_BASE + '/knowledge/' + id;
       
       fetch(detailUrl, { headers: getAuthHeaders() })
         .then(res => res.json())
@@ -3499,7 +3501,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            const imgUrl = data.data.cover_url || data.data.image_url || '';
+            const imgUrl = data.data.cover?.url || data.data.cover_url || data.data.imageUrl || data.data.image_url || '';
             if (imgUrl) {
               currentPushImageUrl = imgUrl;
               document.getElementById('push-image-preview').innerHTML = 
@@ -3541,7 +3543,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           .then(res => res.json())
           .then(data => {
             if (data.success) {
-              const imgUrl = data.data.cover_url || data.data.image_url || '';
+              const imgUrl = data.data.cover?.url || data.data.cover_url || data.data.imageUrl || data.data.image_url || '';
               if (imgUrl) {
                 currentPushImageUrl = imgUrl;
                 preview.innerHTML = `
