@@ -43,7 +43,7 @@ const featuredRecipes = allRecipes.slice(6, 12).map(r => ({
 const popularIngredients = allIngredients.slice(0, 8).map((i: any) => ({
   name: i.name,
   slug: i.slug,
-  image: i.image_url || '',
+  image: i.imageUrl || '',
   category: i.category || '',
 }));
 
