@@ -1,7 +1,10 @@
----
+网页标题：
+
+网页链接：https://raw.githubusercontent.com/huanjun-892/chanmaoyoupu-web/main/src/pages/admin.astro
+
+网页内容：---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-
 <BaseLayout title="管理后台 - 馋猫有谱" description="馋猫有谱网站管理后台">
   <!-- Quill 富文本编辑器 -->
   <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
@@ -217,13 +220,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       margin: 0;
       color: var(--color-title);
     }
-
     .admin-header-actions {
       flex: 1;
       display: flex;
       justify-content: center;
     }
-
     .admin-user {
       display: flex;
       align-items: center;
@@ -265,16 +266,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       background: #fee2e2;
       color: #dc2626;
     }
-
     .btn-success {
       background: #10b981;
       color: white;
     }
-
     .btn-success:hover {
       background: #059669;
     }
-
     .btn-sm {
       padding: 5px 10px;
       font-size: 0.75rem;
@@ -733,6 +731,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     
     @keyframes spin {
+
       to { transform: rotate(360deg); }
     }
     
@@ -756,7 +755,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .toast-error {
       background: #ef4444;
     }
-
     .toast-info {
       background: #3b82f6;
     }
@@ -1217,6 +1215,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         
         <div id="tab-methods" class="tab-content" style="display:none;">
           <div class="toolbar">
+
             <input type="text" class="search-input" id="method-search" placeholder="搜索做法..." oninput="searchMethods()">
             <button class="btn btn-primary" onclick="openMethodModal()">+ 新增做法</button>
           </div>
@@ -1509,7 +1508,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="modal-resize-handle" id="modal-resize-handle"></div>
     </div>
   </div>
-
   <script is:inline>
     const API_BASE = 'https://api.chanmaoyoupu.com/api/admin';
     let currentPage = { recipes: 1, ingredients: 1, knowledge: 1 };
@@ -1573,6 +1571,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     function getQuillContent(containerId) {
       if (quillEditors[containerId]) {
+
         return quillEditors[containerId].root.innerHTML;
       }
       const container = document.getElementById(containerId);
@@ -1896,7 +1895,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     function renderRecipeForm(data) {
       const body = document.getElementById('modal-body');
-
       // 构建食材HTML
       let ingredientsHtml = '';
       const ingredients = data.ingredients || [];
@@ -1913,7 +1911,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           `;
         });
       }
-
       // 构建步骤HTML
       let stepsHtml = '';
       const steps = data.steps || [];
@@ -1932,7 +1929,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           `;
         });
       }
-
       body.innerHTML = `
         <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 12px;">
           <h4 style="margin: 0 0 12px 0; color: var(--color-title); font-size: 0.95rem;">基本信息</h4>
@@ -1978,6 +1974,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <label>封面图</label>
             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
               <input type="text" id="recipe-cover" value="${data.cover_url || ''}" placeholder="https://..." style="flex: 1;">
+
               <button type="button" id="btn-recipe-upload" onclick="document.getElementById('recipe-cover-file').click()" style="padding: 6px 12px; background: var(--color-bg-secondary); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 4px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">📁 上传</button>
               <button type="button" id="btn-recipe-ai-gen" onclick="generateRecipeCover()" style="padding: 6px 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">🤖 AI生成</button>
               <input type="file" id="recipe-cover-file" accept="image/*" style="display: none;" onchange="handleRecipeCoverUpload(event)">
@@ -1998,7 +1995,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </select>
           </div>
         </div>
-
         <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 12px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
             <h4 style="margin: 0; color: var(--color-title); font-size: 0.95rem;">食材清单</h4>
@@ -2006,7 +2002,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div id="ingredients-list">${ingredientsHtml}</div>
         </div>
-
         <div style="border-bottom: 1px solid var(--color-border); padding-bottom: 12px; margin-bottom: 12px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
             <h4 style="margin: 0; color: var(--color-title); font-size: 0.95rem;">烹饪步骤</h4>
@@ -2014,7 +2009,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div id="steps-list">${stepsHtml}</div>
         </div>
-
         <div>
           <h4 style="margin: 0 0 12px 0; color: var(--color-title); font-size: 0.95rem;">详细信息</h4>
           <div class="form-group">
@@ -2043,7 +2037,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </div>
       `;
-
       // 加载菜系选项
       loadCuisineOptions(data.cuisine_id);
       
@@ -2078,7 +2071,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         });
       }, 10);
     }
-
     // 加载菜系下拉选项
     function loadCuisineOptions(selectedId) {
       fetch(API_BASE + '/cuisines?all=1', { headers: getAuthHeaders() })
@@ -2098,7 +2090,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           }
         });
     }
-
     // 添加食材行
     function addIngredientRow() {
       const list = document.getElementById('ingredients-list');
@@ -2113,20 +2104,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       `;
       list.appendChild(row);
     }
-
     // 删除食材行
     function removeIngredientRow(btn) {
       const row = btn.closest('.ingredient-row');
       if (row) row.remove();
     }
-
     // 添加步骤行
     function addStepRow() {
       const list = document.getElementById('steps-list');
       if (!list) return;
       const rows = list.querySelectorAll('.step-row');
       const stepNum = rows.length + 1;
-
       const row = document.createElement('div');
       row.className = 'step-row';
       row.style.marginBottom = '8px';
@@ -2139,7 +2127,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       `;
       list.appendChild(row);
     }
-
     // 删除步骤行
     function removeStepRow(btn) {
       const row = btn.closest('.step-row');
@@ -2325,6 +2312,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         <div class="form-group">
           <label>营养价值</label>
+
           <div id="ingredient-nutrition" class="quill-small"></div>
         </div>
         <div class="form-group">
@@ -2788,6 +2776,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     
     // 地区
+
     function loadRegions() {
       fetch(API_BASE + '/regions', { headers: getAuthHeaders() })
         .then(res => res.json())
@@ -3053,6 +3042,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <td>${formatDate(user.created_at)}</td>
             <td style="display: flex; gap: 6px; flex-wrap: wrap;">
               <button class="btn btn-secondary btn-sm" onclick="viewUserDetail(${user.id})">详情</button>
+              ${user.role === 'admin' 
+                ? '<button class="btn btn-secondary btn-sm" onclick="updateUserRole(' + user.id + ', \'user\')">撤管</button>'
+                : '<button class="btn btn-success btn-sm" onclick="updateUserRole(' + user.id + ', \'admin\')">设管</button>'}
               <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})">删除</button>
             </td>
           </tr>
@@ -3216,6 +3208,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           : API_BASE + '/knowledge/' + id;
       
       fetch(detailUrl, { headers: getAuthHeaders() })
+
         .then(res => res.json())
         .then(data => {
           if (data.success) {
@@ -3652,6 +3645,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               if (imgUrl) {
                 currentPushImageUrl = imgUrl;
                 preview.innerHTML = `
+
                   <img src="${imgUrl}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" alt="AI配图">
                   <div style="position: absolute; top: 8px; right: 8px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 500; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
                     ✨ AI生成（演示版）
@@ -4099,6 +4093,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       
       let html = '<table class="data-table"><thead><tr>';
       html += '<th>ID</th><th>名称</th><th>链接</th><th>排序</th><th>状态</th><th>操作</th>';
+
       html += '</tr></thead><tbody>';
       
       items.forEach(item => {
@@ -4550,6 +4545,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             document.getElementById('setting-site-description').value = data.data.site_description || '';
             document.getElementById('setting-keywords').value = data.data.site_keywords || '';
             document.getElementById('setting-icp').value = data.data.icp || '';
+
             document.getElementById('setting-footer').value = data.data.footer_text || '';
           }
         });
@@ -4949,6 +4945,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           let newWidth = resizeStartWidth + deltaX;
           let newHeight = resizeStartHeight + deltaY;
           
+
           // 最小尺寸限制
           newWidth = Math.max(400, newWidth);
           newHeight = Math.max(300, newHeight);
@@ -5383,25 +5380,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // 触发网站重建
     let deployCheckTimer = null;
     let deployStartTime = 0;
-
     async function triggerDeploy() {
       const btn = document.getElementById('btn-deploy');
       if (!btn) return;
-
       if (btn.disabled) return;
-
       const originalText = btn.innerHTML;
       btn.disabled = true;
       btn.innerHTML = '⏳ 正在触发...';
-
       try {
         const response = await fetch(API_BASE + '/deploy', {
           method: 'POST',
           headers: getAuthHeaders(),
         });
-
         const data = await response.json();
-
         if (data.success) {
           showToast('✅ 构建已触发！预计1-2分钟完成', 'success');
           deployStartTime = Date.now();
@@ -5417,27 +5408,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         btn.innerHTML = originalText;
       }
     }
-
     // 轮询检查构建状态
     function startDeployCheck() {
       const btn = document.getElementById('btn-deploy');
       if (!btn) return;
-
       let checkCount = 0;
       const maxChecks = 12; // 最多查12次（每次30秒 = 6分钟）
       const checkInterval = 30000; // 30秒查一次
-
       function updateButtonStatus() {
         const elapsed = Math.floor((Date.now() - deployStartTime) / 1000);
         const minutes = Math.floor(elapsed / 60);
         const seconds = elapsed % 60;
         btn.innerHTML = `🔄 构建中... ${minutes}:${seconds.toString().padStart(2, '0')}`;
       }
-
       async function checkDeployStatus() {
         checkCount++;
         updateButtonStatus();
-
         if (checkCount >= maxChecks) {
           // 超时了，停止检查
           btn.disabled = false;
@@ -5447,14 +5433,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           deployCheckTimer = null;
           return;
         }
-
         try {
           // 尝试请求前台首页，通过比较响应时间和内容判断是否更新
           const response = await fetch(window.location.origin + '/?t=' + Date.now(), {
             method: 'HEAD',
             cache: 'no-store',
           });
-
           // 如果能正常响应，说明网站在线
           // 这里我们用一个简化的判断：如果构建已超过90秒，提示用户可以刷新看看
           const elapsed = (Date.now() - deployStartTime) / 1000;
@@ -5470,14 +5454,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           // 网站可能暂时不可用（构建中），继续等
         }
       }
-
       // 立即更新一次按钮状态
       updateButtonStatus();
-
       // 开始轮询
       deployCheckTimer = setInterval(checkDeployStatus, checkInterval);
     }
-
     // ============ 图片上传与 AI 生成 ============
     
     // 更新图片预览
@@ -5494,7 +5475,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
       }
     }
-
     // 触发文件选择
     function triggerFileInput(inputId) {
       const input = document.getElementById(inputId);
@@ -5502,7 +5482,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         input.click();
       }
     }
-
     // 上传图片
     async function uploadImage(file, type, slug) {
       const formData = new FormData();
@@ -5511,7 +5490,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (slug) {
         formData.append('slug', slug);
       }
-
       try {
         const response = await fetch(API_BASE + '/upload', {
           method: 'POST',
@@ -5521,7 +5499,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           },
           body: formData,
         });
-
         const data = await response.json();
         if (data.success) {
           return data.data;
@@ -5533,12 +5510,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         throw err;
       }
     }
-
     // 处理食谱封面上传
     async function handleRecipeCoverUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
-
       // 检查文件类型和大小
       if (!file.type.startsWith('image/')) {
         showToast('请选择图片文件', 'error');
@@ -5548,7 +5523,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         showToast('图片大小不能超过 5MB', 'error');
         return;
       }
-
       const slug = document.getElementById('recipe-slug')?.value || '';
       const btn = document.getElementById('btn-recipe-upload');
       const originalText = btn?.textContent || '';
@@ -5557,7 +5531,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         btn.disabled = true;
         btn.textContent = '上传中...';
       }
-
       try {
         const result = await uploadImage(file, 'recipe', slug);
         const urlInput = document.getElementById('recipe-cover');
@@ -5577,12 +5550,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         event.target.value = '';
       }
     }
-
     // 处理食材图片上传
     async function handleIngredientImageUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
-
       if (!file.type.startsWith('image/')) {
         showToast('请选择图片文件', 'error');
         return;
@@ -5591,7 +5562,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         showToast('图片大小不能超过 5MB', 'error');
         return;
       }
-
       const slug = document.getElementById('ingredient-slug')?.value || '';
       const btn = document.getElementById('btn-ingredient-upload');
       const originalText = btn?.textContent || '';
@@ -5600,7 +5570,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         btn.disabled = true;
         btn.textContent = '上传中...';
       }
-
       try {
         const result = await uploadImage(file, 'ingredient', slug);
         const urlInput = document.getElementById('ingredient-image');
@@ -5619,7 +5588,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         event.target.value = '';
       }
     }
-
     // AI 生成图片 - 创建任务
     async function generateImage(type, name, slug, customPrompt) {
       try {
@@ -5636,7 +5604,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             prompt: customPrompt || '',
           }),
         });
-
         const data = await response.json();
         if (data.success) {
           return data.data;
@@ -5648,7 +5615,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         throw err;
       }
     }
-
     // 查询生成任务状态
     async function getGenTaskStatus(taskId) {
       try {
@@ -5665,19 +5631,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         throw err;
       }
     }
-
     // 轮询生成任务状态
     function pollGenTask(taskId, type, onUpdate, onComplete, onError) {
       const maxAttempts = 60; // 最多轮询60次（每次2秒 = 2分钟）
       let attempts = 0;
-
       function check() {
         attempts++;
         
         getGenTaskStatus(taskId)
           .then(task => {
             if (onUpdate) onUpdate(task);
-
             if (task.status === 'completed') {
               if (onComplete) onComplete(task);
             } else if (task.status === 'failed') {
@@ -5698,10 +5661,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             }
           });
       }
-
       check();
     }
-
     // AI 生成食谱封面
     async function generateRecipeCover() {
       const name = document.getElementById('recipe-title')?.value;
@@ -5711,7 +5672,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         showToast('请先填写食谱名称', 'error');
         return;
       }
-
       const btn = document.getElementById('btn-recipe-ai-gen');
       const originalText = btn?.textContent || '';
       
@@ -5719,7 +5679,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         btn.disabled = true;
         btn.textContent = '生成中...';
       }
-
       try {
         const task = await generateImage('recipe', name, slug);
         showToast('已加入生成队列，请在聊天中发送【生成图片】启动处理', 'info');
@@ -5775,7 +5734,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
       }
     }
-
     // AI 生成食材图片
     async function generateIngredientImage() {
       const name = document.getElementById('ingredient-name')?.value;
@@ -5785,7 +5743,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         showToast('请先填写食材名称', 'error');
         return;
       }
-
       const btn = document.getElementById('btn-ingredient-ai-gen');
       const originalText = btn?.textContent || '';
       
@@ -5793,7 +5750,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         btn.disabled = true;
         btn.textContent = '生成中...';
       }
-
       try {
         const task = await generateImage('ingredient', name, slug);
         showToast('已加入生成队列，请在聊天中发送【生成图片】启动处理', 'info');
@@ -5849,7 +5805,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
       }
     }
-
     // 初始化图片预览（打开编辑弹窗时调用）
     function initImagePreviews() {
       // 食谱封面预览
@@ -5866,3 +5821,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   </script>
 </BaseLayout>
+
