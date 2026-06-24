@@ -18,8 +18,8 @@
     <!-- 登录表单 -->
     <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
       <div class="form-group">
-        <label for="login-email">邮箱</label>
-        <input type="email" id="login-email" name="email" required placeholder="请输入邮箱">
+        <label for="login-email">账号</label>
+        <input type="text" id="login-email" name="account" required placeholder="请输入邮箱或昵称">
       </div>
       <div class="form-group">
         <label for="login-password">密码</label>
@@ -33,15 +33,15 @@
     <!-- 注册表单 -->
     <form id="register-form" class="auth-form" style="display: none;" onsubmit="handleRegister(event)">
       <div class="form-group">
-        <label for="register-nickname">昵称</label>
+        <label for="register-nickname">昵称 <span class="required">*</span></label>
         <div class="nickname-input-wrap">
-          <input type="text" id="register-nickname" name="nickname" placeholder="不填则自动生成趣味昵称" maxlength="20">
+          <input type="text" id="register-nickname" name="nickname" required placeholder="请输入昵称" maxlength="20">
           <span id="nickname-status" class="nickname-status"></span>
         </div>
       </div>
       <div class="form-group">
-        <label for="register-email">邮箱 <span class="required">*</span></label>
-        <input type="email" id="register-email" name="email" required placeholder="请输入邮箱">
+        <label for="register-email">邮箱</label>
+        <input type="email" id="register-email" name="email" placeholder="选填，用于找回密码">
       </div>
       <div class="form-group">
         <label for="register-password">密码 <span class="required">*</span></label>
@@ -498,7 +498,12 @@ window.handleRegister = async function(e: Event) {
   }
   
   try {
-    const result = await register(email, password, nickname || undefined, phone || undefined, birthday || undefined);
+    const result = await register(password, {
+      email: email || undefined,
+      nickname: nickname || undefined,
+      phone: phone || undefined,
+      birthday: birthday || undefined
+    });
     if (result.success && result.data) {
       window.closeLoginModal();
       window.updateAuthUI();
