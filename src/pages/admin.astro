@@ -362,6 +362,58 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       color: var(--color-text-secondary);
     }
     
+    /* 用户管理相关样式 */
+    .user-info-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    
+    .user-avatar-default {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    
+    .user-name {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    
+    .user-nickname {
+      font-weight: 500;
+      color: var(--color-text);
+      font-size: 0.9rem;
+    }
+    
+    .user-id {
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    
     /* 搜索栏 */
     .toolbar {
       display: flex;
@@ -1521,6 +1573,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     let currentPushImageUrl = '';
     let quillEditors = {}; // 存储所有 Quill 编辑器实例
     
+    // ============ 通用工具函数 ============
+    function escapeHtml(text) {
+      if (text === null || text === undefined) return '';
+      const div = document.createElement('div');
+      div.appendChild(document.createTextNode(text));
+      return div.innerHTML;
+    }
+    
+    function formatDate(dateStr) {
+      if (!dateStr) return '-';
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) return dateStr;
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+    
     // ============ Quill 富文本编辑器工具函数 ============
     function initQuillEditor(containerId, options = {}) {
       // 如果已存在，先销毁
@@ -1846,10 +1918,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const statusClass = item.published ? 'status-published' : 'status-draft';
         html += `<tr>
           <td>${item.id}</td>
-          <td>${item.title}</td>
-          <td><code style="font-size: 0.8rem;">${item.slug}</code></td>
-          <td>${item.difficulty || '-'}</td>
-          <td>${item.cuisine_name || '-'}</td>
+          <td>${escapeHtml(item.title)}</td>
+          <td><code style="font-size: 0.8rem;">${escapeHtml(item.slug || '')}</code></td>
+          <td>${escapeHtml(item.difficulty || '-')}</td>
+          <td>${escapeHtml(item.cuisine_name || '-')}</td>
           <td><span class="status-badge ${statusClass}">${statusText}</span></td>
           <td>
             <button class="btn btn-secondary btn-sm" onclick="editRecipe(${item.id})">编辑</button>
@@ -3010,26 +3082,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       
       let html = '<table class="data-table">';
       html += '<thead><tr>';
-      html += '<th>ID</th><th>邮箱</th><th>昵称</th><th>角色</th><th>注册时间</th><th>操作</th>';
+      html += '<th>用户</th><th>邮箱</th><th>手机</th><th>角色</th><th>注册时间</th><th>操作</th>';
       html += '</tr></thead><tbody>';
       
       users.forEach(user => {
+        const avatar = user.avatar_url 
+          ? `<img src="${escapeHtml(user.avatar_url)}" class="user-avatar" alt="avatar">`
+          : `<div class="user-avatar-default">${(user.nickname || user.email || 'U').charAt(0).toUpperCase()}</div>`;
+        
         const roleBadge = user.role === 'admin' 
           ? '<span class="badge badge-admin">管理员</span>' 
           : '<span class="badge badge-user">普通用户</span>';
         
-        const roleAction = user.role === 'admin'
-          ? `<button class="btn btn-secondary btn-sm" onclick="updateUserRole(${user.id}, 'user')">设为普通用户</button>`
-          : `<button class="btn btn-primary btn-sm" onclick="updateUserRole(${user.id}, 'admin')">设为管理员</button>`;
-        
         html += `
           <tr>
-            <td>${user.id}</td>
-            <td>${escapeHtml(user.email || '')}</td>
-            <td>${escapeHtml(user.nickname || '-')}</td>
+            <td>
+              <div class="user-info-cell">
+                ${avatar}
+                <div class="user-name">
+                  <div class="user-nickname">${escapeHtml(user.nickname || '未设置昵称')}</div>
+                  <div class="user-id">ID: ${user.id}</div>
+                </div>
+              </div>
+            </td>
+            <td>${escapeHtml(user.email || '-')}</td>
+            <td>${escapeHtml(user.phone || '-')}</td>
             <td>${roleBadge}</td>
             <td>${formatDate(user.created_at)}</td>
-            <td>${roleAction}</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-secondary btn-sm" onclick="viewUserDetail(${user.id})">详情</button>
+                ${user.role === 'admin'
+                  ? `<button class="btn btn-secondary btn-sm" onclick="updateUserRole(${user.id}, 'user')">取消管理</button>`
+                  : `<button class="btn btn-primary btn-sm" onclick="updateUserRole(${user.id}, 'admin')">设为管理</button>`
+                }
+                <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})">删除</button>
+              </div>
+            </td>
           </tr>
         `;
       });
@@ -3046,7 +3135,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     
     function updateUserRole(id, role) {
-      const action = role === 'admin' ? '设为管理员' : '设为普通用户';
+      const action = role === 'admin' ? '设为管理员' : '取消管理员权限';
       if (!confirm('确定要将该用户' + action + '吗？')) return;
       
       fetch(API_BASE + '/users/' + id + '/role', {
@@ -3063,6 +3152,132 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           showToast(data.error || '操作失败', 'error');
         }
       });
+    }
+    
+    function deleteUser(id) {
+      if (!confirm('确定要删除该用户吗？此操作不可恢复。')) return;
+      
+      fetch(API_BASE + '/users/' + id, {
+        method: 'DELETE',
+        headers: getAuthHeaders()
+      }).then(res => res.json()).then(data => {
+        if (data.success) {
+          showToast('用户已删除', 'success');
+          const search = document.getElementById('user-search').value;
+          const role = document.getElementById('user-role-filter').value;
+          loadUsers(usersCurrentPage, search, role);
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      });
+    }
+    
+    function viewUserDetail(id) {
+      // 加载用户详情
+      fetch(API_BASE + '/users/' + id, { headers: getAuthHeaders() })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            const user = data.data;
+            const modal = document.getElementById('edit-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            
+            modalTitle.textContent = '用户详情';
+            
+            const avatar = user.avatar_url 
+              ? `<img src="${escapeHtml(user.avatar_url)}" class="detail-avatar" alt="avatar">`
+              : `<div class="detail-avatar-default">${(user.nickname || user.email || 'U').charAt(0).toUpperCase()}</div>`;
+            
+            modalBody.innerHTML = `
+              <div class="user-detail">
+                <div class="user-detail-header">
+                  ${avatar}
+                  <div>
+                    <h3 style="margin: 0 0 8px 0; color: var(--color-title);">${escapeHtml(user.nickname || '未设置昵称')}</h3>
+                    <p style="margin: 0; color: var(--color-text-secondary);">${escapeHtml(user.email || '')}</p>
+                  </div>
+                </div>
+                <div class="detail-grid">
+                  <div class="detail-item">
+                    <label>用户ID</label>
+                    <span>${user.id}</span>
+                  </div>
+                  <div class="detail-item">
+                    <label>角色</label>
+                    <span>${user.role === 'admin' ? '管理员' : '普通用户'}</span>
+                  </div>
+                  <div class="detail-item">
+                    <label>手机号</label>
+                    <span>${escapeHtml(user.phone || '-')}</span>
+                  </div>
+                  <div class="detail-item">
+                    <label>生日</label>
+                    <span>${escapeHtml(user.birthday || '-')}</span>
+                  </div>
+                  <div class="detail-item">
+                    <label>注册时间</label>
+                    <span>${formatDate(user.created_at)}</span>
+                  </div>
+                  <div class="detail-item">
+                    <label>最后登录</label>
+                    <span>${user.last_login_at ? formatDate(user.last_login_at) : '-'}</span>
+                  </div>
+                </div>
+              </div>
+              <style>
+                .user-detail-header {
+                  display: flex;
+                  align-items: center;
+                  gap: 20px;
+                  padding: 20px;
+                  background: var(--color-bg-secondary);
+                  border-radius: var(--radius);
+                  margin-bottom: 20px;
+                }
+                .detail-avatar {
+                  width: 64px;
+                  height: 64px;
+                  border-radius: 50%;
+                  object-fit: cover;
+                }
+                .detail-avatar-default {
+                  width: 64px;
+                  height: 64px;
+                  border-radius: 50%;
+                  background: var(--color-accent);
+                  color: white;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 24px;
+                  font-weight: 600;
+                }
+                .detail-grid {
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 16px;
+                }
+                .detail-item {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 4px;
+                }
+                .detail-item label {
+                  font-size: 0.8rem;
+                  color: var(--color-text-secondary);
+                }
+                .detail-item span {
+                  font-size: 0.95rem;
+                  color: var(--color-text);
+                }
+              </style>
+            `;
+            
+            modal.classList.add('show');
+            resetModalPosition();
+          }
+        });
     }
     
     // ============ 推送助手 ============
