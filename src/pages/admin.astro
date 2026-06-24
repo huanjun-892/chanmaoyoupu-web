@@ -3027,6 +3027,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           ? '<span class="badge badge-admin">管理员</span>' 
           : '<span class="badge badge-user">普通用户</span>';
         
+        const roleBtn = user.role === 'admin'
+          ? `<button class="btn btn-secondary btn-sm" onclick="updateUserRole(${user.id}, 'user')">撤管</button>`
+          : `<button class="btn btn-success btn-sm" onclick="updateUserRole(${user.id}, 'admin')">设管</button>`;
+        
         const avatar = user.avatar_url 
           ? `<img src="${escapeHtml(user.avatar_url)}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">`
           : '<div style="width: 32px; height: 32px; border-radius: 50%; background: var(--color-bg-secondary); display: flex; align-items: center; justify-content: center; font-size: 14px;">👤</div>';
@@ -3042,9 +3046,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <td>${formatDate(user.created_at)}</td>
             <td style="display: flex; gap: 6px; flex-wrap: wrap;">
               <button class="btn btn-secondary btn-sm" onclick="viewUserDetail(${user.id})">详情</button>
-              ${user.role === 'admin' 
-                ? '<button class="btn btn-secondary btn-sm" onclick="updateUserRole(' + user.id + ', \'user\')">撤管</button>'
-                : '<button class="btn btn-success btn-sm" onclick="updateUserRole(' + user.id + ', \'admin\')">设管</button>'}
+              ${roleBtn}
               <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})">删除</button>
             </td>
           </tr>
