@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProfileSidebar from '../../components/ProfileSidebar.astro';
+import '../../styles/global.css';
+
+const pageTitle = '个人资料 - 馋猫有谱';
+---
+
+<BaseLayout title={pageTitle}>
+  <main class="profile-page">
+    <div class="container profile-container">
+      <ProfileSidebar active="profile" />
+      
+      <div class="profile-content">
+        <div class="content-card">
+          <h2 class="card-title">个人资料</h2>
+          <p class="card-desc">完善您的个人信息，让我们为您提供更好的服务</p>
+          
+          <form id="profile-form" class="profile-form">
+            <div class="form-row avatar-row">
+              <label class="form-label">头像</label>
+              <div class="avatar-upload">
+                <img id="profile-avatar" src="/images/default-avatar.jpg" alt="头像" class="current-avatar" />
+                <div class="avatar-actions">
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('avatar-input').click()">
+                    更换头像
+                  </button>
+                  <input type="file" id="avatar-input" accept="image/*" style="display: none" onchange="handleAvatarChange(event)" />
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="nickname">昵称</label>
+              <input type="text" id="nickname" name="nickname" class="form-input" placeholder="请输入昵称" maxlength="20" />
+              <p class="form-hint" id="nickname-hint">昵称最长20个字符</p>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="email">邮箱</label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="请输入邮箱" />
+              <p class="form-hint">用于找回密码和接收通知</p>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="phone">手机号</label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="请输入手机号" maxlength="11" />
+              <p class="form-hint">选填，用于账号安全验证</p>
+            </div>
+            
+            <div class="form-row">
+              <label class="form-label" for="birthday">生日</label>
+              <input type="date" id="birthday" name="birthday" class="form-input" />
+              <p class="form-hint">选填，生日当天有惊喜哦</p>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="save-btn">
+                <span class="btn-text">保存修改</span>
+                <span class="btn-loading" style="display: none">保存中...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+.profile-page {
+  min-height: calc(100vh - 80px);
+  padding: 32px 0;
+  background: var(--color-bg-secondary);
+}
+
+.profile-container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.profile-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.content-card {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-title);
+  margin: 0 0 8px 0;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin: 0 0 24px 0;
+}
+
+.profile-form {
+  max-width: 480px;
+}
+
+.form-row {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.form-input:disabled {
+  background: var(--color-bg-secondary);
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin: 6px 0 0 0;
+}
+
+.avatar-row {
+  margin-bottom: 24px;
+}
+
+.avatar-upload {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.current-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-border);
+}
+
+.avatar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-actions {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background: var(--color-border);
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 16px 0;
+  }
+  
+  .profile-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .content-card {
+    padding: 20px;
+  }
+  
+  .avatar-upload {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
+
+<script>
+import { getCurrentUser, updateProfile, getStoredUser, isLoggedIn } from '../../lib/auth';
+
+// 检查登录状态
+if (!isLoggedIn()) {
+  window.location.href = '/';
+}
+
+// 加载用户信息
+async function loadUserProfile() {
+  const user = getStoredUser();
+  if (user) {
+    fillForm(user);
+  }
+  
+  try {
+    const result = await getCurrentUser();
+    if (result.success && result.data) {
+      fillForm(result.data);
+    }
+  } catch (err) {
+    console.error('加载用户信息失败:', err);
+  }
+}
+
+function fillForm(user) {
+  const nicknameEl = document.getElementById('nickname') as HTMLInputElement;
+  const emailEl = document.getElementById('email') as HTMLInputElement;
+  const phoneEl = document.getElementById('phone') as HTMLInputElement;
+  const birthdayEl = document.getElementById('birthday') as HTMLInputElement;
+  const avatarEl = document.getElementById('profile-avatar') as HTMLImageElement;
+  
+  if (nicknameEl) nicknameEl.value = user.nickname || '';
+  if (emailEl) emailEl.value = user.email || '';
+  if (phoneEl) phoneEl.value = user.phone || '';
+  if (birthdayEl && user.birthday) {
+    birthdayEl.value = user.birthday.split(' ')[0];
+  }
+  if (avatarEl && user.avatar_url) {
+    avatarEl.src = user.avatar_url;
+  }
+}
+
+// 保存修改
+async function handleSubmit(e: Event) {
+  e.preventDefault();
+  
+  const saveBtn = document.getElementById('save-btn') as HTMLButtonElement;
+  const btnText = saveBtn?.querySelector('.btn-text') as HTMLElement;
+  const btnLoading = saveBtn?.querySelector('.btn-loading') as HTMLElement;
+  
+  if (saveBtn) saveBtn.disabled = true;
+  if (btnText) btnText.style.display = 'none';
+  if (btnLoading) btnLoading.style.display = 'inline';
+  
+  const nickname = (document.getElementById('nickname') as HTMLInputElement).value.trim();
+  const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+  const phone = (document.getElementById('phone') as HTMLInputElement).value.trim();
+  const birthday = (document.getElementById('birthday') as HTMLInputElement).value;
+  
+  try {
+    const result = await updateProfile({
+      nickname,
+      email,
+      phone,
+      birthday: birthday || null,
+    });
+    
+    if (result.success) {
+      showToast('保存成功', 'success');
+      // 触发登录状态变化事件，更新侧边栏等
+      window.dispatchEvent(new Event('auth_change'));
+    } else {
+      showToast(result.error || '保存失败', 'error');
+    }
+  } catch (err) {
+    showToast('保存失败，请稍后重试', 'error');
+  } finally {
+    if (saveBtn) saveBtn.disabled = false;
+    if (btnText) btnText.style.display = 'inline';
+    if (btnLoading) btnLoading.style.display = 'none';
+  }
+}
+
+// 头像上传处理（占位，后续可扩展）
+function handleAvatarChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    showToast('头像上传功能开发中...', 'info');
+  }
+}
+
+// Toast 提示
+function showToast(message: string, type: 'success' | 'error' | 'info' = 'info') {
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+  toast.style.cssText = `
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+    z-index: 9999;
+    animation: slideDown 0.3s ease;
+  `;
+  
+  if (type === 'success') toast.style.background = '#10b981';
+  else if (type === 'error') toast.style.background = '#ef4444';
+  else toast.style.background = '#6b7280';
+  
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'slideUp 0.3s ease';
+    setTimeout(() => toast.remove(), 300);
+  }, 2000);
+}
+
+// 初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    loadUserProfile();
+    document.getElementById('profile-form')?.addEventListener('submit', handleSubmit);
+  });
+} else {
+  loadUserProfile();
+  document.getElementById('profile-form')?.addEventListener('submit', handleSubmit);
+}
+</script>
