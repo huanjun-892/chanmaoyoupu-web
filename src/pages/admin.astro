@@ -3027,9 +3027,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           ? '<span class="badge badge-admin">管理员</span>' 
           : '<span class="badge badge-user">普通用户</span>';
         
-        const roleBtn = user.role === 'admin'
-          ? `<button class="btn btn-secondary btn-sm" onclick="updateUserRole(${user.id}, 'user')">撤管</button>`
-          : `<button class="btn btn-success btn-sm" onclick="updateUserRole(${user.id}, 'admin')">设管</button>`;
+        let roleBtn;
+        if (user.role === 'admin') {
+          roleBtn = '<button class="btn btn-secondary btn-sm" onclick="updateUserRole(' + user.id + ', \'user\')">撤管</button>';
+        } else {
+          roleBtn = '<button class="btn btn-success btn-sm" onclick="updateUserRole(' + user.id + ', \'admin\')">设管</button>';
+        }
         
         const avatar = user.avatar_url 
           ? `<img src="${escapeHtml(user.avatar_url)}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">`
