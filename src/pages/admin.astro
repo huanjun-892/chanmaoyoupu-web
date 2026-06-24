@@ -2985,7 +2985,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     
     // ============ 用户管理 ============
     let usersCurrentPage = 1;
-    const usersPageSize = 20;
+    let usersPageSize = 20;
     
     function loadUsers(page = 1, search = '', role = '') {
       usersCurrentPage = page;
@@ -3066,11 +3066,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       container.innerHTML = html;
       
       // 渲染分页
-      renderPagination('users', total, usersPageSize, page, function(p) {
-        const search = document.getElementById('user-search').value;
-        const role = document.getElementById('user-role-filter').value;
-        loadUsers(p, search, role);
-      });
+      renderPagination('users', { total, pages: Math.ceil(total / usersPageSize), page });
     }
     
     // 查看用户详情
@@ -4788,6 +4784,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (type === 'recipes') loadRecipes();
       else if (type === 'ingredients') loadIngredients();
       else if (type === 'knowledge') loadKnowledge();
+      else if (type === 'users') {
+        usersPageSize = parseInt(value);
+        usersCurrentPage = 1;
+        const search = document.getElementById('user-search').value;
+        const role = document.getElementById('user-role-filter').value;
+        loadUsers(1, search, role);
+      }
     }
     
     function jumpToPage(type) {
@@ -4804,6 +4807,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (type === 'recipes') loadRecipes();
       else if (type === 'ingredients') loadIngredients();
       else if (type === 'knowledge') loadKnowledge();
+      else if (type === 'users') {
+        const search = document.getElementById('user-search').value;
+        const role = document.getElementById('user-role-filter').value;
+        loadUsers(page, search, role);
+      }
     }
     
     function closeModal() {
