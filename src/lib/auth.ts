@@ -110,12 +110,13 @@ export async function checkNickname(nickname: string): Promise<ApiResponse<{ ava
   return await apiRequest<{ available: boolean }>(`${API_BASE}/api/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`);
 }
 
-// 注册
-export async function register(email: string, password: string, nickname?: string, phone?: string, birthday?: string): Promise<AuthResponse> {
-  const body: any = { email, password };
-  if (nickname) body.nickname = nickname;
-  if (phone) body.phone = phone;
-  if (birthday) body.birthday = birthday;
+// 注册（邮箱和昵称至少填一个）
+export async function register(password: string, options?: { email?: string; nickname?: string; phone?: string; birthday?: string }): Promise<AuthResponse> {
+  const body: any = { password };
+  if (options?.email) body.email = options.email;
+  if (options?.nickname) body.nickname = options.nickname;
+  if (options?.phone) body.phone = options.phone;
+  if (options?.birthday) body.birthday = options.birthday;
   
   const response = await apiRequest<{ user: User; token: string }>(`${API_BASE}/api/auth/register`, {
     method: 'POST',
@@ -129,11 +130,18 @@ export async function register(email: string, password: string, nickname?: strin
   return response as AuthResponse;
 }
 
-// 登录
-export async function login(email: string, password: string): Promise<AuthResponse> {
+// 登录（支持邮箱或昵称）
+export async function login(account: string, password: string): Promise<AuthResponse> {
+  const body: any = { password };
+  if (account.includes('@')) {
+    body.email = account;
+  } else {
+    body.username = account;
+  }
+  
   const response = await apiRequest<{ user: User; token: string }>(`${API_BASE}/api/auth/login`, {
     method: 'POST',
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(body),
   });
   
   if (response.success && response.data) {
