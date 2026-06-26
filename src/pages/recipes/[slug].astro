@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LikeButton from '../../components/LikeButton.astro';
+import CommentSection from '../../components/CommentSection.astro';
 import FavoriteButton from '../../components/FavoriteButton.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
 import { getAllRecipes, getAllIngredients, difficultyLabel, difficultyColor, getCoverUrl, getCoverFullUrl } from '../../lib/strapi';
@@ -240,6 +241,11 @@ const recipeSchema = {
         </div>
       </section>
       )}
+
+      <!-- 评论区 -->
+      <section class="recipe-comments">
+        <CommentSection slug={recipe.slug} />
+      </section>
     </div>
   </article>
 </BaseLayout>
@@ -517,3 +523,4 @@ const recipeSchema = {
     }
   }
 </style>
+
