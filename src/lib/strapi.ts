@@ -70,7 +70,10 @@ async function fetchContentAPI(path: string): Promise<any> {
         return null;
       }
       const data = await res.json();
+      // 兼容两种格式：直接返回数组 或 { success: true, data: [...] }
+      if (Array.isArray(data)) return data;
       if (data && data.success && data.data) return data.data;
+      if (data && Array.isArray(data.data)) return data.data;
       return null;
     } catch (err: any) {
       console.warn('Content API ' + path + ' error: ' + err.message + ' (attempt ' + attempt + '/' + maxRetries + ')');
