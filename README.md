@@ -13,3 +13,4 @@
 # Rebuild 18:17
 
 <!-- Last rebuild: 2026-05-29 -->
+# Build trigger 2026-06-26 17:45:47 - 评论系统部署验证
