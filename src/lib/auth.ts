@@ -281,3 +281,69 @@ export function onAuthChange(callback: (isLoggedIn: boolean, user: User | null) 
     window.removeEventListener('storage', handler);
   };
 }
+
+
+// ==================== 评论相关 ====================
+
+export interface Comment {
+  id: number;
+  recipe_slug: string;
+  user_id: number;
+  content: string;
+  parent_id: number;
+  status: number;
+  created_at: string;
+  updated_at: string;
+  nickname: string;
+  avatar_url: string;
+  replies?: Comment[];
+}
+
+export interface CommentsResponse {
+  items: Comment[];
+  total: number;
+  page: number;
+  limit: number;
+  pages: number;
+}
+
+// 获取食谱评论列表
+export async function getRecipeComments(slug: string, page: number = 1, limit: number = 20): Promise<ApiResponse<CommentsResponse>> {
+  return await apiRequest<CommentsResponse>(`${API_BASE}/api/recipes/${encodeURIComponent(slug)}/comments?page=${page}&limit=${limit}`);
+}
+
+// 发表评论
+export async function createComment(slug: string, content: string, parentId?: number): Promise<ApiResponse<Comment>> {
+  const body: any = { content };
+  if (parentId) body.parent_id = parentId;
+  
+  return await apiRequest<Comment>(`${API_BASE}/api/recipes/${encodeURIComponent(slug)}/comments`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
+
+// 删除评论
+export async function deleteComment(commentId: number): Promise<ApiResponse<{ deleted: boolean }>> {
+  return await apiRequest<{ deleted: boolean }>(`${API_BASE}/api/comments/${commentId}`, {
+    method: 'DELETE',
+  });
+}
+
+// 获取我的评论列表
+export interface MyCommentItem extends Comment {
+  recipe_title?: string;
+  recipe_cover?: string;
+}
+
+export interface MyCommentsResponse {
+  items: MyCommentItem[];
+  total: number;
+  page: number;
+  limit: number;
+  pages: number;
+}
+
+export async function getMyComments(page: number = 1, limit: number = 20): Promise<ApiResponse<MyCommentsResponse>> {
+  return await apiRequest<MyCommentsResponse>(`${API_BASE}/api/users/me/comments?page=${page}&limit=${limit}`);
+}
