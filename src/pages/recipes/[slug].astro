@@ -244,7 +244,7 @@ const recipeSchema = {
 
       <!-- 评论区 -->
       <section class="recipe-comments">
-        <CommentSection slug={recipe.slug} />
+        <CommentSection recipeSlug={recipe.slug} recipeTitle={recipe.title} />
       </section>
     </div>
   </article>
