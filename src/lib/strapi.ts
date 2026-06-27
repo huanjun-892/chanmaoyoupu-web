@@ -185,6 +185,10 @@ export async function getAllRecipes() {
 }
 
 export async function getRecipeBySlug(slug: string) {
+  if (FORCE_FALLBACK) {
+    const r = fallbackRecipes.find((r: any) => r.slug === slug);
+    return r || null;
+  }
   const contentData = await fetchContentAPI('/api/content/recipes/' + slug);
   if (contentData) return contentData;
   const data = await fetchAPI('/recipes', {
@@ -311,6 +315,10 @@ export async function getAllIngredients(category?: string) {
 }
 
 export async function getIngredientBySlug(slug: string) {
+  if (FORCE_FALLBACK) {
+    const ing = (fallbackIngredients || []).find((i: any) => i.slug === slug);
+    return ing || null;
+  }
   const contentData = await fetchContentAPI('/api/content/ingredients/' + slug);
   if (contentData) return contentData;
   return null;
