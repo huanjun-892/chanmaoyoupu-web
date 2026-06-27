@@ -158,8 +158,12 @@ function getFallbackSecrets(): any[] {
   return fallbackKnowledge.filter((e: any) => e.category === 'secret');
 }
 
+// ==================== 强制使用Fallback（构建加速） ====================
+const FORCE_FALLBACK = true;
+
 // ==================== 食谱 ====================
 export async function getAllRecipes() {
+  if (FORCE_FALLBACK) return fallbackRecipes;
   const contentData = await fetchContentAPI('/api/content/recipes');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/recipes', {
@@ -205,6 +209,7 @@ export async function getRecipeBySlug(slug: string) {
 
 // ==================== 菜系 ====================
 export async function getAllCuisines() {
+  if (FORCE_FALLBACK) return fallbackCuisines || [];
   const contentData = await fetchContentAPI('/api/content/cuisines');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/cuisines', {
@@ -219,6 +224,7 @@ export async function getAllCuisines() {
 
 // ==================== 标签 ====================
 export async function getAllTags() {
+  if (FORCE_FALLBACK) return fallbackTags || [];
   const contentData = await fetchContentAPI('/api/content/tags');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/tags', { 'pagination[pageSize]': '100' });
@@ -230,6 +236,7 @@ export async function getAllTags() {
 
 // ==================== 知识库 ====================
 export async function getAllKnowledge() {
+  if (FORCE_FALLBACK) return getFallbackKnowledge();
   const contentData = await fetchContentAPI('/api/content/knowledge');
   if (contentData && contentData.length > 0) {
     return contentData;
@@ -247,6 +254,7 @@ export async function getAllKnowledge() {
 
 // ==================== 秘方 ====================
 export async function getAllSecrets() {
+  if (FORCE_FALLBACK) return getAllSecrets();
   const contentData = await fetchContentAPI('/api/content/secrets');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/knowledge-entries', {
@@ -290,6 +298,7 @@ export function difficultyColor(d: string): string {
 
 // ==================== 食材调料 ====================
 export async function getAllIngredients(category?: string) {
+  if (FORCE_FALLBACK) return fallbackIngredients || [];
   const params: Record<string, string> = {};
   if (category) params['category'] = category;
   const contentData = await fetchContentAPI('/api/content/ingredients' + (category ? '?category=' + category : ''));
