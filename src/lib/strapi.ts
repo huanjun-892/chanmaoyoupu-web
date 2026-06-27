@@ -11,6 +11,8 @@ const fallbackKnowledge: any[] = fallback.knowledge || [];
 const fallbackRecipes: any[] = fallback.recipes || [];
 const fallbackCuisines: any[] = fallback.cuisines || [];
 const fallbackTags: any[] = fallback.tags || [];
+const fallbackRegions: any[] = fallback.regions || [];
+const fallbackMethods: any[] = fallback.methods || [];
 
 // ==================== 数据格式统一 ====================
 // Strapi v4 返回嵌套格式 { id, attributes: {...} }，Content API 返回扁平格式
@@ -254,7 +256,7 @@ export async function getAllKnowledge() {
 
 // ==================== 秘方 ====================
 export async function getAllSecrets() {
-  if (FORCE_FALLBACK) return getAllSecrets();
+  if (FORCE_FALLBACK) return getFallbackSecrets();
   const contentData = await fetchContentAPI('/api/content/secrets');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/knowledge-entries', {
@@ -271,6 +273,7 @@ export async function getAllSecrets() {
 
 // ==================== 辅助函数 ====================
 export async function getAllRegions() {
+  if (FORCE_FALLBACK) return fallbackRegions || [];
   const contentData = await fetchContentAPI('/api/content/regions');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/regions', { 'pagination[pageSize]': '100' });
@@ -278,6 +281,7 @@ export async function getAllRegions() {
 }
 
 export async function getAllMethods() {
+  if (FORCE_FALLBACK) return fallbackMethods || [];
   const contentData = await fetchContentAPI('/api/content/methods');
   if (contentData && contentData.length > 0) return contentData;
   const data = await fetchAPI('/methods', { 'pagination[pageSize]': '100' });
