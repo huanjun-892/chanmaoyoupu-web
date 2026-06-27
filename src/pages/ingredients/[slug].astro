@@ -1,17 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
-import { getIngredientBySlug, getAllIngredients, difficultyLabel, getCoverUrl } from '../../lib/strapi';
+import { getAllIngredients, difficultyLabel, getCoverUrl } from '../../lib/strapi';
 
 export async function getStaticPaths() {
   const ingredients = await getAllIngredients();
   return ingredients.map((i: any) => ({
     params: { slug: i.slug },
+    props: { ingredient: i },
   }));
 }
 
-const { slug } = Astro.params;
-const ingredient = await getIngredientBySlug(slug);
+const { ingredient } = Astro.props;
 
 if (!ingredient) {
   return Astro.redirect('/ingredients');
