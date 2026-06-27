@@ -13,6 +13,7 @@ const fallbackCuisines: any[] = fallback.cuisines || [];
 const fallbackTags: any[] = fallback.tags || [];
 const fallbackRegions: any[] = fallback.regions || [];
 const fallbackMethods: any[] = fallback.methods || [];
+const fallbackIngredients: any[] = fallback.ingredients || [];
 
 // ==================== 数据格式统一 ====================
 // Strapi v4 返回嵌套格式 { id, attributes: {...} }，Content API 返回扁平格式
