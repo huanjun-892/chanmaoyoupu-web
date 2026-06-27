@@ -162,7 +162,7 @@ function getFallbackSecrets(): any[] {
 }
 
 // ==================== 强制使用Fallback（构建加速） ====================
-const FORCE_FALLBACK = true;
+const FORCE_FALLBACK = false;
 
 // ==================== 食谱 ====================
 export async function getAllRecipes() {
