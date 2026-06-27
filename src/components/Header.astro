@@ -693,4 +693,18 @@ window.updateAuthUI = function() {
     if (dropdownNickname) dropdownNickname.textContent = user.nickname || user.email;
     const avatarUrl = user.avatar_url || '/images/default-avatar.jpg';
     if (headerAvatar) headerAvatar.src = avatarUrl;
-    if (dropdownAvata
+    if (dropdownAvatar) dropdownAvatar.src = avatarUrl;
+  } else {
+    if (authBtn) authBtn.style.display = 'inline-block';
+    if (userMenu) userMenu.style.display = 'none';
+  }
+};
+
+// Initialize
+window.updateAuthUI();
+
+// Listen for auth changes
+onAuthChange(() => {
+  window.updateAuthUI();
+});
+</script>
