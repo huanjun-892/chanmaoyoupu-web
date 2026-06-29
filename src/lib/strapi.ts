@@ -168,7 +168,16 @@ const FORCE_FALLBACK = false;
 export async function getAllRecipes() {
   if (FORCE_FALLBACK) return fallbackRecipes;
   const contentData = await fetchContentAPI('/api/content/recipes');
-  if (contentData && contentData.length > 0) return contentData;
+  if (contentData && contentData.length > 0) {
+    // 数据清洗：确保必要字段有默认值，避免构建时报错
+    return contentData.map(recipe => ({
+      ...recipe,
+      cover: recipe.cover || { url: null, formats: {} },
+      steps: Array.isArray(recipe.steps) ? recipe.steps : [],
+      ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [],
+      cuisine: recipe.cuisine || null,
+    }));
+  }
   const data = await fetchAPI('/recipes', {
     'pagination[pageSize]': '100',
     'populate[cuisine]': 'true',
@@ -191,7 +200,15 @@ export async function getRecipeBySlug(slug: string) {
     return r || null;
   }
   const contentData = await fetchContentAPI('/api/content/recipes/' + slug);
-  if (contentData) return contentData;
+  if (contentData) {
+    return {
+      ...contentData,
+      cover: contentData.cover || { url: null, formats: {} },
+      steps: Array.isArray(contentData.steps) ? contentData.steps : [],
+      ingredients: Array.isArray(contentData.ingredients) ? contentData.ingredients : [],
+      cuisine: contentData.cuisine || null,
+    };
+  }
   const data = await fetchAPI('/recipes', {
     'filters[slug][$eq]': slug,
     'populate[cuisine]': 'true',
