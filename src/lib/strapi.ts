@@ -361,6 +361,9 @@ export async function getAllKnowledge() {
   });
   const items = flattenStrapiList(data?.data);
   if (items.length > 0) return items;
+  } catch (e) {
+    console.warn('getAllKnowledge error:', e);
+  }
   console.warn('All APIs returned no knowledge entries, using fallback data');
   return getFallbackKnowledge();
 }
@@ -392,6 +395,9 @@ export async function getAllSecrets() {
   });
   const items = flattenStrapiList(data?.data);
   if (items.length > 0) return items;
+  } catch (e) {
+    console.warn('getAllSecrets error:', e);
+  }
   console.warn('All APIs returned no secrets, using fallback data');
   return getFallbackSecrets();
 }
