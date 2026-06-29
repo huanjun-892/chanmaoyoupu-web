@@ -166,7 +166,8 @@ const FORCE_FALLBACK = false;
 
 // ==================== 食谱 ====================
 export async function getAllRecipes() {
-  if (FORCE_FALLBACK) return fallbackRecipes;
+  try {
+    if (FORCE_FALLBACK) return fallbackRecipes;
   const contentData = await fetchContentAPI('/api/content/recipes');
   if (contentData && contentData.length > 0) {
     // 数据清洗：确保必要字段有默认值，避免构建时报错
@@ -212,12 +213,17 @@ export async function getAllRecipes() {
   });
   const items = flattenStrapiList(data?.data);
   if (items.length > 0) return items;
-  console.warn('All APIs returned no recipes, using fallback data');
-  return fallbackRecipes;
+    console.warn('All APIs returned no recipes, using fallback data');
+    return fallbackRecipes;
+  } catch (e) {
+    console.warn('getAllRecipes error:', e);
+    return fallbackRecipes;
+  }
 }
 
 export async function getRecipeBySlug(slug: string) {
-  if (FORCE_FALLBACK) {
+  try {
+    if (FORCE_FALLBACK) {
     const r = fallbackRecipes.find((r: any) => r.slug === slug);
     return r || null;
   }
@@ -271,39 +277,68 @@ export async function getRecipeBySlug(slug: string) {
     console.warn('Using fallback for recipe: ' + slug);
     return fallbackRecipe;
   }
-  return null;
+    return null;
+  } catch (e) {
+    console.warn('getRecipeBySlug error:', e);
+    const fallbackRecipe = fallbackRecipes.find((r: any) => r.slug === slug);
+    return fallbackRecipe || null;
+  }
 }
 
 // ==================== 菜系 ====================
 export async function getAllCuisines() {
   if (FORCE_FALLBACK) return fallbackCuisines || [];
-  const contentData = await fetchContentAPI('/api/content/cuisines');
-  if (contentData && contentData.length > 0) return contentData;
-  const data = await fetchAPI('/cuisines', {
-    'pagination[pageSize]': '100',
-    'populate[cover]': 'true',
-  });
-  const items = flattenStrapiList(data?.data);
-  if (items.length > 0) return items;
+  try {
+    const contentData = await fetchContentAPI('/api/content/cuisines');
+    if (contentData && contentData.length > 0) {
+      return contentData.map((item: any) => ({
+        ...item,
+        name: item.name || '',
+        slug: item.slug || '',
+        description: item.description || '',
+        cover: item.cover || { url: '', formats: {} },
+      }));
+    }
+    const data = await fetchAPI('/cuisines', {
+      'pagination[pageSize]': '100',
+      'populate[cover]': 'true',
+    });
+    const items = flattenStrapiList(data?.data);
+    if (items.length > 0) return items;
+  } catch (e) {
+    console.warn('getAllCuisines error:', e);
+  }
   console.warn('All APIs returned no cuisines, using fallback data');
-  return fallbackCuisines;
+  return fallbackCuisines || [];
 }
 
 // ==================== 标签 ====================
 export async function getAllTags() {
   if (FORCE_FALLBACK) return fallbackTags || [];
-  const contentData = await fetchContentAPI('/api/content/tags');
-  if (contentData && contentData.length > 0) return contentData;
-  const data = await fetchAPI('/tags', { 'pagination[pageSize]': '100' });
-  const items = flattenStrapiList(data?.data);
-  if (items.length > 0) return items;
+  try {
+    const contentData = await fetchContentAPI('/api/content/tags');
+    if (contentData && contentData.length > 0) {
+      return contentData.map((item: any) => ({
+        ...item,
+        name: item.name || '',
+        slug: item.slug || '',
+        icon: item.icon || '',
+      }));
+    }
+    const data = await fetchAPI('/tags', { 'pagination[pageSize]': '100' });
+    const items = flattenStrapiList(data?.data);
+    if (items.length > 0) return items;
+  } catch (e) {
+    console.warn('getAllTags error:', e);
+  }
   console.warn('All APIs returned no tags, using fallback data');
-  return fallbackTags;
+  return fallbackTags || [];
 }
 
 // ==================== 知识库 ====================
 export async function getAllKnowledge() {
-  if (FORCE_FALLBACK) return getFallbackKnowledge();
+  try {
+    if (FORCE_FALLBACK) return getFallbackKnowledge();
   const contentData = await fetchContentAPI('/api/content/knowledge');
   if (contentData && contentData.length > 0) {
     return contentData.map(item => ({
@@ -332,7 +367,8 @@ export async function getAllKnowledge() {
 
 // ==================== 秘方 ====================
 export async function getAllSecrets() {
-  if (FORCE_FALLBACK) return getFallbackSecrets();
+  try {
+    if (FORCE_FALLBACK) return getFallbackSecrets();
   const contentData = await fetchContentAPI('/api/content/secrets');
   if (contentData && contentData.length > 0) {
     return contentData.map(item => ({
@@ -363,18 +399,41 @@ export async function getAllSecrets() {
 // ==================== 辅助函数 ====================
 export async function getAllRegions() {
   if (FORCE_FALLBACK) return fallbackRegions || [];
-  const contentData = await fetchContentAPI('/api/content/regions');
-  if (contentData && contentData.length > 0) return contentData;
-  const data = await fetchAPI('/regions', { 'pagination[pageSize]': '100' });
-  return flattenStrapiList(data?.data);
+  try {
+    const contentData = await fetchContentAPI('/api/content/regions');
+    if (contentData && contentData.length > 0) {
+      return contentData.map((item: any) => ({
+        ...item,
+        name: item.name || '',
+        slug: item.slug || '',
+      }));
+    }
+    const data = await fetchAPI('/regions', { 'pagination[pageSize]': '100' });
+    return flattenStrapiList(data?.data);
+  } catch (e) {
+    console.warn('getAllRegions error:', e);
+    return fallbackRegions || [];
+  }
 }
 
 export async function getAllMethods() {
   if (FORCE_FALLBACK) return fallbackMethods || [];
-  const contentData = await fetchContentAPI('/api/content/methods');
-  if (contentData && contentData.length > 0) return contentData;
-  const data = await fetchAPI('/methods', { 'pagination[pageSize]': '100' });
-  return flattenStrapiList(data?.data);
+  try {
+    const contentData = await fetchContentAPI('/api/content/methods');
+    if (contentData && contentData.length > 0) {
+      return contentData.map((item: any) => ({
+        ...item,
+        name: item.name || '',
+        slug: item.slug || '',
+        icon: item.icon || '',
+      }));
+    }
+    const data = await fetchAPI('/methods', { 'pagination[pageSize]': '100' });
+    return flattenStrapiList(data?.data);
+  } catch (e) {
+    console.warn('getAllMethods error:', e);
+    return fallbackMethods || [];
+  }
 }
 
 
@@ -404,9 +463,31 @@ export async function getIngredientBySlug(slug: string) {
     const ing = (fallbackIngredients || []).find((i: any) => i.slug === slug);
     return ing || null;
   }
-  const contentData = await fetchContentAPI('/api/content/ingredients/' + slug);
-  if (contentData) return contentData;
-  return null;
+  try {
+    const contentData = await fetchContentAPI('/api/content/ingredients/' + slug);
+    if (contentData) {
+      return {
+        ...contentData,
+        name: contentData.name || '',
+        slug: contentData.slug || '',
+        category: contentData.category || '',
+        description: contentData.description || '',
+        imageUrl: contentData.imageUrl || '',
+        nutrition: contentData.nutrition || '',
+        tips: contentData.tips || '',
+        aliases: contentData.aliases || '',
+        season: contentData.season || '',
+        origin: contentData.origin || '',
+        storageMethod: contentData.storageMethod || '',
+        pairingSuggestions: contentData.pairingSuggestions || '',
+        avoidWith: contentData.avoidWith || '',
+      };
+    }
+  } catch (e) {
+    console.warn('getIngredientBySlug error:', e);
+  }
+  const fallbackIng = (fallbackIngredients || []).find((i: any) => i.slug === slug);
+  return fallbackIng || null;
 }
 
 // ==================== 全站搜索 ====================
