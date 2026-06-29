@@ -193,13 +193,12 @@ export async function getAllRecipes() {
             amount: ing.amount || '',
           }))
         : [],
-      cuisine: recipe.cuisine || null,
+      cuisine: recipe.cuisine || { name: '', slug: '' },
       tags: Array.isArray(recipe.tags) ? recipe.tags : [],
       methods: Array.isArray(recipe.methods) ? recipe.methods : [],
       regions: Array.isArray(recipe.regions) ? recipe.regions : [],
     }));
-    // 测试：只返回前10道排查构建失败问题
-    return cleanedData.slice(0, 10);
+    return cleanedData;
   }
   const data = await fetchAPI('/recipes', {
     'pagination[pageSize]': '100',
@@ -247,7 +246,7 @@ export async function getRecipeBySlug(slug: string) {
             amount: ing.amount || '',
           }))
         : [],
-      cuisine: contentData.cuisine || null,
+      cuisine: contentData.cuisine || { name: '', slug: '' },
       tags: Array.isArray(contentData.tags) ? contentData.tags : [],
       methods: Array.isArray(contentData.methods) ? contentData.methods : [],
       regions: Array.isArray(contentData.regions) ? contentData.regions : [],
