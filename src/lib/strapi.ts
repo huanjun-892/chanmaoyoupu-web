@@ -306,7 +306,18 @@ export async function getAllKnowledge() {
   if (FORCE_FALLBACK) return getFallbackKnowledge();
   const contentData = await fetchContentAPI('/api/content/knowledge');
   if (contentData && contentData.length > 0) {
-    return contentData;
+    return contentData.map(item => ({
+      ...item,
+      title: item.title || '',
+      slug: item.slug || '',
+      description: item.description || '',
+      category: item.category || '',
+      cover: item.cover || { url: '', formats: {} },
+      cuisine: item.cuisine || { name: '', slug: '' },
+      tags: Array.isArray(item.tags) ? item.tags : [],
+      content: item.content || '',
+      summary: item.summary || '',
+    }));
   }
   const data = await fetchAPI('/knowledge-entries', {
     'pagination[pageSize]': '100',
@@ -323,7 +334,20 @@ export async function getAllKnowledge() {
 export async function getAllSecrets() {
   if (FORCE_FALLBACK) return getFallbackSecrets();
   const contentData = await fetchContentAPI('/api/content/secrets');
-  if (contentData && contentData.length > 0) return contentData;
+  if (contentData && contentData.length > 0) {
+    return contentData.map(item => ({
+      ...item,
+      title: item.title || '',
+      slug: item.slug || '',
+      description: item.description || '',
+      category: item.category || 'secret',
+      cover: item.cover || { url: '', formats: {} },
+      cuisine: item.cuisine || { name: '', slug: '' },
+      tags: Array.isArray(item.tags) ? item.tags : [],
+      content: item.content || '',
+      summary: item.summary || '',
+    }));
+  }
   const data = await fetchAPI('/knowledge-entries', {
     'pagination[pageSize]': '100',
     'filters[category][$eq]': 'secret',
