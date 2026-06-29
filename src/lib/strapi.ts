@@ -451,11 +451,30 @@ export function difficultyColor(d: string): string {
 // ==================== 食材调料 ====================
 export async function getAllIngredients(category?: string) {
   if (FORCE_FALLBACK) return fallbackIngredients || [];
-  const params: Record<string, string> = {};
-  if (category) params['category'] = category;
-  const contentData = await fetchContentAPI('/api/content/ingredients' + (category ? '?category=' + category : ''));
-  if (contentData && contentData.length > 0) return contentData;
-  return [];
+  try {
+    const contentData = await fetchContentAPI('/api/content/ingredients' + (category ? '?category=' + category : ''));
+    if (contentData && contentData.length > 0) {
+      return contentData.map((item: any) => ({
+        ...item,
+        name: item.name || '',
+        slug: item.slug || '',
+        category: item.category || '',
+        description: item.description || '',
+        imageUrl: item.imageUrl || '',
+        nutrition: item.nutrition || '',
+        tips: item.tips || '',
+        aliases: item.aliases || '',
+        season: item.season || '',
+        origin: item.origin || '',
+        storageMethod: item.storageMethod || '',
+        pairingSuggestions: item.pairingSuggestions || '',
+        avoidWith: item.avoidWith || '',
+      }));
+    }
+  } catch (e) {
+    console.warn('getAllIngredients error:', e);
+  }
+  return fallbackIngredients || [];
 }
 
 export async function getIngredientBySlug(slug: string) {
