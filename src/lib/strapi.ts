@@ -172,10 +172,31 @@ export async function getAllRecipes() {
     // 数据清洗：确保必要字段有默认值，避免构建时报错
     return contentData.map(recipe => ({
       ...recipe,
+      title: recipe.title || '未命名食谱',
+      slug: recipe.slug || '',
+      description: recipe.description || '',
+      difficulty: recipe.difficulty || '简单',
+      cookTime: recipe.cookTime || 0,
+      servings: recipe.servings || 1,
       cover: recipe.cover || { url: null, formats: {} },
-      steps: Array.isArray(recipe.steps) ? recipe.steps : [],
-      ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [],
+      steps: Array.isArray(recipe.steps) 
+        ? recipe.steps.map((step: any) => ({
+            ...step,
+            stepNumber: step.stepNumber || 0,
+            description: step.description || '',
+          }))
+        : [],
+      ingredients: Array.isArray(recipe.ingredients) 
+        ? recipe.ingredients.map((ing: any) => ({
+            ...ing,
+            name: ing.name || '',
+            amount: ing.amount || '',
+          }))
+        : [],
       cuisine: recipe.cuisine || null,
+      tags: Array.isArray(recipe.tags) ? recipe.tags : [],
+      methods: Array.isArray(recipe.methods) ? recipe.methods : [],
+      regions: Array.isArray(recipe.regions) ? recipe.regions : [],
     }));
   }
   const data = await fetchAPI('/recipes', {
@@ -203,10 +224,31 @@ export async function getRecipeBySlug(slug: string) {
   if (contentData) {
     return {
       ...contentData,
+      title: contentData.title || '未命名食谱',
+      slug: contentData.slug || '',
+      description: contentData.description || '',
+      difficulty: contentData.difficulty || '简单',
+      cookTime: contentData.cookTime || 0,
+      servings: contentData.servings || 1,
       cover: contentData.cover || { url: null, formats: {} },
-      steps: Array.isArray(contentData.steps) ? contentData.steps : [],
-      ingredients: Array.isArray(contentData.ingredients) ? contentData.ingredients : [],
+      steps: Array.isArray(contentData.steps)
+        ? contentData.steps.map((step: any) => ({
+            ...step,
+            stepNumber: step.stepNumber || 0,
+            description: step.description || '',
+          }))
+        : [],
+      ingredients: Array.isArray(contentData.ingredients)
+        ? contentData.ingredients.map((ing: any) => ({
+            ...ing,
+            name: ing.name || '',
+            amount: ing.amount || '',
+          }))
+        : [],
       cuisine: contentData.cuisine || null,
+      tags: Array.isArray(contentData.tags) ? contentData.tags : [],
+      methods: Array.isArray(contentData.methods) ? contentData.methods : [],
+      regions: Array.isArray(contentData.regions) ? contentData.regions : [],
     };
   }
   const data = await fetchAPI('/recipes', {
