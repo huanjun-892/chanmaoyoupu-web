@@ -162,7 +162,7 @@ function getFallbackSecrets(): any[] {
 }
 
 // ==================== 强制使用Fallback（构建加速） ====================
-const FORCE_FALLBACK = true; // 临时启用fallback排查构建问题
+const FORCE_FALLBACK = false;
 
 // ==================== 食谱 ====================
 export async function getAllRecipes() {
@@ -170,7 +170,7 @@ export async function getAllRecipes() {
   const contentData = await fetchContentAPI('/api/content/recipes');
   if (contentData && contentData.length > 0) {
     // 数据清洗：确保必要字段有默认值，避免构建时报错
-    return contentData.map(recipe => ({
+    const cleanedData = contentData.map(recipe => ({
       ...recipe,
       title: recipe.title || '未命名食谱',
       slug: recipe.slug || '',
@@ -198,6 +198,8 @@ export async function getAllRecipes() {
       methods: Array.isArray(recipe.methods) ? recipe.methods : [],
       regions: Array.isArray(recipe.regions) ? recipe.regions : [],
     }));
+    // 测试：只返回前10道排查构建失败问题
+    return cleanedData.slice(0, 10);
   }
   const data = await fetchAPI('/recipes', {
     'pagination[pageSize]': '100',
