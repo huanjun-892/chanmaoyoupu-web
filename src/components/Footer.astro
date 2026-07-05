@@ -1,0 +1,119 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="/images/logo.png?v=3" alt="馋猫有谱" width="28" height="36" />
+          <span>馋猫有谱</span>
+        </div>
+        <p class="footer-desc">馋得明白，做得靠谱</p>
+        <p class="footer-manifesto">他做的好，因为<span class="footer-highlight">有谱</span>，只要<span class="footer-highlight">靠谱</span>，你也可以</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>浏览</h4>
+          <a href="/recipes">全部食谱</a>
+          <a href="/knowledge">知识库</a>
+          <a href="/ingredients">食材调料</a>
+          <a href="/recipes?difficulty=easy">新手专区</a>
+        </div>
+        <div class="footer-col">
+          <h4>分类</h4>
+          <a href="/recipes?scene=diet">减脂餐</a>
+          <a href="/recipes?scene=quick">快手菜</a>
+          <a href="/recipes?scene=latesnack">夜宵</a>
+          <a href="/recipes?scene=baking">烘焙</a>
+        </div>
+        <div class="footer-col">
+          <h4>关于</h4>
+          <a href="/about">关于我们</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {year} 馋猫有谱. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #F0F1F3;
+    border-top: 1px solid var(--color-border-light);
+    padding: 56px 0 28px;
+    margin-top: 80px;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-title);
+  }
+
+  .footer-manifesto { font-size: 0.8rem; color: #999; margin-top: 6px; line-height: 1.5; }
+  .footer-highlight { color: var(--color-accent); font-weight: 600; }
+  .footer-desc {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-top: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 56px;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-title);
+    margin-bottom: 2px;
+  }
+
+  .footer-col a {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-light);
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 768px) {
+    .footer-top {
+      flex-direction: column;
+      gap: 36px;
+    }
+    .footer-links { gap: 36px; }
+  }
+</style>

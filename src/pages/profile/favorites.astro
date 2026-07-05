@@ -1,0 +1,462 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProfileSidebar from '../../components/ProfileSidebar.astro';
+import '../../styles/global.css';
+
+const pageTitle = '我的收藏 - 馋猫有谱';
+---
+
+<BaseLayout title={pageTitle}>
+  <main class="profile-page">
+    <div class="container profile-container">
+      <ProfileSidebar active="favorites" />
+      
+      <div class="profile-content">
+        <div class="content-card">
+          <div class="card-header">
+            <h2 class="card-title">我的收藏</h2>
+            <p class="card-count" id="favorites-count">共 0 个收藏</p>
+          </div>
+          
+          <div id="login-prompt" class="login-prompt" style="display: none;">
+            <div class="prompt-content">
+              <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+              <h2>登录后查看收藏</h2>
+              <p>登录后可查看和管理您收藏的食谱</p>
+              <button class="btn btn-primary" onclick="openLoginModal()">立即登录</button>
+            </div>
+          </div>
+
+          <div id="favorites-content" class="favorites-content">
+            <div id="favorites-list" class="favorites-list">
+              <div class="loading">
+                <div class="spinner"></div>
+                <span>加载中...</span>
+              </div>
+            </div>
+            
+            <div id="pagination" class="pagination" style="display: none;">
+              <button id="prev-btn" class="page-btn" onclick="prevPage()">上一页</button>
+              <span id="page-info" class="page-info"></span>
+              <button id="next-btn" class="page-btn" onclick="nextPage()">下一页</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+.profile-page {
+  min-height: calc(100vh - 80px);
+  padding: 32px 0;
+  background: var(--color-bg-secondary);
+}
+
+.profile-container {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.profile-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.content-card {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-title);
+  margin: 0;
+}
+
+.card-count {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.login-prompt {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.prompt-content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.prompt-content svg {
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.prompt-content h2 {
+  font-size: 1.25rem;
+  color: var(--color-title);
+  margin: 0 0 8px 0;
+}
+
+.prompt-content p {
+  color: var(--color-muted);
+  margin: 0 0 20px 0;
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.favorite-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
+
+.favorite-item:hover {
+  background: var(--color-border);
+}
+
+.favorite-item a {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.favorite-info {
+  flex: 1;
+}
+
+.favorite-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.favorite-date {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.favorite-arrow {
+  color: var(--color-muted);
+}
+
+.remove-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: 12px;
+}
+
+.remove-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 12px;
+  color: var(--color-muted);
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.page-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 16px 0;
+  }
+  
+  .profile-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .content-card {
+    padding: 20px;
+  }
+  
+  .favorite-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .remove-btn {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+}
+</style>
+
+<script>
+import { isLoggedIn, getMyFavorites, toggleFavorite, type FavoritesResponse } from '../../lib/auth';
+
+declare global {
+  interface Window {
+    loadFavorites: () => Promise<void>;
+    renderFavorites: (data: FavoritesResponse) => void;
+    prevPage: () => void;
+    nextPage: () => void;
+    removeFavorite: (slug: string) => Promise<void>;
+  }
+}
+
+let currentPage = 1;
+let totalPages = 1;
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+function formatSlug(slug: string): string {
+  return slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+window.renderFavorites = function(data: FavoritesResponse) {
+  currentPage = data.page;
+  totalPages = data.pages;
+  
+  const container = document.getElementById('favorites-list');
+  const pagination = document.getElementById('pagination');
+  const pageInfo = document.getElementById('page-info');
+  const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
+  const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
+  const countEl = document.getElementById('favorites-count');
+  
+  if (!container) return;
+  
+  if (countEl) {
+    countEl.textContent = `共 ${data.total} 个收藏`;
+  }
+  
+  if (data.items.length === 0) {
+    container.innerHTML = '<div class="empty-state">暂无收藏，快去收藏喜欢的食谱吧~</div>';
+    if (pagination) pagination.style.display = 'none';
+    return;
+  }
+  
+  container.innerHTML = data.items.map(item => `
+    <div class="favorite-item" data-slug="${item.recipe_slug}">
+      <a href="/recipes/${item.recipe_slug}">
+        <div class="favorite-info">
+          <div class="favorite-title">${formatSlug(item.recipe_slug)}</div>
+          <div class="favorite-date">收藏于 ${formatDate(item.created_at)}</div>
+        </div>
+        <svg class="favorite-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </a>
+      <button class="remove-btn" onclick="event.preventDefault(); removeFavorite('${item.recipe_slug}')">取消收藏</button>
+    </div>
+  `).join('');
+  
+  if (pagination) pagination.style.display = 'flex';
+  if (pageInfo) pageInfo.textContent = `第 ${currentPage} / ${totalPages} 页`;
+  if (prevBtn) prevBtn.disabled = currentPage <= 1;
+  if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
+};
+
+window.removeFavorite = async function(slug: string) {
+  try {
+    const result = await toggleFavorite(slug);
+    if (result.success) {
+      const item = document.querySelector(`.favorite-item[data-slug="${slug}"]`);
+      if (item) {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-100%)';
+        setTimeout(() => {
+          item.remove();
+          if (document.querySelectorAll('.favorite-item').length === 0) {
+            window.loadFavorites();
+          }
+        }, 300);
+      }
+    }
+  } catch (err) {
+    console.error('取消收藏失败:', err);
+  }
+};
+
+window.loadFavorites = async function() {
+  const loginPrompt = document.getElementById('login-prompt');
+  const favoritesContent = document.getElementById('favorites-content');
+  
+  if (!isLoggedIn()) {
+    if (loginPrompt) loginPrompt.style.display = 'block';
+    if (favoritesContent) favoritesContent.style.display = 'none';
+    return;
+  }
+  
+  if (loginPrompt) loginPrompt.style.display = 'none';
+  if (favoritesContent) favoritesContent.style.display = 'block';
+  
+  const container = document.getElementById('favorites-list');
+  if (!container) return;
+  
+  container.innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      <span>加载中...</span>
+    </div>
+  `;
+  
+  try {
+    const result = await getMyFavorites(currentPage, 10);
+    if (result.success && result.data) {
+      window.renderFavorites(result.data);
+    } else if (result.error === '请先登录') {
+      if (loginPrompt) loginPrompt.style.display = 'block';
+      if (favoritesContent) favoritesContent.style.display = 'none';
+    } else {
+      container.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
+    }
+  } catch (err) {
+    console.error('加载收藏失败:', err);
+    container.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
+  }
+};
+
+window.prevPage = function() {
+  if (currentPage > 1) {
+    currentPage--;
+    window.loadFavorites();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
+
+window.nextPage = function() {
+  if (currentPage < totalPages) {
+    currentPage++;
+    window.loadFavorites();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.loadFavorites();
+});
+
+window.addEventListener('auth_change', () => {
+  currentPage = 1;
+  window.loadFavorites();
+});
+</script>
