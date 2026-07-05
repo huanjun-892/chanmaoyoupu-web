@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllKnowledge, processContent } from '../../lib/strapi';
+
+export async function getStaticPaths() {
+  const knowledgeItems = await getAllKnowledge();
+  if (knowledgeItems.length === 0) {
+    return [];
+  }
+  return knowledgeItems.map((k: any) => ({
+    params: { slug: k.slug },
+    props: { entry: k, allKnowledge: knowledgeItems },
+  }));
+}
+
+const { entry, allKnowledge } = Astro.props;
+
+if (!entry) {
+  return Astro.redirect('/knowledge');
+}
+
+// 获取相关知识库文章作为推荐
+const otherKnowledge = allKnowledge.filter((k: any) => k.slug !== entry.slug)
+  .slice(0, 4);
+
+// SEO
+const pageDescription = entry.summary || entry.description || `${entry.title} - 馋猫有谱美食知识库`;
+const pageKeywords = entry.keywords ? entry.keywords.split(',').map((k: string) => k.trim()).join(',') : `${entry.title},美食知识,烹饪技巧`;
+
+// Schema.org
+const knowledgeSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": entry.title,
+  "description": entry.summary || entry.description || '',
+  "articleBody": entry.content ? entry.content.replace(/<[^>]*>/g, '').substring(0, 500) : '',
+  "author": entry.author ? { "@type": "Person", "name": entry.author } : undefined,
+  "datePublished": entry.published_at || undefined,
+  "keywords": entry.keywords || undefined,
+  "articleSection": entry.category || "知识库"
+};
+---
+
+<BaseLayout title={entry.title} description={pageDescription} keywords={pageKeywords}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(knowledgeSchema)} />
+  </Fragment>
+  
+  <article class="knowledge-detail">
+    <div class="container">
+      <div class="knowledge-breadcrumb">
+        <a href="/knowledge">知识库</a> <span class="sep">›</span> <span>{entry.title}</span>
+      </div>
+
+      <div class="knowledge-header">
+        <span class="tag">📖 知识库</span>
+        <h1 class="knowledge-title">{entry.title}</h1>
+        {entry.summary && (
+        <div class="knowledge-summary">
+          <strong>📝 摘要：</strong>{entry.summary}
+        </div>
+        )}
+        {entry.keywords && (
+        <div class="knowledge-keywords">
+          <span class="keywords-label">🏷️ 关键词：</span>
+          {entry.keywords.split(',').map((k: string) => k.trim()).filter(Boolean).map((k: string) => (
+            <span class="keyword-tag">{k}</span>
+          ))}
+        </div>
+        )}
+      </div>
+
+      <div class="knowledge-body" set:html={processContent(entry.content || '')} />
+
+      {otherKnowledge.length > 0 && (
+      <div class="related-knowledge">
+        <h3 class="related-title">相关知识</h3>
+        <div class="related-grid">
+          {otherKnowledge.map((k: any) => (
+            <a href={`/knowledge/${k.slug}`} class="related-card">
+              <h4>{k.title}</h4>
+              <span>查看 →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+      )}
+    </div>
+  </article>
+
+</BaseLayout>
+
+<style>
+  .knowledge-detail { padding-top: 40px; }
+  
+  .knowledge-breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 24px;
+  }
+  .knowledge-breadcrumb a { color: var(--color-accent); text-decoration: none; }
+  .knowledge-breadcrumb a:hover { text-decoration: underline; }
+  .knowledge-breadcrumb .sep { margin: 0 8px; }
+
+  .knowledge-header { margin-bottom: 40px; }
+  .knowledge-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-top: 12px; }
+
+  .knowledge-summary {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: #FFF7E6;
+    border-left: 4px solid #FA8C16;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .knowledge-summary strong { color: var(--color-title); }
+
+  .knowledge-keywords {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .knowledge-keywords .keywords-label { font-size: 0.85rem; color: var(--color-muted); }
+  .knowledge-keywords .keyword-tag {
+    padding: 4px 12px;
+    background: #FFF0E6;
+    color: #D46B08;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  .knowledge-body { max-width: 720px; font-size: 0.95rem; line-height: 1.9; color: var(--color-text); }
+  .knowledge-body :global(h2) { font-size: 1.3rem; font-weight: 600; color: var(--color-title); margin: 36px 0 16px; padding-left: 12px; border-left: 3px solid var(--color-accent); }
+  .knowledge-body :global(h3) { font-size: 1.15rem; font-weight: 600; color: var(--color-title); margin: 28px 0 12px; }
+  .knowledge-body :global(h4) { font-size: 1rem; font-weight: 600; color: var(--color-title); margin: 20px 0 8px; }
+  .knowledge-body :global(p) { margin-bottom: 12px; }
+  .knowledge-body :global(strong) { color: var(--color-title); }
+  .knowledge-body :global(table) { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+  .knowledge-body :global(th) { background: var(--color-bg-warm); padding: 8px 12px; text-align: left; font-weight: 600; }
+  .knowledge-body :global(td) { padding: 8px 12px; border-bottom: 1px solid var(--color-border); }
+  .knowledge-body :global(ul) { margin-bottom: 16px; padding-left: 24px; }
+  .knowledge-body :global(li) { margin-bottom: 6px; }
+
+  .related-knowledge {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border);
+  }
+  .related-title { font-size: 1.1rem; font-weight: 600; color: var(--color-title); margin-bottom: 16px; }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .related-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .related-card:hover {
+    border-color: var(--color-accent);
+  }
+  .related-card h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-title);
+    margin: 0;
+  }
+  .related-card span {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<button class="action-btn like-btn" data-slug={slug} aria-label="点赞">
+  <span class="btn-icon">👍</span>
+  <span class="btn-text">点赞</span>
+  <span class="btn-count" data-count>0</span>
+</button>
+
+<script>
+  class LikeButton extends HTMLElement {
+    constructor() {
+      super();
+      this.liked = false;
+      this.count = 0;
+    }
+
+    connectedCallback() {
+      const btn = this.querySelector('.like-btn') || document.querySelector(`.like-btn[data-slug="${this.dataset.slug}"]`);
+      if (!btn) return;
+      
+      const slug = btn.dataset.slug || '';
+      const countEl = btn.querySelector('.btn-count');
+      const iconEl = btn.querySelector('.btn-icon');
+      const textEl = btn.querySelector('.btn-text');
+      
+      // Load like count from API
+      fetch(`https://api.chanmaoyoupu.com/api/content/recipes/${slug}`)
+        .then(r => r.json())
+        .then(data => {
+          const recipe = data.data || data;
+          this.count = recipe.likeCount || 0;
+          if (countEl) countEl.textContent = this.count;
+        })
+        .catch(() => {});
+
+      // Check if user has liked
+      try {
+        const likes = JSON.parse(localStorage.getItem('cmp_likes') || '{}');
+        this.liked = !!likes[slug];
+        if (this.liked) {
+          btn.classList.add('active');
+          if (iconEl) iconEl.textContent = '👍';
+          if (textEl) textEl.textContent = '已点赞';
+        }
+      } catch {}
+
+      btn.addEventListener('click', async () => {
+        const token = localStorage.getItem('cmp_token');
+        if (!token) {
+          window.dispatchEvent(new CustomEvent('cmp-login_required'));
+          return;
+        }
+
+        try {
+          const res = await fetch(`https://api.chanmaoyoupu.com/api/user/likes/${slug}`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+          });
+          const data = await res.json();
+          
+          if (data.success) {
+            this.liked = !this.liked;
+            this.count += this.liked ? 1 : -1;
+            
+            if (countEl) countEl.textContent = this.count;
+            btn.classList.toggle('active', this.liked);
+            if (iconEl) iconEl.textContent = '👍';
+            if (textEl) textEl.textContent = this.liked ? '已点赞' : '点赞';
+            
+            // Save locally
+            const likes = JSON.parse(localStorage.getItem('cmp_likes') || '{}');
+            if (this.liked) likes[slug] = true;
+            else delete likes[slug];
+            localStorage.setItem('cmp_likes', JSON.stringify(likes));
+          }
+        } catch (err) {
+          console.error('Like failed:', err);
+        }
+      });
+    }
+  }
+
+  if (!customElements.get('like-button')) {
+    customElements.define('like-button', LikeButton);
+  }
+</script>
+
+<style>
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .action-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .action-btn.active {
+    background: var(--color-accent-light);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .btn-icon { font-size: 1rem; }
+  .btn-count { font-weight: 600; }
+</style>

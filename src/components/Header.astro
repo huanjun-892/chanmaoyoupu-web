@@ -693,4 +693,21 @@ window.updateAuthUI = function() {
     if (dropdownNickname) dropdownNickname.textContent = user.nickname || user.email;
     const avatarUrl = user.avatar_url || '/images/default-avatar.jpg';
     if (headerAvatar) headerAvatar.src = avatarUrl;
-    if (dropdownAvata
+    if (dropdownAvatar) dropdownAvatar.src = avatarUrl;
+  } else {
+    if (authBtn) authBtn.style.display = 'inline-flex';
+    if (userMenu) userMenu.style.display = 'none';
+  }
+};
+
+// Initialize auth UI on load
+document.addEventListener('DOMContentLoaded', () => {
+  window.updateAuthUI();
+  onAuthChange(() => window.updateAuthUI());
+});
+
+// Listen for login events
+window.addEventListener('cmp_login', () => {
+  window.updateAuthUI();
+});
+</script>

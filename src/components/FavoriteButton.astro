@@ -1,0 +1,102 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<button class="action-btn fav-btn" data-slug={slug} aria-label="收藏">
+  <span class="btn-icon">⭐</span>
+  <span class="btn-text">收藏</span>
+</button>
+
+<script>
+  class FavoriteButton extends HTMLElement {
+    constructor() {
+      super();
+      this.favorited = false;
+    }
+
+    connectedCallback() {
+      const btn = this.querySelector('.fav-btn') || document.querySelector(`.fav-btn[data-slug="${this.dataset.slug}"]`);
+      if (!btn) return;
+      
+      const slug = btn.dataset.slug || '';
+      const iconEl = btn.querySelector('.btn-icon');
+      const textEl = btn.querySelector('.btn-text');
+
+      // Check if user has favorited
+      try {
+        const favs = JSON.parse(localStorage.getItem('cmp_favorites') || '{}');
+        this.favorited = !!favs[slug];
+        if (this.favorited) {
+          btn.classList.add('active');
+          if (iconEl) iconEl.textContent = '⭐';
+          if (textEl) textEl.textContent = '已收藏';
+        }
+      } catch {}
+
+      btn.addEventListener('click', async () => {
+        const token = localStorage.getItem('cmp_token');
+        if (!token) {
+          window.dispatchEvent(new CustomEvent('cmp-login_required'));
+          return;
+        }
+
+        try {
+          const res = await fetch(`https://api.chanmaoyoupu.com/api/user/favorites/${slug}`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+          });
+          const data = await res.json();
+          
+          if (data.success) {
+            this.favorited = !this.favorited;
+            btn.classList.toggle('active', this.favorited);
+            if (iconEl) iconEl.textContent = '⭐';
+            if (textEl) textEl.textContent = this.favorited ? '已收藏' : '收藏';
+            
+            // Save locally
+            const favs = JSON.parse(localStorage.getItem('cmp_favorites') || '{}');
+            if (this.favorited) favs[slug] = true;
+            else delete favs[slug];
+            localStorage.setItem('cmp_favorites', JSON.stringify(favs));
+          }
+        } catch (err) {
+          console.error('Favorite failed:', err);
+        }
+      });
+    }
+  }
+
+  if (!customElements.get('favorite-button')) {
+    customElements.define('favorite-button', FavoriteButton);
+  }
+</script>
+
+<style>
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .action-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .action-btn.active {
+    background: #FFF7E6;
+    border-color: #FA8C16;
+    color: #FA8C16;
+  }
+  .btn-icon { font-size: 1rem; }
+</style>
