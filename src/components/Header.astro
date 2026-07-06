@@ -241,6 +241,8 @@ const currentPath = Astro.url.pathname;
   }
 
   .search-input::placeholder {
+    color: var(--color-muted);
+  }
   .search-submit {
     display: flex; align-items: center; justify-content: center;
     width: 28px; height: 28px; border: none; background: var(--color-accent);
@@ -249,8 +251,6 @@ const currentPath = Astro.url.pathname;
   }
   .search-submit:hover { opacity: 0.85; }
   .search-scope { border: none; background: transparent; font-size: 0.78rem; color: var(--color-muted); cursor: pointer; outline: none; padding: 0 4px; }
-    color: var(--color-muted);
-  }
 
   .auth-btn {
     padding: 7px 20px;
