@@ -4,288 +4,100 @@
       "id": 304,
       "title": "金沙南瓜",
       "slug": "jin-sha-nan-gua",
-      "description": "金沙南瓜是一道色香味俱全的创意菜，金黄的南瓜块裹上咸香的咸蛋黄碎，外酥里糯，咸甜交融。这道菜既有南瓜的自然甜味，又有咸蛋黄的独特鲜香，老少皆宜。",
-      "difficulty": "简单",
-      "cookTime": 25,
-      "servings": 3,
+      "description": "",
+      "difficulty": "easy",
+      "cookTime": 0,
+      "servings": 2,
       "calories": 0,
-      "cover": null,
-      "ingredients": [
-        {
-          "name": "南瓜",
-          "amount": "400g",
-          "isMain": true
-        },
-        {
-          "name": "咸蛋黄",
-          "amount": "4个",
-          "isMain": true
-        },
-        {
-          "name": "淀粉",
-          "amount": "适量",
-          "isMain": true
-        },
-        {
-          "name": "食用油",
-          "amount": "大量",
-          "isMain": true
-        },
-        {
-          "name": "葱",
-          "amount": "适量",
-          "isMain": true
+      "cover": {
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/jin-sha-nan-gua.jpg",
+        "formats": {
+          "small": {
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/jin-sha-nan-gua.jpg"
+          }
         }
-      ],
-      "steps": [
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        }
-      ],
+      },
+      "ingredients": [],
+      "steps": [],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "南瓜富含胡萝卜素和膳食纤维，咸蛋黄含有卵磷脂和维生素A，适量食用有益健康。",
-      "common_mistakes": "南瓜块裹淀粉要均匀，否则炸制时容易脱糊；炒咸蛋黄火候太大容易炒糊发苦；南瓜不要炸太久，保持外酥里糯的口感。",
-      "success_tips": "选用老南瓜口感更粉糯；炸南瓜时油温要高，可以使表面快速定型；咸蛋黄可以加一点料酒去腥。",
-      "ingredient_substitutes": "没有咸蛋黄可以用咸蛋白碎代替；南瓜可以用土豆或红薯代替。",
-      "suitable_for": "适合儿童、老人、素食者，是一道颜值与口感并存的家常菜。",
-      "required_tools": "炒锅、漏勺"
+      "nutrition": "",
+      "common_mistakes": "",
+      "success_tips": "",
+      "ingredient_substitutes": "",
+      "suitable_for": "",
+      "required_tools": ""
     },
     {
       "id": 303,
       "title": "泡菜豆腐汤",
       "slug": "pao-cai-dou-fu-tang",
-      "description": "泡菜豆腐汤是一道极具韩国风味的家常汤品，酸辣开胃，豆腐嫩滑，泡菜的发酵香味让人食欲大开。这道汤制作简单，是韩国料理中最经典的家常菜之一。",
-      "difficulty": "简单",
-      "cookTime": 20,
-      "servings": 3,
+      "description": "",
+      "difficulty": "easy",
+      "cookTime": 0,
+      "servings": 2,
       "calories": 0,
-      "cover": null,
-      "ingredients": [
-        {
-          "name": "南豆腐",
-          "amount": "300g",
-          "isMain": true
-        },
-        {
-          "name": "辣白菜",
-          "amount": "150g",
-          "isMain": true
-        },
-        {
-          "name": "五花肉",
-          "amount": "100g",
-          "isMain": true
-        },
-        {
-          "name": "韩式辣酱",
-          "amount": "2勺",
-          "isMain": true
-        },
-        {
-          "name": "生抽",
-          "amount": "半勺",
-          "isMain": true
-        },
-        {
-          "name": "蒜",
-          "amount": "3瓣",
-          "isMain": true
-        },
-        {
-          "name": "小葱",
-          "amount": "适量",
-          "isMain": true
-        },
-        {
-          "name": "芝麻油",
-          "amount": "几滴",
-          "isMain": true
-        },
-        {
-          "name": "清水",
-          "amount": "600ml",
-          "isMain": true
+      "cover": {
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/pao-cai-dou-fu-tang.jpg",
+        "formats": {
+          "small": {
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/pao-cai-dou-fu-tang.jpg"
+          }
         }
-      ],
-      "steps": [
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        }
-      ],
+      },
+      "ingredients": [],
+      "steps": [],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "豆腐富含植物蛋白和钙质，泡菜含有益生菌有助消化，五花肉提供动物脂肪，营养均衡。",
-      "common_mistakes": "豆腐下锅时要轻拿轻放避免碎掉；泡菜要炒香再加汤；辣酱用量要根据泡菜的酸辣程度调整。",
-      "success_tips": "用老坛酸菜阿冲配方腌制新鲜白菜可以自制泡菜；加入一勺淘米水可以让汤更浓稠。",
-      "ingredient_substitutes": "没有韩式辣酱可以用辣椒粉代替；可以用鸡胸肉代替五花肉做成低脂版本。",
-      "suitable_for": "适合上班族、减肥人群、韩餐爱好者，是一道开胃下饭的快手汤品。",
-      "required_tools": "炒锅、锅铲"
+      "nutrition": "",
+      "common_mistakes": "",
+      "success_tips": "",
+      "ingredient_substitutes": "",
+      "suitable_for": "",
+      "required_tools": ""
     },
     {
       "id": 302,
       "title": "蒜香黑椒牛柳",
       "slug": "suan-xiang-hei-jiao-niu-liu",
-      "description": "蒜香黑椒牛柳是一道充满西式风情的快手菜，牛里脊肉质细嫩，搭配浓郁的蒜香和黑胡椒的辛香，简单几步就能做出牛排店的品质。",
-      "difficulty": "简单",
-      "cookTime": 15,
+      "description": "",
+      "difficulty": "easy",
+      "cookTime": 0,
       "servings": 2,
       "calories": 0,
-      "cover": null,
-      "ingredients": [
-        {
-          "name": "牛里脊肉",
-          "amount": "300g",
-          "isMain": true
-        },
-        {
-          "name": "大蒜",
-          "amount": "8瓣",
-          "isMain": true
-        },
-        {
-          "name": "黑胡椒粉",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "蚝油",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "生抽",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "料酒",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "淀粉",
-          "amount": "适量",
-          "isMain": true
-        },
-        {
-          "name": "黄油",
-          "amount": "15g",
-          "isMain": true
-        },
-        {
-          "name": "食用油",
-          "amount": "适量",
-          "isMain": true
+      "cover": {
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/suan-xiang-hei-jiao-niu-liu.jpg",
+        "formats": {
+          "small": {
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/suan-xiang-hei-jiao-niu-liu.jpg"
+          }
         }
-      ],
-      "steps": [
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        }
-      ],
+      },
+      "ingredients": [],
+      "steps": [],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "牛肉富含铁元素和蛋白质，黑胡椒促进消化，蒜具有杀菌消炎功效，是一道营养价值很高的菜品。",
-      "common_mistakes": "牛肉切的方向不对会导致口感柴；煎制时间过长会使牛肉变老；黄油不要烧焦。",
-      "success_tips": "牛肉选择新鲜的，口感更嫩；腌制时加一点小苏打可以使肉质更嫩；蒜片要分次下锅，避免糊掉。",
-      "ingredient_substitutes": "可以用牛肩肉或牛腩代替里脊；没有黄油可以用普通食用油代替。",
-      "suitable_for": "适合上班族、健身人群、追求西式口味的年轻人，是一道快手西餐。",
-      "required_tools": "平底锅、锅铲"
+      "nutrition": "",
+      "common_mistakes": "",
+      "success_tips": "",
+      "ingredient_substitutes": "",
+      "suitable_for": "",
+      "required_tools": ""
     },
     {
       "id": 301,
       "title": "糖醋瓦块鱼",
       "slug": "tang-cu-wa-kuai-yu",
-      "description": "糖醋瓦块鱼是一道色泽红亮、酸甜可口的经典鲁菜。选用新鲜的草鱼切成瓦块状，先炸后熘，外酥里嫩，裹上厚厚的糖醋汁，口感层次分明，老少皆宜。",
-      "difficulty": "中等",
-      "cookTime": 35,
-      "servings": 4,
+      "description": "",
+      "difficulty": "easy",
+      "cookTime": 0,
+      "servings": 2,
       "calories": 0,
       "cover": {
         "url": "https://cdn.chanmaoyoupu.com/images/recipes/tang-cu-wa-kuai-yu.jpg",
@@ -295,219 +107,48 @@
           }
         }
       },
-      "ingredients": [
-        {
-          "name": "草鱼",
-          "amount": "600g",
-          "isMain": true
-        },
-        {
-          "name": "番茄酱",
-          "amount": "3勺",
-          "isMain": true
-        },
-        {
-          "name": "白醋",
-          "amount": "2勺",
-          "isMain": true
-        },
-        {
-          "name": "白糖",
-          "amount": "3勺",
-          "isMain": true
-        },
-        {
-          "name": "生抽",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "料酒",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "淀粉",
-          "amount": "适量",
-          "isMain": true
-        },
-        {
-          "name": "面粉",
-          "amount": "适量",
-          "isMain": true
-        },
-        {
-          "name": "鸡蛋",
-          "amount": "1个",
-          "isMain": true
-        },
-        {
-          "name": "食用油",
-          "amount": "大量",
-          "isMain": true
-        },
-        {
-          "name": "葱姜",
-          "amount": "适量",
-          "isMain": true
-        }
-      ],
-      "steps": [
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        }
-      ],
+      "ingredients": [],
+      "steps": [],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "草鱼富含优质蛋白和DHA，有助于大脑发育，糖醋汁开胃促消化，适量食用有益健康。",
-      "common_mistakes": "炸鱼时油温不够会导致脱糊；糖醋汁熬制时间过长会发苦；翻拌动作要轻，避免鱼块碎掉。",
-      "success_tips": "鱼块切得大小均匀可以保证成熟一致；复炸是外酥里嫩的关键；糖醋汁要现调现用。",
-      "ingredient_substitutes": "没有番茄酱可以用山楂酱代替增加酸味；草鱼可以用鳊鱼或鲈鱼替代。",
-      "suitable_for": "适合儿童、老人、爱吃酸甜口味的人群，是宴客的好选择。",
-      "required_tools": "炒锅、漏勺、碗"
+      "nutrition": "",
+      "common_mistakes": "",
+      "success_tips": "",
+      "ingredient_substitutes": "",
+      "suitable_for": "",
+      "required_tools": ""
     },
     {
       "id": 300,
       "title": "酱爆鸡丁",
       "slug": "jiang-bao-ji-ding",
-      "description": "酱爆鸡丁是一道经典的家常菜，鸡丁嫩滑入味，裹满浓郁的酱汁，搭配酥脆的花生米，口感层次丰富。这道菜做法简单，但想要做出餐厅级的味道，需要掌握火候和酱汁的调配技巧。",
-      "difficulty": "简单",
-      "cookTime": 20,
-      "servings": 3,
+      "description": "",
+      "difficulty": "easy",
+      "cookTime": 0,
+      "servings": 2,
       "calories": 0,
-      "cover": null,
-      "ingredients": [
-        {
-          "name": "鸡胸肉",
-          "amount": "300g",
-          "isMain": true
-        },
-        {
-          "name": "花生米",
-          "amount": "50g",
-          "isMain": true
-        },
-        {
-          "name": "黄瓜",
-          "amount": "半根",
-          "isMain": true
-        },
-        {
-          "name": "甜面酱",
-          "amount": "2勺",
-          "isMain": true
-        },
-        {
-          "name": "豆瓣酱",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "生抽",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "料酒",
-          "amount": "1勺",
-          "isMain": true
-        },
-        {
-          "name": "淀粉",
-          "amount": "适量",
-          "isMain": true
-        },
-        {
-          "name": "白糖",
-          "amount": "半勺",
-          "isMain": true
-        },
-        {
-          "name": "食用油",
-          "amount": "适量",
-          "isMain": true
-        },
-        {
-          "name": "葱姜蒜",
-          "amount": "适量",
-          "isMain": true
+      "cover": {
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/jiang-bao-ji-ding.jpg",
+        "formats": {
+          "small": {
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/jiang-bao-ji-ding.jpg"
+          }
         }
-      ],
-      "steps": [
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        },
-        {
-          "stepNumber": 0,
-          "description": ""
-        }
-      ],
+      },
+      "ingredients": [],
+      "steps": [],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "鸡胸肉富含优质蛋白质，花生含有不饱和脂肪酸，这道菜营养丰富，适合健身人群食用。",
-      "common_mistakes": "鸡丁腌制时间不够会导致不入味；炸花生米火候太大容易炸糊；鸡丁滑炒时间不宜过长，否则会变老。",
-      "success_tips": "鸡丁切好后可以用刀背轻轻敲一下，使其质地更嫩滑；酱汁要提前调好，避免在烹饪过程中手忙脚乱。",
-      "ingredient_substitutes": "没有甜面酱可以用黄豆酱加少量白糖代替；花生米可以用腰果或杏仁替代。",
-      "suitable_for": "适合儿童、健身人群、学生党，是一道营养丰富的下饭家常菜。",
-      "required_tools": "炒锅、漏勺、碗"
+      "nutrition": "",
+      "common_mistakes": "",
+      "success_tips": "",
+      "ingredient_substitutes": "",
+      "suitable_for": "",
+      "required_tools": ""
     },
     {
       "id": 299,
