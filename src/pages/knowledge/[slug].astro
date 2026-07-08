@@ -55,6 +55,11 @@ const knowledgeSchema = {
       <div class="knowledge-header">
         <span class="tag">📖 知识库</span>
         <h1 class="knowledge-title">{entry.title}</h1>
+        <div class="knowledge-meta">
+          {entry.published_at && <span class="meta-date">📅 {entry.published_at.substring(0, 10)}</span>}
+          {entry.author && <span class="meta-author">✍️ {entry.author}</span>}
+          {entry.is_original ? <span class="meta-original">🔒 原创文章</span> : <span class="meta-reprint">📋 转载整理</span>}
+        </div>
         {entry.summary && (
         <div class="knowledge-summary">
           <strong>📝 摘要：</strong>{entry.summary}
@@ -104,6 +109,22 @@ const knowledgeSchema = {
 
   .knowledge-header { margin-bottom: 40px; }
   .knowledge-title { font-size: 2rem; font-weight: 700; color: var(--color-title); margin-top: 12px; }
+  .knowledge-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    flex-wrap: wrap;
+  }
+  .knowledge-meta .meta-original {
+    color: #389e0d;
+    font-weight: 500;
+  }
+  .knowledge-meta .meta-reprint {
+    color: var(--color-muted);
+  }
 
   .knowledge-summary {
     margin-top: 20px;
