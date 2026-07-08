@@ -128,16 +128,23 @@ export async function fetchAPI(path: string, params: Record<string, string> = {}
   return null;
 }
 
+// 将CDN路径转换为相对路径
+function convertCdnToRelative(url: string): string {
+  if (!url) return url;
+  // 将 https://cdn.chanmaoyoupu.com/images/... 转换为 /images/...
+  return url.replace(/https?:\/\/cdn\.chanmaoyoupu\.com/g, '');
+}
+
 export function getCoverUrl(cover: any): string | null {
   if (!cover) return null;
-  if (cover.formats?.small?.url) return cover.formats.small.url;
-  if (cover.url) return cover.url;
+  if (cover.formats?.small?.url) return convertCdnToRelative(cover.formats.small.url);
+  if (cover.url) return convertCdnToRelative(cover.url);
   return null;
 }
 
 export function getCoverFullUrl(cover: any): string | null {
   if (!cover) return null;
-  if (cover.url) return cover.url;
+  if (cover.url) return convertCdnToRelative(cover.url);
   return null;
 }
 
