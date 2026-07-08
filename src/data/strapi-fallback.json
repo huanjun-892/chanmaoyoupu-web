@@ -1,6 +1,438 @@
 {
   "recipes": [
     {
+      "id": 308,
+      "title": "红烧五花肉炖土豆",
+      "slug": "hong-shao-wu-hua-rou-dun-tu-dou",
+      "description": "红烧五花肉炖土豆是经典家常菜，五花肉炖至软烂入味、土豆绵软吸收肉汁，色泽红亮、咸甜适口。一锅炖出家的味道，是最能治愈味蕾的 comforting food。",
+      "difficulty": "中等",
+      "cookTime": 60,
+      "servings": "4人份",
+      "calories": 420,
+      "cover": {
+        "url": "/images/recipes/hong-shao-wu-hua-rou-dun-tu-dou.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/hong-shao-wu-hua-rou-dun-tu-dou.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "五花肉",
+          "amount": "500克",
+          "isMain": true
+        },
+        {
+          "name": "土豆",
+          "amount": "2个（约400克）",
+          "isMain": true
+        },
+        {
+          "name": "生姜",
+          "amount": "4片",
+          "isMain": true
+        },
+        {
+          "name": "大葱",
+          "amount": "1段",
+          "isMain": true
+        },
+        {
+          "name": "八角",
+          "amount": "2颗",
+          "isMain": true
+        },
+        {
+          "name": "桂皮",
+          "amount": "1小段",
+          "isMain": true
+        },
+        {
+          "name": "冰糖",
+          "amount": "20克",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "3汤匙",
+          "isMain": true
+        },
+        {
+          "name": "老抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "料酒",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "1汤匙",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "500克五花肉洗净后切成3厘米见方的块。冷水下锅，加入1汤匙料酒和2片生姜，大火烧开后撇去浮沫，焯水2分钟捞出用温水冲净备用。2个土豆（约400克）去皮切成3厘米滚刀块，泡在清水中防止氧化。4片生姜拍松，1段大葱切段。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "炒锅烧热倒入1汤匙食用油，放入20克冰糖，小火慢熬至冰糖完全融化、糖色变成琥珀色（约2-3分钟），立即放入焯好的五花肉块，快速翻炒使每块肉均匀裹上糖色。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "加入拍松的姜块、葱段、2颗八角、1小段桂皮翻炒出香味，约30秒。加入3汤匙生抽、1汤匙老抽翻炒均匀，让肉块上色。倒入约600毫升开水（没过肉块约3厘米），大火烧开。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "大火烧开后转小火，盖上锅盖慢炖35-40分钟。期间可以翻动1-2次让上色均匀。炖至五花肉用筷子能戳入但还有些弹性。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "加入切好的土豆块，翻拌均匀使土豆浸入汤汁中。继续小火炖15-20分钟，至土豆变得绵软、筷子能轻松插入。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "开盖转大火收汁3-5分钟，期间轻轻翻动防止土豆碎烂。汤汁收到浓稠挂壁时尝一下咸淡，按需加盐。关火出锅，成品色泽红亮、五花肉软烂不腻、土豆绵软入味。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
+      "nutrition": "<p><strong>热量：</strong>约420千卡/份</p><p><strong>蛋白质：</strong>约18克</p><p><strong>脂肪：</strong>约32克</p><p><strong>碳水化合物：</strong>约22克（来自土豆和糖）</p><p><strong>钾：</strong>约400毫克（土豆富含钾）</p>",
+      "common_mistakes": "<p><strong>1. 糖色炒过头：</strong>糖色炒到深褐色会发苦，琥珀色就下肉。宁可浅一点也不要过。</p><p><strong>2. 土豆下太早：</strong>土豆和肉一起下锅会炖成泥。一定要在肉炖了35分钟后再加。</p><p><strong>3. 冷水下肉：</strong>焯水后要用温水冲洗，冷水会让肉收紧影响口感。</p><p><strong>4. 收汁太急：</strong>大火收汁时要轻翻，土豆很软容易碎。</p>",
+      "success_tips": "<p><strong>选五花肉：</strong>选肥瘦相间、层次分明的五花，至少三层（皮-肥-瘦）。太瘦的口感柴。</p><p><strong>焯水要诀：</strong>冷水下锅焯水才能逼出内部血水，热水下锅血水会凝固在里面。</p><p><strong>炖制耐心：</strong>小火慢炖是灵魂，急不得。40分钟的慢炖才能让五花肉入口即化。</p><p><strong>水量控制：</strong>水要一次加够（没过肉3厘米），中途加水会影响味道和色泽。</p>",
+      "ingredient_substitutes": "<p><strong>五花肉：</strong>可用梅花肉、猪前腿肉代替</p><p><strong>土豆：</strong>可用芋头、山药代替</p><p><strong>冰糖：</strong>可用白糖代替，但冰糖上色更亮</p><p><strong>八角桂皮：</strong>可用五香粉1茶匙代替</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜</p><p><strong>注意事项：</strong>高脂血症患者少食；土豆淀粉含量高，糖尿病人适量</p><p><strong>适用场景：</strong>家常便饭、冬季暖身菜、待客菜</p><p><strong>搭配建议：</strong>配米饭最佳，可搭配凉拌菜解腻</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅或砂锅、菜刀、菜板</p><p><strong>可选工具：</strong>砂锅（保温效果更好）</p>"
+    },
+    {
+      "id": 307,
+      "title": "蒜蓉粉丝蒸虾",
+      "slug": "suan-rong-fen-si-zheng-xia",
+      "description": "蒜蓉粉丝蒸虾是粤式宴席经典菜，大虾开背铺在吸满蒜香的粉丝上，蒸制后鲜味交融。蒜蓉金黄喷香、虾肉弹嫩、粉丝Q弹入味，卖相华丽但做法并不复杂，家宴必备的硬菜。",
+      "difficulty": "中等",
+      "cookTime": 25,
+      "servings": "2人份",
+      "calories": 210,
+      "cover": {
+        "url": "/images/recipes/suan-rong-fen-si-zheng-xia.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/suan-rong-fen-si-zheng-xia.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "大虾",
+          "amount": "12只（约300克）",
+          "isMain": true
+        },
+        {
+          "name": "粉丝",
+          "amount": "1把（约50克）",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "8瓣",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "料酒",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "小葱",
+          "amount": "2根",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "少许",
+          "isMain": true
+        },
+        {
+          "name": "白糖",
+          "amount": "半茶匙",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "50克粉丝放入温水中浸泡15-20分钟至完全变软，捞出沥干水分，用剪刀剪成10厘米左右的段（方便夹取）。8瓣大蒜去皮切成细蒜末。2根小葱切成葱花。12只大虾剪去虾须和虾枪。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "用厨房剪刀从虾背第二节剪到尾部，挑出虾线。将处理好的虾从腹部切开但不切断背部，使虾身能平铺展开。所有虾处理完后加入1汤匙料酒和少许盐拌匀腌5分钟去腥。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "炒锅烧热倒入2汤匙食用油，油温四成热时转小火，放入蒜末小火慢炒约2分钟至金黄色散发浓郁蒜香。关火，加入2汤匙生抽和半茶匙白糖搅拌均匀，制成蒜蓉酱汁。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "取一个圆盘，将泡软的粉丝均匀铺在盘底。将处理好的大虾背部朝上、腹部朝下，整齐地摆放在粉丝上，虾头朝外呈放射状排列。将蒜蓉酱汁均匀浇在每只虾的开背处和粉丝上。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "蒸锅加水大火烧开，水沸后放入虾盘，盖紧锅盖，大火蒸6-7分钟。时间到立即关火取出，不要蒸过头以免虾肉变老。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "出锅后撒上葱花，可以再淋少许热油激香。成品虾身弯曲呈C形（说明火候刚好）、蒜蓉金黄喷香、粉丝晶莹剔透吸满鲜汁。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": {
+        "name": "粤菜",
+        "slug": "yue-cai"
+      },
+      "nutrition": "<p><strong>热量：</strong>约210千卡/份</p><p><strong>蛋白质：</strong>约25克（来自虾）</p><p><strong>碳水化合物：</strong>约18克（来自粉丝）</p><p><strong>钙：</strong>约80毫克（虾壳含有钙质）</p><p><strong>碘：</strong>丰富（来自虾）</p>",
+      "common_mistakes": "<p><strong>1. 虾线没去干净：</strong>虾线是消化道，不去干净会有泥沙味。必须从背部第二节挑出。</p><p><strong>2. 蒸过头：</strong>虾肉蒸超过8分钟就会变老变柴，6-7分钟足够。虾身弯曲成C形刚好，如果缩成O形就是蒸老了。</p><p><strong>3. 蒜蓉炒焦：</strong>蒜末一定要小火，炒到金黄就关火，炒焦了发苦。</p><p><strong>4. 粉丝太干：</strong>粉丝一定要泡软沥干后铺盘，太干蒸不软。</p>",
+      "success_tips": "<p><strong>选虾：</strong>选活虾或冰鲜虾，虾身弯曲有弹性、虾头不发黑。冷冻虾需完全解冻后再处理。</p><p><strong>开背技巧：</strong>剪刀比刀更好控制深度，剪到虾肉2/3处即可，不要完全切断。</p><p><strong>粉丝处理：</strong>粉丝泡软后用厨房纸吸干水分，否则蒸出来水汪汪的。</p><p><strong>摆盘美观：</strong>虾头朝外放射状排列，蒸出来呈C形弯曲，卖相极佳。</p>",
+      "ingredient_substitutes": "<p><strong>大虾：</strong>可用基围虾、明虾代替</p><p><strong>粉丝：</strong>可用龙口粉丝、绿豆粉丝</p><p><strong>大蒜：</strong>蒜量不可减，这是这道菜的灵魂</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，对虾过敏者忌食</p><p><strong>注意事项：</strong>虾为高嘌呤食物，痛风患者慎食</p><p><strong>适用场景：</strong>家宴、宴客菜、节日餐桌</p><p><strong>搭配建议：</strong>作为主菜搭配清炒蔬菜和汤品</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>蒸锅、炒锅、菜刀、厨房剪刀、圆盘</p>"
+    },
+    {
+      "id": 306,
+      "title": "蒜蓉蒸丝瓜",
+      "slug": "suan-rong-zheng-si-gua",
+      "description": "蒜蓉蒸丝瓜是一道清爽的夏季时令菜，丝瓜蒸至软嫩、蒜蓉香气扑鼻，口感清甜鲜嫩。做法简单健康，少油少盐，保留了丝瓜的原汁原味和营养成分。",
+      "difficulty": "简单",
+      "cookTime": 15,
+      "servings": "2人份",
+      "calories": 85,
+      "cover": {
+        "url": "/images/recipes/suan-rong-zheng-si-gua.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/suan-rong-zheng-si-gua.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "丝瓜",
+          "amount": "2根（约500克）",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "6瓣",
+          "isMain": true
+        },
+        {
+          "name": "蒸鱼豉油",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "香油",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "小葱",
+          "amount": "1根",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "少许",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "将2根丝瓜（约500克）用削皮刀削去外皮，露出嫩绿色瓜肉。切成约4厘米长的段，再从中间对半剖开成条状。将丝瓜条整齐摆放在蒸盘中，切面朝上，便于蒜蓉附着和入味。6瓣大蒜去皮后切成细蒜末备用。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "炒锅烧热倒入1汤匙食用油，油温四成热（微冒烟）时转小火，放入蒜末慢慢煸炒。持续小火煸炒约2分钟至蒜末呈金黄色、散发浓郁蒜香，注意不要炒焦。关火后加入2汤匙蒸鱼豉油和少许盐，搅拌均匀制成蒜蓉酱汁。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "将炒好的蒜蓉酱汁均匀浇在丝瓜条上，确保每块丝瓜表面都覆盖有蒜蓉。蒸锅加水大火烧至水沸，放入丝瓜盘，盖上锅盖，中大火蒸6-8分钟。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "蒸至丝瓜变得半透明、用筷子能轻松戳穿即可关火。取出蒸盘，在丝瓜上淋1茶匙香油增香，撒上切好的葱花。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "蒜蓉蒸丝瓜完成。成品应丝瓜翠绿软嫩、蒜蓉金黄喷香、汁水清甜。可立即上桌享用，趁热吃口感最佳。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": {
+        "name": "粤菜",
+        "slug": "yue-cai"
+      },
+      "nutrition": "<p><strong>热量：</strong>约85千卡/份</p><p><strong>蛋白质：</strong>约2克</p><p><strong>膳食纤维：</strong>约1.5克</p><p><strong>维生素C：</strong>约8毫克</p><p><strong>钙：</strong>约45毫克</p>",
+      "common_mistakes": "<p><strong>1. 丝瓜氧化变黑：</strong>丝瓜去皮后容易氧化变黑，切好后应尽快烹饪，不要长时间放置。</p><p><strong>2. 蒸过头：</strong>蒸超过10分钟丝瓜会过于软烂出水，失去口感。6-8分钟最佳。</p><p><strong>3. 蒜末炒焦：</strong>蒜末一定要小火慢炒，大火很容易炒焦变苦。</p>",
+      "success_tips": "<p><strong>选丝瓜：</strong>选粗细均匀、表皮嫩绿、手感微软有弹性的嫩丝瓜。太粗的可能老了有籽。</p><p><strong>去皮技巧：</strong>用削皮刀比菜刀更好控制，削到露出浅绿色瓜肉即可，不要削太深浪费。</p><p><strong>蒜蓉灵魂：</strong>蒜蓉用油小火慢炒到金黄是这道菜的灵魂，比直接用生蒜末香很多倍。</p>",
+      "ingredient_substitutes": "<p><strong>丝瓜：</strong>可用嫩南瓜、西葫芦代替</p><p><strong>蒸鱼豉油：</strong>可用生抽加少许白糖代替</p><p><strong>香油：</strong>可用花椒油代替，风味不同</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，低热量适合减脂人群</p><p><strong>注意事项：</strong>丝瓜性凉，脾胃虚寒者少食</p><p><strong>适用场景：</strong>夏季家常菜、清淡饮食、减脂餐</p><p><strong>搭配建议：</strong>可搭配红烧肉等油腻菜品平衡口感</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>蒸锅、炒锅、菜刀、削皮刀、蒸盘</p>"
+    },
+    {
+      "id": 305,
+      "title": "酸汤肥牛",
+      "slug": "suan-tang-fei-niu",
+      "description": "酸汤肥牛是一道以肥牛卷为主料、酸辣开胃的家常汤菜。酸汤底用番茄和金汤熬制，搭配金针菇等配菜，肥牛嫩滑、汤汁酸辣鲜香，特别适合夏天没胃口的时候来一碗。",
+      "difficulty": "简单",
+      "cookTime": 20,
+      "servings": "3人份",
+      "calories": 320,
+      "cover": {
+        "url": "/images/recipes/suan-tang-fei-niu.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/suan-tang-fei-niu.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "肥牛卷",
+          "amount": "400克",
+          "isMain": true
+        },
+        {
+          "name": "番茄",
+          "amount": "2个（约400克）",
+          "isMain": true
+        },
+        {
+          "name": "金针菇",
+          "amount": "200克",
+          "isMain": true
+        },
+        {
+          "name": "泡小米辣",
+          "amount": "5-6个",
+          "isMain": true
+        },
+        {
+          "name": "生姜",
+          "amount": "3片",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "4瓣",
+          "isMain": true
+        },
+        {
+          "name": "小葱",
+          "amount": "2根",
+          "isMain": true
+        },
+        {
+          "name": "料酒",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "白醋",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "白糖",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "2汤匙",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "将400克肥牛卷从冰箱取出，室温静置5分钟稍解冻，平铺在盘中备用。2个番茄顶部划十字刀，放入沸水中烫30秒后捞出剥皮，切成小丁。200克金针菇切去根部，撕成小朵洗净沥干。4瓣大蒜切末，3片生姜切丝，5-6个泡小米辣切碎，2根小葱切葱花。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "炒锅烧热倒入2汤匙食用油，油温五成热时放入姜丝和蒜末小火煸炒30秒至出香味，加入番茄丁转中火翻炒。持续翻炒约3-4分钟，用锅铲边炒边压，将番茄炒至完全软烂出汁、呈糊状，加入1茶匙白糖中和酸味。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "向锅中加入约800毫升开水（没过食材约5厘米），大火烧开后加入5-6个泡小米辣碎，转中火煮3分钟让汤底味道充分释放。加入2汤匙白醋、适量盐调味，汤底应呈明亮的橙红色，口味酸辣鲜香。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "将200克金针菇放入酸汤中，中火煮2分钟至金针菇变软断生。用漏勺将金针菇捞出垫在汤碗底部，锅中保留酸汤底。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "将酸汤底大火烧至微沸，取1汤匙料酒均匀淋在400克肥牛卷上稍腌10秒。将肥牛卷逐片散开放入滚汤中，大火煮约40-60秒，待肥牛变色卷曲立即关火，切勿久煮以免肥牛变老。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "将肥牛连同酸汤一起倒入垫有金针菇的碗中，撒上葱花点缀。酸汤肥牛应汤色红亮、肥牛嫩滑、金针菇脆嫩，酸辣开胃，趁热享用口感最佳。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": {
+        "name": "湘菜",
+        "slug": "xiang-cai"
+      },
+      "nutrition": "<p><strong>热量：</strong>约320千卡/份</p><p><strong>蛋白质：</strong>约28克</p><p><strong>脂肪：</strong>约18克</p><p><strong>维生素C：</strong>约25毫克（来自番茄）</p><p><strong>膳食纤维：</strong>约3克（来自金针菇）</p>",
+      "common_mistakes": "<p><strong>1. 肥牛煮太久：</strong>肥牛入汤后最多煮60秒，煮过头肉质变老变柴，失去嫩滑口感。</p><p><strong>2. 番茄没炒透：</strong>番茄必须炒到完全软烂出沙，否则汤底不够浓郁，酸味也不够自然。</p><p><strong>3. 酸味不够：</strong>番茄本身的酸度可能不够，需要额外加白醋提味，但不要一次加太多，边尝边调。</p><p><strong>4. 金针菇煮太久：</strong>金针菇煮2分钟即可，煮太久口感变软烂失去脆嫩感。</p>",
+      "success_tips": "<p><strong>肥嫩关键：</strong>肥牛卷下锅前不要解冻完全，半冻状态下锅更容易逐片分开，煮的时间更短更嫩。</p><p><strong>汤底浓郁：</strong>番茄一定要用油炒透，炒到起沙出汁，这样汤底才够浓郁。</p><p><strong>辣度调节：</strong>泡小米辣的辣度较高，可根据个人口味调整用量，也可以用剁椒代替。</p><p><strong>配菜丰富：</strong>可以加入豆芽、豆腐皮、宽粉等配菜，丰富口感和营养。</p>",
+      "ingredient_substitutes": "<p><strong>肥牛卷：</strong>可用羊肉卷、猪肉片代替</p><p><strong>番茄：</strong>可用番茄酱2汤匙代替（酸味略不同）</p><p><strong>金针菇：</strong>可用豆芽、娃娃菜、豆腐皮代替</p><p><strong>泡小米辣：</strong>可用剁椒、干辣椒代替</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，尤其适合食欲不振者</p><p><strong>注意事项：</strong>胃酸过多者少食；肥牛脂肪含量较高，减脂人群适量</p><p><strong>适用场景：</strong>家常便饭、开胃菜、冬季暖身</p><p><strong>搭配建议：</strong>配米饭或面条，可搭配凉拌黄瓜解腻</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅、菜刀、菜板、汤碗</p><p><strong>可选工具：</strong>漏勺</p>"
+    },
+    {
       "id": 304,
       "title": "金沙南瓜",
       "slug": "jin-sha-nan-gua",
@@ -10,10 +442,10 @@
       "servings": 2,
       "calories": 0,
       "cover": {
-        "url": "/images/recipes/jin-sha-nan-gua.jpg",
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/jin-sha-nan-gua.jpg",
         "formats": {
           "small": {
-            "url": "/images/recipes/jin-sha-nan-gua.jpg"
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/jin-sha-nan-gua.jpg"
           }
         }
       },
@@ -40,10 +472,10 @@
       "servings": 2,
       "calories": 0,
       "cover": {
-        "url": "/images/recipes/pao-cai-dou-fu-tang.jpg",
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/pao-cai-dou-fu-tang.jpg",
         "formats": {
           "small": {
-            "url": "/images/recipes/pao-cai-dou-fu-tang.jpg"
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/pao-cai-dou-fu-tang.jpg"
           }
         }
       },
@@ -70,10 +502,10 @@
       "servings": 2,
       "calories": 0,
       "cover": {
-        "url": "/images/recipes/suan-xiang-hei-jiao-niu-liu.jpg",
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/suan-xiang-hei-jiao-niu-liu.jpg",
         "formats": {
           "small": {
-            "url": "/images/recipes/suan-xiang-hei-jiao-niu-liu.jpg"
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/suan-xiang-hei-jiao-niu-liu.jpg"
           }
         }
       },
@@ -100,10 +532,10 @@
       "servings": 2,
       "calories": 0,
       "cover": {
-        "url": "/images/recipes/tang-cu-wa-kuai-yu.jpg",
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/tang-cu-wa-kuai-yu.jpg",
         "formats": {
           "small": {
-            "url": "/images/recipes/tang-cu-wa-kuai-yu.jpg"
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/tang-cu-wa-kuai-yu.jpg"
           }
         }
       },
@@ -130,10 +562,10 @@
       "servings": 2,
       "calories": 0,
       "cover": {
-        "url": "/images/recipes/jiang-bao-ji-ding.jpg",
+        "url": "https://cdn.chanmaoyoupu.com/images/recipes/jiang-bao-ji-ding.jpg",
         "formats": {
           "small": {
-            "url": "/images/recipes/jiang-bao-ji-ding.jpg"
+            "url": "https://cdn.chanmaoyoupu.com/images/recipes/jiang-bao-ji-ding.jpg"
           }
         }
       },
@@ -15659,28 +16091,28 @@
       "id": 132,
       "title": "香菇滑鸡",
       "slug": "xiang-gu-hua-ji",
-      "description": "香菇滑鸡是一道经典的粤式家常菜，以鸡肉嫩滑、香菇鲜美著称。鸡腿肉腌制后口感滑嫩，与干香菇的浓郁鲜香完美融合，汤汁浓稠鲜甜，拌饭一绝。这道菜做法简单，营养丰富，老少皆宜，是家庭餐桌上的暖胃选择。",
-      "difficulty": "中级",
-      "cookTime": 40,
-      "servings": 3,
-      "calories": 320,
+      "description": "香菇滑鸡是湘菜经典家常菜，鸡腿肉滑嫩多汁、香菇鲜香浓郁，搭配枸杞红枣蒸制或炒制，汤汁鲜美、营养丰富。鸡肉经腌制后口感格外嫩滑，是一道老少皆宜的下饭菜。",
+      "difficulty": "中等",
+      "cookTime": 30,
+      "servings": "3人份",
+      "calories": 260,
       "cover": {
-        "url": "/images/recipes/recipe-xiang-gu-hua-ji.jpg",
+        "url": "/images/recipes/xiang-gu-hua-ji.jpg",
         "formats": {
           "small": {
-            "url": "/images/recipes/recipe-xiang-gu-hua-ji.jpg"
+            "url": "/images/recipes/xiang-gu-hua-ji.jpg"
           }
         }
       },
       "ingredients": [
         {
-          "name": "鸡腿肉",
-          "amount": "3个（约400g）",
+          "name": "鸡腿",
+          "amount": "3个（约450克）",
           "isMain": true
         },
         {
-          "name": "干香菇",
-          "amount": "8朵",
+          "name": "香菇",
+          "amount": "8朵（干香菇约30克）",
           "isMain": true
         },
         {
@@ -15689,47 +16121,37 @@
           "isMain": true
         },
         {
-          "name": "大蒜",
-          "amount": "4瓣",
-          "isMain": true
-        },
-        {
-          "name": "大葱",
-          "amount": "1段",
+          "name": "小葱",
+          "amount": "2根",
           "isMain": true
         },
         {
           "name": "生抽",
-          "amount": "2勺",
-          "isMain": true
-        },
-        {
-          "name": "老抽",
-          "amount": "半勺",
-          "isMain": true
-        },
-        {
-          "name": "蚝油",
-          "amount": "1勺",
+          "amount": "2汤匙",
           "isMain": true
         },
         {
           "name": "料酒",
-          "amount": "1勺",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "蚝油",
+          "amount": "1汤匙",
           "isMain": true
         },
         {
           "name": "淀粉",
-          "amount": "1勺",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "香油",
+          "amount": "1茶匙",
           "isMain": true
         },
         {
           "name": "白胡椒粉",
-          "amount": "少许",
-          "isMain": true
-        },
-        {
-          "name": "白糖",
           "amount": "少许",
           "isMain": true
         },
@@ -15739,74 +16161,50 @@
           "isMain": true
         },
         {
-          "name": "香油",
-          "amount": "几滴",
-          "isMain": true
-        },
-        {
           "name": "食用油",
-          "amount": "适量",
-          "isMain": true
-        },
-        {
-          "name": "青红椒",
-          "amount": "各半个（可选）",
+          "amount": "2汤匙",
           "isMain": true
         }
       ],
       "steps": [
         {
           "stepNumber": 1,
-          "description": "处理食材：干香菇提前用温水泡发20分钟，泡软后去蒂对半切，泡香菇的水留着备用。鸡腿肉去骨切成2厘米大小的块，洗净沥干水分。"
+          "description": "3个鸡腿（约450克）洗净后去骨，切成约2厘米见方的块。如果用干香菇30克需提前温水泡发30分钟（泡发的水留着），鲜香菇8朵洗净对半切开即可。鸡腿肉块加入1汤匙生抽、1汤匙料酒、1汤匙淀粉、少许白胡椒粉，抓匀腌制15分钟。3片生姜切丝，2根小葱切段。"
         },
         {
           "stepNumber": 2,
-          "description": "腌制鸡肉：鸡块放入碗中，加入1勺生抽、料酒、白胡椒粉、少许盐、淀粉，用手抓拌均匀，再淋入1勺食用油拌匀锁住水分，腌制15分钟。这是鸡肉嫩滑的关键。"
+          "description": "炒锅烧热倒入2汤匙食用油，油温七成热时放入姜丝和葱段爆香约20秒。转大火，将腌好的鸡腿肉块下锅快速翻炒，炒至鸡肉表面变色、微微焦黄，约2-3分钟。"
         },
         {
           "stepNumber": 3,
-          "description": "炒制香菇：热锅倒油，放入姜片、蒜片爆香，加入香菇中火翻炒2分钟，炒出香菇的香气。泡香菇的水沉淀后取清汤倒入锅中，加入蚝油、生抽、少许老抽调色、白糖提鲜。"
+          "description": "加入香菇一起翻炒1分钟至香菇微微出水。加入1汤匙蚝油、1汤匙生抽调味，翻炒均匀。如果使用干香菇，加入约100毫升泡香菇的水（底部沉淀部分倒掉不要），鲜香菇则加50毫升清水。"
         },
         {
           "stepNumber": 4,
-          "description": "焖煮鸡肉：倒入腌好的鸡块，平铺在香菇上，不要马上翻动。盖上锅盖，中小火焖煮8-10分钟，让鸡肉在汤汁中慢慢焖熟，保持嫩滑口感。"
+          "description": "大火烧开后转中小火，盖上锅盖焖煮8-10分钟。期间翻动1-2次防止糊底。焖至鸡肉完全熟透、香菇充分吸收汤汁变软入味。"
         },
         {
           "stepNumber": 5,
-          "description": "翻炒入味：开盖后用铲子轻轻翻动，让鸡肉均匀裹上汤汁。如果喜欢配菜，可以加入青红椒块翻炒1分钟。试一下咸淡，根据口味调整盐量。"
+          "description": "开盖转大火收汁约1-2分钟，汤汁变浓稠裹在食材表面。尝一下咸淡，按需加盐调味。淋1茶匙香油翻匀增香。"
         },
         {
           "stepNumber": 6,
-          "description": "勾芡出锅：取少许淀粉加水调成水淀粉，淋入锅中，大火翻炒至汤汁浓稠，均匀裹在鸡肉和香菇上。滴几滴香油增香，撒上葱花即可出锅装盘。"
+          "description": "关火装盘，撒上葱花点缀。成品鸡肉嫩滑多汁、香菇鲜香入味，汤汁浓稠油亮，搭配米饭极佳。"
         }
       ],
-      "tags": [
-        {
-          "name": "下饭菜",
-          "slug": "xiaban",
-          "icon": "🍚"
-        }
-      ],
-      "methods": [
-        {
-          "name": "炒"
-        },
-        {
-          "name": "蒸"
-        }
-      ],
-      "regions": [
-        {
-          "name": "广东"
-        }
-      ],
-      "cuisine": null,
-      "nutrition": "<h3>营养价值分析</h3>\n<ul>\n<li><strong>蛋白质</strong>：鸡肉每100克含约19.4克优质蛋白，香菇含多种必需氨基酸，营养互补</li>\n<li><strong>脂肪</strong>：每100克鸡肉含约5克脂肪，多为不饱和脂肪酸</li>\n<li><strong>热量</strong>：每份约350千卡，中等热量</li>\n<li><strong>膳食纤维</strong>：香菇富含膳食纤维，促进肠道蠕动</li>\n<li><strong>维生素矿物质</strong>：鸡肉富含B族维生素和铁锌；香菇含维生素D原和香菇多糖</li>\n</ul>\n<p><strong>营养特点</strong>：高蛋白低脂肪，香菇多糖增强免疫力。蒸制做法营养保留完整。</p>",
-      "common_mistakes": "<h3>常见错误与避坑技巧</h3>\n<ul>\n<li><strong>鸡肉焯水</strong>：滑鸡不需要焯水，会使鸡肉变老，直接腌制更嫩滑</li>\n<li><strong>腌制不足</strong>：鸡肉至少腌制15分钟以上才能入味，建议20-30分钟</li>\n<li><strong>淀粉太少</strong>：淀粉是嫩滑关键，每100克鸡肉约需5-8克淀粉</li>\n<li><strong>蒸制过久</strong>：鸡肉蒸太久会老，一般12-15分钟即可</li>\n<li><strong>香菇不挤水</strong>：泡发香菇要挤干水分，否则稀释味道出汤水</li>\n</ul>",
-      "success_tips": "<h3>成功关键要点</h3>\n<ul>\n<li><strong>鸡腿肉更佳</strong>：鸡腿肉比鸡胸肉更嫩滑多汁，去骨带皮切丁最佳</li>\n<li><strong>腌制顺序</strong>：先加调料抓匀入味，再加淀粉和油锁水，最后加香菇</li>\n<li><strong>加油腌制</strong>：腌制时加一勺食用油，蒸好后鸡肉更嫩滑不粘连</li>\n<li><strong>干香菇更香</strong>：干香菇比鲜香菇香味浓郁，温水泡发30分钟</li>\n<li><strong>水开上锅</strong>：水开后再放入蒸锅，大火蒸制鸡肉才鲜嫩</li>\n</ul>",
-      "ingredient_substitutes": "<h3>食材替代方案</h3>\n<ul>\n<li><strong>鸡腿肉</strong>：可用鸡胸肉替代，需注意腌制时间和淀粉用量</li>\n<li><strong>干香菇</strong>：可用鲜香菇替代，味道稍淡</li>\n<li><strong>淀粉</strong>：土豆淀粉嫩滑效果最好，也可用玉米、红薯淀粉</li>\n<li><strong>生抽</strong>：可用味极鲜酱油替代</li>\n<li><strong>料酒</strong>：可用米酒、花雕酒替代</li>\n</ul>",
-      "suitable_for": "<h3>适宜人群与场景</h3>\n<ul>\n<li><strong>适宜人群</strong>：一般人群均可，尤其适合老人、儿童、脾胃虚弱者</li>\n<li><strong>推荐场景</strong>：家庭正餐、便当带饭、月子餐、病后恢复</li>\n<li><strong>慎食人群</strong>：痛风患者适量；湿热体质者不宜过量</li>\n<li><strong>搭配建议</strong>：搭配青菜、豆腐等素菜，营养更均衡</li>\n<li><strong>食用时机</strong>：午餐、晚餐皆宜</li>\n</ul>",
-      "required_tools": "<h3>所需厨具工具</h3>\n<ul>\n<li><strong>蒸锅</strong>：家用蒸锅或蒸笼，配深盘</li>\n<li><strong>大碗</strong>：腌制鸡肉用</li>\n<li><strong>菜刀+菜板</strong>：处理鸡肉、切配食材</li>\n<li><strong>筷子/夹子</strong>：夹取蒸好的菜品</li>\n</ul>"
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": {
+        "name": "湘菜",
+        "slug": "xiang-cai"
+      },
+      "nutrition": "<p><strong>热量：</strong>约260千卡/份</p><p><strong>蛋白质：</strong>约32克</p><p><strong>脂肪：</strong>约12克</p><p><strong>膳食纤维：</strong>约2克（来自香菇）</p><p><strong>维生素D：</strong>丰富（香菇是天然维D来源）</p>",
+      "common_mistakes": "<p><strong>1. 鸡肉没腌制：</strong>不腌制直接炒，鸡肉容易变柴变老。淀粉和料酒是嫩滑的关键。</p><p><strong>2. 香菇没泡透：</strong>干香菇必须充分泡发，否则口感硬、香味出不来。</p><p><strong>3. 收汁不彻底：</strong>汤汁太多会影响口感，收汁到浓稠挂料才好吃。</p>",
+      "success_tips": "<p><strong>去骨技巧：</strong>鸡腿沿骨头纵向剪开，贴着骨头将肉剥离，比用刀刃更安全高效。</p><p><strong>嫩滑秘诀：</strong>腌制时加淀粉锁住水分，大火快炒封住表面，再转小火焖熟，双保险。</p><p><strong>香菇水别浪费：</strong>泡干香菇的水鲜味十足，用来焖鸡比清水鲜很多。</p>",
+      "ingredient_substitutes": "<p><strong>鸡腿：</strong>可用鸡翅中、鸡胸肉代替（鸡胸肉需更注意不要炒老）</p><p><strong>香菇：</strong>可用杏鲍菇、茶树菇代替</p><p><strong>蚝油：</strong>可用生抽加少许白糖代替</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，蛋白质丰富适合健身人群</p><p><strong>注意事项：</strong>痛风患者少食（香菇嘌呤较高）</p><p><strong>适用场景：</strong>家常便饭、下饭菜、宴客菜</p><p><strong>搭配建议：</strong>配米饭、馒头均可，可搭配清炒时蔬</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅、菜刀、菜板</p><p><strong>可选工具：</strong>砂锅（焖煮效果更佳）</p>"
     },
     {
       "id": 131,
@@ -26539,6 +26937,70 @@
   ],
   "ingredients": [
     {
+      "id": 310,
+      "name": "番茄",
+      "slug": "fan-qie",
+      "category": "蔬菜",
+      "description": "番茄又称西红柿，是全球使用最广泛的蔬菜之一。酸甜多汁，可生食可熟食，是番茄炒蛋、酸汤、意面酱等经典菜肴的灵魂食材。番茄富含番茄红素和维生素C，加热后番茄红素更易被人体吸收。",
+      "imageUrl": "",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
+      "id": 309,
+      "name": "鱿鱼",
+      "slug": "you-yu",
+      "category": "海鲜",
+      "description": "鱿鱼是软体动物门头足纲的海洋生物，肉质紧实弹嫩，适合爆炒、铁板烤制、白灼等多种烹饪方式。新鲜鱿鱼体表有光泽、肉质有弹性，干制后即为鱿鱼干。鱿鱼富含牛磺酸和优质蛋白质。",
+      "imageUrl": "",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
+      "id": 308,
+      "name": "丝瓜",
+      "slug": "si-gua",
+      "category": "蔬菜",
+      "description": "丝瓜又称天丝瓜、布瓜，是夏季时令蔬菜。嫩瓜肉质细嫩、汁多味清，适合炒蛋、煮汤、蒜蓉蒸制。丝瓜富含皂苷和黏液蛋白，有清热利湿的功效。选购时以瓜条均匀、表皮嫩绿、手感有弹性为佳。",
+      "imageUrl": "",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
+      "id": 307,
+      "name": "肥牛卷",
+      "slug": "fei-niu-juan",
+      "category": "肉类",
+      "description": "肥牛卷是将优质牛肉经冷冻后切成薄片卷制而成的食材，涮煮或煮汤时口感鲜嫩滑嫩，是酸汤肥牛、肥牛饭等菜的核心原料。选购时注意颜色鲜红、脂肪分布均匀，解冻后不宜反复冷冻。",
+      "imageUrl": "",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
       "id": 306,
       "name": "韩式辣酱",
       "slug": "han-shi-la-jiang",
@@ -31053,6 +31515,66 @@
   ],
   "knowledge": [
     {
+      "id": 257,
+      "title": "家常菜的营养搭配——三餐膳食平衡指南",
+      "slug": "jia-chang-cai-ying-yang-da-pei",
+      "category": "nutrition",
+      "content": "<h2>家常菜的营养搭配指南</h2><p>家常菜不仅要好吃，更要吃得健康。了解基本的营养搭配原则，让每一顿饭都能满足身体所需的各类营养素，是每个人应该掌握的生活技能。</p><h3>一、一餐的理想结构</h3><p>营养学家建议每餐包含以下四大类食物：</p><ul><li><strong>主食（碳水化合物）：</strong>提供能量，占餐盘的1/4。优选糙米、全麦、薯类等粗粮</li><li><strong>蛋白质：</strong>修复组织，占餐盘的1/4。鱼禽蛋肉搭配豆类</li><li><strong>蔬菜：</strong>提供维生素矿物质和膳食纤维，占餐盘的1/2。深色蔬菜为主</li><li><strong>适量油脂：</strong>提供必需脂肪酸，每餐烹饪用油控制在10-15克</li></ul><h3>二、食材搭配的黄金法则</h3><p><strong>1. 荤素搭配：</strong>每道菜或每餐都要有荤有素。红烧肉配土豆、西红柿炒鸡蛋，都是经典的荤素搭配。</p><p><strong>2. 颜色搭配：</strong>不同颜色的蔬菜含有不同的植物化学物质。一餐中尽量凑齐红（番茄）、绿（叶菜）、黄（南瓜/玉米）、白（萝卜/豆腐）、黑（木耳/香菇）五种颜色。</p><p><strong>3. 蛋白质互补：</strong>动物蛋白和植物蛋白搭配食用，氨基酸互补提高利用率。如：猪肉炖粉条、鸡蛋豆腐、鱼头豆腐汤。</p><h3>三、一日三餐怎么吃</h3><p><strong>早餐（占全天30%）：</strong>必须有主食+蛋白质。推荐：鸡蛋+全麦面包/粥+牛奶+少量蔬果。早餐吃好，一上午精力充沛。</p><p><strong>午餐（占全天40%）：</strong>最丰盛的一餐。一荤一素一汤是基本配置，主食要够。推荐：米饭+红烧鱼+炒青菜+紫菜蛋汤。</p><p><strong>晚餐（占全天30%）：</strong>清淡适量。蔬菜为主，蛋白质选易消化的鱼虾或豆制品，主食可减量。避免油腻和过饱影响睡眠。</p><h3>四、几个常见的营养误区</h3><p><strong>误区1：喝骨头汤补钙。</strong>骨头汤的钙含量其实很低（约2-4mg/100ml），远不如牛奶（约100mg/100ml）。骨头汤白色来自脂肪乳化，不是钙。</p><p><strong>误区2：吃鸡蛋会升高胆固醇。</strong>健康人每天1-2个鸡蛋不会显著影响血液胆固醇水平。鸡蛋是性价比最高的优质蛋白来源之一。</p><p><strong>误区3：吃素更健康。</strong>完全素食容易缺乏维生素B12、铁、锌等营养素。荤素搭配才是最优解。</p><h3>五、特殊人群的搭配建议</h3><p><strong>减脂人群：</strong>减少主食和油脂，增加蛋白质和蔬菜。每餐保证25g以上优质蛋白（约100克鸡胸肉/鱼肉）。</p><p><strong>健身人群：</strong>训练后30分钟内补充蛋白质+碳水（如鸡蛋+香蕉）。日常蛋白质摄入需达到1.5-2g/kg体重。</p><p><strong>老年人：</strong>增加钙质摄入（奶制品、豆制品、小鱼虾），适量补充维生素D（晒太阳+鱼类），蛋白质选择易消化的蒸蛋、鱼肉。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-09",
+      "summary": "从营养学角度介绍家常菜的膳食搭配原则，包括一餐理想结构、食材搭配黄金法则、三餐分配建议、常见营养误区纠正以及特殊人群饮食建议。",
+      "keywords": "营养搭配,膳食平衡,三餐搭配,荤素搭配,蛋白质互补,饮食误区,健康饮食"
+    },
+    {
+      "id": 256,
+      "title": "中式烹饪六大技法——炒爆煎炸蒸煮的基础要领",
+      "slug": "zhong-shi-peng-ren-liu-da-ji-fa",
+      "category": "technique",
+      "content": "<h2>中式烹饪六大技法基础要领</h2><p>中餐烹饪技法丰富多样，但最核心最常用的不外乎六大类：炒、爆、煎、炸、蒸、煮。掌握这些基础技法的要领，就能应对80%以上的家常菜制作。</p><h3>一、炒（Stir-fry）</h3><p><strong>核心要领：</strong>大火、快翻、断生即出锅</p><p>炒是中餐最基础的技法。关键在于锅要烧到足够热（冒烟），食材下锅后快速翻炒，在最短时间内断生。蔬菜类一般2-3分钟，肉类切片3-5分钟。</p><p><strong>常见失误：</strong>火不够大，食材出水变成\"煮菜\"；翻动不够频繁，部分食材炒焦。</p><h3>二、爆（Flash-fry）</h3><p><strong>核心要领：</strong>超高油温、极短时间、先过油再回锅</p><p>爆比炒的火更大、油更多、时间更短。典型代表有葱爆羊肉、酱爆鸡丁。食材通常需要先在高温油中过一下（滑油），捞出后再与调料快速翻炒。</p><p><strong>关键区别：</strong>爆菜的食材通常切成薄片或花刀，以增大受热面积，确保短时间内熟透。</p><h3>三、煎（Pan-fry）</h3><p><strong>核心要领：</strong>中火、少油、两面金黄</p><p>煎用油量比炒少，火力比炒小，核心是两面煎至金黄酥脆。适合鱼排、豆腐、肉饼等扁平形状的食材。</p><p><strong>不粘锅秘诀：</strong>锅先烧热再倒油（热锅冷油），食材下锅后不要急着翻动，等底面定型自然脱锅后再翻。</p><h3>四、炸（Deep-fry）</h3><p><strong>核心要领：</strong>油量充足、控好油温、复炸更酥</p><p>炸需要大量油完全浸没食材。油温控制是核心：三四成热（100-130°C）适合炸坚果和低温定型，五六成热（150-170°C）适合炸肉类，七八成热（190-210°C）适合炸蔬菜天妇罗。</p><p><strong>复炸技巧：</strong>第一次中温炸熟，捞出后升高油温再炸一次至金黄，这就是\"复炸\"，能让食物外酥里嫩。</p><h3>五、蒸（Steam）</h3><p><strong>核心要领：</strong>水沸再上锅、时间精准、不揭盖</p><p>蒸是最能保留食材原味和营养的技法。关键是水一定要先烧开再放入食材，蒸制过程中不要揭开锅盖，以免温度骤降影响口感。</p><p><strong>时间参考：</strong>蒸鱼8-10分钟、蒸蛋6-8分钟、蒸包子12-15分钟、蒸排骨15-20分钟。</p><h3>六、煮（Boil）</h3><p><strong>核心要领：</strong>冷水还是沸水下锅看食材</p><p>煮看似最简单，但冷水还是沸水下锅大有讲究：肉类焯水要冷水下锅（逼出血水），煮汤要冷水下锅（鲜味慢慢释放），煮面条蔬菜要沸水下锅（快速断生保持口感）。</p><p><strong>万能汤底法则：</strong>骨头/肉类冷水下锅大火烧开转小火，保持微沸状态煮1-2小时，汤色浓白。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-09",
+      "summary": "系统介绍中餐六大基础烹饪技法（炒、爆、煎、炸、蒸、煮）的核心要领、油温控制、时间参考和常见失误，帮助初学者建立完整的烹饪技法框架。",
+      "keywords": "烹饪技法,炒,煎,炸,蒸,煮,火候控制,中餐基础"
+    },
+    {
+      "id": 255,
+      "title": "香煎三文鱼腌制秘方",
+      "slug": "xiang-jian-san-wen-yu",
+      "category": "secret",
+      "content": "<h2>香煎三文鱼腌制秘方</h2><p>三文鱼富含Omega-3脂肪酸，香煎是最简单又美味的做法。掌握腌制和煎制技巧，在家就能做出外焦里嫩、香气四溢的餐厅级三文鱼。</p><h3>腌制材料（2块）</h3><ul><li>三文鱼排 2块（每块约150克，厚度2厘米）</li><li>海盐 1茶匙</li><li>黑胡椒碎 1/2茶匙（现磨最佳）</li><li>柠檬汁 1汤匙</li><li>橄榄油 1汤匙</li><li>干迷迭香 1/2茶匙（没有可用黑胡椒代替）</li><li>蒜粉 少许（可选）</li></ul><h3>腌制步骤</h3><p><strong>第一步：</strong>三文鱼从冰箱取出，用厨房纸巾彻底吸干表面水分。这一步非常关键，表面干燥才能煎出焦脆外皮。</p><p><strong>第二步：</strong>将海盐、黑胡椒碎、干迷迭香混合均匀，均匀撒在三文鱼两面，用手轻压让调味料贴合鱼排。</p><p><strong>第三步：</strong>淋上柠檬汁和橄榄油，翻面确保均匀覆盖。腌制15-20分钟（不要超过30分钟，柠檬汁酸性会让鱼肉变散）。</p><h3>煎制技巧</h3><p><strong>热锅冷油：</strong>平底锅中火预热2分钟，倒入少许橄榄油。油温六成热（微微冒烟）时放入鱼排。</p><p><strong>皮面朝下先煎：</strong>如果有皮，先煎皮面3-4分钟不翻动，让鱼皮变得金黄酥脆。</p><p><strong>翻面：</strong>用铲子轻推鱼排，能轻松推动说明底面已煎好。翻面后再煎2分钟即可（喜欢medium rare内部保持粉色的煎2分钟，全熟煎3分钟）。</p><h3>搭配建议</h3><ul><li>经典搭配：柠檬角+黄油+酸豆酱</li><li>日式风味：酱油+芥末+萝卜泥</li><li>沙拉搭配：配混合生菜和油醋汁</li></ul><h3>选购要点</h3><p>选颜色鲜亮（橙红色有光泽）、纹路清晰、肉质有弹性的新鲜三文鱼。冷冻三文鱼需提前12小时冷藏解冻，不要室温解冻或微波解冻。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-09",
+      "summary": "西式香煎三文鱼的腌制和煎制秘方，包含腌制调料比例、三次控温煎制法和三种搭配酱料，在家即可做出餐厅级口感。",
+      "keywords": "三文鱼,香煎,腌制,黑胡椒,柠檬汁,Omega-3,西餐"
+    },
+    {
+      "id": 254,
+      "title": "口水鸡秘制红油配方",
+      "slug": "kou-shui-ji-hong-you",
+      "category": "secret",
+      "content": "<h2>口水鸡秘制红油配方</h2><p>口水鸡是四川经典凉菜，鸡肉嫩滑、红油喷香、麻辣鲜甜。这个红油配方可以用于口水鸡、夫妻肺片等多种川味凉菜。</p><h3>红油材料</h3><ul><li>干辣椒面 50克（二荆条和朝天椒各半，粗细混合）</li><li>白芝麻 20克</li><li>菜籽油 300毫升</li><li>花椒粉 10克</li><li>八角 1颗（炸油用）</li><li>桂皮 1小段（炸油用）</li><li>香叶 2片（炸油用）</li></ul><h3>口水鸡调味汁</h3><ul><li>红油 3汤匙</li><li>生抽 2汤匙</li><li>香醋 1汤匙</li><li>白糖 1茶匙</li><li>花椒粉 1/2茶匙</li><li>蒜泥 1汤匙</li><li>姜汁 1茶匙</li><li>花生碎 适量</li><li>小葱花 适量</li></ul><h3>红油制作</h3><p><strong>第一步：</strong>将粗细辣椒面混合，加入白芝麻和少许盐拌匀，放入耐热碗中。</p><p><strong>第二步：</strong>菜籽油冷油放入八角、桂皮、香叶，小火加热至香料变色出香（约5分钟），捞出香料渣。</p><p><strong>第三步：</strong>将油温升至180°C（油面冒青烟），关火等30秒让油温降到约160°C。先倒1/3油到辣椒面上，快速搅拌（此时会剧烈冒泡）。等30秒后再倒1/3油搅拌。最后倒入剩余油，此时油温较低，可以慢慢浸出色素。</p><p><strong>第四步：</strong>红油静置过夜后使用，颜色更红、味道更香。</p><h3>组装口水鸡</h3><p>鸡腿煮熟过冰水后切块摆盘，将调味汁材料混合均匀浇在鸡肉上，撒上花生碎和葱花即可。</p><h3>关键要点</h3><p>红油的灵魂在于\"三次泼油\"——高温出香、中温出色、低温出味。一次泼油只能得到单一风味，三次分泼才能层次丰富。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-09",
+      "summary": "经典川味口水鸡红油配方，采用三次泼油法制作，搭配完整调味汁比例，可用于口水鸡、夫妻肺片等多种川味凉菜。",
+      "keywords": "口水鸡,红油配方,三次泼油,川味凉菜,辣椒面,花椒,红油制作"
+    },
+    {
+      "id": 253,
+      "title": "酸汤火锅底料秘制配方",
+      "slug": "suan-tang-huo-guo-di-liao",
+      "category": "secret",
+      "content": "<h2>酸汤火锅底料秘制配方</h2><p>酸汤火锅源自贵州，以酸辣鲜香著称，夏天开胃首选。掌握这个底料配方，在家就能做出餐馆级的酸汤火锅。</p><h3>核心材料（4-6人份）</h3><ul><li>番茄 6个（约1.2公斤），选完全成熟的红透番茄</li><li>泡小米辣 15-20个（根据辣度调整）</li><li>生姜 1大块（约30克）</li><li>大蒜 1整头</li><li>白醋 100毫升</li><li>木姜子油 1汤匙（灵魂调料，没有可用花椒油代替）</li><li>盐 适量</li><li>鸡精 1茶匙</li></ul><h3>制作步骤</h3><p><strong>第一步：番茄处理</strong><br>番茄顶部划十字，沸水烫30秒去皮，切小块后用料理机打成番茄泥。没有料理机可以用擦丝器擦成蓉。</p><p><strong>第二步：炒制底料</strong><br>大锅烧热倒入50毫升菜籽油，油温五成热时放入拍碎的姜块和整瓣大蒜炒香2分钟。加入泡小米辣碎炒1分钟，再倒入番茄泥，中火翻炒10分钟至番茄完全出沙变浓稠。</p><p><strong>第三步：调汤底</strong><br>加入2升开水大火烧开，转中火煮5分钟。加入白醋、木姜子油、盐和鸡精调味。酸汤底应呈橙红色，口味酸辣鲜香。</p><h3>涮菜推荐</h3><ul><li>荤菜：肥牛卷、鱼片、虾、毛肚</li><li>素菜：金针菇、娃娃菜、豆腐皮、红薯粉</li><li>主食：酸汤泡饭一绝</li></ul><h3>小贴士</h3><p>木姜子油是贵州酸汤的灵魂，有独特的柠檬清香，建议网购一瓶备用。没有的话汤底风味会不同但依然好吃。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-09",
+      "summary": "贵州风味酸汤火锅底料配方，以番茄和泡小米辣为核心，加入木姜子油提香，酸辣鲜香，适合涮肥牛、鱼片等食材。",
+      "keywords": "酸汤火锅,番茄底料,泡辣椒,木姜子油,贵州酸汤,涮菜搭配"
+    },
+    {
       "id": 251,
       "title": "家常汤品的艺术：从入门到精通",
       "slug": "jia-chang-tang-pin-de-yi-shu-cong-ru-men-dao-jing-tong",
@@ -33800,6 +34322,5 @@
       "summary": "本文介绍了川菜的味型体系的风味特点和制作要点，帮助您了解不同风味的特点和制作方法，在家也能做出地道的特色美食。内容详实，讲解清晰，实用性强，是美食爱好者不可错过的实用参考资料。",
       "keywords": "风味,特色美食,地方菜,口味,烹饪,美食,技巧"
     }
-  ],
-  "lastUpdated": "2026-07-08T07:40:00+08:00"
+  ]
 }
