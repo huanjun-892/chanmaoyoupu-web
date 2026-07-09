@@ -1,6 +1,481 @@
 {
   "recipes": [
     {
+      "id": 313,
+      "title": "韭菜盒子",
+      "slug": "jiu-cai-he-zi",
+      "description": "韭菜盒子是一道经典的北方面食，外皮金黄酥脆、内馅韭菜鸡蛋鲜香四溢，是早餐和小吃的绝佳选择，也是许多人的童年味道。",
+      "difficulty": "中等",
+      "cookTime": 0,
+      "servings": "4人份（约8个）",
+      "calories": 220,
+      "cover": {
+        "url": "/images/recipes/jiu-cai-he-zi.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/jiu-cai-he-zi.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "中筋面粉",
+          "amount": "300克",
+          "isMain": true
+        },
+        {
+          "name": "韭菜",
+          "amount": "250克",
+          "isMain": true
+        },
+        {
+          "name": "鸡蛋",
+          "amount": "3个",
+          "isMain": true
+        },
+        {
+          "name": "虾仁",
+          "amount": "100克（可选）",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "适量（煎制用）",
+          "isMain": true
+        },
+        {
+          "name": "香油",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "白胡椒粉",
+          "amount": "少许",
+          "isMain": true
+        },
+        {
+          "name": "温水",
+          "amount": "约160毫升",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约220千卡/个</p><p><strong>蛋白质：</strong>约8克</p><p><strong>脂肪：</strong>约12克</p><p><strong>碳水化合物：</strong>约22克</p><p><strong>膳食纤维：</strong>韭菜富含膳食纤维，有助消化</p><p><strong>钙：</strong>韭菜含有一定量的钙和铁</p>",
+      "common_mistakes": "<p><strong>1. 韭菜出汤：</strong>韭菜切好后如果放盐太早会大量出水，一定要先用香油拌匀锁水，包之前再放盐。</p><p><strong>2. 面皮太硬：</strong>面团太硬擀不开、口感发硬。面团要偏软，和面时水要加够。</p><p><strong>3. 煎不熟：</strong>火太大外面焦了里面还没熟，一定要中小火慢煎。</p><p><strong>4. 没有醒面：</strong>不醒面的面团延展性差，擀皮时会回缩，很难擀薄。</p>",
+      "success_tips": "<p><strong>韭菜选择：</strong>选用叶片宽厚、颜色深绿的新鲜韭菜。春天的头茬韭菜最嫩最香。</p><p><strong>和面技巧：</strong>温水面团延展性最好，不冷不热。水量约为面粉的50-55%。</p><p><strong>封口关键：</strong>边缘一定要捏紧，否则煎的时候馅料会漏出来。可以蘸少量水帮助封口。</p>",
+      "ingredient_substitutes": "韭菜可用韭黄替代做成韭黄盒子。馅料中加入虾皮可提鲜。纯素版本可去掉鸡蛋，用粉丝和豆腐丁替代增加口感。",
+      "suitable_for": "早餐,主食,北方小吃,面食",
+      "required_tools": "平底锅,擀面杖,刀具,砧板"
+    },
+    {
+      "id": 312,
+      "title": "丝瓜蛋汤",
+      "slug": "si-gua-dan-tang",
+      "description": "丝瓜蛋汤是一道清爽鲜美的家常汤品，翠绿的丝瓜搭配金黄的蛋花，汤色清亮、味道甘甜，是夏日消暑的绝佳选择。",
+      "difficulty": "简单",
+      "cookTime": 0,
+      "servings": "4人份",
+      "calories": 95,
+      "cover": {
+        "url": "/images/recipes/si-gua-dan-tang.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/si-gua-dan-tang.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "丝瓜",
+          "amount": "1根（约350克）",
+          "isMain": true
+        },
+        {
+          "name": "鸡蛋",
+          "amount": "2个",
+          "isMain": true
+        },
+        {
+          "name": "生姜",
+          "amount": "3片",
+          "isMain": true
+        },
+        {
+          "name": "小葱",
+          "amount": "2根",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "香油",
+          "amount": "几滴",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "白胡椒粉",
+          "amount": "少许",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约95千卡/份</p><p><strong>蛋白质：</strong>约6克</p><p><strong>脂肪：</strong>约5克</p><p><strong>碳水化合物：</strong>约7克</p><p><strong>维生素C：</strong>丝瓜含有较丰富的维生素C</p><p><strong>钾：</strong>丝瓜高钾低钠，适合夏季补钾</p>",
+      "common_mistakes": "<p><strong>1. 丝瓜切太早：</strong>丝瓜去皮后极易氧化变黑，切好后要立即泡水或下锅。</p><p><strong>2. 蛋花散碎：</strong>蛋液倒入时汤太沸腾会冲散蛋花，要小火微沸时倒入。</p><p><strong>3. 丝瓜煮太久：</strong>煮过头的丝瓜会过于软烂失去口感，3-4分钟刚好。</p><p><strong>4. 放太多调料：</strong>这道汤喝的是清鲜原味，盐要少放，不需要鸡精味精。</p>",
+      "success_tips": "<p><strong>选丝瓜：</strong>选表皮嫩绿、手感沉重、粗细均匀的丝瓜。太粗的丝瓜可能籽多偏老。</p><p><strong>蛋花秘诀：</strong>蛋液要顺着汤面缓缓倒入，不要一下子倒进去，这样才能形成大朵漂亮的蛋花。</p><p><strong>清淡为本：</strong>这道汤的精髓在于清淡鲜美，不要加太多调味料掩盖食材本味。</p>",
+      "ingredient_substitutes": "丝瓜可用嫩冬瓜替代。鸡蛋可换成皮蛋，做成皮蛋丝瓜汤风味独特。还可加入虾皮增加鲜味。",
+      "suitable_for": "清淡饮食,减脂餐,夏日消暑,快手汤品",
+      "required_tools": "汤锅,刀具"
+    },
+    {
+      "id": 311,
+      "title": "胡萝卜炒肉片",
+      "slug": "hu-luo-bo-chao-rou-pian",
+      "description": "胡萝卜炒肉片是一道营养丰富的家常菜，胡萝卜的甘甜与肉片的鲜香完美融合，色彩鲜艳、口感嫩滑，老少皆宜。",
+      "difficulty": "简单",
+      "cookTime": 0,
+      "servings": "3人份",
+      "calories": 250,
+      "cover": {
+        "url": "/images/recipes/hu-luo-bo-chao-rou-pian.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/hu-luo-bo-chao-rou-pian.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "胡萝卜",
+          "amount": "2根（约300克）",
+          "isMain": true
+        },
+        {
+          "name": "猪里脊肉",
+          "amount": "200克",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "料酒",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "淀粉",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "3瓣",
+          "isMain": true
+        },
+        {
+          "name": "生姜",
+          "amount": "3片",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "青椒",
+          "amount": "1个（配色用）",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约250千卡/份</p><p><strong>蛋白质：</strong>约18克</p><p><strong>脂肪：</strong>约14克</p><p><strong>碳水化合物：</strong>约12克</p><p><strong>维生素A：</strong>胡萝卜富含β-胡萝卜素，在体内可转化为维生素A，对视力有益</p>",
+      "common_mistakes": "<p><strong>1. 肉片顺纹切：</strong>顺纹切的肉片炒出来又老又硬，一定要逆纹切（刀口垂直于肉的纹理方向）。</p><p><strong>2. 胡萝卜没炒熟：</strong>胡萝卜较硬，需要足够时间炒软，否则口感不好且营养不易吸收。</p><p><strong>3. 肉片炒太老：</strong>第一次炒肉片到八成熟就够了，回锅后还会继续加热。</p><p><strong>4. 不放淀粉腌制：</strong>淀粉能在肉片表面形成保护层，锁住水分让肉片更嫩滑。</p>",
+      "success_tips": "<p><strong>选里脊肉：</strong>猪里脊是最嫩的部位，适合快炒。也可用梅花肉，口感更香。</p><p><strong>胡萝卜用油炒：</strong>β-胡萝卜素是脂溶性的，用油炒后更利于人体吸收。</p><p><strong>腌制秘诀：</strong>腌肉时加1茶匙油，可以防止下锅时肉片粘连。</p>",
+      "ingredient_substitutes": "猪里脊可换为鸡胸肉或牛肉片。胡萝卜可加入木耳、西兰花等配菜增加营养层次。",
+      "suitable_for": "家常菜,快手菜,儿童营养餐",
+      "required_tools": "炒锅,刀具"
+    },
+    {
+      "id": 310,
+      "title": "西芹炒百合",
+      "slug": "xi-qin-chao-bai-he",
+      "description": "西芹炒百合是一道清爽的素菜佳肴，脆嫩的西芹搭配清甜的百合，色泽翠绿洁白，口感爽脆，营养丰富，非常适合夏季食用。",
+      "difficulty": "简单",
+      "cookTime": 0,
+      "servings": "3人份",
+      "calories": 120,
+      "cover": {
+        "url": "/images/recipes/xi-qin-chao-bai-he.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/xi-qin-chao-bai-he.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "西芹",
+          "amount": "300克（约3根）",
+          "isMain": true
+        },
+        {
+          "name": "鲜百合",
+          "amount": "100克（1个）",
+          "isMain": true
+        },
+        {
+          "name": "胡萝卜",
+          "amount": "半根（配色用）",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "3瓣",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "白糖",
+          "amount": "少许",
+          "isMain": true
+        },
+        {
+          "name": "淀粉",
+          "amount": "1茶匙（勾芡用）",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约120千卡/份</p><p><strong>蛋白质：</strong>约4克</p><p><strong>脂肪：</strong>约7克</p><p><strong>碳水化合物：</strong>约12克</p><p><strong>膳食纤维：</strong>芹菜富含膳食纤维，百合含有多种生物碱</p>",
+      "common_mistakes": "<p><strong>1. 西芹不去筋：</strong>老筋严重影响口感，一定要刮去表面粗纤维。</p><p><strong>2. 百合炒太久：</strong>百合加热过久会变软发苦，焯水和翻炒时间都要短。</p><p><strong>3. 没有焯水：</strong>焯水可以去掉百合的微苦味，也能让胡萝卜更快熟透。</p><p><strong>4. 盐放太早：</strong>盐放早了会让西芹出水变软，出锅前放盐最佳。</p>",
+      "success_tips": "<p><strong>选百合：</strong>鲜百合选鳞片紧实、颜色洁白、无斑点的。干百合需提前泡发4小时。</p><p><strong>大火快炒：</strong>这道菜的灵魂在于脆嫩，全程大火快炒，控制在3分钟以内。</p><p><strong>配色技巧：</strong>加胡萝卜片不仅增加营养，还能让菜品颜色更丰富好看。</p>",
+      "ingredient_substitutes": "鲜百合可用干百合替代（提前泡发），西芹可用普通芹菜替代但口感稍逊，胡萝卜可用红椒片代替配色。",
+      "suitable_for": "清淡饮食,减脂餐,素菜,夏季菜品",
+      "required_tools": "炒锅,刀具"
+    },
+    {
+      "id": 309,
+      "title": "糖醋花生米",
+      "slug": "tang-cu-hua-sheng-mi",
+      "description": "糖醋花生米是一道经典的下酒小菜，花生米炸至酥脆后裹上酸甜可口的糖醋汁，外酥里脆、酸甜开胃，是餐桌上的百搭佳肴。",
+      "difficulty": "简单",
+      "cookTime": 0,
+      "servings": "4人份",
+      "calories": 280,
+      "cover": {
+        "url": "/images/recipes/tang-cu-hua-sheng-mi.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/tang-cu-hua-sheng-mi.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "花生米",
+          "amount": "300克",
+          "isMain": true
+        },
+        {
+          "name": "白糖",
+          "amount": "3汤匙",
+          "isMain": true
+        },
+        {
+          "name": "陈醋",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "适量（炸制用）",
+          "isMain": true
+        },
+        {
+          "name": "白芝麻",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "小葱",
+          "amount": "2根",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "少许",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        },
+        {
+          "stepNumber": 0,
+          "description": ""
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约280千卡/份</p><p><strong>蛋白质：</strong>约12克</p><p><strong>脂肪：</strong>约18克</p><p><strong>碳水化合物：</strong>约20克</p><p><strong>维生素E：</strong>花生富含维生素E，有助于抗氧化</p>",
+      "common_mistakes": "<p><strong>1. 花生米没晾干就炸：</strong>水分会导致油溅，非常危险。一定要沥干或擦干。</p><p><strong>2. 火太大炸焦：</strong>花生米含糖量高，大火容易外焦内生。必须中小火慢炸。</p><p><strong>3. 裹酱太早：</strong>花生米没凉透就裹酱会回软，一定要等完全晾凉再拌。</p><p><strong>4. 酱汁太稀：</strong>酱汁没熬浓稠就拌花生米，挂不住味道也不好看。</p>",
+      "success_tips": "<p><strong>选花生米：</strong>选颗粒饱满、无霉变的新鲜花生米，陈年花生口感和香味都差。</p><p><strong>油炸技巧：</strong>冷油下花生米可以更均匀地受热，但中小火是前提。</p><p><strong>糖醋比例：</strong>酸甜度可根据个人口味微调，经典比例是糖：醋=3:2。</p>",
+      "ingredient_substitutes": "花生米可用腰果或杏仁替代，做成糖醋腰果或糖醋杏仁，做法相同。陈醋可用香醋或米醋代替，风味略有不同。",
+      "suitable_for": "下酒菜,开胃小菜,宴客菜,零食",
+      "required_tools": "炒锅,漏勺,盘子"
+    },
+    {
       "id": 308,
       "title": "红烧五花肉炖土豆",
       "slug": "hong-shao-wu-hua-rou-dun-tu-dou",
@@ -26937,6 +27412,38 @@
   ],
   "ingredients": [
     {
+      "id": 312,
+      "name": "鲜百合",
+      "slug": "xian-bai-he",
+      "category": "ingredient",
+      "description": "鲜百合是百合的鳞茎，味甘微苦，有润肺止咳、清心安神的功效，常用于炒菜和煲汤。",
+      "imageUrl": "/images/ingredients/xian-bai-he.jpg",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
+      "id": 311,
+      "name": "西芹",
+      "slug": "xi-qin",
+      "category": "ingredient",
+      "description": "西芹是芹菜的一个品种，茎秆粗壮、纤维较少、口感脆嫩，适合炒食和凉拌。",
+      "imageUrl": "/images/ingredients/xi-qin.jpg",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
       "id": 310,
       "name": "番茄",
       "slug": "fan-qie",
@@ -31514,6 +32021,66 @@
     }
   ],
   "knowledge": [
+    {
+      "id": 262,
+      "title": "鸡蛋的烹饪科学与技巧大全",
+      "slug": "jidan-pengren-kexue-yu-jiqiao",
+      "category": "technique",
+      "content": "<h2>鸡蛋的烹饪科学与技巧</h2><p>鸡蛋是厨房中最万能的食材，煮、炒、煎、蒸、炸无一不可。但看似简单的鸡蛋，背后藏着不少烹饪科学。理解了这些原理，能让你的鸡蛋料理更上一层楼。</p><h3>鸡蛋的蛋白质变化</h3><p>鸡蛋中的蛋白质在不同温度下会发生不同的变化：</p><ul><li><strong>62°C：</strong>蛋清开始凝固（卵白蛋白变性）</li><li><strong>65°C：</strong>蛋黄开始凝固</li><li><strong>70°C以上：</strong>完全凝固</li></ul><p>这就是为什么溏心蛋能做到蛋清凝固、蛋黄流动——精准控制温度在62-65°C之间。</p><h3>煮蛋的时间控制</h3><p><strong>冷水下锅计时：</strong></p><ul><li>6分钟：流心溏心蛋（蛋清凝固，蛋黄完全流动）</li><li>8分钟：半熟蛋（蛋黄外围凝固，中心软糯）</li><li>10分钟：全熟蛋（蛋黄完全凝固但仍湿润）</li><li>12分钟以上：过熟（蛋黄变干发绿，不建议）</li></ul><p>煮好后立即放入冰水中，可以防止余热继续加热蛋黄，也容易剥壳。</p><h3>炒蛋的嫩滑秘诀</h3><p><strong>1. 加液体：</strong>打蛋时加入少量液体（牛奶、水或料酒），每2个蛋加1汤匙。液体在加热时变成蒸汽，让炒蛋更加蓬松。</p><p><strong>2. 低温慢炒：</strong>中小火加热，蛋液入锅后不要急着翻动，等底部刚刚凝固就用铲子从边缘向中心推，让未凝固的蛋液流到底部。这样炒出的蛋嫩滑蓬松。</p><p><strong>3. 提前关火：</strong>在鸡蛋还略微湿润时就关火，利用锅的余温让它刚好凝固。等盛到盘子里再完全熟透就过了。</p><h3>蒸蛋的平整秘诀</h3><p>蒸蛋羹要做到表面如镜面般光滑，关键是：蛋液和温水比例1:1.5，搅打后过筛去气泡，盖上保鲜膜扎几个小孔，水开后转中小火蒸12分钟。</p><h3>鸡蛋的保存</h3><p>鸡蛋在室温下1天相当于冰箱里1周的损耗。买回来的鸡蛋应冷藏保存（大头朝上），保质期一般为冷藏后30-45天。新鲜鸡蛋的蛋清浓稠、蛋黄挺立，不新鲜的鸡蛋蛋清稀薄、蛋黄扁平。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-10",
+      "summary": "鸡蛋烹饪科学详解：蛋白质在不同温度下的变化规律、煮蛋时间控制、炒蛋嫩滑秘诀（加液体+低温慢炒+提前关火）、蒸蛋表面光滑技巧及鸡蛋保存方法。",
+      "keywords": "鸡蛋,烹饪科学,溏心蛋,炒蛋技巧,蒸蛋,蛋白质变性,保存方法"
+    },
+    {
+      "id": 261,
+      "title": "面粉的种类与烹饪应用全指南",
+      "slug": "mianfen-zhonglei-yu-pengren-yingyong",
+      "category": "ingredient",
+      "content": "<h2>面粉的种类与烹饪应用</h2><p>面粉是中式烹饪中最重要的基础食材之一，从面条到饺子、从馒头到糕点，不同的面粉适合不同的用途。选对面粉，是做好面食的第一步。</p><h3>按蛋白质含量分类</h3><p><strong>高筋面粉（蛋白质≥12%）</strong></p><p>筋度高、弹性强，适合做需要韧性和嚼劲的面食：拉面、手擀面、饺子皮等。也常用于西式面包制作。</p><p><strong>中筋面粉（蛋白质9%-12%）</strong></p><p>家庭最常用的面粉，也叫普通面粉或全能面粉。适合做馒头、包子、花卷、烙饼、面条等大部分中式面食。市售的普通面粉基本都是中筋。</p><p><strong>低筋面粉（蛋白质≤8.5%）</strong></p><p>筋度低、口感松软，主要用于烘焙：蛋糕、饼干、酥皮等。做中式面点时，如果想让馒头更加松软，也可以用低筋粉。</p><h3>特殊面粉</h3><p><strong>全麦面粉：</strong>保留了麸皮和胚芽，膳食纤维丰富，但口感较粗糙。可以和普通面粉按1:3比例混合做馒头。</p><p><strong>澄面（小麦淀粉）：</strong>几乎不含蛋白质，做出的面点晶莹剔透，是虾饺皮、肠粉的主要原料。</p><p><strong>自发粉：</strong>已经加入了膨松剂的面粉，做馒头、发糕时不需要另外加酵母，方便快捷。</p><h3>选购和保存</h3><p>选购面粉时注意查看蛋白质含量标识，根据用途选择对应筋度的面粉。保存时应放在干燥阴凉处，开封后密封保存。夏季建议冷藏保存防止生虫。</p><h3>常见问题</h3><p><strong>Q：没有中筋面粉怎么办？</strong> 用高筋面粉和低筋面粉按1:1混合可以替代中筋面粉。</p><p><strong>Q：面粉过期了还能用吗？</strong> 过期的面粉可能产生黄曲霉素，不建议食用。但可以用来做清洁（擦拭不锈钢锅具效果很好）。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-10",
+      "summary": "面粉按蛋白质含量分为高筋、中筋、低筋三类，分别适用于拉面/饺子、馒头/包子、蛋糕/饼干等不同场景，本文详解各类面粉特性与选购保存方法。",
+      "keywords": "面粉,高筋面粉,中筋面粉,低筋面粉,面食,全麦面粉,烹饪应用"
+    },
+    {
+      "id": 260,
+      "title": "万能馅料调味秘方",
+      "slug": "wanneng-xianliao-tiaowei-mifang",
+      "category": "secret",
+      "content": "<h2>万能饺子/包子馅料调味秘方</h2><p>不管是包饺子、包包子还是做馅饼，掌握了这个万能调味秘方，任何馅料都能鲜香多汁、口感弹嫩。</p><h3>基础调味配方（500克肉馅）</h3><p><strong>必备调料：</strong></p><ul><li>生抽 2汤匙</li><li>老抽 半汤匙（上色用）</li><li>料酒 1汤匙</li><li>香油 1汤匙</li><li>白胡椒粉 半茶匙</li><li>盐 1茶匙（根据馅料蔬菜量调整）</li><li>姜末 1汤匙</li><li>葱花 2汤匙</li></ul><h3>打水技巧（最关键！）</h3><p>500克肉馅分3次加入约150毫升清水（或高汤、花椒水），每次加入后顺一个方向搅拌至水分完全被吸收。打够水的肉馅才会嫩滑多汁。</p><p><strong>花椒水做法：</strong>10粒花椒加200毫升开水泡15分钟，晾凉后过滤使用。花椒水可以去腥增香，比清水效果更好。</p><h3>调味顺序</h3><p>①先加盐搅拌（让蛋白质充分吸水）→②分次打水→③加生抽、老抽、料酒→④加白胡椒粉→⑤加姜末→⑥加香油（锁住水分）→⑦最后加葱花和蔬菜（蔬菜在包之前再拌入，防止出汤）</p><h3>适用场景</h3><p>猪肉白菜馅、猪肉韭菜馅、牛肉洋葱馅、三鲜馅、素馅（减少打水量）等各种馅料都适用。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-10",
+      "summary": "万能饺子包子馅料调味秘方：500克肉馅的基础调料配比+分次打水技巧+花椒水去腥增香法，让馅料鲜香多汁口感弹嫩。",
+      "keywords": "馅料调味,饺子馅,包子馅,打水技巧,花椒水,万能配方,多汁嫩滑"
+    },
+    {
+      "id": 259,
+      "title": "酥脆炸物挂糊秘方",
+      "slug": "sucui-zhawu-guahu-mifang",
+      "category": "secret",
+      "content": "<h2>酥脆炸物万能挂糊秘方</h2><p>无论是炸鸡、炸鱼、炸虾还是炸蔬菜，挂糊是决定成品酥脆度的关键环节。这个万能脆皮糊配方，可以让所有炸物都达到外酥里嫩的效果。</p><h3>万能脆皮糊配方</h3><p><strong>材料：</strong></p><ul><li>中筋面粉 50克</li><li>玉米淀粉 30克（面粉和淀粉比例约5:3）</li><li>泡打粉 3克（约半茶匙）</li><li>盐 2克</li><li>鸡蛋 1个</li><li>冰水 约100毫升</li><li>食用油 1茶匙（加入面糊中）</li></ul><h3>调制方法</h3><p>面粉、淀粉、泡打粉、盐混合均匀，打入鸡蛋，慢慢加入冰水搅拌至无颗粒的糊状（类似酸奶的浓稠度）。最后加入1茶匙食用油拌匀。面糊调好后静置10分钟让泡打粉发挥作用。</p><h3>关键技巧</h3><p><strong>用冰水：</strong>冰水可以降低面糊温度，炸的时候温差更大，外壳更加酥脆。这是专业炸物店的秘诀。</p><p><strong>加油入糊：</strong>面糊中加入少量油，炸的时候油会从面糊中渗出形成小气孔，增加酥脆感。</p><p><strong>不要过度搅拌：</strong>搅拌到没有干粉即可，有少量面疙瘩没关系。过度搅拌会起筋，炸出来反而不脆。</p><h3>适用食材</h3><p>鸡块、鱼块、虾、鱿鱼圈、蘑菇、茄子、红薯条等几乎所有需要油炸的食材都可以用这个配方。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-10",
+      "summary": "万能酥脆炸物挂糊配方：面粉淀粉5:3比例+泡打粉+冰水+少量油，炸出的食物外酥里嫩，适用于炸鸡、炸鱼、炸蔬菜等各类炸物。",
+      "keywords": "挂糊,脆皮糊,炸物配方,冰水秘诀,油炸技巧,酥脆,万能糊"
+    },
+    {
+      "id": 258,
+      "title": "糖醋汁黄金比例万能配方",
+      "slug": "tang-cu-zhi-wanneng-peifang",
+      "category": "secret",
+      "content": "<h2>万能糖醋汁配方</h2><p>糖醋汁是中餐中极为经典的调味汁，酸甜可口、老少皆宜。掌握这个黄金比例，可以让糖醋排骨、糖醋里脊、糖醋藕片等菜品都能轻松驾驭。</p><h3>黄金比例</h3><p><strong>核心比例：1:2:3:4:5</strong></p><ul><li>1汤匙料酒（去腥增香）</li><li>2汤匙生抽（提鲜增咸）</li><li>3汤匙白糖（甜味主体）</li><li>4汤匙陈醋（酸味主体）</li><li>5汤匙清水（稀释调和）</li></ul><h3>制作步骤</h3><p>将所有材料倒入小碗中搅拌均匀即可。也可以在锅中小火加热至糖完全融化，制成更浓郁的糖醋汁。</p><h3>使用技巧</h3><p>如果是做糖醋排骨等需要挂汁的菜品，建议在糖醋汁中加入1茶匙淀粉水，煮至微微浓稠后浇在食材上，色泽更亮、挂汁更均匀。</p><h3>注意事项</h3><p>醋的选择很关键：陈醋色深味浓适合红烧类糖醋菜，米醋色浅味清适合浅色糖醋菜。白糖可根据口味在±0.5汤匙范围内调整。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-10",
+      "summary": "经典万能糖醋汁黄金比例配方：1酒2酱3糖4醋5水，适用于糖醋排骨、糖醋里脊等多种糖醋菜品，掌握比例即可轻松做出酸甜适口的糖醋汁。",
+      "keywords": "糖醋汁,黄金比例,万能配方,糖醋排骨,糖醋里脊,调味汁,陈醋"
+    },
     {
       "id": 257,
       "title": "家常菜的营养搭配——三餐膳食平衡指南",
