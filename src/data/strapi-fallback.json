@@ -1,6 +1,512 @@
 {
   "recipes": [
     {
+      "id": 318,
+      "title": "红枣银耳莲子羹",
+      "slug": "hongzao-yiner-lianzi-geng",
+      "description": "银耳炖至软糯胶质满满，红枣增甜、莲子添糯，一碗滋润养颜的经典中式甜汤。四季皆宜，冷藏后更是消暑圣品。",
+      "difficulty": "中等",
+      "cookTime": 90,
+      "servings": "4人份",
+      "calories": 165,
+      "cover": {
+        "url": "/images/recipes/hongzao-yiner-lianzi-geng.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/hongzao-yiner-lianzi-geng.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "银耳",
+          "amount": "1朵（约30克）",
+          "isMain": true
+        },
+        {
+          "name": "红枣",
+          "amount": "8颗",
+          "isMain": true
+        },
+        {
+          "name": "莲子",
+          "amount": "50克",
+          "isMain": true
+        },
+        {
+          "name": "冰糖",
+          "amount": "40克",
+          "isMain": true
+        },
+        {
+          "name": "枸杞",
+          "amount": "10克",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "银耳1朵提前用冷水浸泡2小时至完全膨发变软（约原来3-4倍大）。泡发后剪去底部黄色硬蒂，用手撕成黄豆大小的小朵——撕得越碎越容易出胶。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "莲子50克温水浸泡30分钟，逐颗检查并去除绿色的莲芯（莲芯味苦影响口感）。8颗红枣洗净，用刀划开去核。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "砂锅中放入撕碎的银耳，加入约1500ml清水（银耳与水的比例约1:5）。大火烧开后转小火，盖上锅盖慢炖40分钟，期间开盖搅拌2-3次防止粘底。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "40分钟后银耳应已变软、汤水开始微微浓稠。此时加入莲子和去核红枣，继续小火炖煮30分钟。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "加入冰糖40克，搅拌至完全融化。再放入枸杞10克，继续小火煮5分钟。此时汤汁应该浓稠拉丝、银耳软糯透亮。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "关火后不要立即开盖，静置10分钟让胶质充分释放融合。温热食用暖胃润肤，冷藏后食用清凉消暑，各有风味。冷藏后胶质会更加浓稠。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约165千卡/碗</p><p><strong>蛋白质：</strong>约4克</p><p><strong>脂肪：</strong>约1克（几乎无脂）</p><p><strong>碳水化合物：</strong>约38克</p><p><strong>胶原蛋白：</strong>银耳富含天然植物胶质（银耳多糖），有滋润养颜功效</p><p><strong>铁：</strong>红枣含铁丰富，有助补血</p>",
+      "common_mistakes": "<p><strong>1. 不出胶：</strong>银耳撕得太大、水量太多、或炖的时间不够。银耳一定要撕碎，水不要加太多。</p><p><strong>2. 冰糖放太早：</strong>糖会抑制银耳出胶。冰糖要最后20分钟再加。</p><p><strong>3. 莲子没去芯：</strong>莲芯极苦，一颗就能毁了一锅汤。必须逐颗去芯。</p>",
+      "success_tips": "<p><strong>出胶秘诀：</strong>银耳撕得越碎越好（黄豆大小），冷水泡比热水泡出胶更充分。</p><p><strong>水量一次加够：</strong>中途加水会破坏胶质的浓稠度。宁可一开始水少一点也不要中途加。</p><p><strong>冷藏升级：</strong>放冰箱冷藏2小时后口感如果冻般Q弹，夏天吃特别舒服。</p>",
+      "ingredient_substitutes": "<p><strong>莲子：</strong>可换成干百合，有润肺效果</p><p><strong>红枣：</strong>可加桂圆肉增加甜味和营养</p><p><strong>变体：</strong>加一小把糯米同煮，口感更加浓稠绵密</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>老少皆宜，特别适合女性美容养颜</p><p><strong>注意事项：</strong>含糖量较高，糖尿病患者减糖或不加糖</p><p><strong>适用场景：</strong>下午茶甜品、滋补养生、夏日消暑</p><p><strong>搭配建议：</strong>可做餐后甜品，也可当下午茶</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>砂锅（保温出胶效果最佳）、刀具、砧板</p><p><strong>可选工具：</strong>电炖锅（更方便控制火候）</p>"
+    },
+    {
+      "id": 317,
+      "title": "孜然鱿鱼",
+      "slug": "ziran-youyu",
+      "description": "鲜嫩鱿鱼裹上孜然辣椒的浓烈香气，大火快炒镬气十足，街头烧烤风味与家常爆炒的完美结合，下酒下饭都一绝。",
+      "difficulty": "中等",
+      "cookTime": 15,
+      "servings": "3人份",
+      "calories": 210,
+      "cover": {
+        "url": "/images/recipes/ziran-youyu.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/ziran-youyu.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "鱿鱼",
+          "amount": "400克",
+          "isMain": true
+        },
+        {
+          "name": "青红椒",
+          "amount": "各1个",
+          "isMain": true
+        },
+        {
+          "name": "洋葱",
+          "amount": "半个",
+          "isMain": true
+        },
+        {
+          "name": "孜然粉",
+          "amount": "2茶匙",
+          "isMain": true
+        },
+        {
+          "name": "辣椒粉",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "料酒",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "3瓣",
+          "isMain": true
+        },
+        {
+          "name": "生姜",
+          "amount": "5克",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "3汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "白芝麻",
+          "amount": "1汤匙",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "400克鱿鱼撕去表面紫褐色薄膜，清洗干净。在鱿鱼内侧用刀尖划斜十字花刀（深度约2/3，间距3mm），再切成3厘米宽的方块。花刀能让鱿鱼受热后卷曲成漂亮的筒状，也更入味。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "青红椒各1个去籽切菱形块，半个洋葱切丝，3瓣大蒜切片，5克生姜切丝。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中烧开水，加入1汤匙料酒，放入鱿鱼块焯水20秒——看到鱿鱼变白卷曲立即捞出沥干。焯水时间不能超过30秒，否则鱿鱼会变老变硬。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "大火烧热炒锅至冒烟，倒入3汤匙食用油。油温七成热时放入姜丝蒜片爆香约15秒。立即倒入鱿鱼，大火快速翻炒30秒至表面微焦。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "加入青红椒块和洋葱丝，继续大火翻炒1分钟至蔬菜断生但仍保持脆感。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "转中火，撒入孜然粉2茶匙、辣椒粉1茶匙、生抽1汤匙、适量盐，大火翻炒均匀约30秒至调料裹满每一块鱿鱼。出锅前撒白芝麻翻两下即可装盘。全程从下锅到出锅不超过2分钟。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约210千卡/份</p><p><strong>蛋白质：</strong>约22克（鱿鱼高蛋白低脂肪）</p><p><strong>脂肪：</strong>约9克</p><p><strong>碳水化合物：</strong>约8克</p><p><strong>牛磺酸：</strong>鱿鱼富含牛磺酸，有助于抗疲劳</p><p><strong>钙磷：</strong>含有丰富的钙和磷</p>",
+      "common_mistakes": "<p><strong>1. 鱿鱼太老：</strong>焯水超过30秒或炒制时间太长，鱿鱼蛋白质收缩变硬。全程大火快进快出。</p><p><strong>2. 没有镬气：</strong>锅不够热、火不够大，炒出来像煮的。一定要等锅冒烟再下料。</p><p><strong>3. 孜然放太早：</strong>孜然粉长时间加热会发苦。要最后放、快速翻炒出锅。</p>",
+      "success_tips": "<p><strong>花刀是灵魂：</strong>内侧切十字花刀不仅好看，更增加了表面积，让调料附着更充分，口感也更嫩。</p><p><strong>全程大火：</strong>从鱿鱼下锅到出锅不超过2分钟。快炒才是保持嫩度和镬气的关键。</p><p><strong>孜然最后放：</strong>关火前30秒撒入孜然粉，用余温激发香气，香气最浓郁。</p>",
+      "ingredient_substitutes": "<p><strong>鱿鱼：</strong>可换鲜虾、墨鱼仔，做法相似</p><p><strong>辣度调整：</strong>不吃辣可减少辣椒粉，用甜椒粉替代增色</p><p><strong>烧烤风味：</strong>可加少许五香粉增添烧烤摊风味</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜</p><p><strong>注意事项：</strong>鱿鱼胆固醇含量较高，高血脂者适量食用；海鲜过敏者忌食</p><p><strong>适用场景：</strong>下酒菜、宵夜、朋友聚会</p><p><strong>搭配建议：</strong>配啤酒或冰镇酸梅汤绝佳</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅（必须够大够热）、菜刀、砧板</p>"
+    },
+    {
+      "id": 316,
+      "title": "凉拌腐竹",
+      "slug": "liangban-fuzhu",
+      "description": "腐竹泡发后口感筋道爽滑，配以麻辣鲜香的调味汁和爽脆黄瓜丝，是一道开胃解腻的经典凉菜，夏天吃尤其过瘾。",
+      "difficulty": "简单",
+      "cookTime": 15,
+      "servings": "3人份",
+      "calories": 195,
+      "cover": {
+        "url": "/images/recipes/liangban-fuzhu.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/liangban-fuzhu.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "腐竹",
+          "amount": "150克",
+          "isMain": true
+        },
+        {
+          "name": "黄瓜",
+          "amount": "1根",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "4瓣",
+          "isMain": true
+        },
+        {
+          "name": "小米辣",
+          "amount": "2个",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "醋",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "芝麻油",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "辣椒油",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "白糖",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "香菜",
+          "amount": "2根",
+          "isMain": true
+        },
+        {
+          "name": "白芝麻",
+          "amount": "1汤匙",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "150克腐竹提前用温水（约40°C）浸泡2-3小时至完全软化，中间无硬芯。泡好后切成4厘米长的小段。泡腐竹的水中可加少许盐，帮助均匀回软。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中烧开水，放入腐竹段焯水1分钟（去除豆腥味），立即捞出过冷水冲凉，沥干水分放入大拌碗中。过冷水能让腐竹保持筋道弹牙的口感。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "1根黄瓜洗净切成细丝，铺在盘底或和腐竹放在一起。4瓣大蒜切末，2个小米辣切小圈。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "调酱汁：蒜末+小米辣圈+生抽2汤匙+醋1汤匙+芝麻油1汤匙+辣椒油1汤匙+白糖1茶匙，充分搅拌均匀至糖融化。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "将调好的酱汁浇在腐竹和黄瓜丝上，用筷子从底部翻拌均匀。撒上香菜段和白芝麻，轻轻拌匀。静置5分钟让腐竹充分吸收调味汁后即可装盘食用。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约195千卡/份</p><p><strong>蛋白质：</strong>约12克（腐竹是优质植物蛋白来源）</p><p><strong>脂肪：</strong>约11克</p><p><strong>碳水化合物：</strong>约12克</p><p><strong>钙：</strong>腐竹含丰富的钙质</p>",
+      "common_mistakes": "<p><strong>1. 腐竹泡发不均：</strong>用开水泡会外烂内硬，温水加盐泡最均匀。</p><p><strong>2. 没焯水：</strong>腐竹有豆腥味，快速焯水能去腥同时保持口感。</p><p><strong>3. 调味太咸：</strong>生抽本身有盐分，不需要额外加盐。</p>",
+      "success_tips": "<p><strong>泡发要诀：</strong>温水+少许盐，泡2-3小时。判断标准：掰开中间无白色硬芯。</p><p><strong>口感关键：</strong>焯水后立刻过冰水/冷水，腐竹会特别筋道弹滑。</p><p><strong>入味技巧：</strong>拌好后静置5-10分钟再吃，腐竹吸满酱汁味道更好。</p>",
+      "ingredient_substitutes": "<p><strong>腐竹：</strong>可换成油豆皮、素鸡，口感各异</p><p><strong>不吃辣：</strong>去掉小米辣和辣椒油，改用花椒油做麻香口味</p><p><strong>丰富配菜：</strong>可加木耳、花生米、胡萝卜丝增加口感层次</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，素食者友好</p><p><strong>注意事项：</strong>腐竹热量不低（干货约400卡/100g），减脂者控制用量</p><p><strong>适用场景：</strong>开胃凉菜、下酒菜、夏日冷盘</p><p><strong>搭配建议：</strong>配粥、配面都是好搭档</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅（焯水用）、菜刀、砧板、大拌碗</p>"
+    },
+    {
+      "id": 315,
+      "title": "蚝油焖南瓜",
+      "slug": "haoyou-men-nangua",
+      "description": "南瓜块经蚝油焖制后软糯甘甜，咸鲜与甜蜜交融，简单快手却让人停不下筷子的家常素菜。秋冬季节吃南瓜既暖胃又滋补。",
+      "difficulty": "简单",
+      "cookTime": 20,
+      "servings": "3人份",
+      "calories": 120,
+      "cover": {
+        "url": "/images/recipes/haoyou-men-nangua.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/haoyou-men-nangua.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "南瓜",
+          "amount": "400克",
+          "isMain": true
+        },
+        {
+          "name": "蚝油",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "3瓣",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "少许",
+          "isMain": true
+        },
+        {
+          "name": "小葱",
+          "amount": "2根",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "400克南瓜去皮去瓤，切成3厘米见方的块状（约麻将大小，不要太大否则不易熟）。3瓣大蒜切末，2根小葱切葱花备用。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "炒锅中火倒入2汤匙食用油，油温五成热时放入蒜末，小火煸炒约20秒至蒜末微黄出香味，注意不要炒糊发苦。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "放入南瓜块翻炒均匀，让每一块南瓜都裹上蒜香油脂。翻炒约1-2分钟至南瓜表面微微透亮。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "加入蚝油2汤匙、生抽1汤匙和约200ml清水（约到南瓜高度的2/3处），大火烧开后转中小火。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "盖上锅盖焖煮10-12分钟，期间可开盖翻动一次防止粘锅。焖至南瓜用筷子能轻松戳透、口感软糯。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "开盖转大火收汁，不断翻动使浓稠的蚝油汁均匀裹在每块南瓜上。汤汁收到挂壁即可关火，撒葱花装盘。尝一下咸淡，蚝油本身有盐分，一般不需额外加盐。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约120千卡/份</p><p><strong>蛋白质：</strong>约3克</p><p><strong>脂肪：</strong>约5克</p><p><strong>碳水化合物：</strong>约18克</p><p><strong>胡萝卜素：</strong>南瓜富含β-胡萝卜素，在体内转化为维生素A</p><p><strong>膳食纤维：</strong>约3克，有助于消化</p>",
+      "common_mistakes": "<p><strong>1. 南瓜切太大：</strong>块太大外面烂了里面还硬，切成均匀的3厘米小块最合适。</p><p><strong>2. 水加太多：</strong>变成煮南瓜，蚝油味道被稀释。水到南瓜2/3高度即可。</p><p><strong>3. 焖太久：</strong>南瓜过度炖煮会碎烂不成形。筷子能戳透就立刻收汁。</p>",
+      "success_tips": "<p><strong>南瓜选择：</strong>贝贝南瓜或板栗南瓜口感最粉糯甜度最高；普通南瓜也行但水分多一些。</p><p><strong>蚝油的甜味：</strong>蚝油本身带有甜鲜味，不需要额外加糖，与南瓜的天然甜完美搭配。</p><p><strong>收汁要点：</strong>大火收汁时要不停翻动，蚝油含糖容易粘锅焦糊。</p>",
+      "ingredient_substitutes": "<p><strong>南瓜：</strong>可换红薯、芋头、山药，做法相同</p><p><strong>蚝油：</strong>素食者可用素蚝油（蘑菇精制成）</p><p><strong>升级做法：</strong>加入少量五花肉片一起焖，荤素搭配更香</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>老少皆宜，特别适合素食者</p><p><strong>注意事项：</strong>南瓜含糖量较高，糖尿病患者适量食用</p><p><strong>适用场景：</strong>快手晚餐、素食餐、秋冬暖身菜</p><p><strong>搭配建议：</strong>配一碗白粥或米饭都很搭</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅、菜刀、砧板</p>"
+    },
+    {
+      "id": 314,
+      "title": "青椒酿肉",
+      "slug": "qingjiao-niangrou",
+      "description": "翠绿青椒包裹鲜嫩肉馅，煎至微焦后红烧入味，荤素搭配、下饭又好看的经典家常菜。青椒的清甜与肉馅的鲜香完美融合，一口咬下汁水四溢。",
+      "difficulty": "中等",
+      "cookTime": 35,
+      "servings": "3人份",
+      "calories": 285,
+      "cover": {
+        "url": "/images/recipes/qingjiao-niangrou.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/qingjiao-niangrou.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "青椒",
+          "amount": "4个",
+          "isMain": true
+        },
+        {
+          "name": "猪肉馅",
+          "amount": "200克",
+          "isMain": true
+        },
+        {
+          "name": "生姜",
+          "amount": "10克",
+          "isMain": true
+        },
+        {
+          "name": "大葱",
+          "amount": "1根",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "老抽",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "蚝油",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "淀粉",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "鸡蛋",
+          "amount": "1个",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "2汤匙",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "4个青椒洗净，从顶部1/3处横切一刀，小心取出椒蒂和籽，形成椒盅备用（不要切透底部）。200克猪肉馅中加入切碎的姜末10克、大葱末半根。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "肉馅中加入生抽1汤匙、淀粉1汤匙、鸡蛋1个、少许盐，用筷子顺一个方向搅拌约3分钟至上劲，肉馅变得黏稠有弹性、能抱团不散。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "用小勺将调好的肉馅小心填入青椒中，边填边用勺背压实，确保填满内部空间但不撑裂青椒。填好后椒口略高出肉馅形成弧面。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "平底锅倒入2汤匙食用油，中火烧热，将填好肉馅的青椒放入锅中（椒口朝上），小火煎约2分钟至底面微焦金黄。轻轻翻面，各面煎约1-2分钟至青椒表面起虎皮纹。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "调酱汁：生抽1汤匙+老抽1茶匙+蚝油1汤匙+半碗清水（约150ml）搅拌均匀。将酱汁倒入锅中，液面约到青椒高度的1/2处。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "盖上锅盖，中小火焖煮8-10分钟至肉馅完全熟透（用筷子戳入无血水渗出）。开盖转大火收汁2-3分钟，期间用勺子将汤汁浇在椒口上，待汤汁浓稠发亮即可出锅装盘。"
+        }
+      ],
+      "tags": [],
+      "methods": [],
+      "regions": [],
+      "cuisine": null,
+      "nutrition": "<p><strong>热量：</strong>约285千卡/份</p><p><strong>蛋白质：</strong>约18克</p><p><strong>脂肪：</strong>约16克</p><p><strong>碳水化合物：</strong>约15克</p><p><strong>维生素C：</strong>青椒富含维生素C，一份可满足日需量60%</p>",
+      "common_mistakes": "<p><strong>1. 青椒太辣：</strong>选菜椒（圆椒）可大幅降低辣度，或去除内部白色筋络（辣味来源）。</p><p><strong>2. 肉馅散开：</strong>肉馅没搅上劲、或填得太满，煎的时候容易从椒里脱落。一定要搅打至黏稠。</p><p><strong>3. 外焦内生：</strong>火太大外面糊了里面还没熟。煎制时保持中小火，焖煮环节不能省。</p>",
+      "success_tips": "<p><strong>肉馅上劲是关键：</strong>顺一个方向搅打3分钟以上，肉馅有弹性能抱团，口感才弹嫩不松散。</p><p><strong>煎制火候：</strong>先大火定型，再转小火慢煎。全程翻面要轻柔，用铲子辅助。</p><p><strong>收汁增色：</strong>最后大火收汁时不断浇汁，成品颜色红亮、味道浓郁。</p>",
+      "ingredient_substitutes": "<p><strong>青椒：</strong>怕辣可换菜椒（圆椒/柿子椒），个头更大更好填馅</p><p><strong>猪肉馅：</strong>可用鸡肉馅或牛肉馅替代，风味各异</p><p><strong>增添口感：</strong>肉馅中可加少量玉米粒或香菇丁增加层次</p>",
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜</p><p><strong>注意事项：</strong>胃肠敏感者选不辣的菜椒</p><p><strong>适用场景：</strong>家常午餐、晚餐、便当菜</p><p><strong>搭配建议：</strong>配米饭绝佳，可搭配紫菜蛋花汤</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>平底锅、菜刀、砧板、搅拌碗</p><p><strong>可选工具：</strong>炒锅（焖煮环节用）</p>"
+    },
+    {
       "id": 313,
       "title": "韭菜盒子",
       "slug": "jiu-cai-he-zi",
@@ -3470,18 +3976,6 @@
         {
           "stepNumber": 4,
           "description": "炒锅烧热，倒入少许食用油，放入沥干水分的玉米粒、胡萝卜丁、黄瓜丁，快速翻炒均匀。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "加入白砂糖和少许盐，翻炒均匀。盐只要一点点，能提鲜中和甜味，不要吃出咸味。糖的量根据个人口味调整。"
-        },
-        {
-          "stepNumber": 6,
-          "description": "取少许淀粉，加适量清水调匀成水淀粉，沿锅边淋入锅中，快速翻炒均匀，让每粒玉米都裹上薄薄的一层芡汁。"
-        },
-        {
-          "stepNumber": 7,
-          "description": "出锅前撒上炒好的松子，翻拌均匀即可装盘。松子最后放，保持酥脆的口感。如果想要更漂亮，可以在表面再撒一些整颗的松子装饰。"
         }
       ],
       "tags": [],
@@ -27412,6 +27906,54 @@
   ],
   "ingredients": [
     {
+      "id": 315,
+      "name": "莲子",
+      "slug": "lian-zi",
+      "category": "干货",
+      "description": "莲子是睡莲科植物莲的干燥成熟种子，去壳去芯后可食用。味甘涩性平，含丰富蛋白质、淀粉和矿物质，具有养心安神、健脾止泻的功效。",
+      "imageUrl": "/images/ingredients/lian-zi.jpg",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
+      "id": 314,
+      "name": "银耳",
+      "slug": "yin-er",
+      "category": "干货",
+      "description": "银耳又称白木耳，是银耳科真菌的子实体。形似菊花，色白半透明，富含天然植物胶质和多种氨基酸。有'菌中之冠'美称，是传统滋补佳品。",
+      "imageUrl": "/images/ingredients/yin-er.jpg",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
+      "id": 313,
+      "name": "红枣",
+      "slug": "hong-zao",
+      "category": "干货",
+      "description": "红枣是鼠李科植物枣的成熟果实，干制品。味甘性温，富含维生素C和铁元素，是中国传统的药食同源食材，常用于煲汤、煮粥、泡茶。",
+      "imageUrl": "/images/ingredients/hong-zao.jpg",
+      "nutrition": "",
+      "tips": "",
+      "aliases": "",
+      "season": "",
+      "origin": "",
+      "storageMethod": "",
+      "pairingSuggestions": "",
+      "avoidWith": ""
+    },
+    {
       "id": 312,
       "name": "鲜百合",
       "slug": "xian-bai-he",
@@ -32021,6 +32563,66 @@
     }
   ],
   "knowledge": [
+    {
+      "id": 267,
+      "title": "蒸锅的选择与使用完全指南",
+      "slug": "zhengguo-de-xuanze-yu-shiyong-wanquanzhinan",
+      "category": "technique",
+      "content": "<p>蒸是中国烹饪最古老也最健康的技法之一。一口好的蒸锅能让你蒸出餐厅级别的包子、鱼和糕点。这篇指南帮你选对蒸锅、用好蒸锅。</p><h2>蒸锅的主要类型</h2><h3>不锈钢蒸锅</h3><p><strong>优点：</strong>耐用、好清洗、不串味、可用洗碗机。导热快，上汽迅速。</p><p><strong>缺点：</strong>锅盖容易滴冷凝水；蒸出来的面点表面可能被水珠砸出坑。</p><p><strong>选购要点：</strong>选304不锈钢材质，锅底越厚越好（导热均匀）。容量建议选28cm以上，蒸大鱼或大盘子才够放。层数选2-3层可拆叠的。</p><h3>竹蒸笼</h3><p><strong>优点：</strong>传统蒸具，透气性好，蒸汽循环均匀。蒸馒头包子不会有水滴落在面皮上，表面光滑。带有天然竹香。</p><p><strong>缺点：</strong>需要养护（首次用要煮过、之后每次用完晾干），使用寿命不如金属锅。不能直接放在电磁炉上。</p><p><strong>选购要点：</strong>选老竹材质、编织紧密的。直径26-30cm家用最实用。首次使用前沸水煮30分钟去毛刺和竹味。</p><h3>电蒸锅</h3><p><strong>优点：</strong>操作方便，定时定温，不用看火。适合忙碌的现代家庭。</p><p><strong>缺点：</strong>功率有限，上汽慢，蒸的效果不如明火蒸锅。容量通常较小。</p><p><strong>选购要点：</strong>功率越大越好（1500W以上），选透明可视盖子方便观察。容量至少10L以上。</p><h2>蒸的核心技巧</h2><h3>水要加够</h3><p>蒸锅底部的水要一次性加足，至少到蒸屉下方3-4cm。蒸制过程中不要开盖加水，温度骤降会影响成品。如果蒸的时间长（超过30分钟），可以提前在锅中放一个耐热小碗，水烧干时小碗会发出响声提醒你。</p><h3>冷水上锅vs热水上锅</h3><p><strong>冷水上锅：</strong>适合发酵面食（馒头、包子）。随着温度缓慢升高，面团还有最后一次发酵的机会（醒发），成品更蓬松。</p><p><strong>热水上锅：</strong>适合非发酵类（蒸鱼、蒸蛋、粉蒸肉）。已经调制好的食材需要高温快速定型，冷水慢慢升温反而影响口感。</p><h3>防滴水技巧</h3><p>蒸馒头包子最怕锅盖滴水把表面砸出死面坑。解决方法：用竹蒸笼天然防滴；不锈钢锅可以在锅盖内包一层干净的棉布吸收冷凝水；也可以用拱形锅盖（冷凝水会沿壁流下而非直接滴落）。</p><h2>常见蒸制时间参考</h2><p><strong>馒头（中等大小）：</strong>冷水上锅，大火至上汽后转中火蒸15-18分钟，关火焖3分钟再开盖。</p><p><strong>清蒸鱼（鲈鱼约500g）：</strong>水开上锅，大火蒸8-10分钟，关火焖2分钟。</p><p><strong>蒸蛋羹：</strong>水开上锅，中小火蒸10-12分钟。碗上覆盖保鲜膜（扎几个小孔）防止水滴入。</p><p><strong>蒸排骨：</strong>水开上锅，大火蒸15-20分钟。</p><p><strong>蒸螃蟹：</strong>冷水上锅，水开后蒸12-15分钟（根据大小调整）。</p><h2>保养与清洁</h2><p>不锈钢蒸锅每次用完后倒掉积水，开盖晾干即可。竹蒸笼用完后冲洗（不用洗洁精），倒扣通风晾干，避免发霉。每月用淡盐水浸泡一次可以防霉消毒。电蒸锅定期除水垢（白醋+水1:1擦拭加热盘）。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-11",
+      "summary": "从不锈钢蒸锅、竹蒸笼到电蒸锅的对比选购指南，详解蒸制核心技巧（水量、冷热上锅、防滴水），附常见食材蒸制时间参考和保养方法。",
+      "keywords": "蒸锅,竹蒸笼,不锈钢蒸锅,蒸制技巧,馒头,清蒸鱼,蒸蛋,烹饪工具"
+    },
+    {
+      "id": 266,
+      "title": "鸡蛋的世界：从选购到烹饪的完全指南",
+      "slug": "jidan-de-shijie-xuangou-daopeing-wanquanzhinan",
+      "category": "ingredient",
+      "content": "<p>鸡蛋是中国人餐桌上最平凡也最万能的食材。看似简单，但从选购到烹饪都藏着不少学问。这篇指南带你重新认识这颗小小的鸡蛋。</p><h2>鸡蛋的种类与区别</h2><h3>按大小分</h3><p>市售鸡蛋按重量分为大（≥60g）、中（50-60g）、小（＜50g）三档。食谱中'鸡蛋1个'一般指中等大小（约50g带壳）。</p><h3>按饲养方式分</h3><p><strong>笼养鸡蛋：</strong>最常见的普通鸡蛋，价格亲民，营养价值与其他鸡蛋差异不大。</p><p><strong>散养/走地鸡蛋：</strong>蛋黄颜色通常更深（但颜色也受饲料影响），价格较高。</p><p><strong>初产蛋：</strong>母鸡刚开始下蛋时产的小蛋，蛋黄比例大、风味稍浓。</p><h2>如何判断新鲜度</h2><p><strong>看：</strong>新鲜蛋壳表面有一层薄薄的粉状保护膜，不反光。放久了的蛋壳会发亮。</p><p><strong>摇：</strong>放在耳边轻轻摇晃，新鲜蛋没有晃动感，不新鲜的能感觉到内部液体晃动。</p><p><strong>沉水测试：</strong>放入冷水中，新鲜蛋平躺在水底；不太新鲜的大头朝上直立；已经变质的会浮起来。</p><h2>储存技巧</h2><p>鸡蛋买回家后应大头朝上放入冰箱冷藏（0-4°C），不建议放在冰箱门上（温度波动大）。正确储存可保鲜4-5周。不要清洗后再储存，保护膜被洗掉反而加速变质。</p><h2>烹饪中的科学</h2><h3>蛋白与蛋黄的不同特性</h3><p>蛋白主要成分是水和蛋白质，加热到62°C开始凝固。打发蛋白时，酸性环境（加几滴醋或柠檬汁）能让泡沫更稳定。</p><p>蛋黄含脂肪和卵磷脂，是天然乳化剂。这也是为什么蛋黄能做蛋黄酱、卡仕达酱。</p><h3>不同烹饪方式的温度控制</h3><p><strong>溏心蛋：</strong>冷水下锅，水开后煮6分钟，立即冰水浸泡。蛋黄刚好凝固但仍是流心状。</p><p><strong>全熟蛋：</strong>冷水下锅，水开后煮10分钟。蛋白蛋黄完全凝固。</p><p><strong>完美炒蛋：</strong>中小火，蛋液入锅后不要急着翻动，等底部刚凝固就用铲子往中间推，让未凝固的蛋液流到底部。反复至大部分凝固但仍湿润时关火，用余温完成最后的凝固。</p><p><strong>水煮蛋剥壳技巧：</strong>煮好后立即泡冰水，温差让蛋白与蛋壳膜分离，剥壳就非常容易了。</p><h2>常见误区</h2><p><strong>误区一：'红壳比白壳好'——</strong>蛋壳颜色只是品种不同，营养价值几乎一样。</p><p><strong>误区二：'生吃鸡蛋更有营养'——</strong>生蛋清含抗生物素蛋白，长期大量生吃会阻碍生物素吸收。而且生鸡蛋有沙门氏菌风险。</p><p><strong>误区三：'蛋黄胆固醇高不能吃'——</strong>膳食胆固醇对血液胆固醇影响有限，每天1个全蛋对大多数人是安全的。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-11",
+      "summary": "全面介绍鸡蛋的种类区别、新鲜度判断方法、储存技巧、不同烹饪方式的温度控制要点，以及常见认知误区。从选购到烹饪一站式掌握鸡蛋知识。",
+      "keywords": "鸡蛋,选购,储存,烹饪,溏心蛋,炒蛋,营养,蛋白质"
+    },
+    {
+      "id": 265,
+      "title": "白灼虾蘸料秘制配方",
+      "slug": "baizhuoxia-zhanliao-mizhi-peifang",
+      "category": "secret",
+      "content": "<p>白灼虾的精髓不在虾本身（好虾白灼就够鲜），而在那一碟让人停不下来的蘸料。这个配方鲜甜微辣，能把虾的鲜味放大三倍。</p><h3>材料清单</h3><ul><li>生姜 1小块（约15g），切极细的姜末</li><li>小葱 2根，只取葱白部分切碎</li><li>蒜蓉 1瓣</li><li>蒸鱼豉油 3汤匙</li><li>芝麻油 1汤匙</li><li>白胡椒粉 少许</li><li>白糖 半茶匙</li><li>小米辣 1个（可选，切圈）</li><li>热油 2汤匙（用来泼葱花）</li></ul><h3>制作步骤</h3><p><strong>第一步：</strong>碗中放入姜末、葱白碎、蒜蓉、小米辣圈（如用）。锅中烧2汤匙食用油至微微冒烟。</p><p><strong>第二步：</strong>将滚烫的热油泼在葱姜蒜上，会听到'刺啦'一声——这个步骤能瞬间激发出葱姜蒜的香气，是蘸料好吃的关键。</p><p><strong>第三步：</strong>趁热加入蒸鱼豉油3汤匙、芝麻油1汤匙、白糖半茶匙、白胡椒粉少许，搅拌均匀至糖融化。</p><p><strong>第四步：</strong>静置5分钟让各种味道充分融合，即可搭配白灼虾食用。</p><h3>白灼虾要点</h3><p>虾要新鲜活蹦的；水烧开后加姜片和料酒，放入虾煮至变红卷曲即捞出（通常2-3分钟）；捞出后过冰水能让虾肉更紧实弹牙。</p><h3>蘸料升级</h3><p>喜欢酸辣口味可以加1汤匙柠檬汁；喜欢蒜香浓郁可以加一倍蒜蓉；粤式经典可以只用葱姜油+生抽，简单到极致。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-11",
+      "summary": "白灼虾的灵魂蘸料配方，热油泼葱姜蒜激发香气，搭配蒸鱼豉油和芝麻油，鲜甜微辣能将虾的鲜味放大三倍。",
+      "keywords": "白灼虾,蘸料,蘸酱,姜葱,蒸鱼豉油,海鲜,秘方"
+    },
+    {
+      "id": 264,
+      "title": "冰镇酸梅汤自制秘方",
+      "slug": "bingzhen-suanmeitang-zhizuo-mifang",
+      "category": "secret",
+      "content": "<p>炎炎夏日，一杯冰镇酸梅汤胜过任何碳酸饮料。这个配方酸甜适中、回甘悠长，比外面买的健康百倍。</p><h3>材料清单</h3><ul><li>乌梅 30g（中药店有售）</li><li>山楂干 20g</li><li>陈皮 5g</li><li>甘草 3g</li><li>冰糖 60-80g（根据口味调整）</li><li>桂花 少许（干桂花或糖桂花）</li><li>清水 2000ml</li></ul><h3>制作步骤</h3><p><strong>第一步：</strong>乌梅、山楂干、陈皮、甘草用清水冲洗一遍去浮尘，然后放入碗中加清水浸泡30分钟，让干料回软。</p><p><strong>第二步：</strong>将浸泡好的材料连同泡的水一起倒入锅中（最好用不锈钢锅或砂锅，避免用铁锅），再加入2000ml清水。大火烧开后转小火煮40分钟。</p><p><strong>第三步：</strong>加入冰糖搅拌至融化，继续小火煮10分钟。关火后撒入干桂花，盖上盖子焖5分钟让桂花香气渗入。</p><p><strong>第四步：</strong>过滤掉渣滓，将酸梅汤倒入容器中。趁热喝也可以，但冷藏后口感最佳。冰箱冷藏至少2小时后再饮用。</p><h3>关键要点</h3><p>乌梅是灵魂，一定要用药食同源的乌梅而非蜜饯话梅；冰糖比白砂糖口感更柔和；桂花最后放才能保留清香；一次煮好可冷藏保存3天。</p><h3>进阶变化</h3><p>喜欢更酸可以加2颗新鲜柠檬切片泡入；喜欢气泡口感可以兑入苏打水；给小朋友喝可以减少乌梅和山楂的用量，口味更温和。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-11",
+      "summary": "夏日消暑经典饮品酸梅汤的家庭自制秘方，以乌梅、山楂、陈皮、甘草为底，冰镇后酸甜回甘，比市售饮料更健康。",
+      "keywords": "酸梅汤,乌梅,山楂,消暑,夏日饮品,自制,冰镇"
+    },
+    {
+      "id": 263,
+      "title": "蒜蓉烤茄子秘制酱汁配方",
+      "slug": "suanrong-kaoqiezi-zhiji-peifang",
+      "category": "secret",
+      "content": "<p>蒜蓉烤茄子是烧烤摊和夏日餐桌的人气王。这道秘制酱汁能让茄子外焦里嫩、蒜香四溢，比外面烧烤摊还好吃。</p><h3>材料清单</h3><ul><li>大蒜 1整头（约50g），剁成细蒜蓉</li><li>生抽 3汤匙</li><li>蚝油 2汤匙</li><li>食用油 4汤匙</li><li>小米辣 2个（切碎）</li><li>白糖 1茶匙</li><li>孜然粉 1茶匙</li><li>白芝麻 1汤匙</li><li>小葱花 适量</li></ul><h3>制作步骤</h3><p><strong>第一步：</strong>锅中倒入4汤匙食用油，小火加热至五成热，放入蒜蓉慢火煸炒约2-3分钟至蒜蓉变成金黄色，蒜香四溢。注意全程小火，蒜蓉很容易炒糊。</p><p><strong>第二步：</strong>加入生抽3汤匙、蚝油2汤匙、白糖1茶匙，继续小火翻炒30秒至酱汁微微冒泡融合。</p><p><strong>第三步：</strong>关火后加入小米辣碎、孜然粉、白芝麻，搅拌均匀。酱汁会随温度降低逐渐浓稠。</p><h3>使用方法</h3><p>茄子对半切开，在切面上用刀划菱形花刀（不要切透底部）。烤至茄子变软后，将酱汁均匀涂抹在切面上，继续烤3-5分钟至酱汁渗入茄肉。出锅前撒葱花。</p><h3>要点</h3><p>蒜蓉一定要炒至金黄才有香味；酱汁提前调好，烤的时候直接刷就行；茄子要烤到完全变软再刷酱，否则不易入味。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-11",
+      "summary": "烧烤级蒜蓉烤茄子专用酱汁配方，蒜蓉小火慢炒至金黄后与生抽蚝油融合，搭配小米辣和孜然，让茄子蒜香浓郁、外焦里嫩。",
+      "keywords": "蒜蓉,茄子,烤茄子,酱汁,烧烤,秘方,蒜蓉酱"
+    },
     {
       "id": 262,
       "title": "鸡蛋的烹饪科学与技巧大全",
