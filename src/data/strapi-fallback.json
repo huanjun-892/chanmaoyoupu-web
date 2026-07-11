@@ -436,7 +436,7 @@
       "id": 304,
       "title": "金沙南瓜",
       "slug": "jin-sha-nan-gua",
-      "description": "",
+      "description": "金沙南瓜是一道色香味俱全的经典家常菜，以南瓜为主料，咸蛋黄裹煎而成。南瓜软糯香甜，外层裹满金黄色的咸蛋黄碎，沙沙的口感咸香浓郁，甜咸交融，既可作为家常菜上桌，也是宴客时的一道亮眼小食。",
       "difficulty": "easy",
       "cookTime": 0,
       "servings": 2,
@@ -527,7 +527,7 @@
       "id": 303,
       "title": "泡菜豆腐汤",
       "slug": "pao-cai-dou-fu-tang",
-      "description": "",
+      "description": "泡菜豆腐汤是一道简单快手的韩式家常汤品，以韩国泡菜和嫩豆腐为主要食材，汤底酸辣鲜香，豆腐滑嫩入味，暖身又开胃。秋冬季节来一碗，驱寒暖胃，特别适合喜欢酸辣口味的人。",
       "difficulty": "easy",
       "cookTime": 0,
       "servings": 2,
@@ -628,7 +628,7 @@
       "id": 302,
       "title": "蒜香黑椒牛柳",
       "slug": "suan-xiang-hei-jiao-niu-liu",
-      "description": "",
+      "description": "蒜香黑椒牛柳是一道中西合璧的快手硬菜，鲜嫩牛柳搭配浓郁蒜香和黑胡椒，大火快炒锁住肉汁，牛肉嫩滑多汁、黑椒辛香扑鼻，蒜香浓郁提味，下饭下酒皆宜。",
       "difficulty": "easy",
       "cookTime": 0,
       "servings": 2,
@@ -734,7 +734,7 @@
       "id": 301,
       "title": "糖醋瓦块鱼",
       "slug": "tang-cu-wa-kuai-yu",
-      "description": "",
+      "description": "糖醋瓦块鱼是一道传统中式名菜，将草鱼或鲤鱼切成瓦块状，先炸至金黄酥脆，再浇上酸甜适口的糖醋汁。外酥里嫩、酸甜开胃，鱼肉鲜嫩多汁，是一道老少皆宜的经典家常菜。",
       "difficulty": "easy",
       "cookTime": 0,
       "servings": 2,
@@ -840,7 +840,7 @@
       "id": 300,
       "title": "酱爆鸡丁",
       "slug": "jiang-bao-ji-ding",
-      "description": "",
+      "description": "酱爆鸡丁是一道北方经典家常菜，鸡胸肉切丁后搭配甜面酱或黄豆酱大火快炒，酱香浓郁、鸡肉嫩滑，搭配黄瓜丁或花生米口感更丰富，是下饭佐酒的绝佳选择。",
       "difficulty": "easy",
       "cookTime": 0,
       "servings": 2,
@@ -3036,7 +3036,7 @@
       "success_tips": "<h3>成功关键要点</h3><ul><li><strong>选金针菇技巧：</strong>选择菌盖紧实、颜色洁白或微黄、菌柄粗细均匀、没有异味的新鲜金针菇。菌盖开伞的说明老了，不好吃。</li><li><strong>沥干水分：</strong>金针菇洗后要充分沥干水分，最好用手轻轻挤一下，去掉多余水分，这样蒸出来味道更浓郁。</li><li><strong>剁椒的选择：</strong>最好用自制或正宗的湖南剁椒，发酵的香味和鲜辣味是这道菜的灵魂。瓶装的剁椒要注意看保质期和生产日期。</li><li><strong>蒜蓉要足：</strong>蒜蓉和剁椒、金针菇是绝配，蒜香味浓郁才好吃。大蒜要多一点，切得细一点。</li><li><strong>蒸的时间要准：</strong>水开后再放进去，大火蒸8-10分钟。时间太长金针菇会老，太短又不够入味。</li><li><strong>热油激香：</strong>最后一定要淋热油，油温要高，均匀地淋在葱花、剁椒和蒜蓉上，听到\"滋滋\"的声音，香味瞬间就出来了。</li><li><strong>调味要简单：</strong>只需要生抽和一点点糖提鲜就够了，保持食材本身的鲜味和剁椒的香味。不要加太多调料。</li><li><strong>摆盘要好看：</strong>金针菇整齐地码在盘子里，中间铺上剁椒，撒上蒜蓉，蒸好后红白带绿，颜色漂亮，让人有食欲。</li></ul>",
       "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li><strong>金针菇替代品：</strong>可以用其他菌类代替，如杏鲍菇、香菇、白玉菇、蟹味菇等，口感不同但也很好吃。</li><li><strong>剁椒替代品：</strong>可以用小米椒、剁椒酱、辣椒酱代替，但风味不同。也可以用蒜蓉豆豉酱，做成蒜蓉豆豉蒸金针菇。</li><li><strong>加料变化：</strong>可以在下面铺一层豆腐，上面放金针菇和剁椒，做成剁椒豆腐金针菇。也可以加粉丝、虾等。</li><li><strong>素食版本：</strong>这道菜本身就是纯素的，非常适合素食者。</li></ul>",
       "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜人群：</strong>一般人群均可食用。特别适合素食者、减脂人群、爱吃辣的人。</li><li><strong>慎食人群：</strong>脾胃虚弱、容易腹泻者少食。胃溃疡、胃炎患者少吃辣。对菌类过敏者禁食。</li><li><strong>推荐场景：</strong>家常菜、快手菜、下饭菜、素菜、蒸菜、晚餐、一人食、宴客冷盘</li><li><strong>搭配建议：</strong>搭配米饭、馒头、粥都很合适。作为一道素菜搭配荤菜，解腻又爽口。</li></ul>",
-      "required_tools": ""
+      "required_tools": "<li>蒸锅或蒸箱</li><li>耐热深盘</li><li>炒锅（炒浇头用）</li>"
     },
     {
       "id": 280,
@@ -3159,7 +3159,7 @@
       "success_tips": "<h3>成功关键要点</h3><ul><li><strong>选米技巧：</strong>用普通的东北大米或长粒香米就可以，颗粒饱满，煮出来的粥绵密有米香。不要用糯米或糙米。</li><li><strong>米提前腌制：</strong>大米洗净沥干后，加少许盐和食用油拌匀腌制15分钟，这是广式粥绵滑的秘诀。油会让米粒煮的时候更容易开花，粥更顺滑。</li><li><strong>开水下米：</strong>水烧开后再下米，这样米不容易粘锅底，而且能快速煮开花。冷水下米容易粘底。</li><li><strong>火候控制：</strong>大火烧开，转最小的火慢慢熬，保持微微沸腾的状态。不要开盖，让粥在里面焖煮，更绵密。</li><li><strong>偶尔搅拌：</strong>煮的过程中偶尔搅拌几次，防止粘底，也能让粥更稠。特别是最后10分钟，要多搅几次。</li><li><strong>肉要嫩：</strong>瘦肉选猪里脊或腿肉，切薄切小，用淀粉和生抽腌制，最后再放，煮的时间不要长，变色就好。</li><li><strong>皮蛋处理：</strong>皮蛋可以先煮5分钟，蛋黄凝固后切的时候不粘刀。也可以用细线切皮蛋，比刀切更整齐。</li><li><strong>分次放皮蛋：</strong>一半皮蛋早放，让味道融入粥里；一半出锅前放，保持Q弹口感。这样既有皮蛋香又有口感。</li><li><strong>姜葱不能少：</strong>姜丝去腥增香，葱花提味增色，是这碗粥必不可少的。</li></ul>",
       "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li><strong>大米替代品：</strong>可以用粳米、珍珠米。不建议用糯米、糙米。也可以用小米，但口感和风味不同。</li><li><strong>瘦肉替代品：</strong>可以用猪肉丝、牛肉丝、鸡肉丝、鱼片等。不同的肉有不同的风味。</li><li><strong>皮蛋替代品：</strong>可以用咸蛋代替，做成咸蛋瘦肉粥，也很好吃。</li><li><strong>加料变化：</strong>可以加香菇（香菇瘦肉粥）、加花生（皮蛋瘦肉花生粥）、加油条（油条配粥）、加生菜丝等。</li><li><strong>素食版本：</strong>去掉肉和皮蛋，加入香菇、青菜、豆腐等，做成素菜粥。</li></ul>",
       "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜人群：</strong>一般人群均可食用。特别适合老人、儿童、病后恢复期、肠胃虚弱者。</li><li><strong>慎食人群：</strong>皮蛋含钠较高，高血压、肾病患者少食。糖尿病患者注意控制粥的摄入量。</li><li><strong>推荐场景：</strong>早餐、宵夜、病后调养、清淡饮食、一人食、家庭早餐</li><li><strong>搭配建议：</strong>配油条、包子、馒头、小菜都是经典搭配。也可以配咸蛋、榨菜、腐乳等。</li></ul>",
-      "required_tools": ""
+      "required_tools": "<li>砂锅或厚底汤锅</li><li>搅拌勺</li><li>菜刀和砧板</li>"
     },
     {
       "id": 279,
@@ -3273,7 +3273,7 @@
       "success_tips": "<h3>成功关键要点</h3><ul><li><strong>选对部位：</strong>首选牛里脊（牛柳），最嫩的部位。其次是牛霖（和尚头）、牛臀肉。不要用牛腩、牛腱子这些适合炖煮的部位。</li><li><strong>逆纹切肉：</strong>一定要横着纹理切，把长纤维切断，这样入口就不会塞牙，口感嫩滑。肉片厚度约2-3毫米最合适。</li><li><strong>腌制是关键：</strong>腌制时加生抽、料酒、淀粉、少许油，抓匀后静置15分钟。淀粉形成保护膜锁住水分，油防止肉片粘连。</li><li><strong>热锅热油：</strong>锅要烧得很热，油要多一点（滑炒用），油温六成热时下牛肉，快速滑散，变色立即盛出。</li><li><strong>大火快炒：</strong>全程大火快炒，动作要快。牛肉炒的时间控制在30秒内（滑炒），洋葱炒1分钟左右，最后合炒几下就出锅。</li><li><strong>洋葱要脆甜：</strong>选择白洋葱或黄洋葱，口感更甜。紫皮洋葱更辛辣一些。洋葱不要炒太烂，保持一点脆度最好吃。</li><li><strong>黑胡椒提香：</strong>黑胡椒和牛肉是绝配，能很好地去腥增香。现磨的黑胡椒粉香味更浓郁。</li><li><strong>不要频繁翻：</strong>牛肉下锅后先煎一下底部，定型后再翻动，不要一进去就不停地翻，那样肉容易碎，而且出水多。</li></ul>",
       "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li><strong>牛肉替代品：</strong>可以用猪肉、鸡胸肉、羊肉代替。猪肉的话选里脊肉，同样要逆纹切、腌制。</li><li><strong>洋葱替代品：</strong>可以用大葱、韭葱、蒜薹代替。大葱炒牛肉也是经典搭配。</li><li><strong>风味变化：</strong>可以加青椒、彩椒一起炒，增加口感和营养。加孜然粉就是新疆风味。加蚝油就是蚝油牛肉。加黑椒汁就是黑椒牛柳。</li><li><strong>淀粉替代品：</strong>可以用玉米淀粉、土豆淀粉、红薯淀粉，都可以。也可以用嫩肉粉，但不如淀粉健康。</li></ul>",
       "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜人群：</strong>一般人群均可食用。特别适合儿童、青少年、贫血者、健身人群、体力劳动者。</li><li><strong>慎食人群：</strong>高胆固醇、高血脂、痛风患者适量食用。皮肤病、肝病、肾病患者慎食。</li><li><strong>推荐场景：</strong>家常菜、下饭菜、快手菜、便当菜、午餐晚餐、健身餐、儿童餐</li><li><strong>搭配建议：</strong>搭配米饭、面条都很合适。配一碗蔬菜汤营养更均衡。</li></ul>",
-      "required_tools": ""
+      "required_tools": "<li>炒锅（铁锅最佳）</li><li>菜刀和砧板</li><li>腌肉用碗</li>"
     },
     {
       "id": 278,
@@ -3381,7 +3381,7 @@
       "success_tips": "<h3>成功关键要点</h3><ul><li><strong>选甜玉米：</strong>一定要用甜玉米（水果玉米），口感脆甜多汁。挑选时看玉米粒饱满、排列整齐、颜色鲜黄，用指甲掐一下有汁水流出的就是新鲜的甜玉米。</li><li><strong>松子要新鲜：</strong>松子容易氧化变质，有哈喇味的就不能吃了。买的时候闻一闻，有清香松仁味的才是新鲜的。一次不要买太多，密封冷藏保存。</li><li><strong>松子提前炒香：</strong>生松子要提前用小火焙香，香味更浓郁。也可以直接买炒熟的松子，更方便。</li><li><strong>保持食材脆嫩：</strong>玉米和蔬菜焯水时间不要太长，过凉水保持脆度。炒的时候大火快炒，时间不要久。</li><li><strong>薄勾芡：</strong>水淀粉要薄，薄薄一层亮芡即可，既能锁住水分，又不影响口感。建议用玉米淀粉，透明度更好。</li><li><strong>甜咸比例：</strong>糖是主角，盐是配角。大概比例是2勺糖加一点点盐（约1/4小勺），盐能提升甜味，让甜不齁。</li><li><strong>松子最后放：</strong>保持酥脆口感是这道菜的关键之一。如果不是马上吃，可以把松子另外放，吃之前再拌进去。</li></ul>",
       "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li><strong>甜玉米替代品：</strong>可以用罐装甜玉米、冷冻甜玉米粒。不建议用普通玉米或糯玉米，口感和甜度都不够。</li><li><strong>松子替代品：</strong>可以用腰果、杏仁、花生碎、瓜子仁等坚果代替，口感和风味不同，但也很好吃。</li><li><strong>胡萝卜替代品：</strong>可以用彩椒丁、青豆代替，增加不同的颜色和营养。</li><li><strong>黄瓜替代品：</strong>可以用西芹丁、莴笋丁代替，增加脆嫩口感。</li><li><strong>素食版本：</strong>这道菜本身就是素菜，非常适合素食者。如果想要更丰富，可以加一些香菇丁或豆腐干。</li></ul>",
       "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜人群：</strong>一般人群均可食用。特别适合儿童、老人、素食者、爱美人士。</li><li><strong>慎食人群：</strong>松子脂肪含量较高，肥胖者、高血脂患者适量食用。脾胃虚弱、容易腹泻者少食。</li><li><strong>推荐场景：</strong>家常菜、宴客菜、年夜饭菜、素菜、儿童餐、午餐晚餐、便当菜</li><li><strong>搭配建议：</strong>搭配米饭、粥类都很合适。可以作为一道清甜的素菜搭配红烧肉类菜肴，解腻又爽口。</li></ul>",
-      "required_tools": ""
+      "required_tools": "<li>炒锅（不粘锅即可）</li><li>小煎锅（炒松子用）</li><li>菜刀和砧板</li>"
     },
     {
       "id": 277,
@@ -4469,7 +4469,20 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "菠菜择洗干净，去老根；芝麻酱加温水和少许盐调成流动的糊状备用。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中烧开水，加少许盐，放入菠菜焯水30秒至变软翠绿，捞出过凉水，挤干水分切段码盘。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "将调好的芝麻酱均匀淋在菠菜上，吃前拌匀即可。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5250,8 +5263,51 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "青椒",
+          "amount": "2个",
+          "isMain": false
+        },
+        {
+          "name": "鸡蛋",
+          "amount": "3个",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "料酒",
+          "amount": "少许",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "青椒洗净去籽，切成细丝或小块；鸡蛋打入碗中，加少许盐和几滴料酒打散。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中倒油烧至七成热，倒入蛋液，中火炒至蛋液凝固成块，用铲子拨散，盛出备用。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中再加少许油，放入青椒丝，大火翻炒1-2分钟至青椒变软断生。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "倒入炒好的鸡蛋块，加盐调味，快速翻炒均匀即可出锅。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5280,8 +5336,56 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "萝卜干",
+          "amount": "150克",
+          "isMain": true
+        },
+        {
+          "name": "腊肉",
+          "amount": "100克",
+          "isMain": true
+        },
+        {
+          "name": "青红椒",
+          "amount": "各1个",
+          "isMain": false
+        },
+        {
+          "name": "蒜",
+          "amount": "3瓣",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "1勺",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "萝卜干提前用清水浸泡20分钟去除多余盐分，沥干切小段；腊肉温水洗净切薄片；青红椒切圈，蒜切末。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中不放油，小火将萝卜干炒干水分（约2分钟），盛出备用，这一步能去涩提香。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中放少许油，放入腊肉片小火煸炒至出油、边缘微卷（约3分钟）。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "加入蒜末和青红椒圈爆香，倒入萝卜干大火翻炒均匀，加生抽调味，翻炒1分钟即可出锅。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5310,8 +5414,76 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "猪耳朵",
+          "amount": "1个（约300克）",
+          "isMain": true
+        },
+        {
+          "name": "葱",
+          "amount": "2根",
+          "isMain": false
+        },
+        {
+          "name": "姜",
+          "amount": "3片",
+          "isMain": false
+        },
+        {
+          "name": "蒜",
+          "amount": "4瓣",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "2勺",
+          "isMain": false
+        },
+        {
+          "name": "香醋",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "辣椒油",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "花椒油",
+          "amount": "少许",
+          "isMain": false
+        },
+        {
+          "name": "白糖",
+          "amount": "半勺",
+          "isMain": false
+        },
+        {
+          "name": "香菜",
+          "amount": "适量",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "猪耳朵刮净毛发，冷水下锅加葱段、姜片、料酒，大火煮开后撇去浮沫，转中小火煮40-50分钟至筷子能轻松插入。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "煮好后捞出放凉（可放冰箱冷藏30分钟更好切），切成薄片码入盘中。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "蒜切末，调碗汁：生抽+香醋+辣椒油+花椒油+白糖+蒜末，搅拌均匀。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "将碗汁淋在猪耳朵上，撒上香菜段和葱花，拌匀即可食用。冷藏后口感更佳。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5340,8 +5512,56 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "菜心",
+          "amount": "300克",
+          "isMain": true
+        },
+        {
+          "name": "蒜",
+          "amount": "3瓣",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "2勺",
+          "isMain": false
+        },
+        {
+          "name": "蚝油",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "白糖",
+          "amount": "少许",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "菜心择洗干净，大棵的对半切开；蒜切末备用。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中烧开水，加少许盐和几滴油，放入菜心焯水约1-2分钟至翠绿断生，捞出沥水摆盘。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "调酱汁：生抽+蚝油+白糖+2勺清水混合均匀。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "炒锅中少许油烧热，爆香蒜末，倒入调好的酱汁煮开，浇在菜心上即可。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5370,8 +5590,51 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "空心菜",
+          "amount": "1把（约300克）",
+          "isMain": true
+        },
+        {
+          "name": "蒜",
+          "amount": "5瓣",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "鸡精",
+          "amount": "少许",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "空心菜择洗干净，嫩叶和茎分开切段（茎比叶先下锅）；蒜切末，多放一些蒜。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中大火烧热油，放入2/3的蒜末爆香（约10秒），注意不要炒焦。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "先放空心菜茎大火翻炒30秒，再放入叶子部分继续大火翻炒1分钟至断生。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "加盐和鸡精调味，撒上剩余蒜末，快速翻匀出锅。全程大火快炒，保持翠绿。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5400,8 +5663,89 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "草鱼",
+          "amount": "1段（约400克）",
+          "isMain": true
+        },
+        {
+          "name": "葱",
+          "amount": "2根",
+          "isMain": false
+        },
+        {
+          "name": "姜",
+          "amount": "4片",
+          "isMain": false
+        },
+        {
+          "name": "蒜",
+          "amount": "4瓣",
+          "isMain": false
+        },
+        {
+          "name": "干辣椒",
+          "amount": "3个",
+          "isMain": false
+        },
+        {
+          "name": "八角",
+          "amount": "1个",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "2勺",
+          "isMain": false
+        },
+        {
+          "name": "老抽",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "料酒",
+          "amount": "2勺",
+          "isMain": false
+        },
+        {
+          "name": "白糖",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "草鱼洗净切成3厘米厚的块，加料酒、盐、姜片腌制15分钟去腥，沥干水分。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中倒油烧至七成热，将鱼块表面拍一层薄淀粉，放入锅中中火煎至两面金黄（每面约2分钟），盛出。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中留底油，放入葱段、姜片、蒜、干辣椒、八角爆香。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "加入生抽、老抽、白糖、料酒和适量清水（能没过鱼块2/3），大火烧开。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "放入煎好的鱼块，转中小火烧10分钟，期间轻轻翻面一次，让鱼块均匀上色入味。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "大火收汁至浓稠，撒上葱花，出锅装盘。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5430,8 +5774,84 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "牛腩",
+          "amount": "500克",
+          "isMain": true
+        },
+        {
+          "name": "白萝卜",
+          "amount": "1个",
+          "isMain": true
+        },
+        {
+          "name": "葱",
+          "amount": "2根",
+          "isMain": false
+        },
+        {
+          "name": "姜",
+          "amount": "4片",
+          "isMain": false
+        },
+        {
+          "name": "八角",
+          "amount": "2个",
+          "isMain": false
+        },
+        {
+          "name": "桂皮",
+          "amount": "1小段",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "2勺",
+          "isMain": false
+        },
+        {
+          "name": "老抽",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "料酒",
+          "amount": "2勺",
+          "isMain": false
+        },
+        {
+          "name": "冰糖",
+          "amount": "适量",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "牛腩切3厘米方块，冷水下锅加姜片和料酒，大火煮开撇去浮沫，煮3分钟捞出洗净沥干。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "白萝卜去皮切滚刀块备用；葱打结，姜切片。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中倒油，放入冰糖小火炒至融化呈琥珀色（炒糖色），放入牛腩翻炒上色。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "加入葱、姜、八角、桂皮炒香，加生抽、老抽、料酒，倒入没过牛腩的开水。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "大火烧开后转小火炖1小时至牛腩八成熟，加入萝卜块继续炖30分钟至萝卜透明、牛腩软烂。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "尝咸淡调整，大火稍微收汁（留一些汤汁配饭更香），出锅撒葱花。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5460,8 +5880,61 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "鲜香菇",
+          "amount": "200克",
+          "isMain": true
+        },
+        {
+          "name": "上海青（小白菜）",
+          "amount": "300克",
+          "isMain": true
+        },
+        {
+          "name": "蒜",
+          "amount": "3瓣",
+          "isMain": false
+        },
+        {
+          "name": "蚝油",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "香菇洗净去蒂，大朵的对半切开；上海青洗净对半切开；蒜切末。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中烧开水，加少许盐，先将上海青焯水30秒捞出摆盘，再将香菇焯水1分钟捞出沥干。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中倒油烧热，放蒜末爆香，倒入香菇翻炒1分钟。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "加蚝油、生抽和少许清水，翻炒均匀让香菇入味，浇在摆好的上海青上即可。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5490,8 +5963,66 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "猪里脊肉",
+          "amount": "200克",
+          "isMain": true
+        },
+        {
+          "name": "青椒",
+          "amount": "3个",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "料酒",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "淀粉",
+          "amount": "1勺",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "姜",
+          "amount": "2片",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "猪里脊逆纹切成细丝，加生抽、料酒、淀粉和少许油抓匀腌制10分钟。青椒去籽切丝，姜切丝。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中倒油烧至六成热，放入肉丝快速滑散，炒至变色断生（约1分钟），盛出备用。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中留底油，放入姜丝和青椒丝，大火翻炒1分钟至青椒微软。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "倒回肉丝，加盐调味，大火快速翻炒均匀即可出锅。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5689,7 +6220,32 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "鸡肉（半只约600克）斩块，冷水下锅加姜片和料酒焯水去血沫，捞出洗净沥干。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中倒油烧热，放姜片、蒜、干辣椒、八角爆香，倒入鸡块大火翻炒至表面微黄。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "加生抽、老抽、料酒、冰糖翻炒上色，倒入开水没过鸡肉，大火烧开转中小火炖20分钟。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "面团提前和好（面粉+水+少许盐），擀成薄饼或用手揪成面片。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "将面饼/面片贴在锅边（一半浸入汤汁中），盖锅盖继续中火焖煮15分钟至饼熟透、汤汁浓稠。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "尝咸淡调整，大火略收汁，撒上葱花，连锅端上桌。饼蘸汤汁是灵魂吃法。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -6518,17 +7074,42 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "干米粉提前用冷水浸泡4小时以上（或温水泡1小时），泡至柔软有弹性，沥干备用。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "螺蛳洗净泥沙，锅中加少许油，放姜片、干辣椒爆香，倒入螺蛳大火翻炒2分钟，加料酒去腥，加水没过螺蛳，大火煮开后转小火炖30分钟，捞出螺蛳留汤底。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "螺蛳汤中加入猪骨汤（或清水），放入螺蛳粉料包（酸笋、木耳丝、花生米），大火煮开后转中火煮10分钟，加盐、鸡精调味。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "另起一锅烧开水，放入泡好的米粉煮3-5分钟至熟透（无硬芯），捞出沥干放入碗中。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "将煮好的螺蛳汤连同配料浇在米粉上，码上酸豆角、腐竹、青菜等配菜。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "最后淋上辣椒油和醋，根据个人口味调整酸辣度，趁热拌匀即可食用。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "<p><strong>热量：</strong>每份约450千卡</p><p><strong>蛋白质：</strong>约15克，来自米粉、螺蛳和豆制品</p><p><strong>碳水化合物：</strong>约65克，主要来自米粉</p><p><strong>脂肪：</strong>约15克，主要来自花生、腐竹和辣椒油</p><p><strong>膳食纤维：</strong>约5克，来自各种蔬菜和菌菇类</p><p><strong>矿物质：</strong>富含钙、铁、锌、镁等多种矿物质</p><p><strong>维生素：</strong>含有B族维生素和维生素C</p>",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
-      "suitable_for": "",
-      "required_tools": ""
+      "common_mistakes": "<ul><li>米粉泡发不到位，煮出来有硬芯——一定要提前充分浸泡</li><li>螺蛳汤不够鲜——螺蛳要先炒香再炖，且炖够时间</li><li>酸笋处理不当会有异味——酸笋需先用清水泡10分钟去除过重的发酵味</li><li>汤底太寡淡——可以用猪骨汤做底，或者加少许味精提鲜</li></ul>",
+      "success_tips": "<ul><li>螺蛳炖汤时间越长越鲜，建议至少炖30分钟</li><li>米粉不要煮太久，保持弹性口感最佳</li><li>辣椒油和醋是灵魂调料，可以根据口味多加</li><li>配菜可以灵活搭配：炸腐竹、卤蛋、酸豇豆都很合适</li></ul>",
+      "ingredient_substitutes": "<ul><li>没有新鲜螺蛳可用螺蛳粉调料包代替，方便快捷</li><li>猪骨汤可用浓汤宝或鸡精+水替代</li><li>酸笋买不到可省略，用酸菜代替</li><li>米粉可用红薯粉或土豆粉替代，口感不同但也可行</li></ul>",
+      "suitable_for": "<ul><li>喜欢酸辣重口味的人群</li><li>秋冬季节暖身驱寒</li><li>朋友聚会时的特色主食</li><li>不太适合胃肠敏感或清淡饮食者</li></ul>",
+      "required_tools": "<ul><li>大汤锅（炖螺蛳汤用）</li><li>炒锅（炒螺蛳用）</li><li>煮粉锅</li><li>大碗</li></ul>"
     },
     {
       "id": 219,
@@ -6624,17 +7205,42 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "大米洗净后用清水浸泡30分钟，沥干备用。肉类（腊肠、鸡肉等）切片，用生抽、料酒、少许糖和淀粉腌制15分钟。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "砂锅内壁均匀刷一层食用油（这是形成锅巴的关键），倒入泡好的米，加入清水，米和水的比例约1:1.2。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "大火煮开后立即转小火，盖上锅盖焖煮约10分钟，至水分基本收干、米饭表面出现气孔。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "快速打开锅盖，将腌好的肉类和配菜（如青菜、香菇）整齐铺在米饭表面，沿锅边淋一圈食用油。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "盖上锅盖，继续小火焖煮10-12分钟，关火后再焖5分钟不开盖。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "开盖后淋上调好的酱汁（生抽+老抽+糖+香油+少许开水），撒上葱花，拌匀即可享用。底部金黄酥脆的就是锅巴。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "<p><strong>热量：</strong>每份约550千卡</p><p><strong>蛋白质：</strong>约18克，来自大米和腊味、鸡蛋</p><p><strong>碳水化合物：</strong>约65克，是主要能量来源</p><p><strong>脂肪：</strong>约22克，主要来自腊味和油脂</p><p><strong>膳食纤维：</strong>约2克，来自青菜</p><p><strong>钠含量：</strong>较高，因腊味和酱油含盐量较高</p><p><strong>维生素：</strong>含有B族维生素和维生素A</p>",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
-      "suitable_for": "",
-      "required_tools": ""
+      "common_mistakes": "<ul><li>米没有提前浸泡，导致夹生——浸泡是煲仔饭的关键步骤</li><li>火候太大导致糊底而非锅巴——必须小火慢焖</li><li>水量不对，饭太硬或太软——米水比1:1.2较合适</li><li>肉类直接铺上去没腌制，味道寡淡——一定要提前腌制入味</li></ul>",
+      "success_tips": "<ul><li>砂锅质量很重要，厚壁砂锅受热均匀，锅巴更脆</li><li>沿锅边淋油是形成完美锅巴的秘诀</li><li>关火后焖5分钟能让食材味道充分融合</li><li>酱汁可以提前调好，最后淋上去提味增色</li></ul>",
+      "ingredient_substitutes": "<ul><li>没有砂锅可用铸铁锅代替，效果接近</li><li>腊肠可用腊肉、排骨、滑鸡等替代</li><li>丝苗米可用泰国香米代替，口感略不同</li><li>没有老抽可用生抽+少许红糖上色</li></ul>",
+      "suitable_for": "<ul><li>喜欢广式风味的人群</li><li>一锅搞定的懒人晚餐</li><li>秋冬季节暖身主食</li><li>不太适合赶时间的人（需要30分钟以上）</li></ul>",
+      "required_tools": "<ul><li>砂锅（煲仔饭专用最佳）</li><li>菜刀和砧板</li><li>刷子（刷油用）</li><li>量杯（控制水量）</li></ul>"
     },
     {
       "id": 218,
@@ -6760,17 +7366,42 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "牛蛙处理干净，去内脏去皮（或保留皮），斩成3厘米左右的块状，用清水反复冲洗去血水，沥干后加料酒、盐、胡椒粉、少许淀粉抓匀腌制15分钟。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "泡椒切碎，姜蒜切末，芹菜切段，洋葱切块备用。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中倒油烧至七成热，放入牛蛙块中火煎至两面微黄（约3分钟），盛出备用。也可选择过油炸至金黄。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "锅中留底油，小火爆香姜蒜末和泡椒碎，炒出红油和酸辣香味（约2分钟）。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "倒入煎好的牛蛙块，大火翻炒均匀，加入生抽、少许糖调味，加小半碗水，中火烧5分钟让牛蛙充分入味。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "加入芹菜段和洋葱块，大火翻炒1分钟至断生，淋少许香醋提味，出锅装盘。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "<p><strong>热量：</strong>每份约280千卡</p><p><strong>蛋白质：</strong>约35克，牛蛙肉是高蛋白低脂肪的优质食材</p><p><strong>脂肪：</strong>约12克，主要来自烹饪用油</p><p><strong>碳水化合物：</strong>约8克，主要来自蔬菜和淀粉</p><p><strong>胆固醇：</strong>含量较低，适合减脂期适量食用</p><p><strong>矿物质：</strong>富含钙、磷、铁、锌等多种矿物质</p><p><strong>维生素：</strong>含有丰富的维生素C、B族维生素</p>",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
-      "suitable_for": "",
-      "required_tools": ""
+      "common_mistakes": "<ul><li>牛蛙腥味重——必须反复冲洗去血水，腌制时加料酒和胡椒粉</li><li>泡椒炒不出香味——要用小火慢慢炒出红油</li><li>牛蛙炒老了——牛蛙肉质细嫩，不宜久炒，煎至微黄即可</li><li>味道不够酸辣——泡椒量要足，最后淋醋提酸</li></ul>",
+      "success_tips": "<ul><li>牛蛙腌制时加少许淀粉可以锁住水分，口感更嫩</li><li>泡椒选择四川产的坛子泡椒味道最正宗</li><li>最后加一点点香醋可以提鲜解腻</li><li>搭配啤酒或冰饮非常过瘾</li></ul>",
+      "ingredient_substitutes": "<ul><li>没有牛蛙可用鸡腿肉代替，做成泡椒鸡</li><li>泡椒买不到可用剁椒代替，风味略不同</li><li>芹菜可换成青红椒或蒜薹</li><li>不喜欢太辣可以减少泡椒用量</li></ul>",
+      "suitable_for": "<ul><li>喜欢川味辣菜的人群</li><li>聚餐下酒的硬菜</li><li>秋冬季节驱寒暖身</li><li>不适合不吃辣或胃肠敏感者</li></ul>",
+      "required_tools": "<ul><li>炒锅（铁锅最佳）</li><li>菜刀和砧板</li><li>大碗（腌制用）</li></ul>"
     },
     {
       "id": 217,
@@ -6886,17 +7517,42 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "猪肉（三肥七瘦）手工切成石榴粒大小的肉丁（不要用绞肉机，口感差很多），加入葱姜水、盐、生抽、胡椒粉、鸡蛋、淀粉，顺一个方向搅拌上劲约5分钟。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "取适量肉馅（约拳头大小），双手沾水，来回摔打成圆形肉丸，共做4-6个大丸子。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中倒油烧至六成热，小心放入肉丸，中火煎至表面金黄定型（各面约2分钟），盛出备用。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "锅中留少许底油，放入葱段、姜片、八角爆香，加入适量清水（能没过丸子2/3），加生抽、老抽、冰糖、料酒调成红烧汁。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "放入煎好的狮子头，大火烧开后转小火，盖锅盖慢炖40-50分钟，期间翻面1-2次，让丸子均匀上色入味。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "炖至汤汁浓稠，狮子头软嫩入味，尝一下咸淡调整，大火收汁后出锅，撒上葱花点缀。可搭配焯水的小青菜围边。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "<p><strong>热量：</strong>每个狮子头约450千卡</p><p><strong>蛋白质：</strong>约28克，富含优质动物蛋白和必需氨基酸</p><p><strong>脂肪：</strong>约35克，主要来自五花肉，提供浓郁口感</p><p><strong>碳水化合物：</strong>约10克，来自淀粉和少量糖类</p><p><strong>胆固醇：</strong>含量较高，每个约150毫克</p><p><strong>矿物质：</strong>富含磷、钾、钠、镁、铁等多种矿物质</p><p><strong>维生素：</strong>含有B族维生素和维生素A</p>",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
-      "suitable_for": "",
-      "required_tools": ""
+      "common_mistakes": "<ul><li>肉馅用绞肉机绞的太细，口感不松——一定要手切肉丁</li><li>丸子散开了——搅拌不够上劲，或淀粉加太少</li><li>外焦里生——煎的时候火太大，要中火慢煎定型</li><li>炖的时间不够，里面不入味——至少炖40分钟以上</li></ul>",
+      "success_tips": "<ul><li>手切肉丁是狮子头松软口感的关键，肥瘦3:7最佳</li><li>搅拌上劲很重要，肉馅要有粘性才能成团不散</li><li>炖的时间越长越入味，可以炖1小时以上</li><li>加一颗荸荠丁或莲藕丁可以增加口感层次</li></ul>",
+      "ingredient_substitutes": "<ul><li>猪肉可用五花肉（偏肥）或前腿肉</li><li>没有荸荠可以加玉米粒增加口感</li><li>红烧汁可加入少许蚝油增鲜</li><li>做清炖版本可省略酱油，用盐和白胡椒调味</li></ul>",
+      "suitable_for": "<ul><li>家庭聚餐或宴客硬菜</li><li>喜欢软嫩口感的老人和小孩</li><li>冬季暖身补营养</li><li>需要耐心慢炖，不适合赶时间的人</li></ul>",
+      "required_tools": "<ul><li>炒锅或炖锅（能放入大丸子）</li><li>菜刀和砧板</li><li>大碗（拌肉馅用）</li><li>砂锅（炖煮效果更佳）</li></ul>"
     },
     {
       "id": 216,
@@ -6992,17 +7648,42 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "五花肉切0.5厘米见方的小丁，黄瓜切丝、胡萝卜切丝、豆芽焯水、芹菜切碎等准备各种面码（菜码）。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中倒少许油，放入五花肉丁中小火煸炒至出油、肉丁微焦（约5分钟），盛出多余的猪油（留底油）。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "在肉丁中加入葱末、姜末、八角爆香，倒入干黄酱和甜面酱（比例约2:1），小火不断翻炒。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "酱和肉丁翻炒约15-20分钟，期间加少许水防止糊锅，炒至酱汁浓稠、油亮、肉丁与酱完全融合。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "另起大锅烧开水，下入面条（手擀面最佳），煮至熟透捞出，过凉水或不过（看个人喜好），盛入碗中。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "面条上码好各种菜码，浇上2-3大勺炸酱，拌匀后大口吃。传统吃法是就着蒜瓣和醋吃。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "<p><strong>热量：</strong>每份约650千卡</p><p><strong>蛋白质：</strong>约25克，主要来自五花肉和面粉，提供丰富的必需氨基酸</p><p><strong>碳水化合物：</strong>约85克，是主要的能量来源</p><p><strong>脂肪：</strong>约28克，来自动物油脂和植物油</p><p><strong>膳食纤维：</strong>约4克，来自蔬菜菜码</p><p><strong>维生素：</strong>含有维生素B族、维生素C、胡萝卜素等</p><p><strong>矿物质：</strong>钙、铁、锌、硒等多种矿物质</p>",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
-      "suitable_for": "",
-      "required_tools": ""
+      "common_mistakes": "<ul><li>酱炒的时间不够，酱和肉没融合——小火至少炒15分钟</li><li>酱太咸——干黄酱本身很咸，不用额外加盐</li><li>肉丁太柴——要用五花肉，肥瘦相间才香</li><li>面码太少不正宗——传统炸酱面菜码至少6-8种</li></ul>",
+      "success_tips": "<ul><li>干黄酱用六必居或天源酱园的比较正宗</li><li>小火慢炒是关键，急不得，酱香要慢慢释放</li><li>面条选手擀面口感最好，机压面也行</li><li>炸酱可以多做，冰箱保存一周，随吃随取</li></ul>",
+      "ingredient_substitutes": "<ul><li>没有干黄酱可以全部用甜面酱代替，偏甜口</li><li>五花肉可用前腿肉代替，但口感略差</li><li>手擀面买不到可用鲜切面代替</li><li>菜码可以根据季节蔬菜灵活调整</li></ul>",
+      "suitable_for": "<ul><li>喜欢北方传统面食的人群</li><li>夏季快手正餐（酱可提前炒好）</li><li>家庭聚餐的互动感主食</li><li>不适合不吃猪肉或对面筋过敏者</li></ul>",
+      "required_tools": "<ul><li>炒锅（炸酱用）</li><li>大煮面锅</li><li>菜刀和砧板</li><li>多个小碟（装菜码用）</li></ul>"
     },
     {
       "id": 215,
@@ -7738,7 +8419,20 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "油麦菜择洗干净，切成5厘米长段，茎和叶分开放；蒜切末。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中大火烧热油，放入蒜末爆香（10秒），立即放入油麦菜茎大火翻炒30秒。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "加入叶子部分继续翻炒30秒至断生，加盐调味，快速翻匀出锅。全程不超过2分钟，保持脆嫩翠绿。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -7993,8 +8687,65 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "鸡腿",
+          "amount": "4个（约500克）",
+          "isMain": true
+        },
+        {
+          "name": "土豆",
+          "amount": "1个",
+          "isMain": false
+        },
+        {
+          "name": "胡萝卜",
+          "amount": "1根",
+          "isMain": false
+        },
+        {
+          "name": "洋葱",
+          "amount": "1个",
+          "isMain": false
+        },
+        {
+          "name": "咖喱块",
+          "amount": "3-4块",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "清水",
+          "amount": "适量",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "鸡腿斩块，冷水下锅焯水去血沫，捞出洗净沥干；土豆、胡萝卜去皮切滚刀块；洋葱切块。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中倒油烧热，放入洋葱块炒至透明出香味（约2分钟）。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "加入鸡块翻炒至表面微黄（约3分钟），加入土豆和胡萝卜继续翻炒1分钟。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "倒入清水没过食材，大火烧开后转中小火炖15分钟至土豆胡萝卜变软。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "关火，放入咖喱块搅拌至完全融化，再开小火煮5分钟至汤汁浓稠即可。搭配米饭食用。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -8045,7 +8796,24 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "牛里脊切成1厘米粗的条，加生抽、料酒、黑胡椒粉、淀粉和少许油抓匀腌制15分钟。洋葱切丝、青红椒切块。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中大火烧油至冒烟，放入牛柳快速滑炒至变色（约1分钟），盛出备用。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中留底油，放洋葱丝和青红椒翻炒至断生（约1分钟）。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "倒回牛柳，加现磨黑胡椒碎、蚝油、少许盐，大火翻炒均匀即可出锅。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -8953,7 +9721,28 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "猪肝洗净切成3毫米薄片，用清水浸泡20分钟去除血水和毒素，沥干后加料酒、生抽、淀粉抓匀腌制10分钟。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "木耳提前泡发撕小朵，黄瓜切菱形片，胡萝卜切片，葱姜蒜切末备用。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中宽油烧至五成热，放入肝尖滑油至变色立即捞出（约30秒），沥油备用。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "锅中留底油，放葱姜蒜末爆香，加入木耳、胡萝卜翻炒1分钟，再放黄瓜片。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "倒入肝尖，加生抽、醋、白糖、盐调好的碗汁，大火快速翻炒均匀，淋少许香油出锅。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -9342,7 +10131,32 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "整鸡一只（约1.5kg）处理干净，全身抹匀盐和花椒粉，腌制2小时入味。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中倒宽油烧至七成热，将鸡沥干放入炸至全身金黄（约5分钟），捞出沥油。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "砂锅底部垫上葱段和姜片，放入炸好的鸡，加八角、桂皮、花椒、香叶、白芷等香料。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "加入生抽、老抽、料酒、冰糖和开水（没过鸡的2/3），大火烧开转最小火。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "盖紧锅盖，小火慢炖2-3小时至鸡肉酥烂脱骨，汤汁浓稠。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "小心取出整鸡装盘（肉烂但要保持形状），将锅中汤汁过滤后浇在鸡身上即可。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -12349,7 +13163,24 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "红薯粉丝提前用温水泡软；鸭血切1厘米厚方块，放入加了少许料酒的开水中焯1分钟去腥，捞出沥干。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "鸭架或鸡架加水熬成高汤（约30分钟），过滤后作为汤底。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "汤底烧开，放入粉丝煮2分钟至透明，加入鸭血、豆腐泡（油豆腐）、鸭肠等配料煮1分钟。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "加盐、白胡椒粉调味，盛入碗中，撒上香菜、葱花、少许辣油即可。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -13478,7 +14309,28 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "猪里脊切成3厘米长、1厘米粗的条，加盐、料酒、鸡蛋液、淀粉抓匀，挂上薄糊。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中宽油烧至六成热，放入肉条炸至定型浮起（约2分钟），捞出；油温升至八成热复炸至金黄酥脆（约1分钟），捞出沥油。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "青红椒切块，洋葱切块，胡萝卜切片，葱姜蒜切末。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "锅中留底油，爆香葱姜蒜末，放入蔬菜翻炒1分钟。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "倒入炸好的肉段，加生抽、醋、白糖、少许水调成的酱汁，大火翻炒至酱汁裹满肉段，淋香油出锅。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -14384,7 +15236,28 @@
           "isMain": true
         }
       ],
-      "steps": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "猪肥肠500克翻洗干净（用面粉和醋反复搓洗去异味），冷水下锅加葱姜料酒煮30分钟至八成熟，捞出切3厘米段。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "锅中倒油烧至六成热，放入肥肠段中火煸炒至表面微焦（约3分钟），盛出。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中留底油，放入姜片、蒜、干辣椒、八角、桂皮爆香，加豆瓣酱1勺炒出红油。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "倒入肥肠翻炒均匀，加生抽、老抽、料酒、冰糖和适量开水没过肥肠。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "大火烧开后转小火炖30分钟至肥肠软糯入味，大火收汁至浓稠，撒上葱花或蒜苗段出锅。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -28284,7 +29157,7 @@
       "category": "蔬菜",
       "description": "番茄又称西红柿，是全球使用最广泛的蔬菜之一。酸甜多汁，可生食可熟食，是番茄炒蛋、酸汤、意面酱等经典菜肴的灵魂食材。番茄富含番茄红素和维生素C，加热后番茄红素更易被人体吸收。",
       "imageUrl": "/images/ingredients/fan-qie.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量18千卡，蛋白质0.9克，脂肪0.2克，碳水化合物3.9克，膳食纤维1.2克，维生素C 14毫克，番茄红素2.6毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -28300,7 +29173,7 @@
       "category": "海鲜",
       "description": "鱿鱼是软体动物门头足纲的海洋生物，肉质紧实弹嫩，适合爆炒、铁板烤制、白灼等多种烹饪方式。新鲜鱿鱼体表有光泽、肉质有弹性，干制后即为鱿鱼干。鱿鱼富含牛磺酸和优质蛋白质。",
       "imageUrl": "/images/ingredients/you-yu.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量92千卡，蛋白质17.4克，脂肪1.4克，碳水化合物3.1克，牛磺酸160毫克，钙26毫克，铁1.2毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -28316,7 +29189,7 @@
       "category": "蔬菜",
       "description": "丝瓜又称天丝瓜、布瓜，是夏季时令蔬菜。嫩瓜肉质细嫩、汁多味清，适合炒蛋、煮汤、蒜蓉蒸制。丝瓜富含皂苷和黏液蛋白，有清热利湿的功效。选购时以瓜条均匀、表皮嫩绿、手感有弹性为佳。",
       "imageUrl": "/images/ingredients/si-gua.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量20千卡，蛋白质1.0克，脂肪0.2克，碳水化合物4.5克，膳食纤维0.6克，维生素C 8毫克，钾115毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -28332,7 +29205,7 @@
       "category": "肉类",
       "description": "肥牛卷是将优质牛肉经冷冻后切成薄片卷制而成的食材，涮煮或煮汤时口感鲜嫩滑嫩，是酸汤肥牛、肥牛饭等菜的核心原料。选购时注意颜色鲜红、脂肪分布均匀，解冻后不宜反复冷冻。",
       "imageUrl": "/images/ingredients/fei-niu-juan.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量295千卡，蛋白质18.4克，脂肪24.2克，碳水化合物1.1克，铁3.2毫克，锌4.5毫克，维生素B12 2.2微克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -28347,8 +29220,8 @@
       "slug": "han-shi-la-jiang",
       "category": "调味酱料",
       "description": "韩式辣酱是韩国料理中常用的调味酱料，又称韩式辣椒酱或gochujang。以辣椒粉、糯米粉、发酵大豆等为原料经长时间发酵制成，色泽红艳，味道浓郁微甜，辣度适中。",
-      "imageUrl": "",
-      "nutrition": "",
+      "imageUrl": "/images/ingredients/han-shi-la-jiang.jpg",
+      "nutrition": "每100克含热量152千卡，蛋白质3.2克，脂肪0.6克，碳水化合物34克，钠3200毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -28363,8 +29236,8 @@
       "slug": "la-bai-cai",
       "category": "调味腌菜",
       "description": "辣白菜是朝鲜族传统发酵食品，以白菜为主要原料，加入辣椒粉、蒜、姜等调料腌制发酵而成。口感酸辣爽脆，富含益生菌，是韩式料理中不可或缺的调味料。",
-      "imageUrl": "",
-      "nutrition": "",
+      "imageUrl": "/images/ingredients/la-bai-cai.jpg",
+      "nutrition": "每100克含热量26千卡，蛋白质1.5克，脂肪0.3克，碳水化合物5.2克，膳食纤维1.3克，钠780毫克，维生素C 12毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -28523,7 +29396,7 @@
       "slug": "zi-ran-li",
       "category": "调味",
       "description": "孜然又名安息茴香，是一种常用的香辛料，具有独特的浓郁香气和微甜带苦的味道。颗粒状的孜然粒比孜然粉香气更持久，常用于烧烤、炖煮、腌制等，是新疆羊肉串的灵魂调料，也常用于制作咖喱粉。",
-      "imageUrl": "https://img.chanmaoyoupu.com/ingredient/zi-ran-li-1782966993314.jpeg",
+      "imageUrl": "/images/ingredients/zi-ran-li.jpg",
       "nutrition": "每100g孜然粒含热量约375大卡，蛋白质约18g，脂肪约15g，碳水化合物约44g，膳食纤维约11g。含有挥发油（孜然精油）、黄酮类物质、多种氨基酸和矿物质。具有理气止痛、调中和胃的功效。",
       "tips": "优质孜然粒颜色均匀、颗粒饱满、香气浓郁、无杂质。孜然粒比孜然粉保存时间更长，香气更持久。使用前可以炒一下，香气更浓。密封保存于阴凉干燥处。",
       "aliases": "孜然,安息茴香,枯茗,孜然芹",
@@ -28539,7 +29412,7 @@
       "slug": "bei-dou-fu",
       "category": "豆制品",
       "description": "北豆腐又称卤水豆腐、老豆腐，是用卤水（氯化镁）作为凝固剂制成的豆腐。质地较紧实，豆香味浓郁，口感偏硬有韧性，适合煎、炒、炖、炸、酿等多种烹饪方式。相比南豆腐，北豆腐的水分含量更低，蛋白质含量更高。",
-      "imageUrl": "https://img.chanmaoyoupu.com/ingredient/bei-dou-fu-1782966995059.jpeg",
+      "imageUrl": "/images/ingredients/bei-dou-fu.jpg",
       "nutrition": "每100g北豆腐含热量约85大卡，蛋白质8.1g，脂肪3.7g，碳水化合物4.2g，钙138mg，镁63mg，还含有丰富的大豆异黄酮、卵磷脂、B族维生素等营养成分。是植物蛋白的优质来源。",
       "tips": "北豆腐比南豆腐更耐煮，不容易碎。选购时选颜色乳白、质地紧实、无异味的。北豆腐可以直接食用，也可以煎、炒、炖、炸。煎之前用厨房纸吸干表面水分，更容易煎成型。",
       "aliases": "卤水豆腐,老豆腐,硬豆腐,北豆腐",
@@ -28555,7 +29428,7 @@
       "slug": "bo-cai",
       "category": "蔬菜",
       "description": "菠菜是一种营养极为丰富的绿叶蔬菜，被誉为\"营养模范生\"。富含类胡萝卜素、维生素C、维生素K、矿物质（钙、铁、钾等）等多种营养素。口感鲜嫩，适合炒、煮、凉拌、做汤等多种做法。",
-      "imageUrl": "https://img.chanmaoyoupu.com/ingredient/bo-cai-1782966997034.jpeg",
+      "imageUrl": "/images/ingredients/bo-cai.jpg",
       "nutrition": "每100g菠菜含能量24大卡，蛋白质2.6g，碳水化合物4.5g，膳食纤维1.7g。维生素C含量32mg，胡萝卜素2920μg，维生素K含量极高（约483μg），还含有丰富的钙（66mg）、铁（2.9mg）、钾（311mg）等矿物质。",
       "tips": "选购菠菜时，应选叶片饱满、颜色鲜绿、无黄叶烂叶的。菠菜含有大量草酸，烹饪前需要焯水去除。菠菜最好现买现吃，不要存放太久。",
       "aliases": "波斯菜,赤根菜,鹦鹉菜,菠薐菜",
@@ -28571,7 +29444,7 @@
       "slug": "jue-gen-fen",
       "category": "主食",
       "description": "蕨根粉是从野生蕨菜的根状茎中提取淀粉制成的粉丝，是传统的天然食品。口感爽滑筋道，带有独特的蕨根清香，常用于凉拌，是夏季开胃解暑的佳品。颜色偏黑褐色，比普通粉丝更有营养。",
-      "imageUrl": "https://img.chanmaoyoupu.com/ingredient/jue-gen-fen-1782966998943.jpeg",
+      "imageUrl": "/images/ingredients/jue-gen-fen.jpg",
       "nutrition": "每100g干蕨根粉含热量约340大卡，碳水化合物约80g，蛋白质约1.5g，膳食纤维丰富。含有多种微量元素和类黄酮物质，具有一定的抗氧化作用。升糖指数较低，适合糖尿病患者适量食用。",
       "tips": "选购蕨根粉时，应选颜色自然、粗细均匀、无异味的。干蕨根粉需提前用凉水泡软，煮后过凉水口感更爽滑。蕨根粉性寒，脾胃虚寒者不宜过量食用。",
       "aliases": "蕨根粉丝,黑粉条,蕨根粉条",
@@ -28587,7 +29460,7 @@
       "slug": "qiu-kui",
       "category": "蔬菜",
       "description": "秋葵又名羊角豆、咖啡黄葵，是一种营养丰富的保健蔬菜。其果实中含有特有的黏液蛋白，具有保护胃黏膜、促进消化、增强体力等功效。口感脆嫩多汁，滑润不腻，适合凉拌、清炒、蒜蓉等多种烹饪方式。",
-      "imageUrl": "https://img.chanmaoyoupu.com/ingredient/qiu-kui-1782967000772.jpeg",
+      "imageUrl": "/images/ingredients/qiu-kui.jpg",
       "nutrition": "每100g秋葵含能量37大卡，蛋白质2g，碳水化合物6.2g，膳食纤维3.9g，维生素C约21mg，维生素A约350μg，还含有钙、铁、锌、硒等多种矿物质，以及独特的黏液蛋白和黄酮类物质。",
       "tips": "选择秋葵时，应选长度5-10厘米、颜色鲜绿、表面有细绒毛、质地饱满的。秋葵最好现买现吃，冷藏可保存2-3天。烹饪前不要切掉蒂部，否则营养会流失。",
       "aliases": "羊角豆,咖啡黄葵,黄秋葵,毛茄",
@@ -32860,7 +33733,7 @@
       "category": "干货",
       "description": "莲子是睡莲科植物莲的干燥成熟种子，去壳去芯后可食用。味甘涩性平，含丰富蛋白质、淀粉和矿物质，具有养心安神、健脾止泻的功效。",
       "imageUrl": "/images/ingredients/lian-zi.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量344千卡，蛋白质17.2克，脂肪2.0克，碳水化合物64克，钾564毫克，磷550毫克，镁242毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -32876,7 +33749,7 @@
       "category": "干货",
       "description": "银耳又称白木耳，是银耳科真菌的子实体。形似菊花，色白半透明，富含天然植物胶质和多种氨基酸。有'菌中之冠'美称，是传统滋补佳品。",
       "imageUrl": "/images/ingredients/yin-er.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量200千卡，蛋白质10克，脂肪1.4克，碳水化合物36克，膳食纤维30克，钙36毫克，铁4.1毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -32892,7 +33765,7 @@
       "category": "干货",
       "description": "红枣是鼠李科植物枣的成熟果实，干制品。味甘性温，富含维生素C和铁元素，是中国传统的药食同源食材，常用于煲汤、煮粥、泡茶。",
       "imageUrl": "/images/ingredients/hong-zao.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量264千卡，蛋白质3.5克，脂肪0.5克，碳水化合物67克，膳食纤维6.7克，铁2.3毫克，维生素C 14毫克，钾524毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -32908,7 +33781,7 @@
       "category": "ingredient",
       "description": "鲜百合是百合的鳞茎，味甘微苦，有润肺止咳、清心安神的功效，常用于炒菜和煲汤。",
       "imageUrl": "/images/ingredients/xian-bai-he.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量162千卡，蛋白质3.2克，脂肪0.1克，碳水化合物38克，膳食纤维1.7克，钾510毫克，维生素C 18毫克",
       "tips": "",
       "aliases": "",
       "season": "",
@@ -32924,7 +33797,7 @@
       "category": "ingredient",
       "description": "西芹是芹菜的一个品种，茎秆粗壮、纤维较少、口感脆嫩，适合炒食和凉拌。",
       "imageUrl": "/images/ingredients/xi-qin.jpg",
-      "nutrition": "",
+      "nutrition": "每100克含热量14千卡，蛋白质0.7克，脂肪0.1克，碳水化合物3.2克，膳食纤维1.4克，维生素K 29微克，钾260毫克，维生素C 3毫克",
       "tips": "",
       "aliases": "",
       "season": "",
