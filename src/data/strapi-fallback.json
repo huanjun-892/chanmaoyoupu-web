@@ -516,12 +516,12 @@
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "",
+      "nutrition": "<p><strong>热量：</strong>约320千卡/份</p><p><strong>蛋白质：</strong>约6克</p><p><strong>脂肪：</strong>约18克（主要来自炸油）</p><p><strong>碳水化合物：</strong>约35克（南瓜天然糖分+淀粉）</p><p><strong>维生素A：</strong>丰富（南瓜富含β-胡萝卜素）</p>",
       "common_mistakes": "<p><strong>1. 南瓜切太细：</strong>南瓜条太细炸后容易碎，切成约1厘米粗最合适。太粗则不容易入味。</p><p><strong>2. 咸蛋黄没蒸透：</strong>蛋黄没完全熟透会有腥味，蒸5分钟确保熟透再压泥。</p><p><strong>3. 炒蛋黄火太大：</strong>咸蛋黄含糖和脂肪，大火很容易炒焦发苦。一定要小火慢炒，炒出细密泡沫即可。</p><p><strong>4. 南瓜没沥干就裹粉：</strong>表面有水分，淀粉会变成糊状，炸出来不酥脆。一定要先吸干水分再裹粉。</p>",
       "success_tips": "<p><strong>选南瓜：</strong>选老南瓜（外皮深黄、手感沉），甜度高、水分少，炸出来更香甜。嫩南瓜水分太多不适合这道菜。</p><p><strong>裹粉技巧：</strong>淀粉不要裹太厚，薄薄一层即可。太厚炸出来口感粉腻，影响南瓜的清甜。</p><p><strong>油温控制：</strong>第一遍炸用中油温定型，如果想更酥脆可以升高油温复炸30秒。</p><p><strong>咸蛋黄选择：</strong>用真空包装的冷冻咸蛋黄更方便，品质稳定。新鲜咸鸭蛋的蛋黄更香但操作稍麻烦。</p>",
       "ingredient_substitutes": "<p><strong>南瓜：</strong>可用红薯、芋头代替，做法相同，都很适合金沙做法</p><p><strong>咸蛋黄：</strong>没有咸蛋黄可用咸蛋黄酱（约2大勺）代替，风味略不同但也能做出效果</p><p><strong>南瓜替换为虾仁：</strong>同样的金沙做法可以做金沙虾球，非常好吃</p>",
-      "suitable_for": "",
-      "required_tools": ""
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，尤其适合秋冬季节食用</p><p><strong>注意事项：</strong>南瓜含糖量较高，糖尿病患者适量；油炸食品，减肥人群少食</p><p><strong>适用场景：</strong>宴客菜、家常小食、下酒菜</p><p><strong>搭配建议：</strong>配清淡的汤品或凉拌菜，平衡油炸的油腻感</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅（炸和炒金沙）、菜刀、菜板</p><p><strong>可选工具：</strong>厨房温度计（控制油温）、厨房纸（吸油）</p>"
     },
     {
       "id": 303,
@@ -617,12 +617,12 @@
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "",
+      "nutrition": "<p><strong>热量：</strong>约180千卡/份（加猪肉约250千卡）</p><p><strong>蛋白质：</strong>约12克（豆腐为主）</p><p><strong>脂肪：</strong>约8克</p><p><strong>碳水化合物：</strong>约15克</p><p><strong>益生菌：</strong>泡菜富含乳酸菌，有助肠道健康</p>",
       "common_mistakes": "<p><strong>1. 泡菜不炒直接煮：</strong>直接加水煮的泡菜汤味道单薄，炒过的泡菜风味更浓郁醇厚，这一步不能省。</p><p><strong>2. 忘记加泡菜汁：</strong>泡菜汁是汤底鲜味的灵魂，不加的话汤会很寡淡。至少加3大勺。</p><p><strong>3. 豆腐下太早煮碎：</strong>豆腐后放、小火慢煮，保持完整形状。用嫩豆腐口感最好，老豆腐也可以但口感偏扎实。</p><p><strong>4. 用淘米水更好：</strong>淘米水中的淀粉让汤底更浓稠顺滑，比清水效果好很多。</p>",
       "success_tips": "<p><strong>泡菜选择：</strong>用发酵较久的老泡菜（酸味重的），做出来的汤味道最正宗。新做的泡菜偏甜偏脆，酸味不足。</p><p><strong>用淘米水：</strong>第二次淘米水最好，第一次太浑浊。淘米水让汤底更浓稠，口感更丰富。</p><p><strong>加一个鸡蛋：</strong>出锅前打入一个鸡蛋，半熟状态拌着饭吃是韩式吃法精髓。</p><p><strong>石锅更香：</strong>如果有石锅，用石锅煮这道汤，底部会有焦香的锅巴，风味升级。</p>",
       "ingredient_substitutes": "<p><strong>泡菜：</strong>没有韩式泡菜无法替代，这是核心食材</p><p><strong>嫩豆腐：</strong>可用老豆腐、冻豆腐代替，口感不同但都可以</p><p><strong>猪肉：</strong>可换成虾仁、金枪鱼罐头，或者完全不加做成素版</p><p><strong>韩式辣椒粉：</strong>可用普通辣椒粉代替，但韩式辣椒粉颜色更红、辣度更温和</p>",
-      "suitable_for": "",
-      "required_tools": ""
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，特别适合喜欢酸辣口味的人</p><p><strong>注意事项：</strong>泡菜含盐量高，高血压患者注意控量；胃肠敏感者少食辛辣部分</p><p><strong>适用场景：</strong>冬日暖身汤、减脂餐配汤、一人食</p><p><strong>搭配建议：</strong>配一碗白米饭，或者加入年糕、拉面做成韩式部队锅</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>汤锅或砂锅、菜刀、菜板</p><p><strong>可选工具：</strong>石锅（更有韩式风味，底部能出锅巴）</p>"
     },
     {
       "id": 302,
@@ -723,12 +723,12 @@
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "",
+      "nutrition": "<p><strong>热量：</strong>约350千卡/份</p><p><strong>蛋白质：</strong>约38克（牛肉高蛋白）</p><p><strong>脂肪：</strong>约18克</p><p><strong>碳水化合物：</strong>约8克</p><p><strong>铁：</strong>约4毫克（牛肉富含血红素铁，补铁佳品）</p>",
       "common_mistakes": "<p><strong>1. 牛肉顺纹切：</strong>顺纹切的牛柳又老又韧嚼不动，一定要逆纹（刀口垂直于肌肉纹理）切薄片。</p><p><strong>2. 牛肉炒太久：</strong>牛柳大火滑炒不超过1分钟，变色就捞出。炒全熟了再回锅就老了。</p><p><strong>3. 蒜末炒焦：</strong>蒜末含糖量高，大火很容易焦苦。要中小火慢煸至金黄即可。</p><p><strong>4. 黑胡椒用粉不是碎：</strong>现磨黑胡椒碎比黑胡椒粉香气浓郁得多，粉状的容易结块且味道平淡。</p>",
       "success_tips": "<p><strong>选牛肉：</strong>牛里脊（菲力）是最嫩的部位，适合快炒。选颜色鲜红、有光泽的新鲜牛肉。冷冻牛肉解冻后口感会差一些。</p><p><strong>腌制加淀粉：</strong>淀粉在牛肉表面形成保护层，锁住水分，炒出来更嫩滑。</p><p><strong>黄油提香：</strong>出锅前加一小块黄油，奶香和黑椒香融合，餐厅级风味。</p><p><strong>锅要够热：</strong>炒牛柳一定要大火热锅，快速锁住肉汁。锅不够热牛肉会出水变柴。</p>",
       "ingredient_substitutes": "<p><strong>牛里脊：</strong>可用牛腱子、牛腿肉代替，但嫩度稍差，腌制时可以加少许小苏打（1/4小勺）软化</p><p><strong>黑胡椒碎：</strong>可用黑椒酱2大勺代替，但风味不同，酱版偏甜</p><p><strong>黄油：</strong>没有可不加，用植物油一样好吃，只是少了奶香</p><p><strong>换成猪柳/鸡柳：</strong>同样的做法可以做蒜香黑椒猪柳或鸡柳，腌制时间延长到20分钟</p>",
-      "suitable_for": "",
-      "required_tools": ""
+      "suitable_for": "<p><strong>适宜人群：</strong>牛肉爱好者、健身人群（高蛋白低脂）</p><p><strong>注意事项：</strong>牛肉不易消化，胃肠功能弱者适量；黑椒辛辣刺激，胃溃疡患者少食</p><p><strong>适用场景：</strong>家常快手菜、宴客硬菜、西式风味中餐</p><p><strong>搭配建议：</strong>配米饭或意面都很合适，也可搭配烤蔬菜</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅（需要大火爆炒）、菜刀、菜板</p><p><strong>可选工具：</strong>现磨黑胡椒器（比黑胡椒碎更香）</p>"
     },
     {
       "id": 301,
@@ -829,12 +829,12 @@
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "",
+      "nutrition": "<p><strong>热量：</strong>约380千卡/份</p><p><strong>蛋白质：</strong>约28克（鱼肉优质蛋白）</p><p><strong>脂肪：</strong>约16克</p><p><strong>碳水化合物：</strong>约30克（糖醋汁）</p><p><strong>DHA：</strong>鱼肉富含不饱和脂肪酸，有益大脑健康</p>",
       "common_mistakes": "<p><strong>1. 鱼块不腌制直接炸：</strong>不腌制会有腥味，至少用料酒和盐腌15分钟。</p><p><strong>2. 鱼块裹粉不均匀：</strong>每个面都要裹到淀粉，否则炸出来颜色不一致，挂汁也不均匀。</p><p><strong>3. 酱汁太稀：</strong>糖醋汁一定要熬到浓稠再下鱼块，太稀挂不住，鱼块也不酥脆了。</p><p><strong>4. 鱼块在酱汁中泡太久：</strong>裹汁后要立即上桌，泡久了外皮变软失去酥脆口感。</p>",
       "success_tips": "<p><strong>选鱼：</strong>草鱼肉质紧实、刺少，最适合做瓦块鱼。也可以用鲤鱼或黑鱼。鱼不要太大，750克左右最好操作。</p><p><strong>复炸更酥脆：</strong>第一遍炸定型，升高油温复炸30秒，外皮更加金黄酥脆，而且不容易回软。</p><p><strong>糖醋比例：</strong>经典的糖醋比例是糖:醋=3:2，可以根据个人口味微调。番茄酱增加色泽和风味层次。</p><p><strong>浇汁法更好：</strong>如果担心鱼块变软，可以把炸好的鱼块摆盘，酱汁单独熬好后浇上去，上桌时再拌。</p>",
       "ingredient_substitutes": "<p><strong>草鱼：</strong>可用鲤鱼、黑鱼、鲈鱼代替，鱼肉紧实的品种都适合</p><p><strong>陈醋：</strong>可用香醋、米醋代替，风味略有不同（陈醋最浓郁）</p><p><strong>番茄酱：</strong>可用新鲜番茄去皮切碎熬制，但色泽和浓度不如番茄酱</p><p><strong>懒人版：</strong>买现成的糖醋酱代替自制，省去熬汁步骤</p>",
-      "suitable_for": "",
-      "required_tools": ""
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，尤其适合喜欢酸甜口味的人和小朋友</p><p><strong>注意事项：</strong>油炸食品热量较高，减肥人群少食；鱼有刺，儿童食用注意安全；糖尿病患者注意糖分</p><p><strong>适用场景：</strong>家宴硬菜、节假日大餐、待客菜</p><p><strong>搭配建议：</strong>配米饭，搭配清炒时蔬平衡油腻</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅（炸鱼+熬汁）、菜刀、菜板</p><p><strong>可选工具：</strong>深炸锅（炸鱼更方便）、厨房温度计</p>"
     },
     {
       "id": 300,
@@ -935,12 +935,12 @@
       "methods": [],
       "regions": [],
       "cuisine": null,
-      "nutrition": "",
+      "nutrition": "<p><strong>热量：</strong>约280千卡/份</p><p><strong>蛋白质：</strong>约32克（鸡胸肉高蛋白）</p><p><strong>脂肪：</strong>约10克</p><p><strong>碳水化合物：</strong>约15克</p><p><strong>维生素B6：</strong>丰富（鸡胸肉富含维生素B6，促进蛋白质代谢）</p>",
       "common_mistakes": "<p><strong>1. 甜面酱不炒直接拌：</strong>生甜面酱有生酱味，必须用油炒至冒泡出香才算\"爆\"好了。这一步是菜名的由来。</p><p><strong>2. 鸡丁不腌制：</strong>鸡胸肉本身脂肪少，不腌制直接炒会很柴。加淀粉和水分抓匀能保持嫩滑。</p><p><strong>3. 黄瓜炒太久：</strong>黄瓜最后放、快速翻炒即可，炒软了就失去爽脆口感。</p><p><strong>4. 酱汁太咸：</strong>甜面酱本身很咸，加糖可以中和，也可以加少许清水稀释。不需要额外加盐。</p>",
       "success_tips": "<p><strong>选鸡胸肉：</strong>鸡胸肉低脂高蛋白，切丁大小均匀（1.5厘米）最好熟。也可以用鸡腿肉，口感更嫩但脂肪稍多。</p><p><strong>甜面酱选择：</strong>北京产的天源或六必居甜面酱最正宗。黄豆酱也可以但风味不同。</p><p><strong>配菜灵活：</strong>经典搭配是黄瓜丁和胡萝卜丁，也可以加入花生米（炸过的）、笋丁等增加口感。</p><p><strong>配主食：</strong>这道菜最经典的吃法是配烙饼或卷饼，像北京烤鸭的吃法一样卷着吃，也可以配米饭。</p>",
       "ingredient_substitutes": "<p><strong>鸡胸肉：</strong>可用鸡腿肉（去骨去皮），口感更嫩；也可用猪里脊代替做成酱爆肉丁</p><p><strong>甜面酱：</strong>可用黄豆酱+少许糖代替，或用京酱肉丝的酱料</p><p><strong>黄瓜：</strong>可用西葫芦、青椒丁代替，或者加入玉米粒增加甜味</p><p><strong>素食版：</strong>鸡丁换成老豆腐丁或杏鲍菇丁，同样做法也很好吃</p>",
-      "suitable_for": "",
-      "required_tools": ""
+      "suitable_for": "<p><strong>适宜人群：</strong>大众皆宜，尤其适合喜欢酱香味的人</p><p><strong>注意事项：</strong>甜面酱含盐量高，高血压患者注意控量；鸡胸肉低脂高蛋白，健身人群友好</p><p><strong>适用场景：</strong>家常快手菜、便当菜、卷饼配菜</p><p><strong>搭配建议：</strong>最经典配烙饼/卷饼卷着吃，也配米饭，可做便当主菜</p>",
+      "required_tools": "<p><strong>必备厨具：</strong>炒锅、菜刀、菜板</p><p><strong>可选工具：</strong>蒸锅（加热饼用）</p>"
     },
     {
       "id": 299,
