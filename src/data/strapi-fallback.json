@@ -449,16 +449,77 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "南瓜",
+          "amount": "400克",
+          "isMain": true
+        },
+        {
+          "name": "咸蛋黄",
+          "amount": "4个",
+          "isMain": true
+        },
+        {
+          "name": "玉米淀粉",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量（炸用）",
+          "isMain": false
+        },
+        {
+          "name": "盐",
+          "amount": "少许",
+          "isMain": false
+        },
+        {
+          "name": "白糖",
+          "amount": "1小勺",
+          "isMain": false
+        },
+        {
+          "name": "料酒",
+          "amount": "1小勺",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "南瓜400克去皮去瓤，切成约1厘米粗、5厘米长的条状（不要太细，炸完会缩）。切好后用厨房纸吸干表面水分，均匀撒上一层玉米淀粉，轻轻翻拌让每根南瓜条都裹上薄薄一层粉。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "咸蛋黄4个放入小碗中，加1小勺料酒，上锅蒸5分钟至熟透。蒸好后用勺子背压成细腻的泥状，越细越容易炒出金沙效果。也可以用现成的熟咸鸭蛋，取出蛋黄直接用。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中倒入足量油，烧至五成热（约160度，筷子插入有小泡），放入裹好淀粉的南瓜条，中火炸约3-4分钟至表面金黄定型，捞出控油。油温不要太高，否则外焦里生。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "锅中留约1勺底油，小火放入压碎的咸蛋黄泥，不断翻炒。蛋黄会先变大泡，然后变成细密的小泡沫，呈现金黄色沙沙的状态，这就是\"金沙\"效果。整个过程约1-2分钟，火太大容易炒焦。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "蛋黄炒出金沙后，倒入炸好的南瓜条，快速翻炒均匀，让每根南瓜条都裹满金黄的蛋黄沙。加入少许盐和1小勺白糖调味（咸蛋黄本身有咸味，盐要少放），翻匀即可出锅。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "出锅装盘，趁热食用口感最佳。成品外层金沙酥香、内里南瓜软糯香甜，咸甜交织，是一道非常受欢迎的宴客菜。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
+      "common_mistakes": "<p><strong>1. 南瓜切太细：</strong>南瓜条太细炸后容易碎，切成约1厘米粗最合适。太粗则不容易入味。</p><p><strong>2. 咸蛋黄没蒸透：</strong>蛋黄没完全熟透会有腥味，蒸5分钟确保熟透再压泥。</p><p><strong>3. 炒蛋黄火太大：</strong>咸蛋黄含糖和脂肪，大火很容易炒焦发苦。一定要小火慢炒，炒出细密泡沫即可。</p><p><strong>4. 南瓜没沥干就裹粉：</strong>表面有水分，淀粉会变成糊状，炸出来不酥脆。一定要先吸干水分再裹粉。</p>",
+      "success_tips": "<p><strong>选南瓜：</strong>选老南瓜（外皮深黄、手感沉），甜度高、水分少，炸出来更香甜。嫩南瓜水分太多不适合这道菜。</p><p><strong>裹粉技巧：</strong>淀粉不要裹太厚，薄薄一层即可。太厚炸出来口感粉腻，影响南瓜的清甜。</p><p><strong>油温控制：</strong>第一遍炸用中油温定型，如果想更酥脆可以升高油温复炸30秒。</p><p><strong>咸蛋黄选择：</strong>用真空包装的冷冻咸蛋黄更方便，品质稳定。新鲜咸鸭蛋的蛋黄更香但操作稍麻烦。</p>",
+      "ingredient_substitutes": "<p><strong>南瓜：</strong>可用红薯、芋头代替，做法相同，都很适合金沙做法</p><p><strong>咸蛋黄：</strong>没有咸蛋黄可用咸蛋黄酱（约2大勺）代替，风味略不同但也能做出效果</p><p><strong>南瓜替换为虾仁：</strong>同样的金沙做法可以做金沙虾球，非常好吃</p>",
       "suitable_for": "",
       "required_tools": ""
     },
@@ -479,16 +540,87 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "韩式泡菜",
+          "amount": "200克",
+          "isMain": true
+        },
+        {
+          "name": "嫩豆腐",
+          "amount": "1盒（约300克）",
+          "isMain": true
+        },
+        {
+          "name": "泡菜汁",
+          "amount": "3大勺",
+          "isMain": false
+        },
+        {
+          "name": "蒜末",
+          "amount": "1大勺",
+          "isMain": false
+        },
+        {
+          "name": "韩式辣椒粉",
+          "amount": "1大勺",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "1大勺",
+          "isMain": false
+        },
+        {
+          "name": "香油",
+          "amount": "1小勺",
+          "isMain": false
+        },
+        {
+          "name": "葱花",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "猪肉片（五花肉）",
+          "amount": "100克（可选）",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "泡菜200克切成约3厘米的小段（方便食用），泡菜汁留着备用（这是汤底鲜味的关键）。嫩豆腐切成2厘米见方的小块，放入淡盐水中浸泡5分钟（不容易煮碎）。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "如果用猪肉，五花肉切成薄片备用。锅中倒入少许香油，中火放入蒜末炒香，如果有猪肉片也放入一起翻炒至变色。素版可以跳过这一步，直接炒泡菜。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "放入切好的泡菜，翻炒2-3分钟，炒到泡菜微微变软、散发出浓郁酸香味。这一步很重要，炒过的泡菜比直接煮的味道更醇厚。加入1大勺韩式辣椒粉一起炒匀。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "倒入约600毫升清水（或淘米水，淘米水会让汤更浓稠），加入3大勺泡菜汁、1大勺生抽调味。大火煮开后转中火煮5分钟，让泡菜的味道充分融入汤中。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "轻轻放入豆腐块，用勺子稍微推一下让豆腐浸入汤中。转中小火继续煮3-5分钟，让豆腐充分吸收泡菜汤的鲜味。注意不要用大火猛煮，否则豆腐容易碎。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "尝一下咸淡，泡菜和生抽已经有足够的咸味，一般不需要额外加盐。关火后淋几滴香油，撒上葱花即可上桌。配一碗白米饭，热乎乎的特别治愈。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
+      "common_mistakes": "<p><strong>1. 泡菜不炒直接煮：</strong>直接加水煮的泡菜汤味道单薄，炒过的泡菜风味更浓郁醇厚，这一步不能省。</p><p><strong>2. 忘记加泡菜汁：</strong>泡菜汁是汤底鲜味的灵魂，不加的话汤会很寡淡。至少加3大勺。</p><p><strong>3. 豆腐下太早煮碎：</strong>豆腐后放、小火慢煮，保持完整形状。用嫩豆腐口感最好，老豆腐也可以但口感偏扎实。</p><p><strong>4. 用淘米水更好：</strong>淘米水中的淀粉让汤底更浓稠顺滑，比清水效果好很多。</p>",
+      "success_tips": "<p><strong>泡菜选择：</strong>用发酵较久的老泡菜（酸味重的），做出来的汤味道最正宗。新做的泡菜偏甜偏脆，酸味不足。</p><p><strong>用淘米水：</strong>第二次淘米水最好，第一次太浑浊。淘米水让汤底更浓稠，口感更丰富。</p><p><strong>加一个鸡蛋：</strong>出锅前打入一个鸡蛋，半熟状态拌着饭吃是韩式吃法精髓。</p><p><strong>石锅更香：</strong>如果有石锅，用石锅煮这道汤，底部会有焦香的锅巴，风味升级。</p>",
+      "ingredient_substitutes": "<p><strong>泡菜：</strong>没有韩式泡菜无法替代，这是核心食材</p><p><strong>嫩豆腐：</strong>可用老豆腐、冻豆腐代替，口感不同但都可以</p><p><strong>猪肉：</strong>可换成虾仁、金枪鱼罐头，或者完全不加做成素版</p><p><strong>韩式辣椒粉：</strong>可用普通辣椒粉代替，但韩式辣椒粉颜色更红、辣度更温和</p>",
       "suitable_for": "",
       "required_tools": ""
     },
@@ -509,16 +641,92 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "牛里脊",
+          "amount": "300克",
+          "isMain": true
+        },
+        {
+          "name": "大蒜",
+          "amount": "6瓣",
+          "isMain": true
+        },
+        {
+          "name": "黑胡椒碎",
+          "amount": "1.5大勺",
+          "isMain": true
+        },
+        {
+          "name": "洋葱",
+          "amount": "半个",
+          "isMain": false
+        },
+        {
+          "name": "青红椒",
+          "amount": "各半个",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "1大勺",
+          "isMain": false
+        },
+        {
+          "name": "蚝油",
+          "amount": "1大勺",
+          "isMain": false
+        },
+        {
+          "name": "料酒",
+          "amount": "1大勺",
+          "isMain": false
+        },
+        {
+          "name": "淀粉",
+          "amount": "1小勺",
+          "isMain": false
+        },
+        {
+          "name": "黄油",
+          "amount": "10克（可选）",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "牛里脊300克逆纹切成约0.5厘米厚的柳条状（长5厘米、宽1厘米）。逆纹切是关键，切断肌肉纤维口感才嫩。放入碗中，加1大勺生抽、1大勺料酒、1小勺淀粉和少许黑胡椒，抓匀腌制15分钟。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "大蒜6瓣切成蒜末（不要太碎，小颗粒更有口感）。洋葱半个切丝，青红椒各半个切菱形块备用。这些配菜增加色彩和口感层次。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅烧至冒烟，倒入适量食用油，油温八成热时放入腌好的牛柳，大火快速滑散。炒至表面变色、七成熟立即盛出，不要炒到全熟，后面还要回锅。全程不超过1分钟。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "锅中留底油，转中小火放入蒜末，慢慢煸炒至金黄出香味（约1分钟），蒜香弥漫时加入1.5大勺黑胡椒碎一起炒出香味。注意火不要大，蒜末和黑胡椒都容易炒焦。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "转大火，放入洋葱丝和青红椒块翻炒30秒至断生，倒回炒好的牛柳，加入1大勺蚝油、少许生抽调味，快速翻炒均匀。如果想更香，可以加10克黄油，黄油和黑椒是绝配。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "大火翻炒约30秒让所有食材和调味充分融合，即可出锅装盘。成品蒜香浓郁、黑椒辛辣、牛柳嫩滑，配米饭或意面都很棒。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
+      "common_mistakes": "<p><strong>1. 牛肉顺纹切：</strong>顺纹切的牛柳又老又韧嚼不动，一定要逆纹（刀口垂直于肌肉纹理）切薄片。</p><p><strong>2. 牛肉炒太久：</strong>牛柳大火滑炒不超过1分钟，变色就捞出。炒全熟了再回锅就老了。</p><p><strong>3. 蒜末炒焦：</strong>蒜末含糖量高，大火很容易焦苦。要中小火慢煸至金黄即可。</p><p><strong>4. 黑胡椒用粉不是碎：</strong>现磨黑胡椒碎比黑胡椒粉香气浓郁得多，粉状的容易结块且味道平淡。</p>",
+      "success_tips": "<p><strong>选牛肉：</strong>牛里脊（菲力）是最嫩的部位，适合快炒。选颜色鲜红、有光泽的新鲜牛肉。冷冻牛肉解冻后口感会差一些。</p><p><strong>腌制加淀粉：</strong>淀粉在牛肉表面形成保护层，锁住水分，炒出来更嫩滑。</p><p><strong>黄油提香：</strong>出锅前加一小块黄油，奶香和黑椒香融合，餐厅级风味。</p><p><strong>锅要够热：</strong>炒牛柳一定要大火热锅，快速锁住肉汁。锅不够热牛肉会出水变柴。</p>",
+      "ingredient_substitutes": "<p><strong>牛里脊：</strong>可用牛腱子、牛腿肉代替，但嫩度稍差，腌制时可以加少许小苏打（1/4小勺）软化</p><p><strong>黑胡椒碎：</strong>可用黑椒酱2大勺代替，但风味不同，酱版偏甜</p><p><strong>黄油：</strong>没有可不加，用植物油一样好吃，只是少了奶香</p><p><strong>换成猪柳/鸡柳：</strong>同样的做法可以做蒜香黑椒猪柳或鸡柳，腌制时间延长到20分钟</p>",
       "suitable_for": "",
       "required_tools": ""
     },
@@ -539,16 +747,92 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "草鱼（或鲤鱼）",
+          "amount": "1条（约750克）",
+          "isMain": true
+        },
+        {
+          "name": "番茄酱",
+          "amount": "3大勺",
+          "isMain": true
+        },
+        {
+          "name": "白糖",
+          "amount": "3大勺",
+          "isMain": true
+        },
+        {
+          "name": "陈醋",
+          "amount": "2大勺",
+          "isMain": true
+        },
+        {
+          "name": "淀粉",
+          "amount": "适量（裹鱼用）",
+          "isMain": false
+        },
+        {
+          "name": "料酒",
+          "amount": "2大勺",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "1大勺",
+          "isMain": false
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": false
+        },
+        {
+          "name": "葱姜蒜",
+          "amount": "各适量",
+          "isMain": false
+        },
+        {
+          "name": "食用油",
+          "amount": "适量（炸鱼用）",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "草鱼1条（约750克）去鳞去鳃去内脏，清洗干净。从鱼身两侧各片下一大片鱼肉，去掉鱼皮（或保留），斜刀切成约3厘米宽的瓦块状（所以叫瓦块鱼）。鱼骨鱼头可以留着熬汤。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "鱼块放入大碗中，加入2大勺料酒、1小勺盐、几片姜和葱段，抓匀腌制15分钟去腥入味。腌好后拣去葱姜，用厨房纸吸干鱼块表面的水分。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "鱼块均匀裹上一层干淀粉（每个面都要裹到），提起鱼块淀粉不掉落即可。锅中倒入足量油，烧至六成热（约170度），放入鱼块中火炸约3-4分钟至金黄定型，捞出。升高油温至八成热，复炸30秒至表面更酥脆，捞出控油。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "另起一锅，放少许油，小火爆香葱姜蒜末。加入3大勺番茄酱炒出红油（约30秒），倒入3大勺白糖、2大勺陈醋、1大勺生抽和半碗清水（约150毫升），中火熬煮至酱汁冒大泡变浓稠。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "酱汁熬到浓稠挂勺时（约2-3分钟），尝一下酸甜度，按个人口味调整（喜欢酸多加醋，喜欢甜多加糖）。淋入少许水淀粉勾芡，让酱汁更加浓稠光亮。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "将炸好的鱼块倒入糖醋汁中，快速翻拌均匀（或者将酱汁浇在摆好盘的鱼块上），让每块鱼都裹满亮泽的糖醋酱。撒上少许白芝麻和葱花点缀即可上桌。外酥里嫩、酸甜适口。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
+      "common_mistakes": "<p><strong>1. 鱼块不腌制直接炸：</strong>不腌制会有腥味，至少用料酒和盐腌15分钟。</p><p><strong>2. 鱼块裹粉不均匀：</strong>每个面都要裹到淀粉，否则炸出来颜色不一致，挂汁也不均匀。</p><p><strong>3. 酱汁太稀：</strong>糖醋汁一定要熬到浓稠再下鱼块，太稀挂不住，鱼块也不酥脆了。</p><p><strong>4. 鱼块在酱汁中泡太久：</strong>裹汁后要立即上桌，泡久了外皮变软失去酥脆口感。</p>",
+      "success_tips": "<p><strong>选鱼：</strong>草鱼肉质紧实、刺少，最适合做瓦块鱼。也可以用鲤鱼或黑鱼。鱼不要太大，750克左右最好操作。</p><p><strong>复炸更酥脆：</strong>第一遍炸定型，升高油温复炸30秒，外皮更加金黄酥脆，而且不容易回软。</p><p><strong>糖醋比例：</strong>经典的糖醋比例是糖:醋=3:2，可以根据个人口味微调。番茄酱增加色泽和风味层次。</p><p><strong>浇汁法更好：</strong>如果担心鱼块变软，可以把炸好的鱼块摆盘，酱汁单独熬好后浇上去，上桌时再拌。</p>",
+      "ingredient_substitutes": "<p><strong>草鱼：</strong>可用鲤鱼、黑鱼、鲈鱼代替，鱼肉紧实的品种都适合</p><p><strong>陈醋：</strong>可用香醋、米醋代替，风味略有不同（陈醋最浓郁）</p><p><strong>番茄酱：</strong>可用新鲜番茄去皮切碎熬制，但色泽和浓度不如番茄酱</p><p><strong>懒人版：</strong>买现成的糖醋酱代替自制，省去熬汁步骤</p>",
       "suitable_for": "",
       "required_tools": ""
     },
@@ -569,16 +853,92 @@
           }
         }
       },
-      "ingredients": [],
-      "steps": [],
+      "ingredients": [
+        {
+          "name": "鸡胸肉",
+          "amount": "300克",
+          "isMain": true
+        },
+        {
+          "name": "甜面酱",
+          "amount": "2大勺",
+          "isMain": true
+        },
+        {
+          "name": "黄瓜",
+          "amount": "1根",
+          "isMain": false
+        },
+        {
+          "name": "胡萝卜",
+          "amount": "半根",
+          "isMain": false
+        },
+        {
+          "name": "葱白",
+          "amount": "2段",
+          "isMain": false
+        },
+        {
+          "name": "姜末",
+          "amount": "1小勺",
+          "isMain": false
+        },
+        {
+          "name": "料酒",
+          "amount": "1大勺",
+          "isMain": false
+        },
+        {
+          "name": "生抽",
+          "amount": "1小勺",
+          "isMain": false
+        },
+        {
+          "name": "淀粉",
+          "amount": "1小勺",
+          "isMain": false
+        },
+        {
+          "name": "白糖",
+          "amount": "1小勺",
+          "isMain": false
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "鸡胸肉300克切成约1.5厘米见方的丁，放入碗中加1大勺料酒、1小勺生抽、1小勺淀粉和少许清水，抓匀至水分被鸡肉吸收，腌制10分钟。这样处理的鸡丁嫩滑不柴。"
+        },
+        {
+          "stepNumber": 2,
+          "description": "黄瓜1根洗净切丁（约1厘米大小），胡萝卜半根去皮切同样大小的丁。葱白切小段，姜切末。甜面酱2大勺加1小勺白糖和2大勺清水调匀备用（甜面酱偏咸，稀释后更容易炒匀）。"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅烧热，倒入适量食用油，油温六成热时放入腌好的鸡丁，大火快速滑散炒至变色发白，盛出备用。鸡丁不要炒太久，变色即可，否则口感发柴。"
+        },
+        {
+          "stepNumber": 4,
+          "description": "锅中留底油，放入姜末和葱白段小火爆香，倒入调好的甜面酱汁，中小火翻炒1-2分钟，炒到酱汁冒泡、颜色变深、散发出浓郁酱香味。这一步是酱爆的关键，酱一定要炒透。"
+        },
+        {
+          "stepNumber": 5,
+          "description": "酱汁炒香后，转大火放入胡萝卜丁翻炒30秒（胡萝卜需要油炒更易吸收营养），再放入黄瓜丁翻炒几下，最后倒回鸡丁。"
+        },
+        {
+          "stepNumber": 6,
+          "description": "大火快速翻炒均匀，让酱汁包裹住每一块鸡丁和配菜。酱汁浓稠、颜色油亮即可出锅装盘。可以搭配米饭或卷饼食用，酱香浓郁、鸡丁嫩滑、黄瓜爽脆，非常下饭。"
+        }
+      ],
       "tags": [],
       "methods": [],
       "regions": [],
       "cuisine": null,
       "nutrition": "",
-      "common_mistakes": "",
-      "success_tips": "",
-      "ingredient_substitutes": "",
+      "common_mistakes": "<p><strong>1. 甜面酱不炒直接拌：</strong>生甜面酱有生酱味，必须用油炒至冒泡出香才算\"爆\"好了。这一步是菜名的由来。</p><p><strong>2. 鸡丁不腌制：</strong>鸡胸肉本身脂肪少，不腌制直接炒会很柴。加淀粉和水分抓匀能保持嫩滑。</p><p><strong>3. 黄瓜炒太久：</strong>黄瓜最后放、快速翻炒即可，炒软了就失去爽脆口感。</p><p><strong>4. 酱汁太咸：</strong>甜面酱本身很咸，加糖可以中和，也可以加少许清水稀释。不需要额外加盐。</p>",
+      "success_tips": "<p><strong>选鸡胸肉：</strong>鸡胸肉低脂高蛋白，切丁大小均匀（1.5厘米）最好熟。也可以用鸡腿肉，口感更嫩但脂肪稍多。</p><p><strong>甜面酱选择：</strong>北京产的天源或六必居甜面酱最正宗。黄豆酱也可以但风味不同。</p><p><strong>配菜灵活：</strong>经典搭配是黄瓜丁和胡萝卜丁，也可以加入花生米（炸过的）、笋丁等增加口感。</p><p><strong>配主食：</strong>这道菜最经典的吃法是配烙饼或卷饼，像北京烤鸭的吃法一样卷着吃，也可以配米饭。</p>",
+      "ingredient_substitutes": "<p><strong>鸡胸肉：</strong>可用鸡腿肉（去骨去皮），口感更嫩；也可用猪里脊代替做成酱爆肉丁</p><p><strong>甜面酱：</strong>可用黄豆酱+少许糖代替，或用京酱肉丝的酱料</p><p><strong>黄瓜：</strong>可用西葫芦、青椒丁代替，或者加入玉米粒增加甜味</p><p><strong>素食版：</strong>鸡丁换成老豆腐丁或杏鲍菇丁，同样做法也很好吃</p>",
       "suitable_for": "",
       "required_tools": ""
     },
