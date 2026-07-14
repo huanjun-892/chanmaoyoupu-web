@@ -1,6 +1,596 @@
 {
   "recipes": [
     {
+      "id": 338,
+      "title": "青椒土豆丝",
+      "slug": "qing-jiao-tu-dou-si",
+      "description": "最朴素也最经典的家常快手菜，土豆丝脆爽、青椒清香，酸辣开胃，几分钟就能上桌",
+      "difficulty": "easy",
+      "cookTime": 10,
+      "servings": 3,
+      "calories": 120,
+      "cover": {
+        "url": "/images/recipes/qing-jiao-tu-dou-si.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/qing-jiao-tu-dou-si.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "土豆",
+          "amount": "2个（约300g）",
+          "isMain": true
+        },
+        {
+          "name": "青椒",
+          "amount": "2个",
+          "isMain": true
+        },
+        {
+          "name": "蒜",
+          "amount": "2瓣",
+          "isMain": true
+        },
+        {
+          "name": "干辣椒",
+          "amount": "3个",
+          "isMain": true
+        },
+        {
+          "name": "醋",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "2汤匙",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "土豆去皮后切成均匀的细丝（越细越脆），切好后立即放入清水中浸泡洗去表面淀粉"
+        },
+        {
+          "stepNumber": 2,
+          "description": "青椒去籽去蒂切成细丝，蒜切末，干辣椒剪成小段"
+        },
+        {
+          "stepNumber": 3,
+          "description": "锅中烧水烧开，将土豆丝放入焯水30秒至微软但仍有脆感，捞出沥干"
+        },
+        {
+          "stepNumber": 4,
+          "description": "炒锅烧热倒入2汤匙食用油，放入蒜末和干辣椒段爆香"
+        },
+        {
+          "stepNumber": 5,
+          "description": "转大火倒入土豆丝快速翻炒30秒，保持大火不粘锅"
+        },
+        {
+          "stepNumber": 6,
+          "description": "加入青椒丝继续翻炒20秒至青椒断生"
+        },
+        {
+          "stepNumber": 7,
+          "description": "沿锅边淋入醋，加生抽和盐调味，翻炒均匀即可出锅"
+        }
+      ],
+      "tags": [
+        {
+          "name": "快手菜",
+          "slug": "quick",
+          "icon": "⚡"
+        },
+        {
+          "name": "下饭菜",
+          "slug": "xiaban",
+          "icon": "🍚"
+        }
+      ],
+      "methods": [
+        {
+          "name": "炒"
+        }
+      ],
+      "regions": [
+        {
+          "name": "全国"
+        }
+      ],
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
+      "nutrition": "<h3>营养价值分析</h3>\n<ul>\n<li><strong>热量</strong>：每份约120千卡</li>\n<li><strong>蛋白质</strong>：3g</li>\n<li><strong>脂肪</strong>：7g</li>\n<li><strong>碳水化合物</strong>：12g</li>\n<li><strong>膳食纤维</strong>：2g</li>\n</ul>",
+      "common_mistakes": "<h3>常见错误与避坑技巧</h3><ul><li>土豆丝不泡水导致淀粉粘连成坨</li><li>火太小炒成软塌没脆感</li><li>醋放太早挥发掉没有酸香味</li><li>土豆丝切太粗不容易熟</li></ul>",
+      "success_tips": "<h3>成功关键要点</h3><ul><li>土豆丝切好后泡水去淀粉是脆爽关键</li><li>大火快炒不超过2分钟</li><li>醋沿锅边淋入更香</li><li>青椒后放保持翠绿</li></ul>",
+      "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li>青椒可换成红椒或尖椒</li><li>土豆可换成红薯或山药</li><li>不吃辣可不放干辣椒</li></ul>",
+      "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜</strong>：快手菜</li><li><strong>适宜</strong>：下饭菜</li><li><strong>适宜</strong>：素食</li><li><strong>适宜</strong>：学生餐</li></ul>",
+      "required_tools": ""
+    },
+    {
+      "id": 337,
+      "title": "香辣鱿鱼须",
+      "slug": "xiang-xiang-you-yu-xu",
+      "description": "鱿鱼须大火快炒，配上干辣椒和花椒的麻辣鲜香，口感弹牙有嚼劲，下酒必备佳肴",
+      "difficulty": "medium",
+      "cookTime": 15,
+      "servings": 3,
+      "calories": 190,
+      "cover": {
+        "url": "/images/recipes/xiang-xiang-you-yu-xu.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/xiang-xiang-you-yu-xu.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "鱿鱼",
+          "amount": "400g（鱿鱼须）",
+          "isMain": true
+        },
+        {
+          "name": "干辣椒",
+          "amount": "8-10个",
+          "isMain": true
+        },
+        {
+          "name": "花椒",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "蒜",
+          "amount": "3瓣",
+          "isMain": true
+        },
+        {
+          "name": "姜",
+          "amount": "3片",
+          "isMain": true
+        },
+        {
+          "name": "葱",
+          "amount": "1根",
+          "isMain": true
+        },
+        {
+          "name": "料酒",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "蚝油",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "白糖",
+          "amount": "半茶匙",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "2汤匙",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "鱿鱼须洗净，切成5-6厘米的段，粗的部分可以从中间劈开方便入味"
+        },
+        {
+          "stepNumber": 2,
+          "description": "烧一锅水，水开后加入料酒和姜片，放入鱿鱼须焯水15-20秒，捞出沥干备用"
+        },
+        {
+          "stepNumber": 3,
+          "description": "干辣椒剪成段去籽，蒜切片，姜切丝，葱切段备用"
+        },
+        {
+          "stepNumber": 4,
+          "description": "炒锅烧热倒入2汤匙油，小火放入花椒煸出香味后捞出花椒粒（或保留）"
+        },
+        {
+          "stepNumber": 5,
+          "description": "放入干辣椒段小火炒至微变色出辣香，注意不要炒糊"
+        },
+        {
+          "stepNumber": 6,
+          "description": "转大火，放入姜丝、蒜片爆香，随即倒入鱿鱼须快速翻炒1分钟"
+        },
+        {
+          "stepNumber": 7,
+          "description": "加入生抽、蚝油、白糖翻炒均匀，大火收汁至调料裹满鱿鱼须"
+        },
+        {
+          "stepNumber": 8,
+          "description": "撒入葱段翻炒两下即可出锅装盘"
+        }
+      ],
+      "tags": [],
+      "methods": [
+        {
+          "name": "炒"
+        }
+      ],
+      "regions": [
+        {
+          "name": "四川"
+        }
+      ],
+      "cuisine": {
+        "name": "川菜",
+        "slug": "chuan-cai"
+      },
+      "nutrition": "<h3>营养价值分析</h3>\n<ul>\n<li><strong>热量</strong>：每份约190千卡</li>\n<li><strong>蛋白质</strong>：22g</li>\n<li><strong>脂肪</strong>：8g</li>\n<li><strong>碳水化合物</strong>：6g</li>\n<li><strong>膳食纤维</strong>：1g</li>\n</ul>",
+      "common_mistakes": "<h3>常见错误与避坑技巧</h3><ul><li>焯水时间太长鱿鱼须变硬缩水</li><li>大火不够旺炒出水变成煮鱿鱼</li><li>干辣椒炒糊发苦</li><li>调料放太多掩盖鲜味</li></ul>",
+      "success_tips": "<h3>成功关键要点</h3><ul><li>焯水控制在20秒内保持弹嫩口感</li><li>全程大火快炒是核心</li><li>干辣椒小火出香再转大火</li><li>调料宜少不宜多突出鲜味</li></ul>",
+      "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li>鱿鱼须可用鲜鱿鱼或鱿鱼圈代替</li><li>不吃太辣可减少干辣椒用量或用青椒代替</li></ul>",
+      "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜</strong>：下酒菜</li><li><strong>适宜</strong>：夜宵</li><li><strong>适宜</strong>：聚会小食</li></ul>",
+      "required_tools": ""
+    },
+    {
+      "id": 336,
+      "title": "蒜蓉蒸鱼",
+      "slug": "suan-rong-zheng-yu",
+      "description": "湘味蒸鱼的代表做法，蒜香浓郁渗入鱼肉，蒸制保留鱼的鲜甜原味，营养又下饭",
+      "difficulty": "medium",
+      "cookTime": 25,
+      "servings": 4,
+      "calories": 220,
+      "cover": {
+        "url": "/images/recipes/suan-rong-zheng-yu.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/suan-rong-zheng-yu.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "鲈鱼",
+          "amount": "1条(约500g)",
+          "isMain": true
+        },
+        {
+          "name": "蒜",
+          "amount": "1整头",
+          "isMain": true
+        },
+        {
+          "name": "姜",
+          "amount": "1块",
+          "isMain": true
+        },
+        {
+          "name": "葱",
+          "amount": "2根",
+          "isMain": true
+        },
+        {
+          "name": "蒸鱼豉油",
+          "amount": "3汤匙",
+          "isMain": true
+        },
+        {
+          "name": "料酒",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "3汤匙",
+          "isMain": true
+        },
+        {
+          "name": "小米椒",
+          "amount": "2个",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "鲈鱼处理干净去鳞去内脏，在鱼身两面各斜切3-4刀（深至骨头），方便入味和熟透"
+        },
+        {
+          "stepNumber": 2,
+          "description": "鱼身抹上料酒和少许盐，姜切丝填入鱼腹和刀口中，腌制15分钟去腥"
+        },
+        {
+          "stepNumber": 3,
+          "description": "蒜切成细碎的蒜末，小米椒切圈，葱白切段、葱绿切丝备用"
+        },
+        {
+          "stepNumber": 4,
+          "description": "炒锅中倒入2汤匙油，小火慢慢煸炒蒜末至金黄色出浓郁蒜香，关火备用"
+        },
+        {
+          "stepNumber": 5,
+          "description": "盘底放葱白段和姜丝架起鱼身，将腌好的鱼放在上面，鱼身上铺满炒好的蒜蓉和小米椒"
+        },
+        {
+          "stepNumber": 6,
+          "description": "蒸锅水大火烧开至冒大量蒸汽，放入鱼盘，大火蒸8-10分钟（视鱼大小调整）"
+        },
+        {
+          "stepNumber": 7,
+          "description": "蒸好后倒掉盘中多余蒸汁（有腥味），沿盘边淋入蒸鱼豉油"
+        },
+        {
+          "stepNumber": 8,
+          "description": "撒上葱丝，另起锅烧热3汤匙油至微微冒烟，快速浇在葱丝和蒜蓉上，发出嗞嗞声即可上桌"
+        }
+      ],
+      "tags": [],
+      "methods": [
+        {
+          "name": "蒸"
+        }
+      ],
+      "regions": [
+        {
+          "name": "湖南"
+        }
+      ],
+      "cuisine": {
+        "name": "湘菜",
+        "slug": "xiang-cai"
+      },
+      "nutrition": "<h3>营养价值分析</h3>\n<ul>\n<li><strong>热量</strong>：每份约220千卡</li>\n<li><strong>蛋白质</strong>：28g</li>\n<li><strong>脂肪</strong>：12g</li>\n<li><strong>碳水化合物</strong>：3g</li>\n<li><strong>膳食纤维</strong>：0g</li>\n</ul>",
+      "common_mistakes": "<h3>常见错误与避坑技巧</h3><ul><li>蒸制时间过长导致鱼肉变老发柴</li><li>不倒掉蒸汁会有腥味</li><li>蒜蓉不炒直接蒸辛辣味重不香</li><li>油不够热浇不出香味</li></ul>",
+      "success_tips": "<h3>成功关键要点</h3><ul><li>鱼身抹盐和料酒腌制去腥</li><li>用葱姜垫底让蒸汽流通受热均匀</li><li>大火足汽蒸是关键</li><li>最后热油浇头激发香味</li></ul>",
+      "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li>鲈鱼可换成多宝鱼、鳊鱼或黄花鱼</li><li>没有蒸鱼豉油可用生抽加少许糖和清水代替</li></ul>",
+      "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜</strong>：家庭聚餐</li><li><strong>适宜</strong>：高蛋白</li><li><strong>适宜</strong>：低脂饮食</li></ul>",
+      "required_tools": ""
+    },
+    {
+      "id": 335,
+      "title": "虾仁蒸蛋",
+      "slug": "xia-ren-zheng-dan",
+      "description": "滑嫩如豆腐的蒸蛋搭配鲜甜虾仁，老少皆宜的营养家常菜，入口即化的鲜美滋味",
+      "difficulty": "easy",
+      "cookTime": 20,
+      "servings": 2,
+      "calories": 180,
+      "cover": {
+        "url": "/images/recipes/xia-ren-zheng-dan.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/xia-ren-zheng-dan.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "鸡蛋",
+          "amount": "3个",
+          "isMain": true
+        },
+        {
+          "name": "虾仁",
+          "amount": "100g",
+          "isMain": true
+        },
+        {
+          "name": "温水",
+          "amount": "200ml",
+          "isMain": true
+        },
+        {
+          "name": "料酒",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "盐",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "香油",
+          "amount": "少许",
+          "isMain": true
+        },
+        {
+          "name": "葱花",
+          "amount": "适量",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "虾仁去除虾线，加入少许料酒和盐抓匀腌制10分钟去腥入味"
+        },
+        {
+          "stepNumber": 2,
+          "description": "鸡蛋打入碗中，加入少许盐用筷子轻轻打散，注意不要打出太多泡沫"
+        },
+        {
+          "stepNumber": 3,
+          "description": "蛋液中加入温水（蛋水比例约1:1.5），边倒边轻轻搅拌均匀"
+        },
+        {
+          "stepNumber": 4,
+          "description": "将蛋液用细筛网过滤1-2遍，去除未打散的蛋白和泡沫，这是蒸蛋嫩滑的关键"
+        },
+        {
+          "stepNumber": 5,
+          "description": "将过滤好的蛋液倒入蒸碗中，盖上保鲜膜并用牙签扎几个小孔透气"
+        },
+        {
+          "stepNumber": 6,
+          "description": "蒸锅水开后放入蛋液，转中小火蒸8分钟至蛋液表面微微凝固"
+        },
+        {
+          "stepNumber": 7,
+          "description": "轻轻打开保鲜膜，将腌好的虾仁摆放在蛋羹表面，重新盖好继续蒸5-6分钟至虾仁变红熟透"
+        },
+        {
+          "stepNumber": 8,
+          "description": "出锅后淋上生抽和香油，撒上葱花即可"
+        }
+      ],
+      "tags": [],
+      "methods": [
+        {
+          "name": "蒸"
+        }
+      ],
+      "regions": [
+        {
+          "name": "全国"
+        }
+      ],
+      "cuisine": {
+        "name": "家常菜",
+        "slug": "家常菜"
+      },
+      "nutrition": "<h3>营养价值分析</h3>\n<ul>\n<li><strong>热量</strong>：每份约180千卡</li>\n<li><strong>蛋白质</strong>：18g</li>\n<li><strong>脂肪</strong>：10g</li>\n<li><strong>碳水化合物</strong>：3g</li>\n<li><strong>膳食纤维</strong>：0g</li>\n</ul>",
+      "common_mistakes": "<h3>常见错误与避坑技巧</h3><ul><li>水太多导致蛋液太稀不成型</li><li>火太大导致蛋羹出现蜂窝状气孔</li><li>不过滤蛋液导致口感粗糙</li><li>虾仁放太早会老</li></ul>",
+      "success_tips": "<h3>成功关键要点</h3><ul><li>蛋水比例1:1.5最嫩滑</li><li>一定要用温开水而非冷水或热水</li><li>中小火慢蒸是嫩滑关键</li><li>过滤蛋液不能省</li></ul>",
+      "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li>虾仁可换成鲜贝、蟹肉或肉末</li><li>没有保鲜膜可用盘子盖住蒸碗</li></ul>",
+      "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜</strong>：宝宝辅食</li><li><strong>适宜</strong>：老人饮食</li><li><strong>适宜</strong>：病后调理</li><li><strong>适宜</strong>：高蛋白</li></ul>",
+      "required_tools": ""
+    },
+    {
+      "id": 334,
+      "title": "白灼芥兰",
+      "slug": "bai-zhuo-jie-lan",
+      "description": "粤菜经典蔬菜做法，芥兰翠绿爽脆，以蒜蓉和蚝油提味，简洁却考验火候功夫",
+      "difficulty": "easy",
+      "cookTime": 10,
+      "servings": 3,
+      "calories": 80,
+      "cover": {
+        "url": "/images/recipes/bai-zhuo-jie-lan.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/recipes/bai-zhuo-jie-lan.jpg"
+          }
+        }
+      },
+      "ingredients": [
+        {
+          "name": "芥兰",
+          "amount": "400g",
+          "isMain": true
+        },
+        {
+          "name": "蒜",
+          "amount": "4瓣",
+          "isMain": true
+        },
+        {
+          "name": "蚝油",
+          "amount": "2汤匙",
+          "isMain": true
+        },
+        {
+          "name": "生抽",
+          "amount": "1汤匙",
+          "isMain": true
+        },
+        {
+          "name": "白糖",
+          "amount": "1茶匙",
+          "isMain": true
+        },
+        {
+          "name": "食用油",
+          "amount": "适量",
+          "isMain": true
+        },
+        {
+          "name": "香油",
+          "amount": "少许",
+          "isMain": true
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "description": "芥兰择去老叶和粗茎，洗净后从中间切开，较粗的茎部斜刀切成段；蒜切成细末备用"
+        },
+        {
+          "stepNumber": 2,
+          "description": "烧一大锅水，水开后加入1茶匙盐和1汤匙食用油，保持水沸腾状态"
+        },
+        {
+          "stepNumber": 3,
+          "description": "先将芥兰粗茎部分放入沸水中焯烫30秒，再放入叶子部分，一起焯烫30-40秒至颜色翠绿断生"
+        },
+        {
+          "stepNumber": 4,
+          "description": "捞出后迅速过冷水（冰水更佳），沥干水分后整齐码放在盘中"
+        },
+        {
+          "stepNumber": 5,
+          "description": "炒锅烧热加入2汤匙食用油，小火煸香蒜末至金黄色出香味"
+        },
+        {
+          "stepNumber": 6,
+          "description": "将蚝油、生抽、白糖和2汤匙清水调成酱汁，倒入蒜油锅中烧开至微微浓稠"
+        },
+        {
+          "stepNumber": 7,
+          "description": "将烧好的蒜蓉蚝油汁均匀淋在码好的芥兰上，最后滴几滴香油即可上桌"
+        }
+      ],
+      "tags": [
+        {
+          "name": "快手菜",
+          "slug": "quick",
+          "icon": "⚡"
+        }
+      ],
+      "methods": [],
+      "regions": [
+        {
+          "name": "广东"
+        }
+      ],
+      "cuisine": {
+        "name": "粤菜",
+        "slug": "yue-cai"
+      },
+      "nutrition": "<h3>营养价值分析</h3>\n<ul>\n<li><strong>热量</strong>：每份约80千卡</li>\n<li><strong>蛋白质</strong>：3g</li>\n<li><strong>脂肪</strong>：5g</li>\n<li><strong>碳水化合物</strong>：8g</li>\n<li><strong>膳食纤维</strong>：3g</li>\n</ul>",
+      "common_mistakes": "<h3>常见错误与避坑技巧</h3><ul><li>焯水时间过长导致芥兰发黄软烂失去脆感</li><li>不过冷水则余温继续加热影响口感</li><li>蒜末火太大容易炒焦发苦</li></ul>",
+      "success_tips": "<h3>成功关键要点</h3><ul><li>焯水时加盐和油可以保持芥兰翠绿色泽</li><li>焯烫时间控制在1分钟以内</li><li>过冰水能让口感更爽脆</li></ul>",
+      "ingredient_substitutes": "<h3>食材替代方案</h3><ul><li>没有芥兰可以用菜心、芥菜或西兰花代替</li><li>没有蚝油可用生抽加少许老抽和糖替代</li></ul>",
+      "suitable_for": "<h3>适宜人群与场景</h3><ul><li><strong>适宜</strong>：清淡饮食</li><li><strong>适宜</strong>：减脂餐</li><li><strong>适宜</strong>：素食</li><li><strong>适宜</strong>：快手菜</li></ul>",
+      "required_tools": ""
+    },
+    {
       "id": 333,
       "title": "清炒虾仁",
       "slug": "qing-chao-xia-ren",
@@ -4458,54 +5048,9 @@
           "name": "料酒",
           "amount": "1汤匙",
           "isMain": true
-        },
-        {
-          "name": "淀粉",
-          "amount": "1茶匙",
-          "isMain": true
-        },
-        {
-          "name": "盐",
-          "amount": "少许",
-          "isMain": true
-        },
-        {
-          "name": "鸡精",
-          "amount": "少许",
-          "isMain": true
-        },
-        {
-          "name": "食用油",
-          "amount": "适量",
-          "isMain": true
         }
       ],
-      "steps": [
-        {
-          "stepNumber": 1,
-          "description": "猪里脊150克洗净擦干，顺着纹路切成均匀的细丝（约0.3厘米粗、5厘米长）。切好的肉丝放入碗中，加入1汤匙料酒、半汤匙生抽、1茶匙淀粉，用手抓匀至上浆，最后淋入少许食用油封住水分，腌制10-15分钟。腌制是肉丝滑嫩不柴的关键步骤。"
-        },
-        {
-          "stepNumber": 2,
-          "description": "香干4块洗净后切成均匀的细丝（约0.3厘米宽），尽量与肉丝粗细一致，这样口感和卖相都更好。青红椒各1个去籽切丝，大蒜3瓣切片，生姜2片切丝。所有配菜切好后分开放置，方便依次下锅。"
-        },
-        {
-          "stepNumber": 3,
-          "description": "炒锅烧热至冒烟，倒入适量食用油滑锅后倒出（热锅凉油防粘），再重新加入适量冷油。油温五成热时（约150°C），放入腌好的肉丝，用筷子快速拨散，中火翻炒至肉丝变色发白（约1-2分钟），立即盛出备用。不要炒太久，否则肉丝会老。"
-        },
-        {
-          "stepNumber": 4,
-          "description": "锅中留底油，大火加热至冒烟，放入姜丝和蒜片爆香（约15秒）。随即倒入香干丝，大火翻炒1-2分钟，炒至香干表面微微焦黄、边缘略微卷起，这样能激发出香干的豆香味。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "加入青红椒丝继续翻炒30秒至断生（保持脆嫩口感），然后将之前炒好的肉丝倒回锅中，与香干和青红椒一起翻炒均匀。"
-        },
-        {
-          "stepNumber": 6,
-          "description": "沿锅边淋入1汤匙生抽，加入少许老抽调色，根据口味加少许盐和鸡精调味。转最大火快速翻炒1分钟，让所有食材充分吸收调味料、均匀上色。整个过程要保持大火快炒，动作要利落，这是湖南菜'镬气'的关键。炒好后立即出锅装盘，趁热食用。"
-        }
-      ],
+      "steps": [],
       "tags": [],
       "methods": [],
       "regions": [],
@@ -5862,10 +6407,6 @@
         {
           "stepNumber": 4,
           "description": "炒锅烧热，倒入少许食用油，放入沥干水分的玉米粒、胡萝卜丁、黄瓜丁，快速翻炒均匀。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "最后淋入少许水淀粉勾薄芡，使汤汁均匀裹在食材上，撒上焙好的松子，翻拌均匀即可出锅装盘。"
         }
       ],
       "tags": [],
@@ -8665,10 +9206,6 @@
         {
           "stepNumber": 4,
           "description": "翻炒鸡块：调料炒香后，倒入焯好水的鸡块，转中火快速翻炒2-3分钟，让每块鸡肉都裹上酱汁，炒至鸡块表面微焦黄，这样鸡肉吃起来更香。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "加入土豆块和泡发好的香菇：鸡块翻炒上色后，加入土豆块和香菇，倒入泡香菇的水（过滤去渣），水量没过食材三分之二，大火烧开后转中小火加盖焖煮15-20分钟，至土豆软烂、鸡肉入味。"
         }
       ],
       "tags": [],
@@ -11225,10 +11762,6 @@
         {
           "stepNumber": 4,
           "description": "入味出锅：青椒煎好后，倒入调好的碗汁，大火快速翻炒，让酱汁均匀地裹在青椒上。汤汁收至浓稠后即可出锅。不要炒太久，否则青椒会太软塌。虎皮青椒要带一点汤汁才好吃。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "装盘后静置2分钟让青椒充分吸收酱汁，此时虎皮纹理更加明显，口感外焦里嫩、酱香四溢。"
         }
       ],
       "tags": [],
@@ -15322,10 +15855,6 @@
         {
           "stepNumber": 4,
           "description": "油炸定型：锅中倒油烧至六成热（约180℃），放入卤好的大肠段，炸至表面金黄微焦，捞出沥油。注意要沥干水分防止油溅，炸制时间不宜过长，保持外脆内嫩。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "红烧收汁：锅中留少许底油，放入冰糖小火炒至融化呈琥珀色，倒入炸好的大肠翻炒上色，加入适量老抽调色、少许料酒去腥，大火收汁至汤汁浓稠裹满大肠，淋入少许明油提亮即可装盘。"
         }
       ],
       "tags": [],
@@ -25464,10 +25993,6 @@
         },
         {
           "stepNumber": 4,
-          "description": "另起锅炒香芽菜碎至微微焦黄出香，与炒好的肉糜混合均匀备用。"
-        },
-        {
-          "stepNumber": 5,
           "description": "舀入热高汤冲入碗中搅匀底汁，放入面条，撒上炒好的肉糜、芽菜和葱花即可。"
         }
       ],
@@ -25865,10 +26390,6 @@
         {
           "stepNumber": 4,
           "description": "在饼上抹甜面酱、辣椒酱、腐乳，放上油条和薄脆，卷起切半即可。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "用吸油纸吸去多余油分，趁热食用，口感外酥里嫩、酱香浓郁，搭配豆浆或小米粥更佳。"
         }
       ],
       "tags": [
@@ -26402,10 +26923,6 @@
         {
           "stepNumber": 4,
           "description": "将面条放入碗中，加入调好的芝麻酱、生抽、陈醋、辣椒油、酸豆角、榨菜、葱蒜末，拌匀即可。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "可根据个人喜好再撒上少许熟芝麻和现磨胡椒粉，搭配一碗蛋酒或米酒同食，风味更佳。"
         }
       ],
       "tags": [
@@ -26541,10 +27058,6 @@
         {
           "stepNumber": 4,
           "description": "将煮好的面条放入碗中，撒上葱花即可。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "可根据个人口味再加入一勺油辣子和少许花椒面，增加麻辣风味。搭配一个煎蛋或几颗花生米，风味更佳。"
         }
       ],
       "tags": [
@@ -26774,10 +27287,6 @@
         {
           "stepNumber": 4,
           "description": "将焯好的西兰花倒入锅中，快速翻炒均匀。加入蚝油和少许盐调味，大火翻炒30秒即可出锅。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "出锅装盘，可用枸杞点缀增色。这道菜讲究蒜香浓郁、西兰花脆嫩爽口，趁热食用口感最佳。"
         }
       ],
       "tags": [],
@@ -29081,23 +29590,19 @@
       "steps": [
         {
           "stepNumber": 1,
-          "description": "鸡蛋打散加少许盐，加入1.5倍温水搅匀。"
+          "description": "鸡蛋打散加少许盐，加入1.5倍温水搅匀"
         },
         {
           "stepNumber": 2,
-          "description": "用细滤网过滤蛋液去除气泡和蛋筋，倒入蒸碗中，盖上保鲜膜并用牙签扎几个小孔。"
+          "description": "过滤蛋液去除气泡，倒入碗中盖保鲜膜"
         },
         {
           "stepNumber": 3,
-          "description": "蒸锅中水烧开后放入蛋碗，转中小火蒸12分钟至蛋液完全凝固。"
+          "description": "水开后上锅中小火蒸12分钟"
         },
         {
           "stepNumber": 4,
-          "description": "用牙签插入蛋羹中心检验是否凝固，表面应光滑如镜面。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "出锅后揭开保鲜膜，淋上少许生抽和香油，撒上葱花即可。"
+          "description": "出锅淋酱油、香油，撒葱花即可"
         }
       ],
       "tags": [
@@ -29781,23 +30286,19 @@
       "steps": [
         {
           "stepNumber": 1,
-          "description": "西红柿顶部划十字，用开水烫30秒去皮，切成小块；鸡蛋打散加少许盐搅匀。"
+          "description": "西红柿切小块，鸡蛋打散加少许盐搅匀"
         },
         {
           "stepNumber": 2,
-          "description": "锅中热油，倒入蛋液，炒至凝固后拨散盛出备用。"
+          "description": "锅中热油，倒入蛋液，炒至凝固盛出"
         },
         {
           "stepNumber": 3,
-          "description": "锅中再加少许油，下西红柿翻炒至出汁变软。"
+          "description": "锅中再加少许油，下西红柿翻炒出汁"
         },
         {
           "stepNumber": 4,
-          "description": "加入白糖和少许盐调味，倒回鸡蛋翻炒均匀，让蛋块充分吸收番茄汁。"
-        },
-        {
-          "stepNumber": 5,
-          "description": "撒上葱花，翻炒两下即可出锅装盘。这道菜汁水丰富，用来拌饭尤其美味。"
+          "description": "加入白糖调味，倒回鸡蛋翻炒均匀，撒葱花出锅"
         }
       ],
       "tags": [
@@ -29835,6 +30336,22 @@
     }
   ],
   "ingredients": [
+    {
+      "id": 317,
+      "name": "芥兰",
+      "slug": "jie-lan",
+      "category": "蔬菜",
+      "description": "芥兰又名白花芥兰，是十字花科芸薹属植物，广东地区最常见的蔬菜之一。茎粗壮翠绿，叶片宽大，口感脆嫩微甜带一丝清苦，焯水后苦味消失只剩清甜。富含维生素C、胡萝卜素和膳食纤维，是粤菜中白灼、炒制的首选蔬菜。",
+      "imageUrl": "/images/ingredients/jie-lan.jpg",
+      "nutrition": "每100g芥兰含热量26千卡、蛋白质1.9g、脂肪0.4g、碳水4.5g、膳食纤维1.6g、维生素C 61mg",
+      "tips": "选购时选茎部粗壮、叶片翠绿挺括的；嫩茎比老茎口感更好",
+      "aliases": "白花芥兰,芥蓝,广东芥兰",
+      "season": "秋冬春三季",
+      "origin": "中国南方",
+      "storageMethod": "用保鲜袋包好放冰箱冷藏，可保存3-5天；不宜久存，越新鲜越脆嫩",
+      "pairingSuggestions": "蒜,蚝油,牛肉,虾仁",
+      "avoidWith": "黄瓜（破坏维C吸收）"
+    },
     {
       "id": 316,
       "name": "蟹",
@@ -34509,6 +35026,66 @@
     }
   ],
   "knowledge": [
+    {
+      "id": 287,
+      "title": "土豆丝为什么切了要泡水？淀粉与口感的烹饪科学",
+      "slug": "tudousi-pao-shui-dianfen-kexue",
+      "category": "technique",
+      "content": "<h2>土豆丝为什么切了要泡水？淀粉与口感的烹饪科学</h2>\n<p>几乎每一个做土豆丝的菜都会说\"切好后泡水\"，但你知道为什么吗？这背后是一整套关于淀粉和细胞结构的烹饪科学。</p>\n\n<h3>一、土豆的淀粉结构</h3>\n<p>土豆含有约 <strong>17% 的淀粉</strong>，这些淀粉以颗粒形式储存在植物细胞内。当土豆被切开时，断裂的细胞会释放出大量游离淀粉，附着在土豆丝表面，形成一层黏滑的白色浆液。</p>\n\n<h3>二、不泡水会怎样？</h3>\n<p>如果切好后不泡水直接下锅：</p>\n<ul>\n<li><strong>粘锅</strong>：表面淀粉在高温下迅速糊化，变成黏性极强的胶状物，牢牢粘在锅底</li>\n<li><strong>成坨</strong>：淀粉让土豆丝之间互相粘连，变成一坨而不是根根分明</li>\n<li><strong>口感发面</strong>：淀粉层阻碍热量均匀传导，外面糊了里面还不熟，整体口感偏面偏软</li>\n<li><strong>颜色发暗</strong>：表面淀粉氧化导致土豆丝发黑发灰</li>\n</ul>\n\n<h3>三、泡水的科学原理</h3>\n<h4>去除表面淀粉</h4>\n<p>泡水的核心目的是 <strong>溶解和冲洗掉表面游离淀粉</strong>。水渗透进切割面，将附着的淀粉颗粒带走。你会发现泡过土豆丝的水变得很浑浊——那就是被泡出来的淀粉。</p>\n\n<h4>保持细胞结构完整</h4>\n<p>冷水浸泡让土豆细胞吸水保持膨胀状态，细胞壁更加紧绷。这样在高温烹饪时，细胞壁能更快形成焦化层而不破裂，保持脆爽口感。</p>\n\n<h4>防止氧化变色</h4>\n<p>土豆中的多酚氧化酶接触空气后会催化褐变反应，让土豆丝变灰变暗。泡水可以隔绝氧气，保持土豆丝的白净颜色。</p>\n\n<h3>四、泡水时间决定口感</h3>\n<table>\n<tr><th>泡水时间</th><th>淀粉残留量</th><th>适合菜式</th><th>口感</th></tr>\n<tr><td>不泡/冲水即炒</td><td>高</td><td>酸辣土豆丝（偏软版）</td><td>略黏糯、软绵</td></tr>\n<tr><td>泡水5-10分钟</td><td>中</td><td>家常炒土豆丝</td><td>外脆内软、适中</td></tr>\n<tr><td>泡水15-30分钟</td><td>低</td><td>醋溜土豆丝、干锅土豆丝</td><td>清脆爽口</td></tr>\n<tr><td>泡水30分钟+换水</td><td>极低</td><td>凉拌土豆丝</td><td>极度脆爽</td></tr>\n</table>\n\n<h3>五、实用技巧</h3>\n<p><strong>切丝要均匀</strong>：土豆丝的粗细要一致（约2-3mm），否则细的熟了粗的还生。刀工不好的可以用擦丝器。</p>\n<p><strong>泡完要沥干</strong>：下锅前一定要充分沥干水分，否则水遇到热油会炸溅，也会降低锅温变成煮土豆丝。</p>\n<p><strong>大火快炒</strong>：沥干后的土豆丝要大火快炒，锅内温度够高才能快速形成焦化层，锁住脆度。一般炒制时间控制在 <strong>2-3分钟</strong>。</p>\n\n<h3>六、延伸：哪些菜需要泡水？</h3>\n<p>同样需要泡水去淀粉的食材还有：藕片（炒藕片脆爽的关键）、山药片、芋头条等含淀粉量高的根茎类蔬菜。泡水的原理和时间参考都类似。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-15",
+      "summary": "土豆丝切好后泡水是中式烹饪的基本操作，但背后的科学原理很多人不清楚。本文从淀粉结构、细胞壁变化和热传导角度解释泡水的必要性，以及如何根据 desired 口感调整泡水时间。",
+      "keywords": "土豆丝,泡水,淀粉,口感,烹饪科学,脆爽,醋溜土豆丝"
+    },
+    {
+      "id": 286,
+      "title": "鱿鱼的种类区分与最佳烹饪方式",
+      "slug": "you-yu-zhong-lei-qufen-pengren",
+      "category": "ingredient",
+      "content": "<h2>鱿鱼的种类区分与最佳烹饪方式</h2>\n<p>鱿鱼是我们餐桌上常见的海鲜食材，但不同品种的鱿鱼在口感和适合的烹饪方式上差异很大。了解这些知识，能帮你更好地选购和烹饪。</p>\n\n<h3>一、常见鱿鱼品种</h3>\n<h4>1. 中国枪乌贼（本地鱿鱼）</h4>\n<p>体型中等，体长15-25厘米，肉质细嫩柔软，鲜甜度高。适合清蒸、白灼、蒜蓉蒸等突出原味的做法。沿海市场常见鲜品，是品质最好的鱿鱼品种。</p>\n\n<h4>2. 阿根廷鱿鱼</h4>\n<p>体型较大，体长可达40厘米以上，肉质厚实紧实，纤维较粗。多用于冷冻出口，价格实惠。适合切花刀爆炒、铁板烧、烧烤等重口味做法，或加工成鱿鱼干、鱿鱼丝。</p>\n\n<h4>3. 日本柔鱼（小鱿鱼）</h4>\n<p>体型较小，体长10-15厘米，肉质柔嫩。常见于日式料理，适合整只烤制、天妇罗、生姜煮等做法。口感细腻，鲜味突出。</p>\n\n<h3>二、如何区分</h3>\n<table>\n<tr><th>特征</th><th>中国枪乌贼</th><th>阿根廷鱿鱼</th><th>日本柔鱼</th></tr>\n<tr><td>体型</td><td>中等15-25cm</td><td>大30-40cm+</td><td>小10-15cm</td></tr>\n<tr><td>肉质</td><td>细嫩柔软</td><td>厚实紧韧</td><td>柔嫩细腻</td></tr>\n<tr><td>颜色</td><td>粉白透亮</td><td>偏紫红色</td><td>乳白色</td></tr>\n<tr><td>鲜味</td><td>★★★★★</td><td>★★★</td><td>★★★★</td></tr>\n</table>\n\n<h3>三、最佳烹饪方式对照</h3>\n<h4>爆炒类</h4>\n<p>阿根廷鱿鱼最适合爆炒——肉质厚实经得起大火翻炒，切花刀后配干辣椒、花椒等调料，口感弹牙入味。</p>\n\n<h4>清蒸/白灼类</h4>\n<p>中国枪乌贼是首选。新鲜的品质可以清蒸，淋上蒸鱼豉油和热油，鲜甜无比。白灼蘸酱油也是绝佳吃法。</p>\n\n<h4>烧烤/铁板类</h4>\n<p>阿根廷鱿鱼的大片身体适合整片烤制，刷上蒜蓉酱或照烧酱，是夜市烧烤的明星食材。</p>\n\n<h4>整只料理</h4>\n<p>日本柔鱼体型小巧，适合整只入菜。日式生姜煮、天妇罗、或者填入糯米做成鱿鱼饭都非常经典。</p>\n\n<h3>四、选购要点</h3>\n<p>鲜鱿鱼选购时注意：体表有光泽、肉质有弹性、眼球清亮饱满、闻起来是海水的清鲜味而非腥臭味。冷冻鱿鱼看包装是否完整，解冻后肉质不应松散。</p>\n\n<h3>五、营养小知识</h3>\n<p>鱿鱼富含优质蛋白质、牛磺酸和多种微量元素，脂肪含量低。牛磺酸有助于降低胆固醇、保护心血管。但鱿鱼胆固醇含量较高（主要在卵和内脏中），去除内脏后适量食用对健康有益。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-15",
+      "summary": "市面上常见的鱿鱼分为中国枪乌贼、阿根廷鱿鱼和日本柔鱼等品种，它们在体型、口感和适合的烹饪方式上有明显区别。了解这些差异可以帮你买到最合适的食材并做出最佳口感。",
+      "keywords": "鱿鱼,种类,枪乌贼,阿根廷鱿鱼,柔鱼,烹饪方式,选购,海鲜"
+    },
+    {
+      "id": 285,
+      "title": "芥兰保持翠绿不发黄的焯水技巧",
+      "slug": "jie-lan-bao-chi-cui-lu-yen-shui-ji-qiao",
+      "category": "secret",
+      "content": "<h2>芥兰保持翠绿不发黄的焯水技巧</h2>\n<p>白灼芥兰好不好吃，七分看焯水功夫。掌握以下技巧，让每盘芥兰都翠绿诱人。</p>\n<h3>技巧一：水要宽火要大</h3>\n<p>水量要足够多（至少是蔬菜的5倍），大火烧至 <strong>完全沸腾</strong> 再下菜。水量不足会导致温度骤降，蔬菜在温水中慢慢变黄。</p>\n<h3>技巧二：加盐加油</h3>\n<p>沸水中加入 <strong>1茶匙盐和1汤匙食用油</strong>。盐帮助蔬菜细胞保持结构，油在蔬菜表面形成薄膜隔绝空气，两者配合锁住翠绿色泽。</p>\n<h3>技巧三：分段焯烫</h3>\n<p>芥兰茎和叶的成熟时间不同。先放 <strong>粗茎部分30秒</strong>，再放入 <strong>叶子部分30-40秒</strong>。这样茎和叶同时达到最佳熟度，不会出现叶烂茎生或茎熟叶黄的情况。</p>\n<h3>技巧四：冰水急冷</h3>\n<p>捞出后 <strong>立即</strong> 投入冰水中浸泡1-2分钟。余温会继续加热蔬菜导致过熟变黄，冰水急冷可以瞬间停止加热过程，锁住颜色和脆度。</p>\n<h3>时间参考</h3>\n<p>芥兰总焯烫时间控制在 <strong>60-70秒</strong>。小白菜、菜心等嫩叶蔬菜约40-50秒，西兰花约90秒。</p>\n<h3>适用范围</h3>\n<p>这套方法适用于所有白灼/灼烫绿叶蔬菜：菜心、菠菜、芥兰、油菜、空心菜等，都适用同样的原理。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-15",
+      "summary": "白灼蔬菜最怕发黄发软。通过加盐加油的沸水、分段焯烫和冰水急冷三步法，让芥兰等绿叶蔬菜保持翠绿爽脆，色泽诱人。",
+      "keywords": "芥兰,焯水,翠绿,白灼,绿叶蔬菜,过冷水,保持色泽"
+    },
+    {
+      "id": 284,
+      "title": "鱿鱼去腥增弹的预处理秘方",
+      "slug": "you-yu-qu-xing-zeng-dan-mi-fang",
+      "category": "secret",
+      "content": "<h2>鱿鱼去腥增弹的预处理秘方</h2>\n<p>鱿鱼味道鲜美但容易腥、容易老，做好预处理是成功的关键。</p>\n<h3>第一步：清洗去膜</h3>\n<p>鱿鱼须表面的薄膜和黏液是腥味的主要来源。用 <strong>盐和醋</strong> 搓洗1-2分钟，再用清水冲净，可以有效去除腥味和黏腻感。</p>\n<h3>第二步：快速焯水</h3>\n<p>水开后加入 <strong>料酒和姜片</strong>，放入鱿鱼须焯烫 <strong>15-20秒</strong> 即可捞出。时间一长鱿鱼就会变硬缩水，失去弹嫩口感。</p>\n<h3>第三步：冰水激冷</h3>\n<p>焯水后立即投入冰水中浸泡30秒，利用热胀冷缩让鱿鱼肉质更加紧实弹牙。这一步很多餐馆会省略，但对口感提升非常明显。</p>\n<h3>第四步：大火快炒</h3>\n<p>鱿鱼正式烹饪时全程 <strong>大火</strong>，从下锅到出锅不超过 <strong>2分钟</strong>。火小了鱿鱼会出水变韧，变成\"煮鱿鱼\"而不是\"炒鱿鱼\"。</p>\n<h3>调味建议</h3>\n<p>鱿鱼本身有海鲜甜味，调味宜 <strong>少而精</strong>。生抽提鲜、蚝油增味、少许白糖提鲜即可。重口味可加干辣椒和花椒，但量不要盖过鱿鱼本味。</p>\n<h3>选购提示</h3>\n<p>新鲜鱿鱼须肉质紧实有弹性，颜色呈自然粉白色。如果发黑发软或闻起来有刺鼻氨水味，说明不新鲜。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-15",
+      "summary": "鱿鱼烹饪前的焯水时间和调味直接决定口感。掌握快速焯水、冰水激冷和大火快炒三个技巧，鱿鱼弹嫩不腥、嚼劲十足。",
+      "keywords": "鱿鱼,去腥,焯水,弹嫩,鱿鱼须,预处理,大火快炒"
+    },
+    {
+      "id": 283,
+      "title": "蒸蛋嫩滑如豆腐的秘诀",
+      "slug": "zheng-dan-nen-hua-mi-jue",
+      "category": "secret",
+      "content": "<h2>蒸蛋嫩滑如豆腐的秘诀</h2>\n<p>蒸蛋看似简单，但要做到嫩滑如豆腐、表面如镜面，需要掌握几个关键要点。</p>\n<h3>核心一：蛋水比例</h3>\n<p>蛋液与水的黄金比例为 <strong>1:1.5</strong>。水太少蛋羹偏硬实，水太多则无法凝固。建议用量杯精确测量：3个鸡蛋约150ml蛋液，配225ml温水。</p>\n<h3>核心二：必须用温开水</h3>\n<p>水温控制在 <strong>40-50°C</strong>（手摸温热不烫）。冷水蒸出来容易有气孔，开水会直接把蛋液烫成蛋花。温开水是嫩滑的关键之一。</p>\n<h3>核心三：过滤蛋液</h3>\n<p>打散的蛋液一定要用细筛网过滤 <strong>1-2遍</strong>，去除未打散的蛋白丝和泡沫。这一步直接决定蒸蛋的口感是否细腻。</p>\n<h3>核心四：覆盖蒸制</h3>\n<p>蒸碗必须覆盖保鲜膜（扎几个透气孔）或扣一个盘子。防止蒸汽水滴落砸出坑洞，这是表面光滑如镜的关键。</p>\n<h3>核心五：火候控制</h3>\n<p>水开后放入蛋液，转 <strong>中小火</strong> 蒸12-15分钟。全程大火会产生蜂窝状气孔，小火又蒸不熟。中小火是嫩滑的保障。</p>\n<h3>判断熟度</h3>\n<p>轻轻晃动蒸碗，中心微微颤动但不流动就刚好。关火后再焖2分钟更保险。</p>",
+      "author": "馋猫有谱",
+      "is_original": 1,
+      "published_at": "2026-07-15",
+      "summary": "掌握蛋水比例、水温选择和火候控制三个核心要素，配合过滤蛋液和覆盖蒸制的方法，就能蒸出表面如镜面般光滑、入口即化的完美蒸蛋。",
+      "keywords": "蒸蛋,嫩滑,蛋水比例,过滤蛋液,火候控制,镜面蒸蛋"
+    },
     {
       "id": 282,
       "title": "荷叶的食用价值与烹饪应用",
