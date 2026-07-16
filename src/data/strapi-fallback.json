@@ -39688,43 +39688,123 @@
   "cuisines": [
     {
       "name": "家常菜",
-      "slug": "家常菜"
+      "slug": "家常菜",
+      "cover": {
+        "url": "/images/cuisines/riliao.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/riliao.jpg"
+          }
+        }
+      }
     },
     {
       "name": "川菜",
-      "slug": "chuan-cai"
+      "slug": "chuan-cai",
+      "cover": {
+        "url": "/images/cuisines/chuan.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/chuan.jpg"
+          }
+        }
+      }
     },
     {
       "name": "湘菜",
-      "slug": "xiang-cai"
+      "slug": "xiang-cai",
+      "cover": {
+        "url": "/images/cuisines/xiang.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/xiang.jpg"
+          }
+        }
+      }
     },
     {
       "name": "粤菜",
-      "slug": "yue-cai"
+      "slug": "yue-cai",
+      "cover": {
+        "url": "/images/cuisines/yue.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/yue.jpg"
+          }
+        }
+      }
     },
     {
       "name": "鲁菜",
-      "slug": "lu-cai"
+      "slug": "lu-cai",
+      "cover": {
+        "url": "/images/cuisines/lu.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/lu.jpg"
+          }
+        }
+      }
     },
     {
       "name": "闽菜",
-      "slug": "min-cai"
+      "slug": "min-cai",
+      "cover": {
+        "url": "/images/cuisines/min.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/min.jpg"
+          }
+        }
+      }
     },
     {
       "name": "东北菜",
-      "slug": "dongbei-cai"
+      "slug": "dongbei-cai",
+      "cover": {
+        "url": "/images/cuisines/dongbei.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/dongbei.jpg"
+          }
+        }
+      }
     },
     {
       "name": "苏菜",
-      "slug": "su-cai"
+      "slug": "su-cai",
+      "cover": {
+        "url": "/images/cuisines/su.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/su.jpg"
+          }
+        }
+      }
     },
     {
       "name": "浙菜",
-      "slug": "zhe-cai"
+      "slug": "zhe-cai",
+      "cover": {
+        "url": "/images/cuisines/zhe.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/zhe.jpg"
+          }
+        }
+      }
     },
     {
       "name": "徽菜",
-      "slug": "hui-cai"
+      "slug": "hui-cai",
+      "cover": {
+        "url": "/images/cuisines/hui.jpg",
+        "formats": {
+          "small": {
+            "url": "/images/cuisines/hui.jpg"
+          }
+        }
+      }
     }
   ],
   "tags": [
