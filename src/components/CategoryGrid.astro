@@ -3,10 +3,10 @@ import { getAllCuisines, getCoverUrl } from '../lib/strapi';
 
 const allCuisines = await getAllCuisines();
 
-// 首页展示10个菜系分类
+// 首页展示真正的菜系分类（不包括家常菜等场景标签）
 const priorityNames = [
   '川菜', '粤菜', '湘菜', '浙菜', '鲁菜', '苏菜',
-  '闽菜', '徽菜', '东北菜', '家常菜',
+  '闽菜', '徽菜', '东北菜',
 ];
 
 const cookingMethods = [

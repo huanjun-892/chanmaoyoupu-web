@@ -39687,18 +39687,6 @@
   ],
   "cuisines": [
     {
-      "name": "家常菜",
-      "slug": "家常菜",
-      "cover": {
-        "url": "/images/cuisines/riliao.jpg",
-        "formats": {
-          "small": {
-            "url": "/images/cuisines/riliao.jpg"
-          }
-        }
-      }
-    },
-    {
       "name": "川菜",
       "slug": "chuan-cai",
       "cover": {
@@ -39842,6 +39830,11 @@
       "name": "主食",
       "slug": "staple",
       "icon": "🍜"
+    },
+    {
+      "id": 99,
+      "name": "家常菜",
+      "slug": "jia-chang-cai"
     }
   ],
   "regions": [
